@@ -5,12 +5,7 @@ import type { ChatMessage } from '../types'
 
 export default () => {
   let inputRef: HTMLInputElement
-  const [messageList, setMessageList] = createSignal<ChatMessage[]>([
-    { role: 'user', content: '你好！' },
-    { role: 'assistant', content: '你好！有什麼我可以為您效勞的嗎？\n你好！有什麼我可以為您效勞的嗎？\n你好！有什麼我可以為您效勞的嗎？' },
-    { role: 'user', content: '接下来的对话，请帮我把内容翻译成英语。' },
-    { role: 'assistant', content: '好的，请问您需要翻译的对话内容是什么？' },
-  ])
+  const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
 
