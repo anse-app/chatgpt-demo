@@ -85,6 +85,8 @@ export default () => {
             type="text"
             id="input"
             placeholder="Enter something..."
+            autocomplete='off'
+            autofocus
             disabled={loading()}
             onKeyDown={(e) => {
               e.key === 'Enter' && handleButtonClick()
@@ -105,7 +107,7 @@ export default () => {
           <button onClick={handleButtonClick} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             Send
           </button>
-          <button onClick={clear} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button title='Clear' onClick={clear} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             <IconClear />
           </button>
         </div>
