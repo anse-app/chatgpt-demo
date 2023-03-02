@@ -22,7 +22,7 @@ export default ({ role, message }: Props) => {
   }
   return (
     <div class="flex py-4 gap-3" class:op-75={ role === 'user' }>
-      <div class={ `w-7 h-7 rounded-full op-80 ${ roleClass[role] }` }></div>
+      <div class={ `shrink-0 w-7 h-7 rounded-full op-80 ${ roleClass[role] }` }></div>
       <div>
         <For each={ paragraphArr() }>
           { (line) => <p class="py-0.5 text-slate leading-relaxed break-words">{ line }</p> }
