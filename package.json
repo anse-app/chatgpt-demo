@@ -22,6 +22,7 @@
     "@types/markdown-it": "^12.2.3",
     "@unocss/preset-attributify": "^0.50.1",
     "@unocss/preset-typography": "^0.50.3",
+    "punycode": "^2.3.0",
     "unocss": "^0.50.1"
   }
 }

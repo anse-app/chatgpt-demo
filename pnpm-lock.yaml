@@ -10,6 +10,7 @@ specifiers:
   astro: ^2.0.15
   eventsource-parser: ^0.1.0
   markdown-it: ^13.0.1
+  punycode: ^2.3.0
   solid-js: ^1.6.11
   unocss: ^0.50.1
 
@@ -26,6 +27,7 @@ devDependencies:
   '@types/markdown-it': 12.2.3
   '@unocss/preset-attributify': 0.50.1
   '@unocss/preset-typography': 0.50.3
+  punycode: 2.3.0
   unocss: 0.50.1
 
 packages:
@@ -2999,6 +3001,11 @@ packages:
   /property-information/6.2.0:
     resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==}
     dev: false
+
+  /punycode/2.3.0:
+    resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
+    engines: {node: '>=6'}
+    dev: true
 
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
