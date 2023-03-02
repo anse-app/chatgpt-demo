@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  chatgpt:
+    image: quzard/chatgpt-demo:latest
+    container_name: chatgpt
+    restart: always
+    ports:
+        - "3000:3000"
+    volumes:
+      - .env:/app/.env
