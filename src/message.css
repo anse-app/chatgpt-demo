@@ -1,20 +1,14 @@
 .message pre {
-  margin: 0.5rem 0;
-  line-height: 1.5;
-  padding: 0.4rem 0.8rem;
-  font-size: 0.8em;
-  background-color: #1e293b;
-  border-radius: 4px;
+  background-color: #64748b10;
+  font-size: 0.8rem;
 }
 
 .message table {
-  border-collapse: collapse;
-  font-size: 0.82em;
+  font-size: 0.8em;
 }
 
 .message table thead tr {
-  background-color: #1e293b;
-  color: #f1f5f9;
+  background-color: #64748b40;
   text-align: left;
 }
 
@@ -22,10 +16,6 @@
   padding: 0.6rem 1rem;
 }
 
-.message table tbody tr:nth-of-type(even) {
-  background-color: #f1f5f90a;
-}
-
 .message table tbody tr:last-of-type {
-  border-bottom: 2px solid #1e293b;
+  border-bottom: 2px solid #64748b40;
 }

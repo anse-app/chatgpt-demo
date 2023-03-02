@@ -15,13 +15,13 @@
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
     "eventsource-parser": "^0.1.0",
-    "micromark": "^3.1.0",
-    "micromark-extension-gfm": "^2.0.1",
-    "micromark-extension-math": "^2.0.2",
+    "markdown-it": "^13.0.1",
     "solid-js": "^1.6.11"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@unocss/preset-attributify": "^0.50.1",
+    "@unocss/preset-typography": "^0.50.3",
     "unocss": "^0.50.1"
   }
 }
