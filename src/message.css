@@ -1,6 +1,11 @@
 .message pre {
   background-color: #64748b10;
   font-size: 0.8rem;
+  padding: 0.4rem 1rem;
+}
+
+.message .hljs {
+  background-color: transparent;
 }
 
 .message table {
