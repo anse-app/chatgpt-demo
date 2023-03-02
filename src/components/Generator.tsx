@@ -89,7 +89,7 @@ export default () => {
             autofocus
             disabled={loading()}
             onKeyDown={(e) => {
-              e.key === 'Enter' && handleButtonClick()
+              e.key === 'Enter' && !e.isComposing && handleButtonClick()
             }}
             w-full
             px-4
