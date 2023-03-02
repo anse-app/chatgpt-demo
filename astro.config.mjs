@@ -13,19 +13,7 @@ export default defineConfig({
       presets: [
         presetAttributify(),
         presetUno(),
-        presetTypography({
-          cssExtend: {
-            'p': {
-              margin: '0.5rem 0',
-            },
-            'code': {
-              color: '#8b5cf6',
-            },
-            'pre': {
-              'background-color': '#1e293b',
-            }
-          },
-        }),
+        presetTypography(),
       ]
     }),
     solidJs()
