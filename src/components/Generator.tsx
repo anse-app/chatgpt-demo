@@ -85,6 +85,8 @@ export default () => {
             type="text"
             id="input"
             placeholder="Enter something..."
+            autocomplete='off'
+            autofocus
             disabled={loading()}
             onKeyDown={(e) => {
               e.key === 'Enter' && handleButtonClick()
