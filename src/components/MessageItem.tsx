@@ -1,7 +1,9 @@
 import type { Accessor } from 'solid-js'
 import type { ChatMessage } from '../types'
 import MarkdownIt from 'markdown-it'
-// import Shiki from 'markdown-it-shiki'
+// @ts-ignore
+import mdKatex from 'markdown-it-katex'
+import mdHighlight from 'markdown-it-highlightjs'
 
 interface Props {
   role: ChatMessage['role']
@@ -15,7 +17,7 @@ export default ({ role, message }: Props) => {
     assistant: 'bg-gradient-to-r from-yellow-200 via-green-200 to-green-300',
   }
   const htmlString = () => {
-    const md = MarkdownIt()
+    const md = MarkdownIt().use(mdKatex).use(mdHighlight)
 
     if (typeof message === 'function') {
       return md.render(message())

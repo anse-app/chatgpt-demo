@@ -9,7 +9,11 @@ specifiers:
   '@unocss/reset': ^0.50.1
   astro: ^2.0.15
   eventsource-parser: ^0.1.0
+  highlight.js: ^11.7.0
+  katex: ^0.6.0
   markdown-it: ^13.0.1
+  markdown-it-highlightjs: ^4.0.1
+  markdown-it-katex: ^2.0.3
   punycode: ^2.3.0
   solid-js: ^1.6.11
   unocss: ^0.50.1
@@ -20,7 +24,11 @@ dependencies:
   '@unocss/reset': 0.50.1
   astro: 2.0.15
   eventsource-parser: 0.1.0
+  highlight.js: 11.7.0
+  katex: 0.6.0
   markdown-it: 13.0.1
+  markdown-it-highlightjs: 4.0.1
+  markdown-it-katex: 2.0.3
   solid-js: 1.6.11
 
 devDependencies:
@@ -1971,6 +1979,11 @@ packages:
       space-separated-tokens: 2.0.2
     dev: false
 
+  /highlight.js/11.7.0:
+    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   /html-entities/2.3.3:
     resolution: {integrity: sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA==}
     dev: false
@@ -2148,6 +2161,13 @@ packages:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
     dev: false
 
+  /katex/0.6.0:
+    resolution: {integrity: sha512-rS4mY3SvHYg5LtQV6RBcK0if7ur6plyEukAOV+jGGPqFImuzu8fHL6M752iBmRGoUyF0bhZbAPoezehn7xYksA==}
+    hasBin: true
+    dependencies:
+      match-at: 0.1.1
+    dev: false
+
   /kind-of/6.0.3:
     resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
     engines: {node: '>=0.10.0'}
@@ -2247,6 +2267,18 @@ packages:
       semver: 6.3.0
     dev: false
 
+  /markdown-it-highlightjs/4.0.1:
+    resolution: {integrity: sha512-EPXwFEN6P5nqR3G4KjT20r20xbGYKMMA/360hhSYFmeoGXTE6hsLtJAiB/8ID8slVH4CWHHEL7GX0YenyIstVQ==}
+    dependencies:
+      highlight.js: 11.7.0
+    dev: false
+
+  /markdown-it-katex/2.0.3:
+    resolution: {integrity: sha512-nUkkMtRWeg7OpdflamflE/Ho/pWl64Lk9wNBKOmaj33XkQdumhXAIYhI0WO03GeiycPCsxbmX536V5NEXpC3Ng==}
+    dependencies:
+      katex: 0.6.0
+    dev: false
+
   /markdown-it/13.0.1:
     resolution: {integrity: sha512-lTlxriVoy2criHP0JKRhO2VDG9c2ypWCsT237eDiLqi09rmbKoUetyGHq2uOIRoRS//kfoJckS0eUzzkDR+k2Q==}
     hasBin: true
@@ -2260,6 +2292,10 @@ packages:
 
   /markdown-table/3.0.3:
     resolution: {integrity: sha512-Z1NL3Tb1M9wH4XESsCDEksWoKTdlUafKc4pt0GRwjUyXaCFZ+dc3g2erqB6zm3szA2IUSi7VnPI+o/9jnxh9hw==}
+    dev: false
+
+  /match-at/0.1.1:
+    resolution: {integrity: sha512-h4Yd392z9mST+dzc+yjuybOGFNOZjmXIPKWjxBd1Bb23r4SmDOsk2NYCU2BMUBGbSpZqwVsZYNq26QS3xfaT3Q==}
     dev: false
 
   /mdast-util-definitions/5.1.2:
