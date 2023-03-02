@@ -15,7 +15,9 @@
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
     "eventsource-parser": "^0.1.0",
-    "openai": "^3.1.0",
+    "micromark": "^3.1.0",
+    "micromark-extension-gfm": "^2.0.1",
+    "micromark-extension-math": "^2.0.2",
     "solid-js": "^1.6.11"
   },
   "devDependencies": {
