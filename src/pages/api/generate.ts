@@ -29,7 +29,7 @@ export const post: APIRoute = async (context) => {
     }),
   }
   if (https_proxy) {
-    init['agent'] = HttpsProxyAgent(https_proxy)
+    initOptions['agent'] = HttpsProxyAgent(https_proxy)
   }
   const completion = await fetch('https://api.openai.com/v1/chat/completions', initOptions)
 
