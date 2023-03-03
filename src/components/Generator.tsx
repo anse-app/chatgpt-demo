@@ -70,6 +70,12 @@ export default () => {
           setCurrentAssistantMessage('')
           continue
         }
+
+        // Keep the assistant message when there is an error.
+        // This enables the user to retry.
+        setLoading(false)
+        setController(null)
+        return
       }
 
       break
