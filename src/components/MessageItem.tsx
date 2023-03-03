@@ -1,5 +1,9 @@
-import { Accessor, For } from 'solid-js'
+import type { Accessor } from 'solid-js'
 import type { ChatMessage } from '../types'
+import MarkdownIt from 'markdown-it'
+// @ts-ignore
+import mdKatex from 'markdown-it-katex'
+import mdHighlight from 'markdown-it-highlightjs'
 
 interface Props {
   role: ChatMessage['role']
@@ -12,22 +16,20 @@ export default ({ role, message }: Props) => {
     user: 'bg-gradient-to-r from-purple-400 to-yellow-400',
     assistant: 'bg-gradient-to-r from-yellow-200 via-green-200 to-green-300',
   }
-  const paragraphArr = () => {
+  const htmlString = () => {
+    const md = MarkdownIt().use(mdKatex).use(mdHighlight)
+
     if (typeof message === 'function') {
-      return message().split('\n')
+      return md.render(message())
     } else if (typeof message === 'string') {
-      return message.split('\n')
+      return md.render(message)
     }
-    return []
+    return ''
   }
   return (
-    <div class="flex py-4 gap-3" class:op-75={ role === 'user' }>
-      <div class={ `shrink-0 w-7 h-7 rounded-full op-80 ${ roleClass[role] }` }></div>
-      <div>
-        <For each={ paragraphArr() }>
-          { (line) => <p class="py-0.5 text-slate leading-relaxed break-words">{ line }</p> }
-        </For>
-      </div>
+    <div class="flex py-2 gap-3 -mx-4 px-4 rounded-lg transition-colors md:hover:bg-slate/3" class:op-75={ role === 'user' }>
+      <div class={ `shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${ roleClass[role] }` }></div>
+      <div class="message prose text-slate break-words overflow-hidden" innerHTML={htmlString()} />
     </div>
   )
 }

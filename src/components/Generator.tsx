@@ -51,8 +51,7 @@ export default () => {
           continue
         }
         if (char) {
-          const textWithoutNewline = char.replace(/^\n+/, '')
-          setCurrentAssistantMessage(currentAssistantMessage() + textWithoutNewline)
+          setCurrentAssistantMessage(currentAssistantMessage() + char)
         }
       }
       done = readerDone
@@ -89,7 +88,7 @@ export default () => {
             autofocus
             disabled={loading()}
             onKeyDown={(e) => {
-              e.key === 'Enter' && handleButtonClick()
+              e.key === 'Enter' && !e.isComposing && handleButtonClick()
             }}
             w-full
             px-4
