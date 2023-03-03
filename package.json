@@ -19,6 +19,7 @@
     "solid-js": "^1.6.11"
   },
   "devDependencies": {
+    "@types/node-fetch": "^2.6.2",
     "@unocss/preset-attributify": "^0.50.1",
     "unocss": "^0.50.1"
   }
