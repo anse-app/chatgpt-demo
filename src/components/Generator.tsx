@@ -79,29 +79,24 @@ export default () => {
       { currentAssistantMessage() && <MessageItem role="assistant" message={currentAssistantMessage} /> }
       <Show when={!loading()} fallback={() => <div class="h-12 my-4 flex items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">AI is thinking...</div>}>
         <div class="my-4 flex items-center gap-2">
-          <input
+          <textarea
             ref={inputRef!}
-            type="text"
             id="input"
             placeholder="Enter something..."
             autocomplete='off'
             autofocus
             disabled={loading()}
-            onKeyDown={(e) => {
-              e.key === 'Enter' && !e.isComposing && handleButtonClick()
+            onInput={() => {
+              inputRef.style.height = 'auto';
+              inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
-            w-full
-            px-4
-            h-12
-            text-slate
-            rounded-sm
-            bg-slate
-            bg-op-15
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-400
-            placeholder:op-30
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.isComposing && !e.shiftKey) {
+                e.preventDefault();
+                handleButtonClick();
+              }
+            }}
+            className="w-full px-4 py-2 text-slate rounded-sm bg-slate bg-op-15 focus:bg-op-20 focus:ring-0 focus:outline-none placeholder:text-slate-400 placeholder:op-30"
           />
           <button onClick={handleButtonClick} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             Send
