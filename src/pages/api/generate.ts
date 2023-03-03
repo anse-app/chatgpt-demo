@@ -1,10 +1,10 @@
 import type { APIRoute } from 'astro'
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
-import fetch from "node-fetch";
+import fetch from 'node-fetch'
+import HttpsProxyAgent from 'https-proxy-agent'
+
 const apiKey = import.meta.env.OPENAI_API_KEY
 const https_proxy = import.meta.env.HTTPS_PROXY
-
-import HttpsProxyAgent from 'https-proxy-agent';
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json()
@@ -15,7 +15,7 @@ export const post: APIRoute = async (context) => {
   if (!messages) {
     return new Response('No input text')
   }
-  var init = {
+  const initOptions = {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${apiKey}`,
@@ -28,10 +28,10 @@ export const post: APIRoute = async (context) => {
       stream: true,
     }),
   }
-  if ( https_proxy != null && https_proxy != "") {
+  if (https_proxy) {
     init['agent'] = HttpsProxyAgent(https_proxy)
   }
-  const completion = await fetch('https://api.openai.com/v1/chat/completions', init)
+  const completion = await fetch('https://api.openai.com/v1/chat/completions', initOptions)
 
   const stream = new ReadableStream({
     async start(controller) {
