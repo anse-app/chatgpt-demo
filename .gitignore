@@ -29,3 +29,4 @@ pnpm-debug.log*
 # Editor directories and files
 .idea
 .vscode
+/package-lock.json
