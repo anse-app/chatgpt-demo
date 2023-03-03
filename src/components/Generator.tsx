@@ -51,8 +51,7 @@ export default () => {
           continue
         }
         if (char) {
-          const textWithoutNewline = char.replace(/^\n+/, '')
-          setCurrentAssistantMessage(currentAssistantMessage() + textWithoutNewline)
+          setCurrentAssistantMessage(currentAssistantMessage() + char)
         }
       }
       done = readerDone
