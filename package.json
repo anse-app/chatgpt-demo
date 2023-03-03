@@ -15,11 +15,18 @@
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
     "eventsource-parser": "^0.1.0",
-    "openai": "^3.1.0",
+    "highlight.js": "^11.7.0",
+    "katex": "^0.6.0",
+    "markdown-it": "^13.0.1",
+    "markdown-it-highlightjs": "^4.0.1",
+    "markdown-it-katex": "^2.0.3",
     "solid-js": "^1.6.11"
   },
   "devDependencies": {
+    "@types/markdown-it": "^12.2.3",
     "@unocss/preset-attributify": "^0.50.1",
+    "@unocss/preset-typography": "^0.50.3",
+    "punycode": "^2.3.0",
     "unocss": "^0.50.1"
   }
 }
