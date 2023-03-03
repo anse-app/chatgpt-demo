@@ -8,6 +8,7 @@ export default () => {
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
+  const [controller, setController] = createSignal<AbortController>(null)
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -26,36 +27,54 @@ export default () => {
       },
     ])
 
-    const response = await fetch('/api/generate', {
-      method: 'POST',
-      body: JSON.stringify({
-        messages: messageList(),
-      }),
-    })
-    if (!response.ok) {
-      throw new Error(response.statusText)
-    }
-    const data = response.body
-    if (!data) {
-      throw new Error('No data')
-    }
-    const reader = data.getReader()
-    const decoder = new TextDecoder('utf-8')
-    let done = false
+    for (;;) {
+      try {
+        const controller = new AbortController()
+        setController(controller)
+        const response = await fetch('/api/generate', {
+          method: 'POST',
+          body: JSON.stringify({
+            messages: messageList(),
+          }),
+          signal: controller.signal,
+        })
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+        const data = response.body
+        if (!data) {
+          throw new Error('No data')
+        }
+        const reader = data.getReader()
+        const decoder = new TextDecoder('utf-8')
+        let done = false
 
-    while (!done) {
-      const { value, done: readerDone } = await reader.read()
-      if (value) {
-        let char = decoder.decode(value)
-        if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
+        while (!done) {
+          const { value, done: readerDone } = await reader.read()
+          if (value) {
+            let char = decoder.decode(value)
+            if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
+              continue
+            }
+            if (char) {
+              setCurrentAssistantMessage(currentAssistantMessage() + char)
+            }
+          }
+          done = readerDone
+        }
+      } catch (e) {
+        console.error(e)
+
+        // Retry when the request is aborted by user.
+        if (e.name === 'AbortError') {
+          setCurrentAssistantMessage('')
           continue
         }
-        if (char) {
-          setCurrentAssistantMessage(currentAssistantMessage() + char)
-        }
       }
-      done = readerDone
+
+      break
     }
+
     setMessageList([
       ...messageList(),
       {
@@ -65,6 +84,7 @@ export default () => {
     ])
     setCurrentAssistantMessage('')
     setLoading(false)
+    setController(null)
   }
 
   const clear = () => {
@@ -73,10 +93,16 @@ export default () => {
     setCurrentAssistantMessage('')
   }
 
+  const retry = () => {
+    if (controller()) {
+      controller().abort()
+    }
+  }
+
   return (
     <div my-6>
       <For each={messageList()}>{(message) => <MessageItem role={message.role} message={message.content} />}</For>
-      { currentAssistantMessage() && <MessageItem role="assistant" message={currentAssistantMessage} /> }
+      {currentAssistantMessage() && <MessageItem role="assistant" message={currentAssistantMessage} onRetry={retry} />}
       <Show when={!loading()} fallback={() => <div class="h-12 my-4 flex items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">AI is thinking...</div>}>
         <div class="my-4 flex items-center gap-2">
           <input
@@ -84,7 +110,7 @@ export default () => {
             type="text"
             id="input"
             placeholder="Enter something..."
-            autocomplete='off'
+            autocomplete="off"
             autofocus
             disabled={loading()}
             onKeyDown={(e) => {
@@ -106,7 +132,7 @@ export default () => {
           <button onClick={handleButtonClick} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             Send
           </button>
-          <button title='Clear' onClick={clear} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button title="Clear" onClick={clear} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             <IconClear />
           </button>
         </div>
