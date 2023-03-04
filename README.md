@@ -6,7 +6,7 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs
 
 1. Setup & Install dependencies
 
-    > First, you need [Node.js](https://nodejs.org/) (v18+) installed.
+    > First, you need [Node.js](https://nodejs.org/) installed.
 
     ```shell
     npm i

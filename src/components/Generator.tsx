@@ -1,7 +1,7 @@
 import { createSignal, For, Show } from 'solid-js'
 import MessageItem from './MessageItem'
 import IconClear from './icons/Clear'
-import type { ChatMessage } from '../types'
+import type { ChatMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -65,6 +65,7 @@ export default () => {
     ])
     setCurrentAssistantMessage('')
     setLoading(false)
+    inputRef.focus()
   }
 
   const clear = () => {
