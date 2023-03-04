@@ -17,15 +17,23 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs
     ```
     OPENAI_API_KEY=sk-xxx...
     ```
-4. Run the app
+4. (Optional) Set the `SITE_TOKEN` in `.env` to protect your OpenAI API key from unauthorized access
+    ```
+    # token can be any string prarsed by regex /^@token=(.*)$/
+    # except clear
+    SITE_TOKEN=YOUR_SITE_TOKEN
+    ```
+    By adding this, vistors need to input @token=YOUR_SITE_TOKEN to access the API.
+    
+    One can also input `@token=clear` to clear the token    
+5. Run the app
     ```shell
     npm run dev
     ```
     
 ## Deploy With Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys)
-
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fandyzhshg%2Fchatgpt-demo&env=OPENAI_API_KEY&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys&env=SITE_TOKEN)
 ## License
 
 MIT

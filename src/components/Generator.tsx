@@ -2,6 +2,7 @@ import { createSignal, For, Show } from 'solid-js'
 import MessageItem from './MessageItem'
 import IconClear from './icons/Clear'
 import type { ChatMessage } from '@/types'
+import Cookies from 'js-cookie'
 
 export default () => {
   let inputRef: HTMLInputElement
@@ -14,6 +15,21 @@ export default () => {
     if (!inputValue) {
       return
     }
+
+    // regex to check if the input is '@token=xxxx'
+    const tokenRegex = /^@token=(.*)$/
+    const match = inputValue.match(tokenRegex)
+    if (match) {
+      const token = match[1].trim()
+      if (token.toLowerCase() == 'clear') {
+        Cookies.remove('token')
+      } else {
+        Cookies.set('token', token)  
+      }
+      inputRef.value = ''
+      return
+    }
+
     setLoading(true)
     // @ts-ignore
     if (window?.umami) umami.trackEvent('chat_generate')
@@ -26,7 +42,8 @@ export default () => {
       },
     ])
 
-    const response = await fetch('/api/generate', {
+    const token = Cookies.get('token')
+    const response = await fetch(`/api/generate?token=${token}`, {
       method: 'POST',
       body: JSON.stringify({
         messages: messageList(),

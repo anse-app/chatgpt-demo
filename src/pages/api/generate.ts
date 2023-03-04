@@ -6,8 +6,15 @@ import { fetch, ProxyAgent } from 'undici'
 
 const apiKey = import.meta.env.OPENAI_API_KEY
 const https_proxy = import.meta.env.HTTPS_PROXY
+const siteToken = import.meta.env.SITE_TOKEN
 
 export const post: APIRoute = async (context) => {
+  if (siteToken) {
+    if (context.url.searchParams.get('token') !== siteToken) {
+      return new Response('Unauthorized: \n\tinput "@token=YOUR_SITE_TOKEN" to authenticate,\n\tinput "@token=clear" to clear token')
+    }
+  }
+
   const body = await context.request.json()
   const messages = body.messages
 
