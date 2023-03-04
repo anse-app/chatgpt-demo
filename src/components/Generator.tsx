@@ -175,6 +175,7 @@ export default () => {
             rounded-sm
             bg-slate
             bg-op-15
+            resize-none
             focus:bg-op-20
             focus:ring-0
             focus:outline-none
