@@ -65,6 +65,7 @@ export default () => {
     ])
     setCurrentAssistantMessage('')
     setLoading(false)
+    inputRef.focus()
   }
 
   const clear = () => {
