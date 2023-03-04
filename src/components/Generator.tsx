@@ -73,6 +73,15 @@ export default () => {
     setCurrentAssistantMessage('')
   }
 
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.isComposing || e.shiftKey) {
+      return
+    }
+    if (e.key === 'Enter') {
+      handleButtonClick()
+    }
+  }
+
   return (
     <div my-6>
       <For each={messageList()}>{(message) => <MessageItem role={message.role} message={message.content} />}</For>
@@ -81,17 +90,16 @@ export default () => {
         <div class="my-4 flex items-center gap-2">
           <textarea
             ref={inputRef!}
-            id="input"
+            disabled={loading()}
+            onKeyDown={handleKeydown}
             placeholder="Enter something..."
             autocomplete='off'
             autofocus
-            disabled={loading()}
-            onKeyDown={(e) => {
-              e.key === 'Enter' && !e.isComposing && !e.shiftKey && handleButtonClick()
-            }}
             w-full
-            p-3
+            px-3 py-3
+            min-h-12
             h-12
+            max-h-36
             text-slate
             rounded-sm
             bg-slate
