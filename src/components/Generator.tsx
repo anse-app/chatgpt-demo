@@ -1,10 +1,10 @@
 import { createSignal, For, Show } from 'solid-js'
 import MessageItem from './MessageItem'
 import IconClear from './icons/Clear'
-import type { ChatMessage } from '../types'
+import type { ChatMessage } from '@/types'
 
 export default () => {
-  let inputRef: HTMLInputElement
+  let inputRef: HTMLTextAreaElement
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
@@ -65,12 +65,22 @@ export default () => {
     ])
     setCurrentAssistantMessage('')
     setLoading(false)
+    inputRef.focus()
   }
 
   const clear = () => {
     inputRef.value = ''
     setMessageList([])
     setCurrentAssistantMessage('')
+  }
+
+  const handleKeydown = (e: KeyboardEvent) => {
+    if (e.isComposing || e.shiftKey) {
+      return
+    }
+    if (e.key === 'Enter') {
+      handleButtonClick()
+    }
   }
 
   return (
@@ -81,22 +91,30 @@ export default () => {
         <div class="my-4 flex items-center gap-2">
           <textarea
             ref={inputRef!}
-            id="input"
+            disabled={loading()}
+            onKeyDown={handleKeydown}
             placeholder="Enter something..."
             autocomplete='off'
-            autofocus
-            disabled={loading()}
             onInput={() => {
               inputRef.style.height = 'auto';
               inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && !e.isComposing && !e.shiftKey) {
-                e.preventDefault();
-                handleButtonClick();
-              }
-            }}
-            className="w-full px-4 py-2 text-slate rounded-sm bg-slate bg-op-15 focus:bg-op-20 focus:ring-0 focus:outline-none placeholder:text-slate-400 placeholder:op-30"
+            autofocus
+            w-full
+            px-3 py-3
+            min-h-12
+            h-12
+            max-h-36
+            text-slate
+            rounded-sm
+            bg-slate
+            bg-op-15
+            focus:bg-op-20
+            focus:ring-0
+            focus:outline-none
+            placeholder:text-slate-400
+            placeholder:op-30
+            overflow-hidden
           />
           <button onClick={handleButtonClick} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             Send
