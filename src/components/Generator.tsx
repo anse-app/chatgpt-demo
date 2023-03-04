@@ -159,14 +159,11 @@ export default () => {
             placeholder="Enter something..."
             autocomplete="off"
             autofocus
-            disabled={loading()}
-            onKeyDown={handleKeydown}
             onInput={() => {
               inputRef.style.height = 'auto';
               inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
             rows="1"
-            autofocus
             w-full
             px-3 py-3
             min-h-12
