@@ -5,7 +5,7 @@ import type { ChatMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
-  const [messageList, setMessageList] = createSignal<ChatMessage[]>([{"role":"user","content":"你好！"},{"role":"assistant","content":"\n\n你好！我是AI助手，有什么可以帮助你的吗？"},{"role":"user","content":"给我讲一个故事"},{"role":"assistant","content":"好的，这是一个叫做《勇士和怪兽》的故事：\n\n在一个遥远的国度里，有一个勇士，他的名字叫做杰克。他是这个国度最勇敢的战士，因为他曾经打败了一只凶猛的巨龙。杰克有一个朋友叫做汤姆，他是一个年轻的牧羊人。\n\n有一天，这个国度遭到了一只可怕的怪兽的攻击，这只怪兽是一个巨大的狮子。它每天晚上都会来到村庄，抓走一些羊和小孩。人们都非常害怕，因为他们不知道该怎么办。\n\n杰克听到了这个消息，他知道他必须要做些什么来帮助这个国度。他决定去打败这只怪兽，但他也知道这不是一件容易的事情。\n\n汤姆知道杰克的计划，他决定和杰克一起去。他知道他不能让杰克一个人去面对这个怪兽。于是，杰克和汤姆一起出发了。\n\n他们走了很长时间，终于来到了怪兽的巢穴。他们看到了那只巨大的狮子，它看起来非常凶猛。\n\n杰克和汤姆决定一起攻击怪兽。他们使用了各种武器，但是怪兽非常强大，他们一直无法打败它。他们都感到非常沮丧，但是他们不想放弃。\n\n最终，他们想到了一个计划。他们决定将怪兽引诱到一个陷阱里，然后用巨石砸死它。这个计划非常危险，但他们决定还是要试一试。\n\n他们开始引诱怪兽，怪兽跟着他们走，最终掉进了陷阱里。杰克和汤姆立刻用巨石砸向怪兽，最终成功地打败了它。\n\n人们听到了这个消息，他们非常高兴。他们感谢杰克和汤姆，因为他们的勇气和智慧，拯救了整个国度。\n\n故事告诉我们勇气和智慧的重要性，只有勇敢地面对困难，才能获得胜利。"}])
+  const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
