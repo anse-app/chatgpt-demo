@@ -15,9 +15,11 @@ export const post: APIRoute = async (context) => {
     return new Response('No input text')
   }
   const initOptions = generatePayload(apiKey, messages)
-  if (ProxyAgent && https_proxy) {
+  // #vercel-disable-blocks
+  if (https_proxy) {
     initOptions['dispatcher'] = new ProxyAgent(https_proxy)
   }
+  // #vercel-end
 
   // @ts-ignore
   const response = await fetch('https://api.openai.com/v1/chat/completions', initOptions) as Response
