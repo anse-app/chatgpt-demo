@@ -99,11 +99,11 @@ export default () => {
               inputRef.style.height = 'auto';
               inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
+            rows="1"
             autofocus
             w-full
             px-3 py-3
             min-h-12
-            h-12
             max-h-36
             text-slate
             rounded-sm
