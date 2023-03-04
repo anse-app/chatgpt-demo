@@ -11,9 +11,7 @@ import vercel from '@astrojs/vercel/edge'
 
 const envAdapter = () => {
   if (process.env.OUTPUT == 'vercel') {
-    return vercel({
-      excludeFiles: ['./src/pages/api/generate.ts']
-    })
+    return vercel()
   } else {
     return node({
       mode: 'standalone'
@@ -37,7 +35,6 @@ export default defineConfig({
   adapter: envAdapter(),
   vite: {
     plugins: [
-      // conditionalCompile(),
       process.env.OUTPUT == 'vercel' && vercelDisableBlocks(),
     ]
   },
