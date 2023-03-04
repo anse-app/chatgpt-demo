@@ -1,4 +1,5 @@
 ---
+
 export interface Props {
 	title: string;
 }
@@ -14,7 +15,7 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
-		<script async defer data-website-id="918699fd-0704-408b-bda3-3f28c1bd9d1b" src="https://stats.ddiu.io/app.js"></script>
+		{ import.meta.env.HEAD_SCRIPTS ? <Fragment set:html={import.meta.env.HEAD_SCRIPTS} /> : null }
 	</head>
 	<body>
 		<slot />
