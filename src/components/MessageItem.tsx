@@ -1,10 +1,11 @@
-import type { Accessor } from 'solid-js'
+import { Accessor, createSignal } from 'solid-js'
 import type { ChatMessage } from '@/types'
 import MarkdownIt from 'markdown-it'
 // @ts-ignore
 import mdKatex from 'markdown-it-katex'
 import mdHighlight from 'markdown-it-highlightjs'
 import IconRefresh from './icons/Refresh'
+import {useClipboard} from 'solidjs-use'
 
 interface Props {
   role: ChatMessage['role']
@@ -19,8 +20,40 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     user: 'bg-gradient-to-r from-purple-400 to-yellow-400',
     assistant: 'bg-gradient-to-r from-yellow-200 via-green-200 to-green-300',
   }
+  const [source, setSource] = createSignal('')
+  const { copy, copied } = useClipboard({ source })
+  if (showRetry?.() && onRetry) {
+    const clickBtn = document.querySelector('.copy-btn')
+    if (clickBtn.tagName) {
+      console.log(222222222,clickBtn,copied)
+      clickBtn.addEventListener('click', () => {
+        console.log(2222)
+        copy(source())
+      })
+    }
+  }
   const htmlString = () => {
     const md = MarkdownIt().use(mdKatex).use(mdHighlight)
+    const fence = md.renderer.rules.fence!
+    md.renderer.rules.fence = (...args) => {
+      const [tokens, idx] = args
+      const token = tokens[idx]
+      // remove title from info
+      token.info = token.info.replace(/\[.*\]/, '')
+
+      const rawCode = fence(...args)
+      setSource(rawCode)
+      
+      return `<div relative>
+      <div class="copy-btn absolute top-2 right-2 z-3 flex justify-center items-center border b-transparent w-8 h-8 p-2 bg-dark-300 op-90 transition-all group">
+          <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z" /><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z" /></svg>
+            <div class="opacity-0 h-7 bg-black px-2.5 py-1 box-border text-xs c-white inline-flex justify-center items-center  rounded absolute z-1 transition duration-600 whitespace-nowrap -top-8" group-hover:opacity-100>
+              ${copied ? 'Copied' : 'Copy'}
+            </div>
+      </div>
+      ${rawCode}
+      </div>`
+    }
 
     if (typeof message === 'function') {
       return md.render(message())

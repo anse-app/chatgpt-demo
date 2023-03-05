@@ -17,6 +17,7 @@ specifiers:
   markdown-it-katex: ^2.0.3
   punycode: ^2.3.0
   solid-js: ^1.6.11
+  solidjs-use: ^1.2.0
   undici: ^5.20.0
   unocss: ^0.50.1
 
@@ -33,6 +34,7 @@ dependencies:
   markdown-it-highlightjs: 4.0.1
   markdown-it-katex: 2.0.3
   solid-js: 1.6.11
+  solidjs-use: 1.2.0
   undici: 5.20.0
 
 devDependencies:
@@ -739,6 +741,16 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /@solidjs-use/shared/1.2.0:
+    resolution: {integrity: sha512-HkGJl6c3XDlusLFJw+4JKUCiW6PZ1xw+brMZdyGMfDbr+RQZXrLfu61WbGhVpY5BPy/+P93gS4+WKpBhOqkz6Q==}
+    dependencies:
+      '@solidjs-use/solid-to-vue': 1.2.0
+    dev: false
+
+  /@solidjs-use/solid-to-vue/1.2.0:
+    resolution: {integrity: sha512-ZmIThxUeX+D40ck0bviDEhta2WSpJd2AQYFF+rjO8zQmgySifeeiEc0Kn/Sp1BMHbLMcLboPYdOnT+6E1E9OLg==}
+    dev: false
+
   /@types/babel__core/7.20.0:
     resolution: {integrity: sha512-+n8dL/9GWblDO0iU6eZAwEIJVr5DWigtle+Q6HLOrh/pdbXOhOtqzq8VPPE2zvNJzSKY4vH/z3iT3tn0A3ypiQ==}
     dependencies:
@@ -828,6 +840,10 @@ packages:
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
+    dev: false
+
+  /@types/web-bluetooth/0.0.16:
+    resolution: {integrity: sha512-oh8q2Zc32S6gd/j50GowEjKLoOVOwHP/bWVjKJInBwQqdOYMdPrf1oVlelTlyfFK3CKxL1uahMDAr+vy8T7yMQ==}
     dev: false
 
   /@types/yargs-parser/21.0.0:
@@ -3414,6 +3430,13 @@ packages:
     resolution: {integrity: sha512-JquQQHPArGq+i2PLURxJ99Pcz2/1docpbycSio/cKSA0SeI3z5zRjy0TNcH4NRYvbOLrcini+iovXwnexKabyw==}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /solidjs-use/1.2.0:
+    resolution: {integrity: sha512-Ylx/ggV/eQ9CMHDux29XKh+23yLmEh+seu/FAbRO41cQzKqi1X/038xSyQwWulPHRGrFBxEggPVQ0WmotTtquA==}
+    dependencies:
+      '@solidjs-use/shared': 1.2.0
+      '@types/web-bluetooth': 0.0.16
     dev: false
 
   /source-map-js/1.0.2:
