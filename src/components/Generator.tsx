@@ -6,7 +6,7 @@ import SystemRoleSettings from './SystemRoleSettings'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
-  const [systemRoleSettings, setSystemRoleSettings] = createSignal('')
+  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
   const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
@@ -38,10 +38,10 @@ export default () => {
       const controller = new AbortController()
       setController(controller)
       const requestMessageList = [...messageList()]
-      if (systemRoleSettings()) {
+      if (currentSystemRoleSettings()) {
         requestMessageList.unshift({
           role: 'system',
-          content: systemRoleSettings(),
+          content: currentSystemRoleSettings(),
         })
       }
       const response = await fetch('/api/generate', {
@@ -106,7 +106,7 @@ export default () => {
     inputRef.style.height = 'auto';
     setMessageList([])
     setCurrentAssistantMessage('')
-    setSystemRoleSettings('')
+    setCurrentSystemRoleSettings('')
   }
 
   const stopStreamFetch = () => {
@@ -142,8 +142,8 @@ export default () => {
         canEdit={() => messageList().length === 0}
         systemRoleEditing={systemRoleEditing}
         setSystemRoleEditing={setSystemRoleEditing}
-        systemRoleSettings={systemRoleSettings}
-        setSystemRoleSettings={setSystemRoleSettings}
+        currentSystemRoleSettings={currentSystemRoleSettings}
+        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
       />
       <Index each={messageList()}>
         {(message, index) => (
