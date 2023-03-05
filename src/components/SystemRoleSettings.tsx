@@ -20,7 +20,7 @@ export default (props: Props) => {
 
   return (
     <div class="my-4">
-      <Show when={!props.systemRoleEditing() && props.canEdit()}>
+      <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
           <div class="text-slate">
             <div class="flex items-center gap-1 op-60 text-slate">
@@ -32,7 +32,7 @@ export default (props: Props) => {
             </div>
           </div>
         </Show>
-        <Show when={!props.currentSystemRoleSettings()}>
+        <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
           <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="inline-flex items-center justify-center gap-1 text-sm text-slate bg-slate/20 px-2 py-1 rounded-md transition-colors cursor-pointer hover:bg-slate/50">
             <IconEnv />
             <span>Add System Role</span>
@@ -71,7 +71,7 @@ export default (props: Props) => {
             />
           </div>
           <button onClick={handleButtonClick} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
-            { props.currentSystemRoleSettings() ? 'Set' : 'Cancel' }
+            Set
           </button>
         </div>
       </Show>
