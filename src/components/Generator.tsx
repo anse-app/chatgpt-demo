@@ -103,6 +103,7 @@ export default () => {
 
   const clear = () => {
     inputRef.value = ''
+    inputRef.style.height = 'auto';
     setMessageList([])
     setCurrentAssistantMessage('')
     setSystemRoleSettings('')
