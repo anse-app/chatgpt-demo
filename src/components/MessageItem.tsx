@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import mdKatex from 'markdown-it-katex'
 import mdHighlight from 'markdown-it-highlightjs'
 import IconRefresh from './icons/Refresh'
-import { useClipboard,useEventListener } from 'solidjs-use'
+import { useClipboard, useEventListener } from 'solidjs-use'
 
 interface Props {
   role: ChatMessage['role']
@@ -20,23 +20,20 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     user: 'bg-gradient-to-r from-purple-400 to-yellow-400',
     assistant: 'bg-gradient-to-r from-yellow-200 via-green-200 to-green-300',
   }
-  const [source, setSource] = createSignal('')
+  const [source] = createSignal('')
   const { copy, copied } = useClipboard({ source, copiedDuring: 1000 })
-
 
   useEventListener('click', (e) => {
     const el = e.target as HTMLElement
     let code = null
-    
+
     if (el.matches('div > div.copy-btn')) {
       code = decodeURIComponent(el.dataset.code!)
     } else {
       code = decodeURIComponent(el.parentElement?.dataset.code!)
-    } 
+    }
     copy(code)
   })
-
-  
 
   const htmlString = () => {
     const md = MarkdownIt().use(mdKatex).use(mdHighlight)
@@ -44,11 +41,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     md.renderer.rules.fence = (...args) => {
       const [tokens, idx] = args
       const token = tokens[idx]
-      // remove title from info
-      token.info = token.info.replace(/\[.*\]/, '')
-
       const rawCode = fence(...args)
-      setSource(token.content)
 
       return `<div relative>
       <div data-code=${encodeURIComponent(token.content)} class="copy-btn absolute top-12px right-12px z-3 flex justify-center items-center border b-transparent w-8 h-8 p-2 bg-dark-300 op-90 transition-all group cursor-pointer">
