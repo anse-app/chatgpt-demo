@@ -53,7 +53,7 @@ export default () => {
           time: timestamp,
           sign: await generateSignature({
             t: timestamp,
-            m: requestMessageList[requestMessageList.length - 1].content,
+            m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
           }),
         }),
         signal: controller.signal,

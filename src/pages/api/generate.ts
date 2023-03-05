@@ -14,7 +14,7 @@ export const post: APIRoute = async (context) => {
   if (!messages) {
     return new Response('No input text')
   }
-  if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages }, sign)) {
+  if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '', }, sign)) {
     return new Response('Invalid signature')
   }
   const initOptions = generatePayload(apiKey, messages)
