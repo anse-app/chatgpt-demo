@@ -5,7 +5,7 @@ import MarkdownIt from 'markdown-it'
 import mdKatex from 'markdown-it-katex'
 import mdHighlight from 'markdown-it-highlightjs'
 import IconRefresh from './icons/Refresh'
-import {useClipboard} from 'solidjs-use'
+import { useClipboard } from 'solidjs-use'
 
 interface Props {
   role: ChatMessage['role']
@@ -22,16 +22,14 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   }
   const [source, setSource] = createSignal('')
   const { copy, copied } = useClipboard({ source })
-  if (showRetry?.() && onRetry) {
-    const clickBtn = document.querySelector('.copy-btn')
-    if (clickBtn.tagName) {
-      console.log(222222222,clickBtn,copied)
-      clickBtn.addEventListener('click', () => {
-        console.log(2222)
-        copy(source())
-      })
+
+  window.addEventListener('click', (e) => {
+    const el = e.target as HTMLElement
+    if (el.matches('div > div.copy-btn') || el.matches('div.copy-btn > svg')) {
+      copy(source())
     }
-  }
+  })
+
   const htmlString = () => {
     const md = MarkdownIt().use(mdKatex).use(mdHighlight)
     const fence = md.renderer.rules.fence!
@@ -42,13 +40,13 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
       token.info = token.info.replace(/\[.*\]/, '')
 
       const rawCode = fence(...args)
-      setSource(rawCode)
-      
+      setSource(token.content)
+
       return `<div relative>
       <div class="copy-btn absolute top-2 right-2 z-3 flex justify-center items-center border b-transparent w-8 h-8 p-2 bg-dark-300 op-90 transition-all group">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M28 10v18H10V10h18m0-2H10a2 2 0 0 0-2 2v18a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V10a2 2 0 0 0-2-2Z" /><path fill="currentColor" d="M4 18H2V4a2 2 0 0 1 2-2h14v2H4Z" /></svg>
             <div class="opacity-0 h-7 bg-black px-2.5 py-1 box-border text-xs c-white inline-flex justify-center items-center  rounded absolute z-1 transition duration-600 whitespace-nowrap -top-8" group-hover:opacity-100>
-              ${copied ? 'Copied' : 'Copy'}
+              ${copied() ? 'Copied' : 'Copy'}
             </div>
       </div>
       ${rawCode}
@@ -62,13 +60,14 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
     }
     return ''
   }
+
   return (
     <div class="py-2 -mx-4 px-4 transition-colors md:hover:bg-slate/3">
       <div class="flex gap-3 rounded-lg" class:op-75={role === 'user'}>
         <div class={`shrink-0 w-7 h-7 mt-4 rounded-full op-80 ${roleClass[role]}`}></div>
         <div class="message prose text-slate break-words overflow-hidden" innerHTML={htmlString()} />
       </div>
-      { showRetry?.() && onRetry && (
+      {showRetry?.() && onRetry && (
         <div class="flex items-center justify-end px-3 mb-2">
           <div onClick={onRetry} class="flex items-center gap-1 px-2 py-0.5 op-70 border border-slate text-slate rounded-md text-sm cursor-pointer hover:bg-slate/10">
             <IconRefresh />
