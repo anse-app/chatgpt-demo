@@ -2,9 +2,14 @@ import type { ChatMessage } from '@/types'
 import { createSignal, Index, Show } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
+import SystemRoleSettings from './SystemRoleSettings'
+import _ from 'lodash'
+import { generateSignature } from '@/utils/auth'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
+  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
+  const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
@@ -27,17 +32,35 @@ export default () => {
     ])
     requestWithLatestMessage()
   }
-
+  const throttle =_.throttle(function(){
+    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
+  }, 300, {
+    leading: true,
+    trailing: false
+  })
   const requestWithLatestMessage = async () => {
     setLoading(true)
     setCurrentAssistantMessage('')
     try {
       const controller = new AbortController()
       setController(controller)
+      const requestMessageList = [...messageList()]
+      if (currentSystemRoleSettings()) {
+        requestMessageList.unshift({
+          role: 'system',
+          content: currentSystemRoleSettings(),
+        })
+      }
+      const timestamp = Date.now()
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
-          messages: messageList(),
+          messages: requestMessageList,
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
+          }),
         }),
         signal: controller.signal,
       })
@@ -62,7 +85,7 @@ export default () => {
           if (char) {
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
-          window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
+          throttle()
         }
         done = readerDone
       }
@@ -93,8 +116,10 @@ export default () => {
 
   const clear = () => {
     inputRef.value = ''
+    inputRef.style.height = 'auto';
     setMessageList([])
     setCurrentAssistantMessage('')
+    setCurrentSystemRoleSettings('')
   }
 
   const stopStreamFetch = () => {
@@ -126,6 +151,13 @@ export default () => {
 
   return (
     <div my-6>
+      <SystemRoleSettings
+        canEdit={() => messageList().length === 0}
+        systemRoleEditing={systemRoleEditing}
+        setSystemRoleEditing={setSystemRoleEditing}
+        currentSystemRoleSettings={currentSystemRoleSettings}
+        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+      />
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
@@ -151,10 +183,10 @@ export default () => {
           </div>
         )}
       >
-        <div class="my-4 flex items-center gap-2">
+        <div class="my-4 flex items-center gap-2 transition-opacity" class:op-50={systemRoleEditing()}>
           <textarea
             ref={inputRef!}
-            disabled={loading()}
+            disabled={systemRoleEditing()}
             onKeyDown={handleKeydown}
             placeholder="Enter something..."
             autocomplete="off"
@@ -180,10 +212,10 @@ export default () => {
             placeholder:op-30
             scroll-pa-8px
           />
-          <button onClick={handleButtonClick} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={loading()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
             <IconClear />
           </button>
         </div>
