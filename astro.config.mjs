@@ -26,7 +26,13 @@ export default defineConfig({
       presets: [
         presetAttributify(),
         presetUno(),
-        presetTypography(),
+        presetTypography({
+          cssExtend: {
+            "ul,ol": {
+              "padding-left": "2em"
+            }
+          }
+        }),
       ]
     }),
     solidJs()
