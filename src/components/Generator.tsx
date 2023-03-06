@@ -1,10 +1,10 @@
 import type { ChatMessage } from '@/types'
-import { createSignal, Index, Show } from 'solid-js'
+import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
-import _ from 'lodash'
 import { generateSignature } from '@/utils/auth'
+import { useThrottleFn } from 'solidjs-use'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -14,6 +14,30 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
+
+
+  onMount(() => {
+    try {
+      if (localStorage.getItem('messageList')) {
+        setMessageList(JSON.parse(localStorage.getItem('messageList')))
+      }
+      if (localStorage.getItem('systemRoleSettings')) {
+        setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+      }
+    } catch (err) {
+      console.error(err)
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    onCleanup(() => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    })
+  })
+
+  const handleBeforeUnload = () => {
+    localStorage.setItem('messageList', JSON.stringify(messageList()))
+    localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
+  }
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
@@ -32,15 +56,15 @@ export default () => {
     ])
     requestWithLatestMessage()
   }
-  const throttle =_.throttle(function(){
-    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
-  }, 300, {
-    leading: true,
-    trailing: false
-  })
+
+  const smoothToBottom = useThrottleFn(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  }, 300, false, true)
+
   const requestWithLatestMessage = async () => {
     setLoading(true)
     setCurrentAssistantMessage('')
+    const storagePassword = localStorage.getItem('pass')
     try {
       const controller = new AbortController()
       setController(controller)
@@ -57,6 +81,7 @@ export default () => {
         body: JSON.stringify({
           messages: requestMessageList,
           time: timestamp,
+          pass: storagePassword,
           sign: await generateSignature({
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
@@ -85,7 +110,7 @@ export default () => {
           if (char) {
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
-          throttle()
+          smoothToBottom()
         }
         done = readerDone
       }
@@ -177,13 +202,13 @@ export default () => {
       <Show
         when={!loading()}
         fallback={() => (
-          <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
+          <div class="gen-cb-wrapper">
             <span>AI is thinking...</span>
-            <div class="px-2 py-0.5 border border-slate text-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
+            <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
           </div>
         )}
       >
-        <div class="my-4 flex items-center gap-2 transition-opacity" class:op-50={systemRoleEditing()}>
+        <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
           <textarea
             ref={inputRef!}
             disabled={systemRoleEditing()}
@@ -196,26 +221,12 @@ export default () => {
               inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
             rows="1"
-            w-full
-            px-3 py-3
-            min-h-12
-            max-h-36
-            text-slate
-            rounded-sm
-            bg-slate
-            bg-op-15
-            resize-none
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-400
-            placeholder:op-30
-            scroll-pa-8px
+            class='gen-textarea'
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
             <IconClear />
           </button>
         </div>
