@@ -11,6 +11,7 @@ specifiers:
   astro: ^2.0.15
   eventsource-parser: ^0.1.0
   highlight.js: ^11.7.0
+  js-sha256: ^0.9.0
   katex: ^0.6.0
   markdown-it: ^13.0.1
   markdown-it-highlightjs: ^4.0.1
@@ -28,6 +29,7 @@ dependencies:
   astro: 2.0.15
   eventsource-parser: 0.1.0
   highlight.js: 11.7.0
+  js-sha256: 0.9.0
   katex: 0.6.0
   markdown-it: 13.0.1
   markdown-it-highlightjs: 4.0.1
@@ -2170,6 +2172,10 @@ packages:
     resolution: {integrity: sha512-NZIITw8uZQFuzQimqjUxIrIcEdxYDFIe/0xYfIlVXTkiBjjyBEvgasj5bb0/cHtPRD/NziPbT312sFrkI5ALpw==}
     hasBin: true
     dev: true
+
+  /js-sha256/0.9.0:
+    resolution: {integrity: sha512-sga3MHh9sgQN2+pJ9VYZ+1LPwXOxuBJBA5nrR5/ofPfuiJBE2hnjsaN8se8JznOmGLN2p49Pe5U/ttafcs/apA==}
+    dev: false
 
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
