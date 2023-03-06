@@ -18,9 +18,9 @@ export const generateSignature = async (payload: AuthPayload) => {
 }
 
 export const verifySignature = async (payload: AuthPayload, sign: string) => {
-  if (Math.abs(payload.t - Date.now()) > 1000 * 60 * 5) {
-    return false
-  }
+  // if (Math.abs(payload.t - Date.now()) > 1000 * 60 * 5) {
+  //   return false
+  // }
   const payloadSign = await generateSignature(payload)
   return payloadSign === sign
 }
