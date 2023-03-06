@@ -4,6 +4,7 @@ import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
 import _ from 'lodash'
+import { generateSignature } from '@/utils/auth'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -50,10 +51,16 @@ export default () => {
           content: currentSystemRoleSettings(),
         })
       }
+      const timestamp = Date.now()
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
           messages: requestMessageList,
+          time: timestamp,
+          sign: await generateSignature({
+            t: timestamp,
+            m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
+          }),
         }),
         signal: controller.signal,
       })
