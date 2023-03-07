@@ -4,6 +4,7 @@ specifiers:
   '@astrojs/node': ^5.0.4
   '@astrojs/solid-js': ^2.0.2
   '@astrojs/vercel': ^3.1.3
+  '@h7ml/badwords': ^0.0.3
   '@types/markdown-it': ^12.2.3
   '@unocss/preset-attributify': ^0.50.1
   '@unocss/preset-typography': ^0.50.3
@@ -27,6 +28,7 @@ dependencies:
   '@astrojs/node': 5.0.4_astro@2.0.15
   '@astrojs/solid-js': 2.0.2_3gp6ihuexfr5udehowqtgybixa
   '@astrojs/vercel': 3.1.3_astro@2.0.15+react@18.2.0
+  '@h7ml/badwords': 0.0.3
   '@unocss/reset': 0.50.1
   astro: 2.0.15
   eventsource-parser: 0.1.0
@@ -616,6 +618,10 @@ packages:
     os: [win32]
     requiresBuild: true
     optional: true
+
+  /@h7ml/badwords/0.0.3:
+    resolution: {integrity: sha512-HvGn6WBciZdw1oEamE/RSmxr05v5Uh57Qb54BDtChagkt+VnWS5CIYrmw8JZHS3iGCQHED0+4cZXHK3cL4BAUg==}
+    dev: false
 
   /@iconify/types/2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
