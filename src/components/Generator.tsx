@@ -1,6 +1,7 @@
 import type { ChatMessage } from '@/types'
 import { createSignal, Index, Show } from 'solid-js'
 import IconClear from './icons/Clear'
+import IconRobotDead from './icons/RobotDead'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
 import _ from 'lodash'
@@ -15,11 +16,20 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
 
+  let forcedAssistant: HTMLTextAreaElement
+  const [forcedAssistantEnabled, setForcedAssistantEnabled] = createSignal(false)
+
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
     if (!inputValue) {
       return
     }
+
+    if (forcedAssistantEnabled()) {
+      forceAssistant(inputValue)
+      return
+    }
+
     // @ts-ignore
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
@@ -32,12 +42,38 @@ export default () => {
     ])
     requestWithLatestMessage()
   }
+
+  const forceAssistant = (message: string) => {
+    const forcedValue = forcedAssistant.value
+    if (!forcedValue) {
+      return
+    }
+
+    forcedAssistant.value = ''
+    inputRef.value = ''
+
+    setMessageList([
+      ...messageList(),
+      {
+        role: 'user',
+        content: message,
+      },
+      {
+        role: 'assistant',
+        content: forcedValue,
+      }
+    ])
+
+    inputRef.focus()
+  }
+
   const throttle =_.throttle(function(){
     window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
   }, 300, {
     leading: true,
     trailing: false
   })
+  
   const requestWithLatestMessage = async () => {
     setLoading(true)
     setCurrentAssistantMessage('')
@@ -146,6 +182,7 @@ export default () => {
     }
     if (e.key === 'Enter') {
       handleButtonClick()
+      e.preventDefault()
     }
   }
 
@@ -217,7 +254,39 @@ export default () => {
           <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm>
             <IconClear />
           </button>
+          <button title="Forced Assistant" onClick={() => setForcedAssistantEnabled((prev) => !prev)} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm>
+            <IconRobotDead />
+          </button>
         </div>
+        <Show when={forcedAssistantEnabled()}>
+          <textarea
+              ref={forcedAssistant!}
+              disabled={systemRoleEditing()}
+              onKeyDown={handleKeydown}
+              placeholder="Enter forced assistant text..."
+              autocomplete="off"
+              autofocus
+              onInput={() => {
+                forcedAssistant.style.height = 'auto';
+                forcedAssistant.style.height = forcedAssistant.scrollHeight + 'px';
+              }}
+              rows="1"
+              w-full
+              px-3 py-3
+              min-h-12
+              max-h-36
+              rounded-sm
+              bg-slate
+              bg-op-15
+              resize-none
+              focus:bg-op-20
+              focus:ring-0
+              focus:outline-none
+              placeholder:op-50
+              dark="placeholder:op-30"
+              scroll-pa-8px
+            />
+          </Show>
       </Show>
     </div>
   )
