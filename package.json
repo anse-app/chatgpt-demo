@@ -25,6 +25,7 @@
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-katex": "^2.0.3",
     "solid-js": "^1.6.11",
+    "solidjs-use": "^1.2.0",
     "undici": "^5.20.0"
   },
   "devDependencies": {
