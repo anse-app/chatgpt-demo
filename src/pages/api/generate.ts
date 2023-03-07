@@ -6,7 +6,8 @@ import { fetch, ProxyAgent } from 'undici'
 // #vercel-end
 
 const apiKey = import.meta.env.OPENAI_API_KEY
-const https_proxy = import.meta.env.HTTPS_PROXY
+const httpsProxy = import.meta.env.HTTPS_PROXY
+const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/,'')
 
 export const post: APIRoute = async (context) => {
   const body = await context.request.json()
@@ -19,13 +20,13 @@ export const post: APIRoute = async (context) => {
   }
   const initOptions = generatePayload(apiKey, messages)
   // #vercel-disable-blocks
-  if (https_proxy) {
-    initOptions['dispatcher'] = new ProxyAgent(https_proxy)
+  if (httpsProxy) {
+    initOptions['dispatcher'] = new ProxyAgent(httpsProxy)
   }
   // #vercel-end
 
   // @ts-ignore
-  const response = await fetch('https://api.openai.com/v1/chat/completions', initOptions) as Response
+  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions) as Response
 
   return new Response(parseOpenAIStream(response))
 }

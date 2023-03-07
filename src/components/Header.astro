@@ -1,12 +1,16 @@
 ---
 import Logo from './Logo.astro'
+import Themetoggle from './Themetoggle.astro'
 ---
 
 <header>
-  <Logo />
+  <div class="flex justify-between">
+    <Logo />
+    <Themetoggle />
+  </div>
   <div class="flex items-center mt-2">
-    <span class="text-2xl text-slate font-extrabold mr-1">ChatGPT</span>
+    <span class="text-2xl font-extrabold mr-1">ChatGPT</span>
     <span class="text-2xl text-transparent font-extrabold bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-600">Demo</span>
   </div>
-  <p mt-1 text-slate op-60>Based on OpenAI API (gpt-3.5-turbo).</p>
+  <p mt-1 op-60>Based on OpenAI API (gpt-3.5-turbo).</p>
 </header>
