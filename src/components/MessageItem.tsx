@@ -29,10 +29,12 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
 
     if (el.matches('div > div.copy-btn')) {
       code = decodeURIComponent(el.dataset.code!)
-    } else {
-      code = decodeURIComponent(el.parentElement?.dataset.code!)
+      copy(code)
     }
-    copy(code)
+    if (el.matches('div > div.copy-btn > svg')) {
+      code = decodeURIComponent(el.parentElement?.dataset.code!)
+      copy(code)
+    }
   })
 
   const htmlString = () => {
