@@ -32,9 +32,6 @@
 </style>
 
 <script>
-  const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  document.documentElement.classList.toggle('dark', darkSchema)
-
   const listenColorSchema = () => {
     const colorSchema = window.matchMedia('(prefers-color-scheme: dark)')
     colorSchema.addEventListener('change', () => {

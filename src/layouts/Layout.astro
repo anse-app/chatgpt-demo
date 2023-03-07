@@ -65,3 +65,8 @@ const { title } = Astro.props;
 		background-color: var(--c-bg);
 	}
 </style>
+
+<script>
+const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+document.documentElement.classList.toggle('dark', darkSchema)
+</script>
