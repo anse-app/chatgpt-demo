@@ -32,34 +32,35 @@
     fill: white;
   }
 </style>
+
 <script>
   const theme = (() => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
+    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+      return localStorage.getItem('theme')
     }
-    if (window.matchMedia("(prefers-color-scheme: bg-gray-800)").matches) {
-      return "bg-gray-800";
+    if (window.matchMedia('(prefers-color-scheme: bg-gray-800)').matches) {
+      return 'bg-gray-800'
     }
-    return "bg-white";
-  })();
+    return 'bg-white'
+  })()
 
-  if (theme === "bg-white") {
-    document.documentElement.classList.remove("bg-gray-800");
+  if (theme === 'bg-white') {
+    document.documentElement.classList.remove('bg-gray-800')
   } else {
-    document.documentElement.classList.add("bg-gray-800");
+    document.documentElement.classList.add('bg-gray-800')
   }
 
-  window.localStorage.setItem("theme", theme);
+  window.localStorage.setItem('theme', theme)
 
   const handleToggleClick = () => {
     const element = document.documentElement;
-    element.classList.toggle("bg-gray-800");
+    element.classList.toggle('bg-gray-800')
 
-    const isDark = element.classList.contains("bg-gray-800");
-    localStorage.setItem("theme", isDark ? "bg-gray-800" : "bg-white");
+    const isDark = element.classList.contains('bg-gray-800')
+    localStorage.setItem("theme", isDark ? 'bg-gray-800' : 'bg-white')
   };
 
   document
-    .getElementById("themeToggle")
-    .addEventListener("click", handleToggleClick);
+    .getElementById('themeToggle')
+    .addEventListener('click', handleToggleClick)
 </script>
