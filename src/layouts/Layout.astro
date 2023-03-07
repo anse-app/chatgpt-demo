@@ -8,7 +8,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -21,15 +21,47 @@ const { title } = Astro.props;
 		<slot />
 	</body>
 </html>
+
 <style is:global>
+	:root {
+		--c-bg: #fbfbfb;
+		--c-fg: #444444;
+		--c-scroll: #d9d9d9;
+		--c-scroll-hover: #bbbbbb;
+		scrollbar-color: var(--c-scrollbar) var(--c-bg);
+	}
+
 	html {
 		font-family: system-ui, sans-serif;
-		background-color: #171921;
-		color: #ffffff;
+		background-color: var(--c-bg);
+		color: var(--c-fg);
 	}
+
+	html.dark {
+		--c-bg: #212129;
+		--c-fg: #ddddf0;
+		--c-scroll: #333333;
+		--c-scroll-hover: #555555;
+	}
+
 	main {
 		max-width: 70ch;
 		margin: 0 auto;
 		padding: 6rem 2rem 4rem;
+	}
+
+	::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: var(--c-scroll);
+		border-radius: 4px;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background-color: var(--c-scroll-hover);
+	}
+	::-webkit-scrollbar-track {
+		background-color: var(--c-bg);
 	}
 </style>
