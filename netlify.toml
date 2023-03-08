@@ -1,7 +1,7 @@
-[build.environment]
-  NETLIFY_USE_PNPM = "true"
-  NODE_VERSION = "18"
-
 [build]
-  command = "pnpm run build"
+  command = "astro build"
+  functions = "netlify/functions"
   publish = "dist"
+
+[[plugins]] 
+  package = "netlify-plugin-cypress"
