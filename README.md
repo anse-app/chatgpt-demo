@@ -28,22 +28,7 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API](https://platform.openai.com/docs
 
 ## Deploy With Netlify
 
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ddiu8081/chatgpt-demo&env[OPEN_API_KEY]=KEY&env[DESCRIPTION]=OpenAI%20API%20Key)
-
-## Environment variable configuration
-
-```sh
-# Your API Key for OpenAI
-OPENAI_API_KEY=
-# Provide proxy for OpenAI API. e.g. http://127.0.0.1:7890
-HTTPS_PROXY=
-# Custom base url for OpenAI API. default: https://api.openai.com
-OPENAI_API_BASE_URL=
-# Inject analytics or other scripts before </head> of the page
-HEAD_SCRIPTS=
-# Secret string for the project. Use for generating signatures for API calls
-SECRET_KEY=
-```
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ddiu8081/chatgpt-demo&ref=feat/netlify&env[OPEN_API_KEY]=xxx)
 
 ## Creative Forked Versions
 
