@@ -32,8 +32,16 @@
 </style>
 
 <script>
-  const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-  document.documentElement.classList.toggle('dark', darkSchema)
+  const initTheme = () => {
+    const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    const storageTheme = localStorage.getItem('theme')
+
+    if (storageTheme) {
+      document.documentElement.classList.toggle('dark', storageTheme === 'dark')
+    } else {
+      document.documentElement.classList.toggle('dark', darkSchema)
+    }
+  }
 
   const listenColorSchema = () => {
     const colorSchema = window.matchMedia('(prefers-color-scheme: dark)')
@@ -41,6 +49,8 @@
       document.documentElement.classList.toggle('dark', colorSchema.matches)
     })
   }
+
+  initTheme()
 
   listenColorSchema()
 
