@@ -65,3 +65,18 @@ const { title } = Astro.props;
 		background-color: var(--c-bg);
 	}
 </style>
+
+<script>
+const initTheme = () => {
+  const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const storageTheme = localStorage.getItem('theme')
+  if (storageTheme) {
+    document.documentElement.classList.toggle('dark', storageTheme === 'dark')
+  } else {
+    document.documentElement.classList.toggle('dark', darkSchema)
+  }
+}
+
+initTheme()
+
+</script>
