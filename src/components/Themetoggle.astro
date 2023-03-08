@@ -34,10 +34,12 @@
 <script>
   const initTheme = () => {
     const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-    document.documentElement.classList.toggle('dark', darkSchema)
+    const isLastInDarkTheme = localStorage.getItem('theme') === 'dark'
 
-    if(localStorage.getItem('theme') === 'dark') {
+    if (isLastInDarkTheme) {
       document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.toggle('dark', darkSchema)
     }
   }
 
