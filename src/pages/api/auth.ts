@@ -7,7 +7,6 @@ export const post: APIRoute = async (context) => {
 
   const { pass } = body
   return new Response(JSON.stringify({
-    real: realPassword,
-    input: pass,
+    code: (!realPassword || pass === realPassword) ? 0 : -1,
   }))
 }
