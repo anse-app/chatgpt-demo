@@ -1,6 +1,6 @@
 [build.environment]
   NETLIFY_USE_PNPM = "true"
-  NODE_VERSION = "16"
+  NODE_VERSION = "18"
 [build]
   command = "astro build"
   functions = "netlify/functions"
