@@ -1,5 +1,5 @@
-<button id="themeToggle">
-  <svg width="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+<button id="themeToggle" class="flex items-center justify-center w-10 h-10 rounded-md border transition-colors hover:bg-slate/10">
+  <svg width="1.2rem" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path
       class="sun"
       fill-rule="evenodd"
@@ -16,7 +16,6 @@
 <style>
   #themeToggle {
     border: 0;
-    background: none;
   }
   .sun {
     fill: black;
@@ -24,40 +23,33 @@
   .moon {
     fill: transparent;
   }
-
-  :global(.bg-gray-800) .sun {
+  :global(html.dark) .sun {
     fill: transparent;
   }
-  :global(.bg-gray-800) .moon {
+  :global(html.dark) .moon {
     fill: white;
   }
 </style>
 
 <script>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme')
-    }
-    if (window.matchMedia('(prefers-color-scheme: bg-gray-800)').matches) {
-      return 'bg-gray-800'
-    }
-    return 'bg-white'
-  })()
+  const darkSchema = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+  document.documentElement.classList.toggle('dark', darkSchema)
 
-  if (theme === 'bg-white') {
-    document.documentElement.classList.remove('bg-gray-800')
-  } else {
-    document.documentElement.classList.add('bg-gray-800')
+  const listenColorSchema = () => {
+    const colorSchema = window.matchMedia('(prefers-color-scheme: dark)')
+    colorSchema.addEventListener('change', () => {
+      document.documentElement.classList.toggle('dark', colorSchema.matches)
+    })
   }
 
-  window.localStorage.setItem('theme', theme)
+  listenColorSchema()
 
   const handleToggleClick = () => {
     const element = document.documentElement;
-    element.classList.toggle('bg-gray-800')
+    element.classList.toggle('dark')
 
-    const isDark = element.classList.contains('bg-gray-800')
-    localStorage.setItem("theme", isDark ? 'bg-gray-800' : 'bg-white')
+    const isDark = element.classList.contains('dark')
+    localStorage.setItem('theme', isDark ? 'dark' : 'light')
   };
 
   document
