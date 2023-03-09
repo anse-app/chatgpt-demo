@@ -2,10 +2,7 @@
 
 <p align="center">
 <strong>A demo repo based on <a href="https://platform.openai.com/docs/guides/chat">OpenAI GPT-3.5 Turbo API.</a></strong><br/>
-<span> ⚠️ Notice: Our API Key limit has been exhausted. So the demo site is not available now.</span>
-</p>
-
-<p align="center">
+<span> ⚠️ Notice: Our API Key limit has been exhausted. So the demo site is not available now.</span><br/>
 <a href="https://chatgpt.ddiu.me/">🦖 Preview</a>
 </p>
 
