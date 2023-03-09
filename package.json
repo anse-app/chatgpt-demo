@@ -1,5 +1,5 @@
 {
-  "name": "novel-gpt",
+  "name": "chatgpt-api-demo",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
