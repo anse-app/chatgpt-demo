@@ -18,10 +18,13 @@ export default () => {
 
   onMount(() => {
     try {
-      if(localStorage.getItem('messageList')) {
+      if (localStorage.getItem('messageList')) {
         setMessageList(JSON.parse(localStorage.getItem('messageList')))
       }
-    }catch(err) {
+      if (localStorage.getItem('systemRoleSettings')) {
+        setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+      }
+    } catch (err) {
       console.error(err)
     }
     
@@ -33,6 +36,7 @@ export default () => {
 
   const handleBeforeUnload = () => {
     localStorage.setItem('messageList', JSON.stringify(messageList()))
+    localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
   }
 
   const handleButtonClick = async () => {
