@@ -16,7 +16,6 @@ specifiers:
   highlight.js: ^11.7.0
   js-sha256: ^0.9.0
   katex: ^0.6.0
-  lodash: ^4.17.21
   markdown-it: ^13.0.1
   markdown-it-highlightjs: ^4.0.1
   markdown-it-katex: ^2.0.3
@@ -37,7 +36,6 @@ dependencies:
   highlight.js: 11.7.0
   js-sha256: 0.9.0
   katex: 0.6.0
-  lodash: 4.17.21
   markdown-it: 13.0.1
   markdown-it-highlightjs: 4.0.1
   markdown-it-katex: 2.0.3
@@ -2459,10 +2457,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       p-locate: 6.0.0
-    dev: false
-
-  /lodash/4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
     dev: false
 
   /log-symbols/5.1.0:
