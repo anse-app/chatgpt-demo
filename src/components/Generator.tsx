@@ -3,8 +3,8 @@ import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
-import _ from 'lodash'
 import { generateSignature } from '@/utils/auth'
+import { useThrottleFn } from 'solidjs-use'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -56,12 +56,11 @@ export default () => {
     ])
     requestWithLatestMessage()
   }
-  const throttle =_.throttle(function(){
-    window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
-  }, 300, {
-    leading: true,
-    trailing: false
-  })
+
+  const smoothToBottom = useThrottleFn(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  }, 300, false, true)
+
   const requestWithLatestMessage = async () => {
     setLoading(true)
     setCurrentAssistantMessage('')
@@ -111,7 +110,7 @@ export default () => {
           if (char) {
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
-          throttle()
+          smoothToBottom()
         }
         done = readerDone
       }
@@ -203,13 +202,13 @@ export default () => {
       <Show
         when={!loading()}
         fallback={() => (
-          <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 rounded-sm">
+          <div class="gen-cb-wrapper">
             <span>AI is thinking...</span>
-            <div class="px-2 py-0.5 border border-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
+            <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
           </div>
         )}
       >
-        <div class="my-4 flex items-center gap-2 transition-opacity" class:op-50={systemRoleEditing()}>
+        <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
           <textarea
             ref={inputRef!}
             disabled={systemRoleEditing()}
@@ -222,25 +221,12 @@ export default () => {
               inputRef.style.height = inputRef.scrollHeight + 'px';
             }}
             rows="1"
-            w-full
-            px-3 py-3
-            min-h-12
-            max-h-36
-            rounded-sm
-            bg-slate
-            bg-op-15
-            resize-none
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:op-50
-            dark="placeholder:op-30"
-            scroll-pa-8px
+            class='gen-textarea'
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm>
+          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 rounded-sm>
+          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
             <IconClear />
           </button>
         </div>
