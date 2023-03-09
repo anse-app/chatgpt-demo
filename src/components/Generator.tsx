@@ -1,5 +1,5 @@
 import type { ChatMessage } from '@/types'
-import { createSignal, Index, Show } from 'solid-js'
+import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
@@ -14,6 +14,26 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
+
+
+  onMount(() => {
+    try {
+      if(localStorage.getItem('messageList')) {
+        setMessageList(JSON.parse(localStorage.getItem('messageList')))
+      }
+    }catch(err) {
+      console.error(err)
+    }
+    
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    onCleanup(() => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    })
+  })
+
+  const handleBeforeUnload = () => {
+    localStorage.setItem('messageList', JSON.stringify(messageList()))
+  }
 
   const handleButtonClick = async () => {
     const inputValue = inputRef.value
