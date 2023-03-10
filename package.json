@@ -32,6 +32,7 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
     "@types/markdown-it": "^12.2.3",
+    "@types/node": "^18.15.0",
     "@unocss/preset-attributify": "^0.50.1",
     "@unocss/preset-icons": "^0.50.4",
     "@unocss/preset-typography": "^0.50.3",

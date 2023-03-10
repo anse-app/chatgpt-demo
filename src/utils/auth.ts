@@ -1,5 +1,5 @@
 import { sha256 } from 'js-sha256'
-
+import crypto from 'node:crypto'
 interface AuthPayload {
   t: number
   m: string
