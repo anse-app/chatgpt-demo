@@ -62,13 +62,13 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
 
 
-2. Select the branch you want to deploy, select `feat/netlify`, and configure environment variables in the project settings.
+2. Select the branch you want to deploy, then configure environment variables in the project settings.
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.6dvtfmoijb7k.webp)
+![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230311/image.gfs9lx8c854.webp)
 
 3. Select the default build command and output directory, Click the `Deploy Site` button to start deploying the site。
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
+![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230311/image.4jky9e1wbojk.webp)
 
 ### Deploy on more servers
 
