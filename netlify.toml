@@ -4,4 +4,4 @@
 [build]
   command = "OUTPUT=netlify astro build"
   functions = "netlify/functions"
-  publish = "dist"
+  publish = ".netlify"
