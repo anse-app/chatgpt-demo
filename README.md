@@ -44,6 +44,15 @@ You can control the website through environment variables.
 | `SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | `null` |
 | `SITE_PASSWORD` | Set password for site. If not set, site will be public | `null` |
 
+## Deploy with Docker
+```bash
+# build
+docker-compose build .
+# run
+docker-compose up -d
+# stop
+docker-compose down
+```
 ## Creative Variant Versions
 
 - [ourongxing/chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel)
