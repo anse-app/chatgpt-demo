@@ -48,6 +48,9 @@ You can control the website through environment variables.
 
 - [ourongxing/chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel)
 
+## PWA support
+If you are in https, you should be able to install as a PWA app.
+
 ## License
 
 MIT
