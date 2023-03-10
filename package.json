@@ -1,5 +1,5 @@
 {
-  "name": "novel-gpt",
+  "name": "chatgpt-api-demo",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -16,11 +16,11 @@
     "@astrojs/vercel": "^3.1.3",
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
+    "chatgpt": "^5.0.8",
     "eventsource-parser": "^0.1.0",
     "highlight.js": "^11.7.0",
     "js-sha256": "^0.9.0",
     "katex": "^0.6.0",
-    "lodash": "^4.17.21",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-katex": "^2.0.3",
@@ -29,8 +29,10 @@
     "undici": "^5.20.0"
   },
   "devDependencies": {
+    "@iconify-json/carbon": "^1.1.16",
     "@types/markdown-it": "^12.2.3",
     "@unocss/preset-attributify": "^0.50.1",
+    "@unocss/preset-icons": "^0.50.4",
     "@unocss/preset-typography": "^0.50.3",
     "punycode": "^2.3.0",
     "unocss": "^0.50.1"
