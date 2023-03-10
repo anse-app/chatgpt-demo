@@ -4,4 +4,7 @@
 [build]
   command = "OUTPUT=netlify astro build"
   functions = "netlify/functions"
-  publish = ".netlify"
+  publish = "dist/"
+[[edge_functions]]
+  path = "/"
+  function = "geolocation"
