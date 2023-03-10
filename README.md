@@ -86,9 +86,11 @@ You can control the website through environment variables.
 ## Frequently Asked Questions
 
 Q: TypeError: fetch failed (can't connect to OpenAI Api)
+
 A: Configure environment variables `HTTPS_PROXY`，reference: https://github.com/ddiu8081/chatgpt-demo/issues/34
 
 Q: throw new TypeError(${context} is not a ReadableStream.)
+
 A: The Node version needs to be `v18` or later，reference: https://github.com/ddiu8081/chatgpt-demo/issues/65
 
 ## Creative Variant Versions
