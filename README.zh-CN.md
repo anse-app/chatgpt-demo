@@ -85,9 +85,11 @@
 ## 常见问题
 
 Q: TypeError: fetch failed (can't connect to OpenAI Api)
+
 A: 配置环境变量 `HTTPS_PROXY`，参考: https://github.com/ddiu8081/chatgpt-demo/issues/34
 
 Q: throw new TypeError(${context} is not a ReadableStream.)
+
 A: Node 版本需要在 `v18` 或者更高，参考: https://github.com/ddiu8081/chatgpt-demo/issues/65
 
 ## 创意变体版本
