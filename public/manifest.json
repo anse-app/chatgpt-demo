@@ -1,0 +1,29 @@
+{
+  "background_color": "#ffffff",
+  "description": "It is a chatbot that uses GPT-3.5-turbo to generate responses.",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "ChatGPT-Demo",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "demo",
+  "start_url": "/",
+  "theme_color": "#ffffff",
+  "categories": [
+    "utilities"
+  ],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": []
+}
