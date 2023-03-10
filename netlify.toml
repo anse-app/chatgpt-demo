@@ -4,5 +4,4 @@
 
 [build]
   command = "OUTPUT=netlify astro build"
-  functions = "https://edge.netlify.com/"
   publish = "dist"
