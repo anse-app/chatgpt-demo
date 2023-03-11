@@ -1,5 +1,4 @@
 import { sha256 } from 'js-sha256'
-
 interface AuthPayload {
   t: number
   m: string
