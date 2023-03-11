@@ -44,10 +44,17 @@ const { title } = Astro.props;
 		--c-scroll-hover: #555555;
 	}
 
-	main {
+	.header-wrapper,
+	.main-wrapper,
+	.footer-wrapper {
 		max-width: 70ch;
 		margin: 0 auto;
-		padding: 6rem 2rem 4rem;
+	}
+
+
+	.footer-wrapper {
+		background-color: var(--c-bg);
+		color: var(--c-fg);
 	}
 
 	::-webkit-scrollbar {

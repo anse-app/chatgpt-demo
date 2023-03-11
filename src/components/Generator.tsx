@@ -2,6 +2,7 @@ import type { ChatMessage } from '@/types'
 import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
+import Footer from './Footer'
 import SystemRoleSettings from './SystemRoleSettings'
 import { generateSignature } from '@/utils/auth'
 import { useThrottleFn } from 'solidjs-use'
@@ -176,61 +177,67 @@ export default () => {
 
   return (
     <div my-6>
-      <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
-        systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
-        currentSystemRoleSettings={currentSystemRoleSettings}
-        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-      />
-      <Index each={messageList()}>
-        {(message, index) => (
-          <MessageItem
-            role={message().role}
-            message={message().content}
-            showRetry={() => (message().role === 'assistant' && index === messageList().length - 1)}
-            onRetry={retryLastFetch}
-          />
-        )}
-      </Index>
-      {currentAssistantMessage() && (
-        <MessageItem
-          role="assistant"
-          message={currentAssistantMessage}
+      <div class='main-wrapper px-8'>
+        <SystemRoleSettings
+          canEdit={() => messageList().length === 0}
+          systemRoleEditing={systemRoleEditing}
+          setSystemRoleEditing={setSystemRoleEditing}
+          currentSystemRoleSettings={currentSystemRoleSettings}
+          setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
         />
-      )}
-      <Show
-        when={!loading()}
-        fallback={() => (
-          <div class="gen-cb-wrapper">
-            <span>AI is thinking...</span>
-            <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
-          </div>
-        )}
-      >
-        <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
-          <textarea
-            ref={inputRef!}
-            disabled={systemRoleEditing()}
-            onKeyDown={handleKeydown}
-            placeholder="Enter something..."
-            autocomplete="off"
-            autofocus
-            onInput={() => {
-              inputRef.style.height = 'auto';
-              inputRef.style.height = inputRef.scrollHeight + 'px';
-            }}
-            rows="1"
-            class='gen-textarea'
+        <Index each={messageList()}>
+          {(message, index) => (
+            <MessageItem
+              role={message().role}
+              message={message().content}
+              showRetry={() => (message().role === 'assistant' && index === messageList().length - 1)}
+              onRetry={retryLastFetch}
+            />
+          )}
+        </Index>
+        {currentAssistantMessage() && (
+          <MessageItem
+            role="assistant"
+            message={currentAssistantMessage}
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
-            Send
-          </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
-            <IconClear />
-          </button>
-        </div>
-      </Show>
+        )}
+      </div>
+      
+      <div class='footer-wrapper sticky bottom-0 px-8'>
+        <Show
+          when={!loading()}
+          fallback={() => (
+            <div class="gen-cb-wrapper">
+              <span>AI is thinking...</span>
+              <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
+            </div>
+          )}
+        >
+          <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
+            <textarea
+              ref={inputRef!}
+              disabled={systemRoleEditing()}
+              onKeyDown={handleKeydown}
+              placeholder="Enter something..."
+              autocomplete="off"
+              autofocus
+              onInput={() => {
+                inputRef.style.height = 'auto';
+                inputRef.style.height = inputRef.scrollHeight + 'px';
+              }}
+              rows="1"
+              class='gen-textarea'
+            />
+            <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
+              Send
+            </button>
+            <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
+              <IconClear />
+            </button>
+          </div>
+        </Show>
+        <Footer />
+      </div>
     </div>
   )
 }
