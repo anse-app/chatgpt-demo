@@ -10,7 +10,7 @@ import 'highlight.js/styles/atom-one-dark.css'
 ---
 
 <Layout title="ChatGPT API Demo">
-  <main >
+  <main class="index">
     <Header />
     <Generator client:load />
     <Footer />
@@ -37,4 +37,12 @@ async function checkCurrentAuth() {
 }
 checkCurrentAuth()
 </script>
+
+<style>
+.index {
+  max-width: 70ch;
+	margin: 0 auto;
+	padding: 6rem 2rem 4rem;
+}
+</style>
 
