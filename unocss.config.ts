@@ -16,7 +16,7 @@ export default defineConfig({
       scale: 1.1,
       cdn: 'https://esm.sh/',
     }),
-     presetTypography({
+    presetTypography({
       cssExtend: {
         "ul,ol": {
           "padding-left": "2em"
