@@ -70,6 +70,18 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230311/image.4jky9e1wbojk.webp)
 
+
+### Deploy with Docker
+```bash
+# build
+docker-compose build .
+# run
+docker-compose up -d
+# stop
+docker-compose down
+```
+
+
 ### Deploy on more servers
 
 Please refer to the official deployment documentation：https://docs.astro.build/en/guides/deploy
@@ -97,9 +109,6 @@ Q: throw new TypeError(${context} is not a ReadableStream.)
 
 A: The Node version needs to be `v18` or later，reference: https://github.com/ddiu8081/chatgpt-demo/issues/65
 
-## Creative Variant Versions
-
-- [ourongxing/chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel)
 
 ## Contributing
 
