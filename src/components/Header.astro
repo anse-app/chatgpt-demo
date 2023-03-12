@@ -13,4 +13,39 @@ import Themetoggle from './Themetoggle.astro'
     <span class="gpt-subtitle">Demo</span>
   </div>
   <p mt-1 op-60>Based on OpenAI API (gpt-3.5-turbo).</p>
+  <select name="selectVoice" id="selectVoice">
+    <option value="">Please select a voice</option>
+  </select>
+
+  <style>
+    #selectVoice {
+      color: inherit;
+      margin: 6px auto;
+      background-color: rgba(148, 163, 184, var(--un-bg-opacity));
+      --un-bg-opacity: 0.15;
+      height: 28px;
+      width: auto;
+      line-height: 28px;
+      padding: 0 10px;
+
+      -moz-border-radius: 3px;
+      -webkit-border-radius: 3px;
+      border-radius: 3px;
+    }
+  </style>
+
+  <script>
+    const loadVoices = () => {
+      const voices = window.speechSynthesis.getVoices();
+      let select = document.getElementById("selectVoice") as HTMLSelectElement;
+      for (let i = 0; i < voices.length; i++) {
+        let option = document.createElement("option");
+        option.value = voices[i].name;
+        option.text = voices[i].name + " (" + voices[i].lang + ")";
+        select.appendChild(option);
+      }
+    };
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+  </script>
 </header>

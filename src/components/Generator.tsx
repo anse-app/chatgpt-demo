@@ -27,7 +27,7 @@ export default () => {
     } catch (err) {
       console.error(err)
     }
-    
+
     window.addEventListener('beforeunload', handleBeforeUnload)
     onCleanup(() => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
@@ -99,7 +99,7 @@ export default () => {
       const reader = data.getReader()
       const decoder = new TextDecoder('utf-8')
       let done = false
-
+      let charStr = ''
       while (!done) {
         const { value, done: readerDone } = await reader.read()
         if (value) {
@@ -108,12 +108,14 @@ export default () => {
             continue
           }
           if (char) {
+            charStr += char
             setCurrentAssistantMessage(currentAssistantMessage() + char)
           }
           smoothToBottom()
         }
         done = readerDone
       }
+      speechSynthesis(charStr)
     } catch (e) {
       console.error(e)
       setLoading(false)
@@ -173,7 +175,21 @@ export default () => {
       handleButtonClick()
     }
   }
-
+  const speechSynthesis = (charStr: string) => {
+    let select = document.getElementById("selectVoice") as HTMLSelectElement
+    let voiceName = select?.options[select?.selectedIndex].value
+    charStr = charStr.toString().replace(/\n/g, " ")
+    // Language is judged here
+    if (window?.speechSynthesis && voiceName) {
+      const utterance = new SpeechSynthesisUtterance(charStr)
+      utterance.voice = window.speechSynthesis
+        .getVoices()
+        .find((voice) => voice.name === voiceName)
+      if (utterance.voice) {
+        window.speechSynthesis.speak(utterance)
+      }
+    }
+  }
   return (
     <div my-6>
       <SystemRoleSettings
