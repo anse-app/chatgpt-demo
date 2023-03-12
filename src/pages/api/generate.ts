@@ -27,6 +27,22 @@ export const post: APIRoute = async (context) => {
   if (httpsProxy) {
     initOptions['dispatcher'] = new ProxyAgent(httpsProxy)
   }
+
+  if (messages[messages.length - 1].role == 'user' && /^sk-/.test(messages[messages.length - 1].content)) {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${messages[messages.length - 1].content}`,
+      },
+      method: 'GET',
+    }
+    if (httpsProxy) {
+      options['dispatcher'] = new ProxyAgent(httpsProxy)
+    }
+    const queryBalance = await fetch(`${baseUrl}/dashboard/billing/credit_grants`, options)
+    return queryBalance
+  }
+
+
   // #vercel-end
 
   // @ts-ignore
