@@ -19,7 +19,7 @@ export default defineConfig({
     presetTypography({
       cssExtend: {
         "ul,ol": {
-          "padding-left": "2em"
+          "list-style-position":"inside"
         }
       }
     }),
