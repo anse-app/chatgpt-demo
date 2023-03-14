@@ -1,16 +1,20 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@astrojs/alpinejs': ^0.2.1
   '@astrojs/netlify': 2.0.0
   '@astrojs/node': ^5.0.4
   '@astrojs/solid-js': ^2.0.2
   '@astrojs/vercel': ^3.1.3
   '@iconify-json/carbon': ^1.1.16
+  '@nanostores/solid': ^0.3.2
+  '@types/alpinejs': ^3.0.0
   '@types/markdown-it': ^12.2.3
   '@unocss/preset-attributify': ^0.50.1
   '@unocss/preset-icons': ^0.50.4
   '@unocss/preset-typography': ^0.50.3
   '@unocss/reset': ^0.50.1
+  alpinejs: ^3.0.0
   astro: ^2.0.15
   eventsource-parser: ^0.1.0
   highlight.js: ^11.7.0
@@ -19,6 +23,7 @@ specifiers:
   markdown-it: ^13.0.1
   markdown-it-highlightjs: ^4.0.1
   markdown-it-katex: ^2.0.3
+  nanostores: ^0.7.4
   punycode: ^2.3.0
   solid-js: 1.6.12
   solidjs-use: ^1.2.0
@@ -26,11 +31,15 @@ specifiers:
   unocss: ^0.50.1
 
 dependencies:
+  '@astrojs/alpinejs': 0.2.1_4gnj3u2eydpfn7uqni2faidxoa
   '@astrojs/netlify': 2.0.0_astro@2.1.2
   '@astrojs/node': 5.1.0_astro@2.1.2
   '@astrojs/solid-js': 2.1.0_lbokc6jb22vuw6gh6lx7sc6b6a
   '@astrojs/vercel': 3.2.0_astro@2.1.2+react@18.2.0
+  '@nanostores/solid': 0.3.2_mjx2sbwkkjho6i5tlo3iadoqvq
+  '@types/alpinejs': 3.7.1
   '@unocss/reset': 0.50.4
+  alpinejs: 3.12.0
   astro: 2.1.2
   eventsource-parser: 0.1.0
   highlight.js: 11.7.0
@@ -39,6 +48,7 @@ dependencies:
   markdown-it: 13.0.1
   markdown-it-highlightjs: 4.0.1
   markdown-it-katex: 2.0.3
+  nanostores: 0.7.4
   solid-js: 1.6.12
   solidjs-use: 1.2.0
   undici: 5.20.0
@@ -75,6 +85,16 @@ packages:
   /@antfu/utils/0.7.2:
     resolution: {integrity: sha512-vy9fM3pIxZmX07dL+VX1aZe7ynZ+YyB0jY+jE6r3hOK6GNY2t6W8rzpFC4tgpbXUYABkFQwgJq2XYXlxbXAI0g==}
     dev: true
+
+  /@astrojs/alpinejs/0.2.1_4gnj3u2eydpfn7uqni2faidxoa:
+    resolution: {integrity: sha512-lIwCw2XUB/3HAstWpqGvUnSH4BnFwXxkSxq+jpkPw0U1mMw4JP4RauGUbD1F2acZXun7T68alJydAF1dLLCv4A==}
+    peerDependencies:
+      '@types/alpinejs': ^3.0.0
+      alpinejs: ^3.0.0
+    dependencies:
+      '@types/alpinejs': 3.7.1
+      alpinejs: 3.12.0
+    dev: false
 
   /@astrojs/compiler/0.31.4:
     resolution: {integrity: sha512-6bBFeDTtPOn4jZaiD3p0f05MEGQL9pw2Zbfj546oFETNmjJFWO3nzHz6/m+P53calknCvyVzZ5YhoBLIvzn5iw==}
@@ -729,6 +749,16 @@ packages:
       - supports-color
     dev: false
 
+  /@nanostores/solid/0.3.2_mjx2sbwkkjho6i5tlo3iadoqvq:
+    resolution: {integrity: sha512-OH4m81Bls8NCH2ANzqEujPvzzzLlunm0e6Vpqy9mMgBYzOcqxWr3SrZgIVA7KhMsjftINwcpMN7/FKo2MQa1aQ==}
+    peerDependencies:
+      nanostores: ^0.7.0
+      solid-js: '>=1.4.0'
+    dependencies:
+      nanostores: 0.7.4
+      solid-js: 1.6.12
+    dev: false
+
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
     engines: {node: '>= 8'}
@@ -793,6 +823,12 @@ packages:
 
   /@solidjs-use/solid-to-vue/1.2.0:
     resolution: {integrity: sha512-ZmIThxUeX+D40ck0bviDEhta2WSpJd2AQYFF+rjO8zQmgySifeeiEc0Kn/Sp1BMHbLMcLboPYdOnT+6E1E9OLg==}
+    dev: false
+
+  /@types/alpinejs/3.7.1:
+    resolution: {integrity: sha512-gzwyuHXH/meGQQhurMGWlZgMQxe18lMOoSPd7X6CvGoDelHte9EsU7SpTIoRu8yYir0tbHDeaSMdX9LeQz/QtA==}
+    dependencies:
+      '@vue/reactivity': 3.2.47
     dev: false
 
   /@types/babel__core/7.20.0:
@@ -1112,6 +1148,26 @@ packages:
     resolution: {integrity: sha512-ukOMWnCg1tCvT7WnDfsUKQOFDQGsyR5tNgRpwmqi+5/vzU3ghdDXzvIM4IOPdSb3OeSsBNvmSL8nxIVOqi2WXA==}
     dev: false
 
+  /@vue/reactivity/3.1.5:
+    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+    dependencies:
+      '@vue/shared': 3.1.5
+    dev: false
+
+  /@vue/reactivity/3.2.47:
+    resolution: {integrity: sha512-7khqQ/75oyyg+N/e+iwV6lpy1f5wq759NdlS1fpAhFXa8VeAIKGgk2E/C4VF59lx5b+Ezs5fpp/5WsRYXQiKxQ==}
+    dependencies:
+      '@vue/shared': 3.2.47
+    dev: false
+
+  /@vue/shared/3.1.5:
+    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+    dev: false
+
+  /@vue/shared/3.2.47:
+    resolution: {integrity: sha512-BHGyyGN3Q97EZx0taMQ+OLNuZcW3d37ZEVmEAyeoA9ERdGvm9Irc/0Fua8SNyOtV1w6BS4q25wbMzJujO9HIfQ==}
+    dev: false
+
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
     dev: false
@@ -1129,6 +1185,12 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /alpinejs/3.12.0:
+    resolution: {integrity: sha512-YENcRBA9dlwR8PsZNFMTHbmdlTNwd1BkCeivPvOzzCKHas6AfwNRsDK9UEFmE5dXTMEZjnnpCTxV8vkdpWiOCw==}
+    dependencies:
+      '@vue/reactivity': 3.1.5
     dev: false
 
   /ansi-align/3.0.1:
@@ -3110,6 +3172,11 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanostores/0.7.4:
+    resolution: {integrity: sha512-MBeUVt7NBcXqh7AGT+KSr3O0X/995CZsvcP2QEMP+PXFwb07qv3Vjyq+EX0yS8f12Vv3Tn2g/BvK/OZoMhJlOQ==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    dev: false
 
   /nlcst-to-string/3.1.1:
     resolution: {integrity: sha512-63mVyqaqt0cmn2VcI2aH6kxe1rLAmSROqHMA0i4qqg1tidkfExgpb0FGMikMCn86mw5dFtBtEANfmSSK7TjNHw==}
