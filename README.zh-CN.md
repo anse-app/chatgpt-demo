@@ -95,10 +95,6 @@ Q: throw new TypeError(${context} is not a ReadableStream.)
 
 A: Node 版本需要在 `v18` 或者更高，参考: https://github.com/ddiu8081/chatgpt-demo/issues/65
 
-## 创意变体版本
-
-- [ourongxing/chatgpt-vercel](https://github.com/ourongxing/chatgpt-vercel)
-
 ## 参与贡献
 
 这个项目的存在要感谢所有做出贡献的人。
