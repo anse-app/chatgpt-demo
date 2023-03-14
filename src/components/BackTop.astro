@@ -34,10 +34,17 @@
     } else {
       backtop_btn.style.display = "none";
     }
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    if (scrollTop + clientHeight >= scrollHeight - 100){
+      backbottom_btn.style.display = "none";
+    } else {
+      backbottom_btn.style.display = "block";
+    }
   });
    backbottom_btn.onclick = () => {
     const scrollHeight = document.documentElement.scrollHeight
-    console.log(scrollHeight);
     window.scrollTo({ top: scrollHeight, behavior: "smooth" });
   };
   backtop_btn.onclick = () => {
