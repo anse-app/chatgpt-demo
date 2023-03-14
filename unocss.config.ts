@@ -16,7 +16,13 @@ export default defineConfig({
       scale: 1.1,
       cdn: 'https://esm.sh/',
     }),
-    presetTypography(),
+    presetTypography({
+      cssExtend: {
+        "ul,ol": {
+          "list-style-position":"inside"
+        }
+      }
+    }),
   ],
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{

@@ -98,8 +98,16 @@ You can control the website through environment variables.
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | `null` |
 | `SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | `null` |
 | `SITE_PASSWORD` | Set password for site. If not set, site will be public | `null` |
+## Deploy with Docker
 
-## Frequently Asked Questions
+# build
+docker-compose build .
+# run
+docker-compose up -d
+# stop
+docker-compose down
+
+## Creative Variant Versions
 
 Q: TypeError: fetch failed (can't connect to OpenAI Api)
 
