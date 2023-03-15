@@ -1,14 +1,28 @@
-<header class="flex items-center border-b h-12 px-4">
-  <div id="sidebar-toggle-btn" class="i-carbon-add-comment text-xl"></div>
-  <div class="flex-1 text-center">ChatGPT Demo</div>
-  <div class="i-carbon-settings text-xl"></div>
+---
+import Button from './Button.astro'
+---
+<header class="flex items-center border-b h-12 px-2">
+  <Button
+    id="sidebar-toggle-btn"
+    class="text-xl md:hidden"
+    type="ghost"
+    icon="i-carbon-add-comment"
+  />
+  <div id="sidebar-toggle-btn" class=""></div>
+  <div class="flex-1 text-center font-extrabold">ChatGPT Demo</div>
+  <Button
+    id="settings-toggle-btn"
+    class="text-xl lg:hidden"
+    type="ghost"
+    icon="i-carbon-settings"
+  />
 </header>
 
 <script>
-  import { toggleSidebar } from '@/strores/ui'
+  import { sidebar } from '@/strores/ui'
 
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn')
   sidebarToggleBtn.addEventListener('click', () => {
-    toggleSidebar()
+    sidebar.set(true)
   })
 </script>

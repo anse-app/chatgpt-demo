@@ -1,8 +1,9 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Main from '@/components/v2/Main.astro'
-import Sidebar from '@/components/v2/Sidebar.astro';
-import Settings from '@/components/v2/Settings.astro';
+import Sidebar from '@/components/v2/Sidebar.astro'
+import Settings from '@/components/v2/Settings.astro'
+import ModelsLayer from '@/components/v2/ModelsLayer'
 ---
 
 <Layout title="ChatGPT Api Demo">
@@ -11,4 +12,5 @@ import Settings from '@/components/v2/Settings.astro';
     <Main />
     <Settings />
   </div>
+  <ModelsLayer client:load />
 </Layout>

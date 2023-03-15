@@ -12,10 +12,7 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
-    presetIcons({
-      scale: 1.1,
-      cdn: 'https://esm.sh/',
-    }),
+    presetIcons(),
     presetTypography({
       cssExtend: {
         "ul,ol": {
@@ -26,6 +23,9 @@ export default defineConfig({
   ],
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
+    'bg-base': 'bg-light-100 dark:bg-dark-600',
+    'bg-darker': 'bg-light-600 dark:bg-dark-200',
+    'fg-base': 'text-dark dark:text-light',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',
     'fb': 'flex justify-between',
