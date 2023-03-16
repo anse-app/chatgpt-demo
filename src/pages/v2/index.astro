@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import Main from '@/components/v2/Main.astro'
 import Sidebar from '@/components/v2/Sidebar.astro'
 import Settings from '@/components/v2/Settings.astro'
-import ModelsLayer from '@/components/v2/ModelsLayer'
+import ModalsLayer from '@/components/v2/ModalsLayer'
 ---
 
 <Layout title="ChatGPT Api Demo">
@@ -12,5 +12,5 @@ import ModelsLayer from '@/components/v2/ModelsLayer'
     <Main />
     <Settings />
   </div>
-  <ModelsLayer client:load />
+  <ModalsLayer client:load />
 </Layout>

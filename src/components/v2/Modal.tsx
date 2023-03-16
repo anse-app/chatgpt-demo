@@ -26,7 +26,7 @@ export default (props: Props) => {
   }[props.direction])
 
   return (
-    <div class="absolute inset-0" classList={{'pointer-events-none': !modelValue()}}>
+    <div class="fixed inset-0" classList={{'pointer-events-none': !modelValue()}}>
       <div
         class="bg-base absolute inset-0 transition-opacity ease-out"
         classList={{'opacity-50': modelValue(), 'opacity-0': !modelValue()}}

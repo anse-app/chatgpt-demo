@@ -1,12 +1,12 @@
 import { sidebar } from '@/strores/ui'
-import Model from './Model'
+import Modal from './Modal'
 
 export default () => {
   return (
     <>
-      <Model bindValue={sidebar} direction="left">
+      <Modal bindValue={sidebar} direction="left">
         <div class="w-[70vw]" />
-      </Model>
+      </Modal>
     </>
   )
 }
