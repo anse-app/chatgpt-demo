@@ -26,8 +26,10 @@ export default defineConfig({
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
     'bg-base': 'bg-light-100 dark:bg-dark-400',
+    'bg-darker-100': 'bg-light-400 dark:bg-dark-300',
     'bg-darker': 'bg-light-600 dark:bg-dark-200',
     'border-base': 'border-light-900 dark:border-dark-100',
+    'placeholder-base': 'placeholder:op-50 dark:placeholder:op-30',
     'fg-base': 'text-dark dark:text-light',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',

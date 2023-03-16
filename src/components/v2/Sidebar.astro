@@ -2,11 +2,13 @@
 import ConversationSidebarItem from './ConversationSidebarItem.astro'
 ---
 
-<aside class="w-[300px] h-full border-r border-base hidden md:block">
+<aside class="w-[300px] h-screen border-r border-base overflow-hidden hidden md:block">
   <div class="h-12 border-b border-base flex px-4 items-center">
     Conversations
   </div>
-  { Array.from({ length: 4 }).map((_, i) => (
-    <ConversationSidebarItem key={i} />
-  ))}
+  <div class="flex-1 overflow-auto">
+    { Array.from({ length: 4 }).map((_, i) => (
+      <ConversationSidebarItem key={i} />
+    ))}
+  </div>
 </aside>
