@@ -10,7 +10,9 @@ import {
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetUno({
+      dark: 'media',
+    }),
     presetAttributify(),
     presetIcons(),
     presetTypography({
@@ -23,8 +25,9 @@ export default defineConfig({
   ],
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
-    'bg-base': 'bg-light-100 dark:bg-dark-600',
+    'bg-base': 'bg-light-100 dark:bg-dark-400',
     'bg-darker': 'bg-light-600 dark:bg-dark-200',
+    'border-base': 'border-light-600 dark:border-dark-100',
     'fg-base': 'text-dark dark:text-light',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',

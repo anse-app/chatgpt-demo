@@ -32,7 +32,7 @@ export default (props: Props) => {
         classList={{'opacity-50': modelValue(), 'opacity-0': !modelValue()}}
         onClick={() => props.bindValue.set(false)}
       />
-      <div class={`bg-base absolute transition-transform ease-out max-w-screen max-h-screen overflow-auto ${containerBaseClass} ${containerTransformClass()}`}>
+      <div class={`bg-base absolute transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass} ${containerTransformClass()}`}>
         { props.children }
       </div>
     </div>

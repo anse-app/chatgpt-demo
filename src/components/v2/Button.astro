@@ -14,7 +14,7 @@ const props = Astro.props
   class:list={[
     'inline-flex items-center gap-1 rounded-md cursor-pointer',
     (props.icon && !props.text) ? 'p-2' : 'px-2 py-1',
-    (!props.type || props.type === 'normal') && 'border hover:bg-darker',
+    (!props.type || props.type === 'normal') && 'border border-base hover:bg-darker',
     props.class ?? '',
   ]}
 >
