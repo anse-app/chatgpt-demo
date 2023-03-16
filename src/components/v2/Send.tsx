@@ -1,6 +1,7 @@
 import { createSignal, Show } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/strores/ui'
+import { prompt } from '@/strores/prompt'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -34,9 +35,20 @@ export default () => {
         onInput={() => { inputPrompt.set(inputRef.value) }}
         class="absolute inset-0 px-6 py-4 bg-darker-100 resize-none scroll-pa-4 placeholder:op-50 dark:placeholder:op-30 focus:(ring-0 outline-none)"
       ></textarea>
-      <div class="i-carbon-send absolute right-6 bottom-5 op-50 text-xl cursor-pointer" />
+      <div
+        onClick={handleSend}
+        class="absolute right-4 bottom-3 inline-flex p-2 items-center gap-1 rounded-md cursor-pointer hover:bg-darker"
+      >
+        <div class="i-carbon-send op-50 text-xl cursor-pointer" />
+      </div>
     </>
   )
+
+  const handleSend = () => {
+    prompt.set(inputRef.value)
+    inputPrompt.set('')
+    inputRef.value = ''
+  }
 
   return (
     <div class={`absolute bottom-0 left-0 right-0 bg-base border-t border-base transition-height ${classTest()}`}>
