@@ -1,14 +1,14 @@
 ---
 import Header from './Header.astro'
 import ChatConfiguration from './ChatConfiguration.astro';
-import Send from './Send.astro'
+import Send from './Send'
 ---
 
 <main class="flex-1 flex flex-col">
   <Header />
   <main class="flex-1 flex flex-col">
     <ChatConfiguration />
-    <div class="flex-1"></div>
-    <Send />
+    <div class="flex-1 overflow-y-scroll"></div>
+    <Send client:load />
   </main>
 </main>
