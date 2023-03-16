@@ -38,7 +38,10 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
   })
 
   const htmlString = () => {
-    const md = MarkdownIt().use(mdKatex).use(mdHighlight)
+    const md = MarkdownIt({
+      linkify: true,
+      breaks: true
+    }).use(mdKatex).use(mdHighlight)
     const fence = md.renderer.rules.fence!
     md.renderer.rules.fence = (...args) => {
       const [tokens, idx] = args
