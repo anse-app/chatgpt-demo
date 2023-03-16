@@ -20,6 +20,12 @@ export const generatePayload = (apiKey: string, messages: ChatMessage[]): Reques
 export const parseOpenAIStream = (rawResponse: Response) => {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
+  if (!rawResponse.ok) {
+    return new Response(rawResponse.body, {
+      status: rawResponse.status,
+      statusText: rawResponse.statusText,
+    })
+  }
 
   const stream = new ReadableStream({
     async start(controller) {
@@ -57,5 +63,5 @@ export const parseOpenAIStream = (rawResponse: Response) => {
     },
   })
 
-  return stream
+  return new Response(stream)
 }

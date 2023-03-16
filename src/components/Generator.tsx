@@ -1,8 +1,9 @@
-import type { ChatMessage } from '@/types'
+import type { ChatMessage, ErrorMessage } from '@/types'
 import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
+import ErrorMessageItem from './ErrorMessageItem'
 import { generateSignature } from '@/utils/auth'
 import { useThrottleFn } from 'solidjs-use'
 
@@ -11,6 +12,7 @@ export default () => {
   const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
   const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
+  const [currentError, setCurrentError] = createSignal<ErrorMessage>()
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
@@ -64,6 +66,7 @@ export default () => {
   const requestWithLatestMessage = async () => {
     setLoading(true)
     setCurrentAssistantMessage('')
+    setCurrentError(null)
     const storagePassword = localStorage.getItem('pass')
     try {
       const controller = new AbortController()
@@ -90,7 +93,10 @@ export default () => {
         signal: controller.signal,
       })
       if (!response.ok) {
-        throw new Error(response.statusText)
+        const error = await response.json()
+        console.error(error.error)
+        setCurrentError(error.error)
+        throw new Error('Request failed')
       }
       const data = response.body
       if (!data) {
@@ -160,8 +166,8 @@ export default () => {
       console.log(lastMessage)
       if (lastMessage.role === 'assistant') {
         setMessageList(messageList().slice(0, -1))
-        requestWithLatestMessage()
       }
+      requestWithLatestMessage()
     }
   }
 
@@ -199,6 +205,7 @@ export default () => {
           message={currentAssistantMessage}
         />
       )}
+      { currentError() && <ErrorMessageItem data={currentError()} onRetry={retryLastFetch} /> }
       <Show
         when={!loading()}
         fallback={() => (

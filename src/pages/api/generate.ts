@@ -14,13 +14,25 @@ export const post: APIRoute = async (context) => {
   const body = await context.request.json()
   const { sign, time, messages, pass } = body
   if (!messages) {
-    return new Response('No input text')
+    return new Response(JSON.stringify({
+      error: {
+        message: 'No input text.',
+      }
+    }), { status: 400 })
   }
   if (sitePassword && sitePassword !== pass) {
-    return new Response('Invalid password')
+    return new Response(JSON.stringify({
+      error: {
+        message: 'Invalid password.',
+      }
+    }), { status: 401 })
   }
   if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '', }, sign)) {
-    return new Response('Invalid signature')
+    return new Response(JSON.stringify({
+      error: {
+        message: 'Invalid signature.',
+      }
+    }), { status: 401 })
   }
   const initOptions = generatePayload(apiKey, messages)
   // #vercel-disable-blocks
@@ -30,7 +42,15 @@ export const post: APIRoute = async (context) => {
   // #vercel-end
 
   // @ts-ignore
-  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions) as Response
+  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions).catch((err: Error) => {
+    console.error(err)
+    return new Response(JSON.stringify({
+      error: {
+        code: err.name,
+        message: err.message,
+      }
+    }), { status: 500 })
+  }) as Response
 
-  return new Response(parseOpenAIStream(response))
+  return parseOpenAIStream(response) as Response
 }
