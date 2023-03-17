@@ -1,11 +1,11 @@
-import type { ChatMessage, ErrorMessage } from '@/types'
-import { createSignal, Index, Show, onMount, onCleanup } from 'solid-js'
+import { Index, Show, createSignal, onCleanup, onMount } from 'solid-js'
+import { useThrottleFn } from 'solidjs-use'
+import { generateSignature } from '@/utils/auth'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
-import { generateSignature } from '@/utils/auth'
-import { useThrottleFn } from 'solidjs-use'
+import type { ChatMessage, ErrorMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -17,19 +17,17 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
 
-
   onMount(() => {
     try {
-      if (localStorage.getItem('messageList')) {
+      if (localStorage.getItem('messageList'))
         setMessageList(JSON.parse(localStorage.getItem('messageList')))
-      }
-      if (localStorage.getItem('systemRoleSettings')) {
+
+      if (localStorage.getItem('systemRoleSettings'))
         setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
-      }
     } catch (err) {
       console.error(err)
     }
-    
+
     window.addEventListener('beforeunload', handleBeforeUnload)
     onCleanup(() => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
@@ -41,12 +39,13 @@ export default () => {
     localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
   }
 
-  const handleButtonClick = async () => {
+  const handleButtonClick = async() => {
     const inputValue = inputRef.value
-    if (!inputValue) {
+    if (!inputValue)
       return
-    }
-    // @ts-ignore
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
     setMessageList([
@@ -63,7 +62,7 @@ export default () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
   }, 300, false, true)
 
-  const requestWithLatestMessage = async () => {
+  const requestWithLatestMessage = async() => {
     setLoading(true)
     setCurrentAssistantMessage('')
     setCurrentError(null)
@@ -99,9 +98,9 @@ export default () => {
         throw new Error('Request failed')
       }
       const data = response.body
-      if (!data) {
+      if (!data)
         throw new Error('No data')
-      }
+
       const reader = data.getReader()
       const decoder = new TextDecoder('utf-8')
       let done = false
@@ -109,13 +108,13 @@ export default () => {
       while (!done) {
         const { value, done: readerDone } = await reader.read()
         if (value) {
-          let char = decoder.decode(value)
-          if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
+          const char = decoder.decode(value)
+          if (char === '\n' && currentAssistantMessage().endsWith('\n'))
             continue
-          }
-          if (char) {
+
+          if (char)
             setCurrentAssistantMessage(currentAssistantMessage() + char)
-          }
+
           smoothToBottom()
         }
         done = readerDone
@@ -147,7 +146,7 @@ export default () => {
 
   const clear = () => {
     inputRef.value = ''
-    inputRef.style.height = 'auto';
+    inputRef.style.height = 'auto'
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
@@ -163,21 +162,19 @@ export default () => {
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1]
-      console.log(lastMessage)
-      if (lastMessage.role === 'assistant') {
+      if (lastMessage.role === 'assistant')
         setMessageList(messageList().slice(0, -1))
-      }
+
       requestWithLatestMessage()
     }
   }
 
   const handleKeydown = (e: KeyboardEvent) => {
-    if (e.isComposing || e.shiftKey) {
+    if (e.isComposing || e.shiftKey)
       return
-    }
-    if (e.key === 'Enter') {
+
+    if (e.key === 'Enter')
       handleButtonClick()
-    }
   }
 
   return (
@@ -224,11 +221,11 @@ export default () => {
             autocomplete="off"
             autofocus
             onInput={() => {
-              inputRef.style.height = 'auto';
-              inputRef.style.height = inputRef.scrollHeight + 'px';
+              inputRef.style.height = 'auto'
+              inputRef.style.height = `${inputRef.scrollHeight}px`
             }}
             rows="1"
-            class='gen-textarea'
+            class="gen-textarea"
           />
           <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send

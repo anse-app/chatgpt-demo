@@ -11,6 +11,6 @@ declare global {
     interface HTMLAttributes extends AttributifyAttributes { }
   }
   namespace JSX {
-    interface HTMLAttributes<T> extends AttributifyAttributes {}
+    interface HTMLAttributes<> extends AttributifyAttributes {}
   }
 }

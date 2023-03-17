@@ -1,7 +1,7 @@
 {
   "name": "chatgpt-api-demo",
-  "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@7.28.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -9,7 +9,9 @@
     "build:vercel": "OUTPUT=vercel astro build",
     "build:netlify": "OUTPUT=netlify astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix"
   },
   "dependencies": {
     "@astrojs/netlify": "2.0.0",
@@ -18,6 +20,7 @@
     "@astrojs/vercel": "^3.1.3",
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
+    "eslint": "^8.36.0",
     "eventsource-parser": "^0.1.0",
     "highlight.js": "^11.7.0",
     "js-sha256": "^0.9.0",
@@ -32,10 +35,13 @@
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.16",
     "@types/markdown-it": "^12.2.3",
+    "@typescript-eslint/parser": "^5.54.1",
     "@unocss/preset-attributify": "^0.50.1",
     "@unocss/preset-icons": "^0.50.4",
     "@unocss/preset-typography": "^0.50.3",
+    "eslint-plugin-astro": "^0.24.0",
     "punycode": "^2.3.0",
-    "unocss": "^0.50.1"
+    "unocss": "^0.50.1",
+    "@evan-yang/eslint-config": "^1.0.1"
   }
 }

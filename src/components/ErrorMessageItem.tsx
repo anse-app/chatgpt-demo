@@ -1,5 +1,5 @@
-import type { ErrorMessage } from '@/types'
 import IconRefresh from './icons/Refresh'
+import type { ErrorMessage } from '@/types'
 
 interface Props {
   data: ErrorMessage
