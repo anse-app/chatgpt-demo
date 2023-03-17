@@ -3,7 +3,7 @@ export default function plugin() {
     if (id.includes('pages/api/generate.ts')) {
       return {
         code: code.replace(/^.*?#vercel-disable-blocks([\s\S]+?)#vercel-end.*?$/gm, ''),
-        map: null
+        map: null,
       }
     }
   }

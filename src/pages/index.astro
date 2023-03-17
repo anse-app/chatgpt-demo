@@ -31,10 +31,8 @@ async function checkCurrentAuth() {
     }),
   })
   const responseJson = await response.json()
-  if (responseJson.code !== 0) {
+  if (responseJson.code !== 0)
     window.location.href = '/password'
-  }
 }
 checkCurrentAuth()
 </script>
-
