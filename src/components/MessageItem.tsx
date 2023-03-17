@@ -78,7 +78,7 @@ export default ({ role, message, showRetry, onRetry }: Props) => {
         <div class="fie px-3 mb-2">
           <div onClick={onRetry} class="gpt-retry-btn">
             <IconRefresh />
-            <span>Regenerate</span>
+            <span>重新生成</span>
           </div>
         </div>
       )}
