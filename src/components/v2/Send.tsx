@@ -1,4 +1,4 @@
-import { createSignal, Show } from 'solid-js'
+import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/strores/ui'
 import { prompt } from '@/strores/prompt'
@@ -8,13 +8,12 @@ export default () => {
   const $inputPrompt = useStore(inputPrompt)
   const [focusState, setFocusState] = createSignal(false)
   const isEditing = () => $inputPrompt() || focusState()
-  
+
   const classTest = () => {
-    if (isEditing()) {
+    if (isEditing())
       return 'h-40'
-    } else {
+    else
       return 'h-14'
-    }
   }
 
   const EmptyState = () => (
@@ -23,7 +22,7 @@ export default () => {
       <div class="i-carbon-send op-50 text-xl" />
     </div>
   )
-  
+
   const EditState = () => (
     <>
       <textarea
@@ -34,7 +33,7 @@ export default () => {
         onBlur={() => { setFocusState(false) }}
         onInput={() => { inputPrompt.set(inputRef.value) }}
         class="absolute inset-0 px-6 py-4 bg-darker-100 resize-none scroll-pa-4 placeholder:op-50 dark:placeholder:op-30 focus:(ring-0 outline-none)"
-      ></textarea>
+      />
       <div
         onClick={handleSend}
         class="absolute right-4 bottom-3 inline-flex p-2 items-center gap-1 rounded-md cursor-pointer hover:bg-darker"

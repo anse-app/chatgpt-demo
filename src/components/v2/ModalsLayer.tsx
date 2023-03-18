@@ -7,6 +7,9 @@ export default () => {
       <Modal bindValue={sidebar} direction="left">
         <div class="w-[70vw]" />
       </Modal>
+      {/* <Modal bindValue={sidebar} direction="left">
+        <div class="w-[70vw]" />
+      </Modal> */}
     </>
   )
 }

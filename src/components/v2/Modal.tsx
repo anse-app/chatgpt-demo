@@ -1,6 +1,6 @@
+import { useStore } from '@nanostores/solid'
 import type { JSXElement } from 'solid-js'
 import type { WritableAtom } from 'nanostores'
-import { useStore } from '@nanostores/solid'
 
 interface Props {
   bindValue: WritableAtom
@@ -26,10 +26,10 @@ export default (props: Props) => {
   }[props.direction])
 
   return (
-    <div class="fixed inset-0" classList={{'pointer-events-none': !modelValue()}}>
+    <div class="fixed inset-0" classList={{ 'pointer-events-none': !modelValue() }}>
       <div
         class="bg-base absolute inset-0 transition-opacity ease-out"
-        classList={{'opacity-50': modelValue(), 'opacity-0': !modelValue()}}
+        classList={{ 'opacity-50': modelValue(), 'opacity-0': !modelValue() }}
         onClick={() => props.bindValue.set(false)}
       />
       <div class={`bg-base absolute transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass} ${containerTransformClass()}`}>
