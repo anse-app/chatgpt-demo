@@ -77,7 +77,7 @@ export default () => {
   return (
     <div class="p-6">
       <header class="mb-4">
-        <h1 class="font-bold">Add Chat</h1>
+        <h1 class="font-bold">Edit Chat</h1>
       </header>
       <main class="flex flex-col gap-4">
         <input

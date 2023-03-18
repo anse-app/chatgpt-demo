@@ -1,7 +1,8 @@
-import { showChatEditModal } from '@/stores/ui'
+import { currentEditingChatId, showChatEditModal } from '@/stores/ui'
 
 export default () => {
   const handleAdd = () => {
+    currentEditingChatId.set(null)
     showChatEditModal.set(true)
   }
 
