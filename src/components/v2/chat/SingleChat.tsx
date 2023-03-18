@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/solid'
-import { prompt, response } from '@/strores/prompt'
+import { prompt, response } from '@/stores/prompt'
 import SingleChatInstance from '../instance/SingleChatInstance'
 
 export default () => {

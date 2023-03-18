@@ -1,7 +1,7 @@
 import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { inputPrompt } from '@/strores/ui'
-import { prompt } from '@/strores/prompt'
+import { inputPrompt } from '@/stores/ui'
+import { prompt } from '@/stores/prompt'
 
 export default () => {
   let inputRef: HTMLTextAreaElement

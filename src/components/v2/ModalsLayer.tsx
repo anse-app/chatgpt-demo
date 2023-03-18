@@ -1,4 +1,4 @@
-import { sidebar } from '@/strores/ui'
+import { sidebar } from '@/stores/ui'
 import Modal from './Modal'
 
 export default () => {

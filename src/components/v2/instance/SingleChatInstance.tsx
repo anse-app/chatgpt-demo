@@ -1,6 +1,6 @@
 import { createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { prompt, response } from '@/strores/prompt'
+import { prompt, response } from '@/stores/prompt'
 import { generateSignature } from '@/utils/auth'
 import type { WritableAtom } from 'nanostores'
 
