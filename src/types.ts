@@ -7,3 +7,5 @@ export interface ErrorMessage {
   code: string
   message: string
 }
+
+export type ChatType = 'single' | 'continuous' | 'image'

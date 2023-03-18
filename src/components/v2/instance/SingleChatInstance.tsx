@@ -56,7 +56,7 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
 
   setController(new AbortController())
-  fetchResponse($prompt(), controller(), response)
+  // fetchResponse($prompt(), controller(), response)
 
   return null
 }

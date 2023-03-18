@@ -19,10 +19,18 @@ import Button from './Button.astro'
 </header>
 
 <script>
-  import { sidebar } from '@/strores/ui'
+  import {
+    showConversationSidebar,
+    showSettingsSidebar,
+  } from '@/stores/ui'
 
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn')
+  const settingsToggleBtn = document.getElementById('settings-toggle-btn')
+
   sidebarToggleBtn.addEventListener('click', () => {
-    sidebar.set(true)
+    showConversationSidebar.set(true)
+  })
+  settingsToggleBtn.addEventListener('click', () => {
+    showSettingsSidebar.set(true)
   })
 </script>

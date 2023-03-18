@@ -28,8 +28,12 @@ export default defineConfig({
     'bg-base': 'bg-light-100 dark:bg-dark-400',
     'bg-darker-100': 'bg-light-400 dark:bg-dark-300',
     'bg-darker': 'bg-light-600 dark:bg-dark-200',
+    // 'bg-accent': 'bg-violet/50',
     'border-base': 'border-light-900 dark:border-dark-100',
     'placeholder-base': 'placeholder:op-50 dark:placeholder:op-30',
+    'hv-base': 'transition-colors cursor-pointer hover:bg-light-600 hover:dark:bg-dark-200',
+    'border-b-base': 'border-b-light-900 dark:border-b-dark-100',
+
     'fg-base': 'text-dark dark:text-light',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',

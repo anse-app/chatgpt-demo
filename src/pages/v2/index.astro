@@ -1,16 +1,21 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Main from '@/components/v2/Main.astro'
-import Sidebar from '@/components/v2/Sidebar.astro'
-import Settings from '@/components/v2/Settings.astro'
+import ConversationSidebar from '@/components/v2/ConversationSidebar'
+import Settings from '@/components/v2/SettingsSidebar'
 import ModalsLayer from '@/components/v2/ModalsLayer'
+import Sidebar from '@/components/v2/Sidebar'
 ---
 
 <Layout title="ChatGPT Api Demo">
   <div class="h-100svh w-screen flex">
-    <Sidebar />
+    <Sidebar direction="left" class="hidden md:block">
+      <ConversationSidebar client:load />
+    </Sidebar>
     <Main />
-    <Settings />
+    <Sidebar direction="right" class="hidden lg:block">
+      <Settings />
+    </Sidebar>
   </div>
   <ModalsLayer client:load />
 </Layout>
