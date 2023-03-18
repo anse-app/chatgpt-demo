@@ -1,14 +1,8 @@
-import { addChat } from '@/stores/chat'
+import { showChatEditModal } from '@/stores/ui'
 
 export default () => {
   const handleAdd = () => {
-    addChat({
-      id: `id_${Date.now()}`,
-      type: 'single',
-      name: 'Test New',
-      avatar: '',
-      messages: [],
-    })
+    showChatEditModal.set(true)
   }
 
   return (

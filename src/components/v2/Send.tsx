@@ -32,7 +32,7 @@ export default () => {
         autofocus
         onBlur={() => { setFocusState(false) }}
         onInput={() => { inputPrompt.set(inputRef.value) }}
-        class="absolute inset-0 px-6 py-4 bg-darker-100 resize-none scroll-pa-4 placeholder:op-50 dark:placeholder:op-30 focus:(ring-0 outline-none)"
+        class="absolute inset-0 px-6 py-4 bg-darker-100 resize-none scroll-pa-4 input-base"
       />
       <div
         onClick={handleSend}

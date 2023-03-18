@@ -1,4 +1,5 @@
 import { currentChatId, deleteChatById } from '@/stores/chat'
+import { currentEditingChatId, showChatEditModal } from '@/stores/ui'
 import type { ChatInstance } from '@/stores/chat'
 
 interface Props {
@@ -14,17 +15,22 @@ export default ({ instance }: Props) => {
   const handleDelete = (chatId: string) => {
     deleteChatById(chatId)
   }
-  const handleEdit = (chatId: string) => {}
+  const handleEdit = (chatId: string) => {
+    currentEditingChatId.set(chatId)
+    showChatEditModal.set(true)
+  }
 
   return (
     <div
       class={[
-        'group flex items-center h-18 px-4 gap-4 border-b border-l-4 border-b-base hv-base',
+        'group fi h-18 px-4 gap-3 border-b border-l-4 border-b-base hv-base',
         instance.current ? 'border-l-emerald-500' : 'border-l-transparent',
       ].join(' ')}
       onClick={handleClick}
     >
-      <div class="w-8 h-8 rounded-full bg-white/50" />
+      <div class="fcc w-8 h-8 rounded-full bg-emerald/10 text-emerald text-xl">
+        <div class={instance.icon || 'i-carbon-chat'} />
+      </div>
       <div class="flex-1">{ instance.name }</div>
       <div class="hidden group-hover:block">
         <div
