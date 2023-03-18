@@ -36,7 +36,7 @@ export default () => {
       />
       <div
         onClick={handleSend}
-        class="absolute right-4 bottom-3 inline-flex p-2 items-center gap-1 rounded-md cursor-pointer hover:bg-darker"
+        class="absolute right-4 bottom-3 inline-flex p-2 items-center gap-1 rounded-md hv-base"
       >
         <div class="i-carbon-send op-50 text-xl cursor-pointer" />
       </div>
