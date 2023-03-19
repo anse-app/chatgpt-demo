@@ -5,7 +5,7 @@ interface AuthPayload {
 }
 
 async function digestMessage(message: string) {
-  if (crypto && crypto.subtle && crypto.subtle.digest) {
+  if (typeof crypto !== 'undefined' && crypto?.subtle?.digest) {
     const msgUint8 = new TextEncoder().encode(message)
     const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8)
     const hashArray = Array.from(new Uint8Array(hashBuffer))
