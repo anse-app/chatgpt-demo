@@ -31,7 +31,6 @@ specifiers:
   punycode: ^2.3.0
   solid-js: 1.6.12
   solidjs-use: ^1.2.0
-  undici: ^5.20.0
   unocss: ^0.50.1
 
 dependencies:
@@ -56,7 +55,6 @@ dependencies:
   nanostores: 0.7.4
   solid-js: 1.6.12
   solidjs-use: 1.2.0
-  undici: 5.21.0
 
 devDependencies:
   '@evan-yang/eslint-config': 1.0.4_j4766f7ecgqbon3u7zlxn5zszu
