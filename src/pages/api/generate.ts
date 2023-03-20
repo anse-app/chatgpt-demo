@@ -40,7 +40,7 @@ export const post: APIRoute = async(context) => {
         message: err.message,
       },
     }), { status: 500 })
-  }) as Response
+  })
 
-  return parseOpenAIStream(response) as Response
+  return parseOpenAIStream(response)
 }
