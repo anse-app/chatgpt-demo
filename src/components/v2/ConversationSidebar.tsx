@@ -8,7 +8,7 @@ export default () => {
   const $chatList = useStore(chatListWithoutMessages)
 
   return (
-    <>
+    <div class="h-screen flex flex-col">
       <div class="h-12 border-b border-base flex px-4 items-center">
         Conversations
       </div>
@@ -20,6 +20,6 @@ export default () => {
         </For>
         <ConversationSidebarAdd />
       </div>
-    </>
+    </div>
   )
 }

@@ -23,7 +23,7 @@ export default ({ instance }: Props) => {
   return (
     <div
       class={[
-        'group fi h-18 px-4 gap-3 border-b border-l-4 border-b-base hv-base',
+        'group fi h-16 px-4 gap-3 border-b border-l-4 border-b-base hv-base',
         instance.current ? 'border-l-emerald-500' : 'border-l-transparent',
       ].join(' ')}
       onClick={handleClick}
