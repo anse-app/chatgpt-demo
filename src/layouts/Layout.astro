@@ -17,13 +17,7 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    {
-      import.meta.env.HEAD_SCRIPTS
-        ? (
-        <Fragment set:html={import.meta.env.HEAD_SCRIPTS} />
-          )
-        : null
-    }
+    { import.meta.env.HEAD_SCRIPTS && <Fragment set:html={import.meta.env.HEAD_SCRIPTS} /> }
   </head>
   <body class="bg-base fg-base">
     <slot />
