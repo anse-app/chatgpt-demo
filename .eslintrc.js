@@ -5,6 +5,7 @@ module.exports = {
     'react/display-name': 'off',
     'react-hooks/rules-of-hooks': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'react/jsx-key': 'off',
   },
   overrides: [
     {

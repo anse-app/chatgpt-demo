@@ -8,6 +8,6 @@ export const showChatEditModal = atom(false)
 export const currentEditingChatId = atom('')
 export const inputPrompt = atom('')
 
-export const adaptorSettingsUIList = computed(providerList, list => {
+export const adaptorSettingsUIList = computed(providerList, (list) => {
   return list.flatMap(provider => provider.settingsUI || [])
 })

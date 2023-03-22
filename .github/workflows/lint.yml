@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - main
+      - feat/v2
 
   pull_request:
     branches:
       - main
+      - feat/v2
 
 jobs:
   lint:

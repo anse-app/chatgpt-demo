@@ -62,5 +62,8 @@ export default defineConfig({
     'gen-text-wrapper': 'my-4 fc gap-2 transition-opacity',
     'gen-textarea': 'w-full px-3 py-3 min-h-12 max-h-36 rounded-sm bg-(slate op-15) resize-none base-focus placeholder:op-50 dark:(placeholder:op-30) scroll-pa-8px',
     'sys-edit-btn': 'inline-fcc gap-1 text-sm bg-slate/20 px-2 py-1 rounded-md transition-colors cursor-pointer hover:bg-slate/50',
+    'gpt-toggle-wrapper': 'inline-flex rounded border border-gray-100 bg-gray-100 p-1 cursor-pointer',
+    'gpt-toggle-item': 'inline-block rounded font-semibold px-2 py-1 text-xs text-gray-500 focus:relative',
+    'gpt-toggle-active': 'bg-emerald-500 text-white',
   }],
 })
