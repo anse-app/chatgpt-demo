@@ -1,17 +1,17 @@
 import type { Provider } from '@/types/provider'
 
-interface Options {
-  apiKey?: string
-}
-
-const providerOpenAI = (options: Options = {}) => {
+const providerOpenAI = () => {
   const provider: Provider = {
     name: 'OpenAI',
-    settingsUI: [{
+    platformSettings: [{
       name: 'API Key',
+      description: 'Your OpenAI API Key',
+      type: 'input',
     }],
-    handlePrompt: async(prompt: string) => {
-      console.log('[OpenAI]', 'handlePrompt', prompt)
+    conversationSettings: [],
+    supportConversationType: ['single', 'continuous'],
+    handleSinglePrompt: async(prompt) => {
+      console.log('handleSinglePrompt', prompt)
       return 'response'
     },
   }
