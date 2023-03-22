@@ -8,12 +8,12 @@ const providerOpenAI = (options: Options = {}) => {
   const provider: Provider = {
     name: 'OpenAI',
     settingsUI: [{
-      name: 'API Key'
+      name: 'API Key',
     }],
-    handlePrompt: async (prompt: string) => {
+    handlePrompt: async(prompt: string) => {
       console.log('[OpenAI]', 'handlePrompt', prompt)
       return 'response'
-    }
+    },
   }
   return provider
 }
