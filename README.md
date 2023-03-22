@@ -80,6 +80,8 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 
 ### Deploy with Docker
+Before deploying the app, please make sure `.env` is configured normally.
+
 ```bash
 # build
 docker-compose build .
@@ -88,7 +90,6 @@ docker-compose up -d
 # stop
 docker-compose down
 ```
-
 
 ### Deploy on more servers
 
@@ -119,7 +120,9 @@ Q: throw new TypeError(${context} is not a ReadableStream.)
 
 A: The Node version needs to be `v18` or later，reference: https://github.com/ddiu8081/chatgpt-demo/issues/65
 
+Q: Accelerate domestic access without the need for proxy deployment tutorial?
 
+A: You can refer to this tutorial: https://github.com/ddiu8081/chatgpt-demo/discussions/270
 ## Contributing
 
 This project exists thanks to all those who contributed.

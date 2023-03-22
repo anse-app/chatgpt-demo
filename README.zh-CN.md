@@ -76,6 +76,18 @@
 
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
 
+### 部署在 Docker
+在部署应用之前，请确保 `.env` 配置正常。
+
+```bash
+# build
+docker-compose build .
+# run
+docker-compose up -d
+# stop
+docker-compose down
+```
+
 ### 部署在更多的服务器
 
 请参考官方部署文档：https://docs.astro.build/en/guides/deploy
@@ -103,6 +115,10 @@ A: 配置环境变量 `HTTPS_PROXY`，参考: https://github.com/ddiu8081/chatgp
 Q: throw new TypeError(${context} is not a ReadableStream.)
 
 A: Node 版本需要在 `v18` 或者更高，参考: https://github.com/ddiu8081/chatgpt-demo/issues/65
+
+Q: Accelerate domestic access without the need for proxy deployment tutorial?
+
+A: 你可以参考此教程: https://github.com/ddiu8081/chatgpt-demo/discussions/270
 
 ## 参与贡献
 
