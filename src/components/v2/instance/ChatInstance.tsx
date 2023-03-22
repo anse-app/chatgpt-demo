@@ -1,6 +1,6 @@
 import { registerProvider } from '@/stores/provider'
 
-import providerOpenAI from '../providers/openai'
+import providerOpenAI from '@/providers/openai'
 
 registerProvider(providerOpenAI())
 
