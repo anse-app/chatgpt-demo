@@ -27,10 +27,10 @@ import Button from './Button.astro'
   const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn')
   const settingsToggleBtn = document.getElementById('settings-toggle-btn')
 
-  sidebarToggleBtn.addEventListener('click', () => {
+  sidebarToggleBtn!.addEventListener('click', () => {
     showConversationSidebar.set(true)
   })
-  settingsToggleBtn.addEventListener('click', () => {
+  settingsToggleBtn!.addEventListener('click', () => {
     showSettingsSidebar.set(true)
   })
 </script>

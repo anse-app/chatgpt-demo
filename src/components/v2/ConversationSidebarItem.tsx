@@ -1,23 +1,24 @@
-import { currentChatId, deleteChatById } from '@/stores/chat'
-import { currentEditingChatId, showChatEditModal } from '@/stores/ui'
-import type { ChatInstance } from '@/stores/chat'
+import { currentConversationId, deleteConversationById } from '@/stores/conversation'
+import { currentEditingConversationId, showConversationEditModal } from '@/stores/ui'
+import type { ConversationInstance } from '@/stores/conversation'
 
 interface Props {
-  instance: ChatInstance & {
-    current: boolean
+  instance: Omit<ConversationInstance, 'messages'> & {
+    current?: boolean
   }
 }
 
 export default ({ instance }: Props) => {
   const handleClick = () => {
-    currentChatId.set(instance.id)
+    console.log('click', instance)
+    currentConversationId.set(instance.id)
   }
-  const handleDelete = (chatId: string) => {
-    deleteChatById(chatId)
+  const handleDelete = (conversationId: string) => {
+    deleteConversationById(conversationId)
   }
-  const handleEdit = (chatId: string) => {
-    currentEditingChatId.set(chatId)
-    showChatEditModal.set(true)
+  const handleEdit = (conversationId: string) => {
+    currentEditingConversationId.set(conversationId)
+    showConversationEditModal.set(true)
   }
 
   return (

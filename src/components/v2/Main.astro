@@ -2,17 +2,17 @@
 import Header from './Header.astro'
 import Send from './Send'
 
-import Chat from './chat/Chat'
-import ChatInstance from './instance/ChatInstance'
+import Conversation from './conversation/Conversation'
+import ConversationInstance from './instance/ConversationInstance'
 ---
 
 <main class="relative flex-1 flex flex-col">
   <Header />
   <main class="flex-1 mt-12 mb-14 flex flex-col">
-    <!-- <ChatConfiguration /> -->
+    <!-- <ConversationConfiguration /> -->
     <div class="flex-1 overflow-y-scroll">
-      <Chat client:load />
-      <ChatInstance client:load />
+      <Conversation client:load />
+      <ConversationInstance client:load />
     </div>
   </main>
   <Send client:load />

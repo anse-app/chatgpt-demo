@@ -1,3 +1,4 @@
+// TODO: Delete this file
 import { createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { prompt, response } from '@/stores/prompt'

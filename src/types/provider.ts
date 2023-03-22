@@ -1,4 +1,4 @@
-export type ConversationType = 'single' | 'continuous' | 'image'
+import type { ConversationType } from './conversation'
 
 export interface Provider {
   /** Name of provider */

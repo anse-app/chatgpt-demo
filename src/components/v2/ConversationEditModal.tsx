@@ -1,27 +1,27 @@
 import { For, createSignal } from 'solid-js'
 import {
-  addChat,
-  currentChatId,
-  currentEditingChat,
-  updateChatById,
-} from '@/stores/chat'
-import { showChatEditModal } from '@/stores/ui'
-import type { ChatType } from '@/types'
+  addConversation,
+  currentConversationId,
+  currentEditingConversation,
+  updateConversationById,
+} from '@/stores/conversation'
+import { showConversationEditModal } from '@/stores/ui'
+import type { ConversationType } from '@/types/conversation'
 
 export default () => {
   let inputRef: HTMLInputElement
   let currentId = ''
-  const [selectType, setSelectType] = createSignal<ChatType>('single')
+  const [selectType, setSelectType] = createSignal<ConversationType>('single')
   const [selectIcon, setSelectIcon] = createSignal<string>('bg-emerald')
   const typeSelectList = [
     {
       value: 'single' as const,
-      label: 'Single Chat',
+      label: 'Single Conversation',
       icon: 'i-carbon-connect',
     },
     {
       value: 'continuous' as const,
-      label: 'Continuous Chat',
+      label: 'Continuous Conversation',
       icon: 'i-carbon-edt-loop',
     },
     {
@@ -38,30 +38,30 @@ export default () => {
   ]
 
   const handleAdd = () => {
-    const chatName = inputRef.value || 'Untitled'
+    const conversationName = inputRef.value || 'Untitled'
     const payload = {
       id: currentId,
       type: selectType(),
-      name: chatName,
+      name: conversationName,
       icon: selectIcon(),
       messages: [],
     }
-    if (currentEditingChat.get()?.id) {
-      updateChatById(currentId, payload)
+    if (currentEditingConversation.get()?.id) {
+      updateConversationById(currentId, payload)
     } else {
-      addChat(payload)
-      currentChatId.set(currentId)
+      addConversation(payload)
+      currentConversationId.set(currentId)
     }
-    showChatEditModal.set(false)
+    showConversationEditModal.set(false)
     inputRef.value = ''
   }
 
-  showChatEditModal.listen((showModal) => {
+  showConversationEditModal.listen((showModal) => {
     if (showModal) {
       // inputRef.focus()
-      if (currentEditingChat.get()?.id) {
-        currentId = currentEditingChat.get().id
-        const { name, icon, type } = currentEditingChat.get()
+      if (currentEditingConversation.get()?.id) {
+        currentId = currentEditingConversation.get().id
+        const { name, icon, type } = currentEditingConversation.get()
         inputRef.value = name
         setSelectType(type)
         setSelectIcon(icon || 'i-carbon-chat')
@@ -77,7 +77,7 @@ export default () => {
   return (
     <div class="p-6">
       <header class="mb-4">
-        <h1 class="font-bold">Edit Chat</h1>
+        <h1 class="font-bold">Edit Conversation</h1>
       </header>
       <main class="flex flex-col gap-4">
         <input

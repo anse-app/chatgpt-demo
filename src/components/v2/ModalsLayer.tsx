@@ -1,11 +1,11 @@
 import {
-  showChatEditModal,
+  showConversationEditModal,
   showConversationSidebar,
   showSettingsSidebar,
 } from '@/stores/ui'
 import ConversationSidebar from '@/components/v2/ConversationSidebar'
 import SettingsSidebar from '@/components/v2/SettingsSidebar'
-import ChatEditModal from '@/components/v2/ChatEditModal'
+import ConversationEditModal from '@/components/v2/ConversationEditModal'
 import Modal from './Modal'
 
 export default () => {
@@ -21,9 +21,9 @@ export default () => {
           <SettingsSidebar />
         </div>
       </Modal>
-      <Modal bindValue={showChatEditModal} direction="bottom">
+      <Modal bindValue={showConversationEditModal} direction="bottom">
         <div class="max-h-[70vh] w-full">
-          <ChatEditModal />
+          <ConversationEditModal />
         </div>
       </Modal>
     </>
