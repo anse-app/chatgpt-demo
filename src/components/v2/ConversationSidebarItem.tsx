@@ -1,3 +1,4 @@
+import { useStore } from '@nanostores/solid'
 import { currentConversationId, deleteConversationById } from '@/stores/conversation'
 import { currentEditingConversationId, showConversationEditModal } from '@/stores/ui'
 import type { ConversationInstance } from '@/stores/conversation'
@@ -9,14 +10,17 @@ interface Props {
 }
 
 export default ({ instance }: Props) => {
+  const $currentConversationId = useStore(currentConversationId)
+
   const handleClick = () => {
-    console.log('click', instance)
     currentConversationId.set(instance.id)
   }
-  const handleDelete = (conversationId: string) => {
+  const handleDelete = (e: MouseEvent, conversationId: string) => {
+    e.stopPropagation()
     deleteConversationById(conversationId)
   }
-  const handleEdit = (conversationId: string) => {
+  const handleEdit = (e: MouseEvent, conversationId: string) => {
+    e.stopPropagation()
     currentEditingConversationId.set(conversationId)
     showConversationEditModal.set(true)
   }
@@ -25,7 +29,7 @@ export default ({ instance }: Props) => {
     <div
       class={[
         'group fi h-16 px-4 gap-3 border-b border-l-4 border-b-base hv-base',
-        instance.current ? 'border-l-emerald-500' : 'border-l-transparent',
+        instance.id === $currentConversationId() ? 'border-l-emerald-500' : 'border-l-transparent',
       ].join(' ')}
       onClick={handleClick}
     >
@@ -36,13 +40,13 @@ export default ({ instance }: Props) => {
       <div class="hidden group-hover:block">
         <div
           class="inline-flex p-2 items-center gap-1 rounded-md hv-base"
-          onClick={() => handleEdit(instance.id)}
+          onClick={e => handleEdit(e, instance.id)}
         >
           <div class="i-carbon-edit" />
         </div>
         <div
           class="inline-flex p-2 items-center gap-1 rounded-md hv-base"
-          onClick={() => handleDelete(instance.id)}
+          onClick={e => handleDelete(e, instance.id)}
         >
           <div class="i-carbon-close" />
         </div>

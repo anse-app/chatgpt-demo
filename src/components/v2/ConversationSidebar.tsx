@@ -1,15 +1,11 @@
 import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { conversationListWithoutMessages } from '@/stores/conversation'
+import { conversationMap } from '@/stores/conversation'
 import ConversationSidebarItem from './ConversationSidebarItem'
 import ConversationSidebarAdd from './ConversationSidebarAdd'
 
 export default () => {
-  const $conversationList = useStore(conversationListWithoutMessages)
-
-  conversationListWithoutMessages.listen((list) => {
-    console.log('conversationListWithoutMessages', list)
-  })
+  const $conversationMap = useStore(conversationMap)
 
   return (
     <div class="h-screen flex flex-col">
@@ -17,9 +13,9 @@ export default () => {
         Conversations
       </div>
       <div class="flex-1 overflow-auto">
-        <For each={$conversationList()}>
-          {item => (
-            <ConversationSidebarItem instance={item} />
+        <For each={Object.values($conversationMap())}>
+          {instance => (
+            <ConversationSidebarItem instance={instance} />
           )}
         </For>
         <ConversationSidebarAdd />

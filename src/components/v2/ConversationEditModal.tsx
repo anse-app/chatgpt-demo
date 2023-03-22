@@ -1,7 +1,6 @@
 import { For, createSignal } from 'solid-js'
 import {
   addConversation,
-  currentConversationId,
   currentEditingConversation,
   updateConversationById,
 } from '@/stores/conversation'
@@ -46,12 +45,11 @@ export default () => {
       icon: selectIcon(),
       messages: [],
     }
-    if (currentEditingConversation.get()?.id) {
+    if (currentEditingConversation.get()?.id)
       updateConversationById(currentId, payload)
-    } else {
+    else
       addConversation(payload)
-      currentConversationId.set(currentId)
-    }
+
     showConversationEditModal.set(false)
     inputRef.value = ''
   }
