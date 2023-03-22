@@ -3,6 +3,7 @@ import Header from './Header.astro'
 import Send from './Send'
 
 import Chat from './chat/Chat'
+import ChatInstance from './instance/ChatInstance'
 ---
 
 <main class="relative flex-1 flex flex-col">
@@ -11,6 +12,7 @@ import Chat from './chat/Chat'
     <!-- <ChatConfiguration /> -->
     <div class="flex-1 overflow-y-scroll">
       <Chat client:load />
+      <ChatInstance client:load />
     </div>
   </main>
   <Send client:load />
