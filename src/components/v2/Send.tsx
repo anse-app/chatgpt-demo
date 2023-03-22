@@ -17,7 +17,7 @@ export default () => {
   }
 
   const EmptyState = () => (
-    <div onClick={() => { setFocusState(true) }} class="px-6 h-full flex flex-row items-center gap-2 hv-base">
+    <div onClick={() => { setFocusState(true) && inputRef.focus() }} class="px-6 h-full flex flex-row items-center gap-2 hv-base">
       <div class="flex-1 op-30">Enter Something...</div>
       <div class="i-carbon-send op-50 text-xl" />
     </div>
