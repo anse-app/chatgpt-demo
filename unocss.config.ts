@@ -18,7 +18,8 @@ export default defineConfig({
     presetTypography({
       cssExtend: {
         'ul,ol': {
-          'list-style-position': 'inside',
+          'padding-left': '2.25em',
+          'position': 'relative',
         },
       },
     }),
