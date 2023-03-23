@@ -19,7 +19,7 @@ export default (props: Props) => {
 
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
-    props.setSystemRoleEditing(true)
+    props.setSystemRoleEditing(false)
      }
   
   return (
