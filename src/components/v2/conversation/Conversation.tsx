@@ -8,7 +8,7 @@ export default () => {
   const conversationType = () => $currentConversation()?.conversationType
   return (
     <>
-      <pre>{JSON.stringify($currentConversation(), null, 4)}</pre>
+      <pre class="text-xs border-b border-base">{JSON.stringify($currentConversation(), null, 4)}</pre>
       { conversationType() === 'single' && <Single /> }
     </>
   )

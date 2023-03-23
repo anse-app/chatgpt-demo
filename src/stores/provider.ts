@@ -13,3 +13,6 @@ export const registerProvider = action(providerList, 'registerProvider', (list, 
   console.log('[provider]', 'registerProvider', provider.name)
   list.set([...list.get(), provider])
 })
+export const getProviderById = action(providerList, 'getProviderById', (list, id: string) => {
+  return list.get().find(provider => provider.id === id)
+})

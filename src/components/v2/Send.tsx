@@ -1,13 +1,17 @@
 import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/stores/ui'
-import { prompt } from '@/stores/prompt'
+import { prompt, response } from '@/stores/prompt'
+import { currentConversation } from '@/stores/conversation'
+import { getProviderById } from '@/stores/provider'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
   const $inputPrompt = useStore(inputPrompt)
+  const $currentConversation = useStore(currentConversation)
   const [focusState, setFocusState] = createSignal(false)
   const isEditing = () => $inputPrompt() || focusState()
+  const conversationProvider = () => getProviderById($currentConversation()?.providerId)
 
   const classTest = () => {
     if (isEditing())
@@ -29,7 +33,6 @@ export default () => {
         ref={inputRef!}
         placeholder="Enter something..."
         autocomplete="off"
-        autofocus
         onBlur={() => { setFocusState(false) }}
         onInput={() => { inputPrompt.set(inputRef.value) }}
         class="absolute inset-0 px-6 py-4 bg-darker-100 resize-none scroll-pa-4 input-base"
@@ -45,8 +48,18 @@ export default () => {
 
   const handleSend = () => {
     prompt.set(inputRef.value)
+    handlePrompt(inputRef.value)
     inputPrompt.set('')
     inputRef.value = ''
+    setFocusState(false)
+  }
+
+  const handlePrompt = async(prompt: string) => {
+    const provider = conversationProvider()
+    if (!provider) return
+
+    const rawResponse = await provider.handleSinglePrompt?.(prompt) || ''
+    response.set(rawResponse)
   }
 
   return (
