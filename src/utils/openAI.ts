@@ -9,15 +9,10 @@ export const generatePayload = (apiKey: string, messages: ChatMessage[]): Reques
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${apiKey}`,
   },
- method: 'POST',
+  method: 'POST',
   body: JSON.stringify({
     model,
-    messages: [
-      { role: 'system', content: 'You are my Physics assistant.  My name is Jada and I am 15 years old in UK. Your focus is on the UK National Curriculum for Physics GCSE. Please explain concepts using fantasy stories with names charachters so its easy to understand.Your tone and character is according to style of NVC non violent communication and a loving sensitive mother' },
-      { role: "user", content: `I want to focus on The calculations of distance and time graphs and velocit and time graphs and the difference between them. As well as vectors and scalars. You must ask me a question at the end of your responses to confirm my understanding and prompt my engagement. \\n${context}\\n${lastThreeInteractions}\\n${input}\`}` },
-      { role: "user", content: `If at anytime i say Cheat Sheet then respond with a relevant cheat sheet to help for revision. Include all concepts and math forumla and examples.\\n${context}\\n${lastThreeInteractions}\\n${input}\`}`
-},
-    ],
+    messages,
     temperature: 0.6,
     stream: true,
   }),
