@@ -26,7 +26,7 @@ export default (props: Props) => {
     <div class="my-4">
       <Show when={!props.systemRoleEditing()}>
         <Show when={props.currentSystemRoleSettings()}>
-          <div>
+          <div style="display: none">
             <div class="fi gap-1 op-50 dark:op-60">
               <IconEnv />
               <span>System Role:</span>
