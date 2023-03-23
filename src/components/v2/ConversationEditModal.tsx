@@ -65,9 +65,9 @@ export default () => {
       // inputRef.focus()
       if (currentEditingConversation.get()?.id) {
         currentId = currentEditingConversation.get().id
-        const { name, icon, type } = currentEditingConversation.get()
+        const { name, icon, conversationType } = currentEditingConversation.get()
         inputRef.value = name
-        setSelectConversationType(type)
+        setSelectConversationType(conversationType)
         setSelectIcon(icon || 'i-carbon-chat')
       } else {
         currentId = `id_${Date.now()}`
