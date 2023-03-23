@@ -13,8 +13,9 @@ export default () => {
   let inputRef: HTMLInputElement
   let currentId = ''
   const $providerMetaList = useStore(providerMetaList)
+  const $currentEditingConversation = useStore(currentEditingConversation)
   const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
-  const [selectIcon, setSelectIcon] = createSignal('bg-emerald')
+  const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
   const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0].id)
   const selectProvider = () => $providerMetaList().find(item => item.id === selectProviderId()) || null
   const typeSelectList = [
@@ -51,7 +52,7 @@ export default () => {
       icon: selectIcon(),
       messages: [],
     }
-    if (currentEditingConversation.get()?.id)
+    if ($currentEditingConversation()?.id)
       updateConversationById(currentId, payload)
     else
       addConversation(payload)
@@ -63,9 +64,10 @@ export default () => {
   showConversationEditModal.listen((showModal) => {
     if (showModal) {
       // inputRef.focus()
-      if (currentEditingConversation.get()?.id) {
-        currentId = currentEditingConversation.get().id
-        const { name, icon, conversationType } = currentEditingConversation.get()
+      const current = $currentEditingConversation()
+      if (current) {
+        currentId = current.id
+        const { name, icon, conversationType } = current
         inputRef.value = name
         setSelectConversationType(conversationType)
         setSelectIcon(icon || 'i-carbon-chat')
@@ -101,9 +103,13 @@ export default () => {
           <For each={typeSelectList.filter(item => selectProvider()?.supportConversationType.includes(item.value))}>
             {item => (
               <div
-                class="flex items-center gap-3 p-4 border border-base hv-base"
-                classList={{ 'border-emerald-500 text-emerald': selectConversationType() === item.value }}
-                onClick={() => { setSelectConversationType(item.value) }}
+                class="flex items-center gap-3 p-4 border border-base"
+                classList={{
+                  'border-emerald-500 text-emerald': selectConversationType() === item.value,
+                  'op-50': !!$currentEditingConversation(),
+                  'hv-base': !$currentEditingConversation(),
+                }}
+                onClick={() => { !$currentEditingConversation() && setSelectConversationType(item.value) }}
               >
                 <div class={`text-xl ${item.icon}`} />
                 <div>{item.label}</div>

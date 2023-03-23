@@ -18,7 +18,7 @@ export const currentConversation = computed([conversationMap, currentConversatio
   return deepCopy as ConversationInstance
 })
 export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
-  return map[id] as ConversationInstance
+  return id ? map[id] as ConversationInstance : null
 })
 
 export const addConversation = action(conversationMap, 'addConversation', (map, instance: ConversationInstance) => {
