@@ -4,7 +4,8 @@ import type { ConversationMessage, ConversationType } from '@/types/conversation
 
 export interface ConversationInstance {
   id: string
-  type: ConversationType
+  providerId: string
+  conversationType: ConversationType
   name: string
   icon: string
   messages: ConversationMessage[]
@@ -14,7 +15,7 @@ export const conversationMap = map<Record<string, ConversationInstance>>({})
 export const currentConversationId = atom('')
 export const currentConversation = computed([conversationMap, currentConversationId], (map, id) => {
   const deepCopy = JSON.parse(JSON.stringify(map[id] || {}))
-  return deepCopy
+  return deepCopy as ConversationInstance
 })
 export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
   return map[id]

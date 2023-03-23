@@ -5,7 +5,7 @@ import Single from './Single'
 
 export default () => {
   const $currentConversation = useStore(currentConversation)
-  const conversationType = () => $currentConversation()?.type
+  const conversationType = () => $currentConversation()?.conversationType
   return (
     <>
       <pre>{JSON.stringify($currentConversation(), null, 4)}</pre>

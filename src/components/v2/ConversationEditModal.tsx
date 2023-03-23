@@ -1,17 +1,22 @@
 import { For, createSignal } from 'solid-js'
+import { useStore } from '@nanostores/solid'
 import {
   addConversation,
   currentEditingConversation,
   updateConversationById,
 } from '@/stores/conversation'
 import { showConversationEditModal } from '@/stores/ui'
+import { providerMetaList } from '@/stores/provider'
 import type { ConversationType } from '@/types/conversation'
 
 export default () => {
   let inputRef: HTMLInputElement
   let currentId = ''
-  const [selectType, setSelectType] = createSignal<ConversationType>('single')
-  const [selectIcon, setSelectIcon] = createSignal<string>('bg-emerald')
+  const $providerMetaList = useStore(providerMetaList)
+  const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
+  const [selectIcon, setSelectIcon] = createSignal('bg-emerald')
+  const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0].id)
+  const selectProvider = () => $providerMetaList().find(item => item.id === selectProviderId()) || null
   const typeSelectList = [
     {
       value: 'single' as const,
@@ -40,7 +45,8 @@ export default () => {
     const conversationName = inputRef.value || 'Untitled'
     const payload = {
       id: currentId,
-      type: selectType(),
+      providerId: selectProviderId(),
+      conversationType: selectConversationType(),
       name: conversationName,
       icon: selectIcon(),
       messages: [],
@@ -61,12 +67,12 @@ export default () => {
         currentId = currentEditingConversation.get().id
         const { name, icon, type } = currentEditingConversation.get()
         inputRef.value = name
-        setSelectType(type)
+        setSelectConversationType(type)
         setSelectIcon(icon || 'i-carbon-chat')
       } else {
         currentId = `id_${Date.now()}`
         inputRef.value = ''
-        setSelectType('single')
+        setSelectConversationType('single')
         setSelectIcon('i-carbon-chat')
       }
     }
@@ -84,13 +90,20 @@ export default () => {
           placeholder="Untitled"
           class="w-full bg-transparent border border-base px-4 py-3 input-base focus:border-darker"
         />
+        {/* <select name="provider" onChange={e => setSelectProviderId(e.target.value)}>
+          <For each={$providerMetaList()}>
+            {item => (
+              <option value={item.id}>{item.name}</option>
+            )}
+          </For>
+        </select> */}
         <div>
-          <For each={typeSelectList}>
+          <For each={typeSelectList.filter(item => selectProvider()?.supportConversationType.includes(item.value))}>
             {item => (
               <div
                 class="flex items-center gap-3 p-4 border border-base hv-base"
-                classList={{ 'border-emerald-500 text-emerald': selectType() === item.value }}
-                onClick={() => { setSelectType(item.value) }}
+                classList={{ 'border-emerald-500 text-emerald': selectConversationType() === item.value }}
+                onClick={() => { setSelectConversationType(item.value) }}
               >
                 <div class={`text-xl ${item.icon}`} />
                 <div>{item.label}</div>

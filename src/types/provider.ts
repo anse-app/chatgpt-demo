@@ -1,6 +1,7 @@
 import type { ConversationType } from './conversation'
 
 export interface Provider {
+  id: string
   /** Name of provider */
   name: string
   /** Global settings of the provider */
