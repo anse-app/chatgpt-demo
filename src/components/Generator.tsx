@@ -1,25 +1,51 @@
-import type { ChatMessage } from '@/types'
-import { createSignal, Index, Show } from 'solid-js'
+import { Index, Show, createSignal, onCleanup, onMount } from 'solid-js'
+import { useThrottleFn } from 'solidjs-use'
+import { generateSignature } from '@/utils/auth'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
-import { generateSignature } from '@/utils/auth'
+import ErrorMessageItem from './ErrorMessageItem'
+import type { ChatMessage, ErrorMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
   const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
   const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
+  const [currentError, setCurrentError] = createSignal<ErrorMessage>()
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
 
-  const handleButtonClick = async () => {
-    const inputValue = inputRef.value
-    if (!inputValue) {
-      return
+  onMount(() => {
+    try {
+      if (localStorage.getItem('messageList'))
+        setMessageList(JSON.parse(localStorage.getItem('messageList')))
+
+      if (localStorage.getItem('systemRoleSettings'))
+        setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+    } catch (err) {
+      console.error(err)
     }
-    // @ts-ignore
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    onCleanup(() => {
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+    })
+  })
+
+  const handleBeforeUnload = () => {
+    localStorage.setItem('messageList', JSON.stringify(messageList()))
+    localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
+  }
+
+  const handleButtonClick = async() => {
+    const inputValue = inputRef.value
+    if (!inputValue)
+      return
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     if (window?.umami) umami.trackEvent('chat_generate')
     inputRef.value = ''
     setMessageList([
@@ -32,9 +58,15 @@ export default () => {
     requestWithLatestMessage()
   }
 
-  const requestWithLatestMessage = async () => {
+  const smoothToBottom = useThrottleFn(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  }, 300, false, true)
+
+  const requestWithLatestMessage = async() => {
     setLoading(true)
     setCurrentAssistantMessage('')
+    setCurrentError(null)
+    const storagePassword = localStorage.getItem('pass')
     try {
       const controller = new AbortController()
       setController(controller)
@@ -51,6 +83,7 @@ export default () => {
         body: JSON.stringify({
           messages: requestMessageList,
           time: timestamp,
+          pass: storagePassword,
           sign: await generateSignature({
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
@@ -59,12 +92,15 @@ export default () => {
         signal: controller.signal,
       })
       if (!response.ok) {
-        throw new Error(response.statusText)
+        const error = await response.json()
+        console.error(error.error)
+        setCurrentError(error.error)
+        throw new Error('Request failed')
       }
       const data = response.body
-      if (!data) {
+      if (!data)
         throw new Error('No data')
-      }
+
       const reader = data.getReader()
       const decoder = new TextDecoder('utf-8')
       let done = false
@@ -72,14 +108,14 @@ export default () => {
       while (!done) {
         const { value, done: readerDone } = await reader.read()
         if (value) {
-          let char = decoder.decode(value)
-          if (char === '\n' && currentAssistantMessage().endsWith('\n')) {
+          const char = decoder.decode(value)
+          if (char === '\n' && currentAssistantMessage().endsWith('\n'))
             continue
-          }
-          if (char) {
+
+          if (char)
             setCurrentAssistantMessage(currentAssistantMessage() + char)
-          }
-          window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})
+
+          smoothToBottom()
         }
         done = readerDone
       }
@@ -110,7 +146,7 @@ export default () => {
 
   const clear = () => {
     inputRef.value = ''
-    inputRef.style.height = 'auto';
+    inputRef.style.height = 'auto'
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
@@ -126,21 +162,19 @@ export default () => {
   const retryLastFetch = () => {
     if (messageList().length > 0) {
       const lastMessage = messageList()[messageList().length - 1]
-      console.log(lastMessage)
-      if (lastMessage.role === 'assistant') {
+      if (lastMessage.role === 'assistant')
         setMessageList(messageList().slice(0, -1))
-        requestWithLatestMessage()
-      }
+
+      requestWithLatestMessage()
     }
   }
 
   const handleKeydown = (e: KeyboardEvent) => {
-    if (e.isComposing || e.shiftKey) {
+    if (e.isComposing || e.shiftKey)
       return
-    }
-    if (e.key === 'Enter') {
+
+    if (e.key === 'Enter')
       handleButtonClick()
-    }
   }
 
   return (
@@ -168,16 +202,17 @@ export default () => {
           message={currentAssistantMessage}
         />
       )}
+      { currentError() && <ErrorMessageItem data={currentError()} onRetry={retryLastFetch} /> }
       <Show
         when={!loading()}
         fallback={() => (
-          <div class="h-12 my-4 flex gap-4 items-center justify-center bg-slate bg-op-15 text-slate rounded-sm">
+          <div class="gen-cb-wrapper">
             <span>AI is thinking...</span>
-            <div class="px-2 py-0.5 border border-slate text-slate rounded-md text-sm op-70 cursor-pointer hover:bg-slate/10" onClick={stopStreamFetch}>Stop</div>
+            <div class="gen-cb-stop" onClick={stopStreamFetch}>Stop</div>
           </div>
         )}
       >
-        <div class="my-4 flex items-center gap-2 transition-opacity" class:op-50={systemRoleEditing()}>
+        <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
           <textarea
             ref={inputRef!}
             disabled={systemRoleEditing()}
@@ -186,30 +221,16 @@ export default () => {
             autocomplete="off"
             autofocus
             onInput={() => {
-              inputRef.style.height = 'auto';
-              inputRef.style.height = inputRef.scrollHeight + 'px';
+              inputRef.style.height = 'auto'
+              inputRef.style.height = `${inputRef.scrollHeight}px`
             }}
             rows="1"
-            w-full
-            px-3 py-3
-            min-h-12
-            max-h-36
-            text-slate
-            rounded-sm
-            bg-slate
-            bg-op-15
-            resize-none
-            focus:bg-op-20
-            focus:ring-0
-            focus:outline-none
-            placeholder:text-slate-400
-            placeholder:op-30
-            scroll-pa-8px
+            class="gen-textarea"
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} h-12 px-4 py-2 bg-slate bg-op-15 hover:bg-op-20 text-slate rounded-sm>
+          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
             <IconClear />
           </button>
         </div>
