@@ -35,7 +35,7 @@ export default (props: Props) => {
         <Show when={!props.currentSystemRoleSettings() && props.canEdit()}>
           <span onClick={() => props.setSystemRoleEditing(!props.systemRoleEditing())} class="sys-edit-btn">
             <IconEnv />
-            <span>Add System Role</span>
+            <span>你想让gpt cos谁</span>
           </span>
         </Show>
       </Show>
