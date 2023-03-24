@@ -38,22 +38,22 @@ export default defineConfig({
         manifest: {
           name: 'ChatGPT-API Demo',
           short_name: 'ChatGPT-API Demo',
-          description: 'A demo repo based on OpenAI GPT-3.5 Turbo API',
+          description: 'A demo repo based on OpenAI API',
           theme_color: '#212129',
           background_color: '#ffffff',
           icons: [
             {
-              src: 'favicon-192x192.png',
+              src: 'icon-192.png',
               sizes: '192x192',
               type: 'image/png',
             },
             {
-              src: 'favicon-512x512.png',
+              src: 'icon-512.png',
               sizes: '512x512',
               type: 'image/png',
             },
             {
-              src: 'favicon-512x512.png',
+              src: 'icon-512-maskable.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable',
