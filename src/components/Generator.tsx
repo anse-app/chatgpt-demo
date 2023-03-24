@@ -150,6 +150,7 @@ export default () => {
     setMessageList([])
     setCurrentAssistantMessage('')
     setCurrentSystemRoleSettings('')
+    setCurrentError(null)
   }
 
   const stopStreamFetch = () => {

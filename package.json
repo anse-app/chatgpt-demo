@@ -42,6 +42,7 @@
     "eslint-plugin-astro": "^0.24.0",
     "punycode": "^2.3.0",
     "unocss": "^0.50.1",
-    "@evan-yang/eslint-config": "^1.0.1"
+    "@evan-yang/eslint-config": "^1.0.1",
+    "vite-plugin-pwa": "^0.14.1"
   }
 }
