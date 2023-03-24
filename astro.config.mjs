@@ -33,29 +33,28 @@ export default defineConfig({
       process.env.OUTPUT === 'vercel' && vercelDisableBlocks(),
       process.env.OUTPUT === 'netlify' && vercelDisableBlocks(),
       process.env.OUTPUT !== 'netlify' && VitePWA({
-        includeAssets: ['favicon.svg'],
         registerType: 'autoUpdate',
         manifest: {
           name: 'ChatGPT-API Demo',
-          short_name: 'ChatGPT-API Demo',
+          short_name: 'ChatGPT Demo',
           description: 'A demo repo based on OpenAI API',
           theme_color: '#212129',
           background_color: '#ffffff',
           icons: [
             {
-              src: 'icon-192.png',
+              src: 'pwa-192.png',
               sizes: '192x192',
               type: 'image/png',
             },
             {
-              src: 'icon-512.png',
+              src: 'pwa-512.png',
               sizes: '512x512',
               type: 'image/png',
             },
             {
-              src: 'icon-512-maskable.png',
-              sizes: '512x512',
-              type: 'image/png',
+              src: 'icon.svg',
+              sizes: '32x32',
+              type: 'image/svg',
               purpose: 'any maskable',
             },
           ],
