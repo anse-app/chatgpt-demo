@@ -12,7 +12,7 @@ export default ({ conversation }: Props) => {
     <div class="flex flex-col h-full">
       <For each={messages()}>
         {message => (
-          <div class="border-b border-base px-6 py-4">
+          <div class="border-b border-base px-6 py-4 break-all">
             {message.content}
           </div>
         )}

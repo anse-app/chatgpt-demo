@@ -15,7 +15,7 @@ export default (props: Props) => {
   return (
     <aside
       class={[
-        'border-base overflow-hidden',
+        'border-base overflow-hidden shrink-0',
         containerBaseClass,
         props.class || '',
       ].join(' ')}

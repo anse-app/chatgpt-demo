@@ -9,10 +9,10 @@ export default ({ conversation }: Props) => {
   const messages = () => conversation().messages
   return (
     <div class="flex flex-col h-full">
-      <div class="flex-[1] border-b border-base px-6 py-4">
+      <div class="flex-[1] border-b border-base px-6 py-4 break-all overflow-y-scroll">
         {messages()?.[0]?.content}
       </div>
-      <div class="flex-[2] px-6 py-4">
+      <div class="flex-[2] px-6 py-4 break-all overflow-y-scroll">
         {messages()?.[1]?.content}
       </div>
     </div>

@@ -33,10 +33,10 @@ export default ({ instance }: Props) => {
       ].join(' ')}
       onClick={handleClick}
     >
-      <div class="fcc w-8 h-8 rounded-full bg-emerald/10 text-emerald text-xl">
+      <div class="fcc w-8 h-8 rounded-full bg-emerald/10 text-emerald text-xl shrink-0">
         <div class={instance.icon || 'i-carbon-chat'} />
       </div>
-      <div class="flex-1">{ instance.name || 'Untitled' }</div>
+      <div class="flex-1 truncate">{ instance.name || 'Untitled' }</div>
       <div class="hidden group-hover:block">
         <div
           class="inline-flex p-2 items-center gap-1 rounded-md hv-base"
