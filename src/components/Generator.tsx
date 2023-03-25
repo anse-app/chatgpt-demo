@@ -149,7 +149,6 @@ export default () => {
     inputRef.style.height = 'auto'
     setMessageList([])
     setCurrentAssistantMessage('')
-    setCurrentSystemRoleSettings('')
     setCurrentError(null)
   }
 
