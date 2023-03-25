@@ -13,10 +13,11 @@ export interface ConversationInstance {
 
 export const conversationMap = map<Record<string, ConversationInstance>>({})
 export const currentConversationId = atom('')
-export const currentConversation = computed([conversationMap, currentConversationId], (map, id) => {
-  const deepCopy = JSON.parse(JSON.stringify(map[id] || {}))
-  return deepCopy as ConversationInstance
-})
+// export const currentConversation = computed([conversationMap, currentConversationId], (map, id) => {
+//   return map[id]
+//   const deepCopy = JSON.parse(JSON.stringify(map[id] || {}))
+//   return deepCopy as ConversationInstance
+// })
 export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
   return id ? map[id] as ConversationInstance : null
 })
@@ -33,4 +34,22 @@ export const updateConversationById = action(conversationMap, 'updateConversatio
 })
 export const deleteConversationById = action(conversationMap, 'deleteConversationById', (map, id: string) => {
   map.set(Object.fromEntries(Object.entries(map.get()).filter(([key]) => key !== id)))
+})
+
+export const clearMessagesOnConversation = action(conversationMap, 'clearMessagesOnConversation', (map, id: string) => {
+  const conversation = map.get()[id]
+  if (!conversation)
+    return
+  updateConversationById(id, { messages: [] })
+})
+
+export const addMessageOnConversation = action(conversationMap, 'addMessageOnConversation', (map, id: string, message: ConversationMessage) => {
+  const conversation = map.get()[id]
+  console.log('conversation', JSON.stringify(conversation.messages), message)
+  if (!conversation)
+    return
+  const newMessages = [...conversation.messages, message]
+  // conversation.messages.push(message)
+  updateConversationById(id, { messages: newMessages })
+  // map.setKey(id, conversation)
 })

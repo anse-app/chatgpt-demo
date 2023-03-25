@@ -11,6 +11,13 @@ export const providerMetaList = computed(providerList, (list) => {
 })
 export const registerProvider = action(providerList, 'registerProvider', (list, provider: Provider) => {
   console.log('[provider]', 'registerProvider', provider.name)
+  let registered = false
+  list.get().forEach((p) => {
+    if (p.id === provider.id)
+      registered = true
+  })
+  if (registered)
+    return
   list.set([...list.get(), provider])
 })
 export const getProviderById = action(providerList, 'getProviderById', (list, id: string) => {

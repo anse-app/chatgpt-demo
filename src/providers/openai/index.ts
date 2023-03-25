@@ -1,3 +1,4 @@
+import { handleSinglePrompt } from './handler/single'
 import type { Provider } from '@/types/provider'
 
 const providerOpenAI = () => {
@@ -11,10 +12,7 @@ const providerOpenAI = () => {
     }],
     conversationSettings: [],
     supportConversationType: ['single', 'continuous'],
-    handleSinglePrompt: async(prompt) => {
-      console.log('handleSinglePrompt', prompt)
-      return 'response'
-    },
+    handleSinglePrompt,
   }
   return provider
 }

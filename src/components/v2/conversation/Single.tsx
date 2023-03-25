@@ -1,16 +1,19 @@
-import { useStore } from '@nanostores/solid'
-import { prompt, response } from '@/stores/prompt'
+import type { Accessor } from 'solid-js'
+import type { ConversationInstance } from '@/stores/conversation'
 
-export default () => {
-  const $prompt = useStore(prompt)
-  const $response = useStore(response)
+interface Props {
+  conversation: Accessor<ConversationInstance>
+}
+
+export default ({ conversation }: Props) => {
+  const messages = () => conversation().messages
   return (
     <div class="flex flex-col h-full">
       <div class="flex-[1] border-b border-base px-6 py-4">
-        {$prompt()}
+        {messages()?.[0]?.content}
       </div>
       <div class="flex-[2] px-6 py-4">
-        {$response()}
+        {messages()?.[1]?.content}
       </div>
     </div>
   )

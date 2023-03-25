@@ -16,7 +16,7 @@ export default () => {
   const $currentEditingConversation = useStore(currentEditingConversation)
   const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
   const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
-  const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0].id)
+  const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0]?.id)
   const selectProvider = () => $providerMetaList().find(item => item.id === selectProviderId()) || null
   const typeSelectList = [
     {
@@ -50,12 +50,15 @@ export default () => {
       conversationType: selectConversationType(),
       name: conversationName,
       icon: selectIcon(),
-      messages: [],
     }
-    if ($currentEditingConversation()?.id)
+    if ($currentEditingConversation()?.id) {
       updateConversationById(currentId, payload)
-    else
-      addConversation(payload)
+    } else {
+      addConversation({
+        ...payload,
+        messages: [],
+      })
+    }
 
     showConversationEditModal.set(false)
     inputRef.value = ''
