@@ -1,8 +1,5 @@
-import { getProviderById, registerProvider } from '@/stores/provider'
-import providerOpenAI from '@/providers/openai'
+import { getProviderById } from '@/stores/provider'
 import { addMessageOnConversation, clearMessagesOnConversation } from '@/stores/conversation'
-
-registerProvider(providerOpenAI())
 
 // interface ChatMessageHandler {
 //   addPrompt: (prompt: string) => void

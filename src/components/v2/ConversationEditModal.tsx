@@ -9,53 +9,54 @@ import { showConversationEditModal } from '@/stores/ui'
 import { providerMetaList } from '@/stores/provider'
 import type { ConversationType } from '@/types/conversation'
 
+const typeSelectList = [
+  {
+    value: 'single' as const,
+    label: 'Single Conversation',
+    icon: 'i-carbon-connect',
+  },
+  {
+    value: 'continuous' as const,
+    label: 'Continuous Conversation',
+    icon: 'i-carbon-edt-loop',
+  },
+  {
+    value: 'image' as const,
+    label: 'Image Generation',
+    icon: 'i-carbon-image',
+  },
+]
+const iconList = [
+  'i-carbon-chat',
+  'i-carbon-basketball',
+  'i-carbon-game-console',
+  'i-carbon-palm-tree',
+]
+
 export default () => {
   let inputRef: HTMLInputElement
-  let currentId = ''
-  const $providerMetaList = useStore(providerMetaList)
   const $currentEditingConversation = useStore(currentEditingConversation)
+  const [currentEditingId, setCurrentEditingId] = createSignal('')
   const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
   const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
   const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0]?.id)
-  const selectProvider = () => $providerMetaList().find(item => item.id === selectProviderId()) || null
-  const typeSelectList = [
-    {
-      value: 'single' as const,
-      label: 'Single Conversation',
-      icon: 'i-carbon-connect',
-    },
-    {
-      value: 'continuous' as const,
-      label: 'Continuous Conversation',
-      icon: 'i-carbon-edt-loop',
-    },
-    {
-      value: 'image' as const,
-      label: 'Image Generation',
-      icon: 'i-carbon-image',
-    },
-  ]
-  const iconList = [
-    'i-carbon-chat',
-    'i-carbon-basketball',
-    'i-carbon-game-console',
-    'i-carbon-palm-tree',
-  ]
+  const selectProvider = () => providerMetaList.get().find(item => item.id === selectProviderId()) || null
 
   const handleAdd = () => {
     const conversationName = inputRef.value || 'Untitled'
+    const currentId = currentEditingId()
     const payload = {
-      id: currentId,
       providerId: selectProviderId(),
       conversationType: selectConversationType(),
       name: conversationName,
       icon: selectIcon(),
     }
-    if ($currentEditingConversation()?.id) {
+    if (currentId) {
       updateConversationById(currentId, payload)
     } else {
       addConversation({
         ...payload,
+        id: `id_${Date.now()}`,
         messages: [],
       })
     }
@@ -66,16 +67,15 @@ export default () => {
 
   showConversationEditModal.listen((showModal) => {
     if (showModal) {
-      // inputRef.focus()
       const current = $currentEditingConversation()
-      if (current) {
-        currentId = current.id
+      if (current?.id) {
+        setCurrentEditingId(current.id)
         const { name, icon, conversationType } = current
         inputRef.value = name
         setSelectConversationType(conversationType)
         setSelectIcon(icon || 'i-carbon-chat')
       } else {
-        currentId = `id_${Date.now()}`
+        setCurrentEditingId('')
         inputRef.value = ''
         setSelectConversationType('single')
         setSelectIcon('i-carbon-chat')
@@ -86,7 +86,7 @@ export default () => {
   return (
     <div class="p-6">
       <header class="mb-4">
-        <h1 class="font-bold">Edit Conversation</h1>
+        <h1 class="font-bold">Edit Conversation {currentEditingId()}</h1>
       </header>
       <main class="flex flex-col gap-4">
         <input
@@ -130,7 +130,6 @@ export default () => {
               >
                 <div class={`text-xl ${item}`} />
               </div>
-
             )}
           </For>
         </div>
