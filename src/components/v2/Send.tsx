@@ -1,7 +1,7 @@
 import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/stores/ui'
-import { conversationMap, currentConversationId } from '@/stores/conversation'
+import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from './instance/ConversationInstance'
 
 export default () => {
@@ -49,6 +49,8 @@ export default () => {
   )
 
   const handleSend = () => {
+    if (!currentConversation())
+      addConversation()
     handlePrompt(currentConversation(), inputRef.value)
     inputPrompt.set('')
     inputRef.value = ''

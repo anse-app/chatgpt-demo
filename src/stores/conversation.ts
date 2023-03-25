@@ -1,5 +1,6 @@
 import { action, atom, computed, map } from 'nanostores'
 import { currentEditingConversationId } from './ui'
+import { providerMetaList } from './provider'
 import type { ConversationMessage, ConversationType } from '@/types/conversation'
 
 export interface ConversationInstance {
@@ -11,24 +12,23 @@ export interface ConversationInstance {
   messages: ConversationMessage[]
 }
 
-export const conversationMap = map<Record<string, ConversationInstance>>({
-  aaa: {
-    id: 'aaa',
-    providerId: 'provider-openai',
-    conversationType: 'continuous',
-    name: 'mock',
-    icon: '',
-    messages: [],
-  },
-})
+export const conversationMap = map<Record<string, ConversationInstance>>({})
 export const currentConversationId = atom('')
 export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
   return id ? map[id] as ConversationInstance : null
 })
 
-export const addConversation = action(conversationMap, 'addConversation', (map, instance: ConversationInstance) => {
-  map.setKey(instance.id, instance)
-  currentConversationId.set(instance.id)
+export const addConversation = action(conversationMap, 'addConversation', (map, instance?: Partial<ConversationInstance>) => {
+  const instanceId = instance?.id || `id_${Date.now()}`
+  map.setKey(instanceId, {
+    id: instanceId,
+    messages: [],
+    providerId: instance?.providerId || providerMetaList.get()[0]?.id,
+    conversationType: instance?.conversationType || providerMetaList.get()[0]?.supportConversationType?.[0],
+    name: instance?.name || '',
+    icon: instance?.icon || 'i-carbon-chat',
+  })
+  currentConversationId.set(instanceId)
 })
 export const updateConversationById = action(conversationMap, 'updateConversationById', (map, id: string, payload: Partial<ConversationInstance>) => {
   map.setKey(id, {

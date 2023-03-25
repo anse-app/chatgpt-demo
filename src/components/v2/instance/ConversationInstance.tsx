@@ -1,5 +1,5 @@
 import { getProviderById } from '@/stores/provider'
-import { addMessageOnConversation, clearMessagesOnConversation } from '@/stores/conversation'
+import { addMessageOnConversation, clearMessagesOnConversation, updateConversationById } from '@/stores/conversation'
 import type { ConversationInstance } from '@/stores/conversation'
 import type { PromptResponse, Provider } from '@/types/provider'
 import type { ConversationMessage, ConversationType } from '@/types/conversation'
@@ -15,6 +15,11 @@ export const handlePrompt = async(conversation: ConversationInstance, prompt: st
 
   if (conversation.conversationType !== 'continuous')
     clearMessagesOnConversation(conversation.id)
+  if (!conversation.messages.length && !conversation.name) {
+    updateConversationById(conversation.id, {
+      name: prompt,
+    })
+  }
 
   addMessageOnConversation(conversation.id, {
     role: 'user',

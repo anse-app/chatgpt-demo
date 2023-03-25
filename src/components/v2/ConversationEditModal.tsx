@@ -43,7 +43,7 @@ export default () => {
   const selectProvider = () => providerMetaList.get().find(item => item.id === selectProviderId()) || null
 
   const handleAdd = () => {
-    const conversationName = inputRef.value || 'Untitled'
+    const conversationName = inputRef.value || ''
     const currentId = currentEditingId()
     const payload = {
       providerId: selectProviderId(),
@@ -51,15 +51,10 @@ export default () => {
       name: conversationName,
       icon: selectIcon(),
     }
-    if (currentId) {
+    if (currentId)
       updateConversationById(currentId, payload)
-    } else {
-      addConversation({
-        ...payload,
-        id: `id_${Date.now()}`,
-        messages: [],
-      })
-    }
+    else
+      addConversation(payload)
 
     showConversationEditModal.set(false)
     inputRef.value = ''

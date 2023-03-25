@@ -14,7 +14,7 @@ const providerOpenAI = () => {
       type: 'input',
     }],
     conversationSettings: [],
-    supportConversationType: ['single', 'continuous'],
+    supportConversationType: ['continuous', 'single'],
     handleSinglePrompt,
     handleContinuousPrompt,
   }
