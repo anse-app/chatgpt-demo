@@ -1,6 +1,7 @@
 import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import Single from './Single'
+import Continuous from './Continuous'
 
 export default () => {
   const $conversationMap = useStore(conversationMap)
@@ -11,9 +12,9 @@ export default () => {
 
   return (
     <>
-      {/* <pre class="text-xs border-b border-base">{JSON.stringify(currentConversation(), null, 4)}</pre>
-      <pre class="text-xs border-b border-base">{currentConversation()?.conversationType}</pre> */}
+      <div />
       { currentConversation()?.conversationType === 'single' && <Single conversation={currentConversation} /> }
+      { currentConversation()?.conversationType === 'continuous' && <Continuous conversation={currentConversation} /> }
     </>
   )
 }

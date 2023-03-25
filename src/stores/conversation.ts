@@ -11,13 +11,17 @@ export interface ConversationInstance {
   messages: ConversationMessage[]
 }
 
-export const conversationMap = map<Record<string, ConversationInstance>>({})
+export const conversationMap = map<Record<string, ConversationInstance>>({
+  aaa: {
+    id: 'aaa',
+    providerId: 'provider-openai',
+    conversationType: 'continuous',
+    name: 'mock',
+    icon: '',
+    messages: [],
+  },
+})
 export const currentConversationId = atom('')
-// export const currentConversation = computed([conversationMap, currentConversationId], (map, id) => {
-//   return map[id]
-//   const deepCopy = JSON.parse(JSON.stringify(map[id] || {}))
-//   return deepCopy as ConversationInstance
-// })
 export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
   return id ? map[id] as ConversationInstance : null
 })
@@ -45,11 +49,8 @@ export const clearMessagesOnConversation = action(conversationMap, 'clearMessage
 
 export const addMessageOnConversation = action(conversationMap, 'addMessageOnConversation', (map, id: string, message: ConversationMessage) => {
   const conversation = map.get()[id]
-  console.log('conversation', JSON.stringify(conversation.messages), message)
   if (!conversation)
     return
   const newMessages = [...conversation.messages, message]
-  // conversation.messages.push(message)
   updateConversationById(id, { messages: newMessages })
-  // map.setKey(id, conversation)
 })

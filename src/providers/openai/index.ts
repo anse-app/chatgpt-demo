@@ -1,4 +1,7 @@
-import { handleSinglePrompt } from './handler/single'
+import {
+  handleContinuousPrompt,
+  handleSinglePrompt,
+} from './handler'
 import type { Provider } from '@/types/provider'
 
 const providerOpenAI = () => {
@@ -13,6 +16,7 @@ const providerOpenAI = () => {
     conversationSettings: [],
     supportConversationType: ['single', 'continuous'],
     handleSinglePrompt,
+    handleContinuousPrompt,
   }
   return provider
 }

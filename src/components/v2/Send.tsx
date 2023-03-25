@@ -1,14 +1,19 @@
 import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/stores/ui'
-import { currentConversationId } from '@/stores/conversation'
+import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from './instance/ConversationInstance'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
+  const $conversationMap = useStore(conversationMap)
+  const $currentConversationId = useStore(currentConversationId)
   const $inputPrompt = useStore(inputPrompt)
   const [focusState, setFocusState] = createSignal(false)
   const isEditing = () => $inputPrompt() || focusState()
+  const currentConversation = () => {
+    return $conversationMap()[$currentConversationId()]
+  }
 
   const classTest = () => {
     if (isEditing())
@@ -44,7 +49,7 @@ export default () => {
   )
 
   const handleSend = () => {
-    handlePrompt(currentConversationId.get(), inputRef.value)
+    handlePrompt(currentConversation(), inputRef.value)
     inputPrompt.set('')
     inputRef.value = ''
     setFocusState(false)
