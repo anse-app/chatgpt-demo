@@ -59,10 +59,6 @@ export default defineConfig({
             },
           ],
         },
-        workbox: {
-          globDirectory: 'dist',
-          navigateFallback: '/',
-        },
         client: {
           installPrompt: true,
           periodicSyncForUpdates: 20,
