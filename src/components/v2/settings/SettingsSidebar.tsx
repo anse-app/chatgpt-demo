@@ -1,22 +1,30 @@
 import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { platformSettingsList } from '@/stores/ui'
+import PlatformSettings from './PlatformSettings'
 
 export default () => {
   const $platformSettingsList = useStore(platformSettingsList)
 
   return (
     <div class="h-screen flex flex-col">
-      <div class="h-12 border-b border-base flex px-4 items-center">
+      <header class="h-12 border-b border-base flex px-4 items-center">
         Settings
-      </div>
-      <div class="flex-1 overflow-auto">
+      </header>
+      <main class="flex-1 overflow-auto">
         <For each={$platformSettingsList()}>
-          {item => (
-            <div>{item.name}</div>
-          )}
+          {item => <PlatformSettings config={item} />}
         </For>
-      </div>
+      </main>
+      <footer class="p-4 text-xs op-50">
+        <a href="#" target="_blank" rel="noreferrer" class="op-70 hover:op-100">
+          FAQ
+        </a>
+        <span class="px-1"> · </span>
+        <a href="https://github.com/ddiu8081/chatgpt-demo" target="_blank" rel="noreferrer" class="op-70 hover:op-100">
+          Github
+        </a>
+      </footer>
     </div>
   )
 }

@@ -25,11 +25,11 @@ interface SettingsUIBase {
   description?: string
 }
 
-interface SettingsUIInput extends SettingsUIBase {
+export interface SettingsUIInput extends SettingsUIBase {
   type: 'input'
 }
 
-interface SettingsUISelect extends SettingsUIBase {
+export interface SettingsUISelect extends SettingsUIBase {
   type: 'select'
   options: string[]
 }

@@ -8,11 +8,13 @@ const providerOpenAI = () => {
   const provider: Provider = {
     id: 'provider-openai',
     name: 'OpenAI',
-    platformSettings: [{
-      name: 'API Key',
-      description: 'Your OpenAI API Key',
-      type: 'input',
-    }],
+    platformSettings: [
+      {
+        name: 'API Key',
+        // description: 'Your OpenAI API Key',
+        type: 'input',
+      },
+    ],
     conversationSettings: [],
     supportConversationType: ['continuous', 'single'],
     handleSinglePrompt,
