@@ -5,7 +5,6 @@ export const showConversationSidebar = atom(false)
 export const showSettingsSidebar = atom(false)
 export const showConversationEditModal = atom(false)
 
-export const currentEditingConversationId = atom<string | null>('')
 export const inputPrompt = atom('')
 
 export const adaptorSettingsUIList = computed(providerList, (list) => {

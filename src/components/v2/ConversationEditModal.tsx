@@ -43,12 +43,11 @@ export default () => {
   const selectProvider = () => providerMetaList.get().find(item => item.id === selectProviderId()) || null
 
   const handleAdd = () => {
-    const conversationName = inputRef.value || ''
     const currentId = currentEditingId()
     const payload = {
       providerId: selectProviderId(),
       conversationType: selectConversationType(),
-      name: conversationName,
+      name: inputRef.value || '',
       icon: selectIcon(),
     }
     if (currentId)
@@ -62,7 +61,7 @@ export default () => {
 
   showConversationEditModal.listen((showModal) => {
     if (showModal) {
-      const current = $currentEditingConversation()
+      const current = currentEditingConversation.get()
       if (current?.id) {
         setCurrentEditingId(current.id)
         const { name, icon, conversationType } = current
@@ -75,13 +74,15 @@ export default () => {
         setSelectConversationType('single')
         setSelectIcon('i-carbon-chat')
       }
+    } else {
+      setCurrentEditingId('')
     }
   })
 
   return (
     <div class="p-6">
       <header class="mb-4">
-        <h1 class="font-bold">Edit Conversation {currentEditingId()}</h1>
+        <h1 class="font-bold">Edit Conversation</h1>
       </header>
       <main class="flex flex-col gap-4">
         <input

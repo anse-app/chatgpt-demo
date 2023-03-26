@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/solid'
-import { currentConversationId, deleteConversationById } from '@/stores/conversation'
-import { currentEditingConversationId, showConversationEditModal } from '@/stores/ui'
+import { currentConversationId, currentEditingConversationId, deleteConversationById } from '@/stores/conversation'
+import { showConversationEditModal } from '@/stores/ui'
 import type { ConversationInstance } from '@/stores/conversation'
 
 interface Props {

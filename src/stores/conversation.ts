@@ -1,5 +1,4 @@
 import { action, atom, computed, map } from 'nanostores'
-import { currentEditingConversationId } from './ui'
 import { providerMetaList } from './provider'
 import type { ConversationMessage, ConversationType } from '@/types/conversation'
 
@@ -14,8 +13,9 @@ export interface ConversationInstance {
 
 export const conversationMap = map<Record<string, ConversationInstance>>({})
 export const currentConversationId = atom('')
-export const currentEditingConversation = computed([conversationMap, currentEditingConversationId], (map, id) => {
-  return id ? map[id] as ConversationInstance : null
+export const currentEditingConversationId = atom<string | null>('')
+export const currentEditingConversation = computed(currentEditingConversationId, (id) => {
+  return id ? conversationMap.get()[id] as ConversationInstance : null
 })
 
 export const addConversation = action(conversationMap, 'addConversation', (map, instance?: Partial<ConversationInstance>) => {
