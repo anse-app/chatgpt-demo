@@ -3,11 +3,6 @@ import { addMessageOnConversation, clearMessagesOnConversation, updateConversati
 import type { PromptResponse, Provider } from '@/types/provider'
 import type { ConversationInstance, ConversationMessage, ConversationType } from '@/types/conversation'
 
-// interface ChatMessageHandler {
-//   addPrompt: (prompt: string) => void
-//   addResponse: (response: string) => void
-// }
-
 export const handlePrompt = async(conversation: ConversationInstance, prompt: string) => {
   const provider = getProviderById(conversation?.providerId)
   if (!provider) return
@@ -60,8 +55,4 @@ const callProviderHandler = async(payload: CallProviderPayload) => {
     console.error(e)
     return null
   }
-}
-
-export default () => {
-  return null
 }

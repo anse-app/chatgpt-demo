@@ -3,8 +3,8 @@ import { providerMetaList } from './provider'
 import { conversationMapData } from './tests/conversation.mock'
 import type { ConversationInstance, ConversationMessage } from '@/types/conversation'
 
-export const conversationMap = map<Record<string, ConversationInstance>>({})
-// export const conversationMap = map<Record<string, ConversationInstance>>(conversationMapData)
+// export const conversationMap = map<Record<string, ConversationInstance>>({})
+export const conversationMap = map<Record<string, ConversationInstance>>(conversationMapData)
 export const currentConversationId = atom('')
 export const currentEditingConversationId = atom<string | null>('')
 export const currentEditingConversation = computed(currentEditingConversationId, (id) => {

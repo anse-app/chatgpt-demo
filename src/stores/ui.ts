@@ -7,6 +7,10 @@ export const showConversationEditModal = atom(false)
 
 export const inputPrompt = atom('')
 
-export const adaptorSettingsUIList = computed(providerList, (list) => {
-  return list.flatMap(provider => provider.platformSettings || [])
+export const platformSettingsList = computed(providerList, (list) => {
+  return list.map(provider => ({
+    id: provider.id,
+    name: provider.name,
+    settings: provider.platformSettings,
+  }))
 })

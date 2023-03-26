@@ -3,10 +3,10 @@ import {
   showConversationSidebar,
   showSettingsSidebar,
 } from '@/stores/ui'
-import ConversationSidebar from '@/components/v2/ConversationSidebar'
-import SettingsSidebar from '@/components/v2/SettingsSidebar'
-import ConversationEditModal from '@/components/v2/ConversationEditModal'
-import Modal from './Modal'
+import ConversationSidebar from './conversations/ConversationSidebar'
+import SettingsSidebar from './settings/SettingsSidebar'
+import ConversationEditModal from './conversations/ConversationEditModal'
+import Modal from './ui/Modal'
 
 export default () => {
   return (

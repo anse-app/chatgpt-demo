@@ -2,7 +2,7 @@ import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { inputPrompt } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
-import { handlePrompt } from './instance/ConversationInstance'
+import { handlePrompt } from '@/logics/conversation'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
