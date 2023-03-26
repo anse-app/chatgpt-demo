@@ -120,6 +120,10 @@ Q: Accelerate domestic access without the need for proxy deployment tutorial?
 
 A: 你可以参考此教程: https://github.com/ddiu8081/chatgpt-demo/discussions/270
 
+Q: `PWA` 不工作？
+
+A: 当前的 PWA 不支持 Netlify 部署，您可以选择 vercel 或 node 部署。
+
 ## 参与贡献
 
 这个项目的存在要感谢所有做出贡献的人。
