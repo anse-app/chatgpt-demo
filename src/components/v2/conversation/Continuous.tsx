@@ -1,6 +1,6 @@
 import { For } from 'solid-js'
 import type { Accessor } from 'solid-js'
-import type { ConversationInstance } from '@/stores/conversation'
+import type { ConversationInstance } from '@/types/conversation'
 
 interface Props {
   conversation: Accessor<ConversationInstance>

@@ -1,8 +1,7 @@
 import { getProviderById } from '@/stores/provider'
 import { addMessageOnConversation, clearMessagesOnConversation, updateConversationById } from '@/stores/conversation'
-import type { ConversationInstance } from '@/stores/conversation'
 import type { PromptResponse, Provider } from '@/types/provider'
-import type { ConversationMessage, ConversationType } from '@/types/conversation'
+import type { ConversationInstance, ConversationMessage, ConversationType } from '@/types/conversation'
 
 // interface ChatMessageHandler {
 //   addPrompt: (prompt: string) => void

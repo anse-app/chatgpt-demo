@@ -1,15 +1,6 @@
 import { action, atom, computed, map } from 'nanostores'
 import { providerMetaList } from './provider'
-import type { ConversationMessage, ConversationType } from '@/types/conversation'
-
-export interface ConversationInstance {
-  id: string
-  providerId: string
-  conversationType: ConversationType
-  name: string
-  icon: string
-  messages: ConversationMessage[]
-}
+import type { ConversationInstance, ConversationMessage } from '@/types/conversation'
 
 export const conversationMap = map<Record<string, ConversationInstance>>({})
 export const currentConversationId = atom('')
