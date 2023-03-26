@@ -30,8 +30,6 @@ export default defineConfig({
   adapter: envAdapter(),
   vite: {
     plugins: [
-      process.env.OUTPUT === 'vercel' && vercelDisableBlocks(),
-      process.env.OUTPUT === 'netlify' && vercelDisableBlocks(),
       process.env.OUTPUT !== 'netlify' && VitePWA({
         registerType: 'autoUpdate',
         manifest: {
