@@ -25,12 +25,14 @@ const { title } = Astro.props;
           )
         : null
     }
+    <!-- netlify-disable-blocks -->
     {
       import.meta.env.PROD && (
          <script is:inline src="/registerSW.js"></script>
          <link rel="manifest" href="/manifest.webmanifest" />
       )
     }
+    <!-- netlify-disable-end -->
   </head>
   <body>
     <slot />

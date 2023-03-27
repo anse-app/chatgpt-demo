@@ -6,7 +6,7 @@ import node from '@astrojs/node'
 import { VitePWA } from 'vite-plugin-pwa'
 import vercel from '@astrojs/vercel/edge'
 import netlify from '@astrojs/netlify/edge-functions'
-import vercelDisableBlocks from './plugins/vercelDisableBlocks'
+import disableBlocks from './plugins/disableBlocks'
 
 const envAdapter = () => {
   if (process.env.OUTPUT === 'vercel') {
@@ -30,8 +30,8 @@ export default defineConfig({
   adapter: envAdapter(),
   vite: {
     plugins: [
-      process.env.OUTPUT === 'vercel' && vercelDisableBlocks(),
-      process.env.OUTPUT === 'netlify' && vercelDisableBlocks(),
+      process.env.OUTPUT === 'vercel' && disableBlocks(),
+      process.env.OUTPUT === 'netlify' && disableBlocks('netlify'),
       process.env.OUTPUT !== 'netlify' && VitePWA({
         registerType: 'autoUpdate',
         manifest: {
