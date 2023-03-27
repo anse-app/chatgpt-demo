@@ -43,7 +43,7 @@ export default (props: Props) => {
         'op-70 bg-darker': props.role === 'user',
       }}
     >
-      <div class="max-w-base flex gap-4">
+      <div class="max-w-base flex gap-4 overflow-hidden">
         <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[props.role]}`} />
         <div class="prose prose-neutral dark:prose-invert max-w-3xl" innerHTML={htmlString()} />
       </div>
