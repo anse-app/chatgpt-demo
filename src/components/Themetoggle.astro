@@ -56,7 +56,7 @@
 const themeToggle = document.getElementById('themeToggle')
 const themeCircle1 = document.querySelector('.theme_toggle_circle1')
 const themeCircle2 = document.querySelector('.theme_toggle_circle2')
-const darkMode = localStorage.getItem('theme') === 'dark'
+const darkMode = localStorage.getItem('theme') === 'dark' || document.documentElement.classList.contains('dark')
 
 if (darkMode) {
   themeCircle1.setAttribute('r', '9')
