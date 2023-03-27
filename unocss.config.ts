@@ -17,9 +17,19 @@ export default defineConfig({
     presetIcons(),
     presetTypography({
       cssExtend: {
-        'ul,ol': {
-          'padding-left': '2.25em',
-          'position': 'relative',
+        'h1': {
+          'font-size': '1.6em',
+        },
+        'h2': {
+          'font-size': '1.4em',
+          'margin': '1.4em 0 0.5em',
+        },
+        'h3': {
+          'font-size': '1.25em',
+          'margin': '1.2em 0 0.5em',
+        },
+        'h5, h6': {
+          margin: '1em 0 0.5em',
         },
       },
     }),

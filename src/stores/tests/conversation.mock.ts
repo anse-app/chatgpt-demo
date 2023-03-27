@@ -28,6 +28,10 @@ const testMarkdown: ConversationInstance = {
     { role: 'assistant', content: 'I love supporting the **[Site](http://example.com)**.\nThis is the *[Site](http://example.com)*.\nSee the section on [`code`](#code).' },
     { role: 'user', content: 'Tables' },
     { role: 'assistant', content: 'First Header | Second Header\n------------ | -------------\nContent from cell 1 | Content from cell 2\nContent in the first column | Content in the second column' },
+    { role: 'assistant', content: '| Syntax      | Description |\n| ----------- | ----------- |\n| Header      | Title       |\n| Paragraph   | Text        |' },
+    { role: 'assistant', content: '| Syntax      | Description | Test Text     |\n| :---        |    :----:   |          ---: |\n| Header      | Title       | Here\'s this   |\n| Paragraph   | Text        | And more      |' },
+    { role: 'user', content: 'GFM Features' },
+    { role: 'assistant', content: '## Autolink literals\n\nwww.example.com, https://example.com, and contact@example.com.\n\n## Footnote\n\nA note[^1]\n\n[^1]: Big note.\n\n## Strikethrough\n\n~one~ or ~~two~~ tildes.\n\n## Table\n\n| a | b  |  c |  d  |\n| - | :- | -: | :-: |\n\n## Tag filter\n\n<plaintext>\n\n## Tasklist\n\n* [ ] to do\n* [x] done' },
   ],
 }
 

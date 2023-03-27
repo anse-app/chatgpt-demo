@@ -1,6 +1,10 @@
 import { For } from 'solid-js'
+import { micromark } from 'micromark'
+import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
 import type { ConversationInstance } from '@/types/conversation'
+
+console.log(micromark('## Hello, *world*!'))
 
 interface Props {
   conversation: Accessor<ConversationInstance>
@@ -12,10 +16,11 @@ export default ({ conversation }: Props) => {
     <div class="flex flex-col h-full overflow-y-scroll">
       <For each={messages()}>
         {message => (
-          <div class="border-b border-lighter p-6 break-all">
-            <div class="max-w-base">
-              {message.content}
-            </div>
+          <div class="border-b border-lighter">
+            <MessageItem
+              role={message.role}
+              message={message.content}
+            />
           </div>
         )}
       </For>
