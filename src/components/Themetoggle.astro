@@ -53,20 +53,6 @@
   :global(html.dark) #themeToggle .theme_toggle_g {
     opacity: 0;
   }
-  .animation_bounce {
-    animation: bounce .3s cubic-bezier(.3,-0.53,.75,1.42);
-  }
-  @keyframes bounce {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(0, -20px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
 </style>
 
 <script>
@@ -85,10 +71,6 @@ const handleToggleClick = () => {
   element.classList.toggle('dark')
   const isDark = element.classList.contains('dark')
   localStorage.setItem('theme', isDark ? 'dark' : 'light')
-  themeToggle.classList.add('animation_bounce')
-  setTimeout(() => {
-    themeToggle.classList.remove('animation_bounce')
-  }, 500)
 }
 themeToggle.addEventListener('click', handleToggleClick)
 </script>
