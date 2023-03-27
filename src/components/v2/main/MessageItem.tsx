@@ -1,5 +1,4 @@
-import { micromark } from 'micromark'
-import { gfm, gfmHtml } from 'micromark-extension-gfm'
+import MarkdownIt from 'markdown-it'
 import type { ConversationMessage } from '@/types/conversation'
 import type { Accessor } from 'solid-js'
 
@@ -9,11 +8,17 @@ interface Props {
 }
 
 const parseMarkdown = (raw: string) => {
-  const result = micromark(raw, {
-    extensions: [gfm()],
-    htmlExtensions: [gfmHtml()],
+  // TODO: use micromark or remark + shiki
+  // const result = micromark(raw, {
+  //   extensions: [gfm()],
+  //   htmlExtensions: [gfmHtml()],
+  // })
+  // return result
+  const md = MarkdownIt({
+    linkify: true,
+    breaks: true,
   })
-  return result
+  return md.render(raw)
 }
 
 export default (props: Props) => {

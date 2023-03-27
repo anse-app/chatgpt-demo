@@ -1,10 +1,7 @@
 import { For } from 'solid-js'
-import { micromark } from 'micromark'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
 import type { ConversationInstance } from '@/types/conversation'
-
-console.log(micromark('## Hello, *world*!'))
 
 interface Props {
   conversation: Accessor<ConversationInstance>
