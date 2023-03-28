@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config'
 import unocss from 'unocss/astro'
 import solidJs from '@astrojs/solid-js'
-import alpinejs from '@astrojs/alpinejs'
 import node from '@astrojs/node'
 import { VitePWA } from 'vite-plugin-pwa'
 import vercel from '@astrojs/vercel/edge'
@@ -24,7 +23,6 @@ export default defineConfig({
   integrations: [
     unocss(),
     solidJs(),
-    alpinejs(),
   ],
   output: 'server',
   adapter: envAdapter(),
