@@ -9,7 +9,7 @@ export default () => {
 
   return (
     <div class="h-screen flex flex-col">
-      <div class="h-12 border-b border-base flex px-4 items-center">
+      <div class="h-12 fi border-b border-base px-4 text-xs uppercase pl-6">
         Conversations
       </div>
       <div class="flex-1 overflow-auto">

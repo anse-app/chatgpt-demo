@@ -21,24 +21,25 @@ export default ({ config }: Props) => {
   if (!config.settings) return null
   return (
     <div
-      class="px-4 py-3 border-b border-base"
+      class="px-4 py-3 border transition-colors"
       classList={{
-        'border border-amber/50': editing(),
+        'border border-amber/40 bg-amber/2': editing(),
+        'border border-b-base border-l-transparent border-r-transparent border-t-transparent': !editing(),
       }}
     >
       <h3 class="mb-2 fi gap-2">
-        <div class="flex-1 truncate">{config.name}</div>
+        <div class="flex-1 text-sm truncate">{config.name}</div>
         {!editing() && (
-          <div onClick={() => setEditing(true)} class="p-1 inline-flex items-center rounded-md hv-base">
+          <div onClick={() => setEditing(true)} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
             <div class="i-carbon-edit" />
           </div>
         )}
         {editing() && (
           <>
-            <div onClick={() => setEditing(false)} class="p-1 inline-flex items-center rounded-md hv-base">
+            <div onClick={() => setEditing(false)} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
               <div class="i-carbon-close" />
             </div>
-            <div onClick={handleClick} class="p-1 inline-flex items-center rounded-md hv-base">
+            <div onClick={handleClick} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
               <div class="i-carbon-checkmark" />
             </div>
           </>

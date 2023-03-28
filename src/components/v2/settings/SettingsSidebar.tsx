@@ -8,7 +8,7 @@ export default () => {
 
   return (
     <div class="h-screen flex flex-col">
-      <header class="h-12 border-b border-base flex px-4 items-center">
+      <header class="h-12 fi border-b border-base px-4 text-xs uppercase">
         Settings
       </header>
       <main class="flex-1 overflow-auto">
