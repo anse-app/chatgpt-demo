@@ -10,6 +10,7 @@ export const inputPrompt = atom('')
 export const platformSettingsList = computed(providerList, (list) => {
   return list.map(provider => ({
     id: provider.id,
+    icon: provider.icon,
     name: provider.name,
     settings: provider.platformSettings,
   }))

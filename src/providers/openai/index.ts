@@ -7,11 +7,17 @@ import type { Provider } from '@/types/provider'
 const providerOpenAI = () => {
   const provider: Provider = {
     id: 'provider-openai',
+    icon: 'i-simple-icons-openai',
     name: 'OpenAI',
     platformSettings: [
       {
         name: 'API Key',
-        // description: 'Your OpenAI API Key',
+        description: 'Your OpenAI API Key',
+        type: 'api-key',
+      },
+      {
+        name: 'Base URL',
+        description: 'Custom base url for OpenAI API.',
         type: 'input',
       },
     ],

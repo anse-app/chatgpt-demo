@@ -27,6 +27,10 @@ interface SettingsUIBase {
   description?: string
 }
 
+export interface SettingsApiKey extends SettingsUIBase {
+  type: 'api-key'
+}
+
 export interface SettingsUIInput extends SettingsUIBase {
   type: 'input'
 }
@@ -36,4 +40,4 @@ export interface SettingsUISelect extends SettingsUIBase {
   options: string[]
 }
 
-export type SettingsUI = SettingsUIInput | SettingsUISelect
+export type SettingsUI = SettingsApiKey | SettingsUIInput | SettingsUISelect

@@ -38,9 +38,10 @@ export default defineConfig({
   shortcuts: [{
     'bg-base': 'bg-light-100 dark:bg-dark-400',
     'bg-darker-100': 'bg-light-400 dark:bg-dark-300',
-    'bg-darker': 'bg-dark/6 dark:bg-white/4',
+    'bg-darker': 'bg-dark/4 dark:bg-white/4',
+    'fg-base': 'text-dark dark:text-light',
     // 'bg-accent': 'bg-emerald/50',
-    'border-base': 'border-light-900 dark:border-dark-100',
+    'border-base': 'border-light-800 dark:border-dark-100',
     'border-lighter': 'border-light-600 dark:border-dark-300',
     'border-darker': 'border-neutral-300 dark:border-neutral-600',
     'placeholder-base': 'placeholder:op-50 dark:placeholder:op-30',
@@ -53,7 +54,6 @@ export default defineConfig({
     'fi': 'flex items-center',
     'fcc': 'fc items-center',
 
-    'fg-base': 'text-dark dark:text-light',
     'fb': 'flex justify-between',
     'fie': 'fi justify-end',
     'col-fcc': 'flex-col fcc',

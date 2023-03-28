@@ -2,6 +2,7 @@ import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { platformSettingsList } from '@/stores/ui'
 import PlatformSettings from './PlatformSettings'
+import GeneralSettings from './GeneralSettings'
 
 export default () => {
   const $platformSettingsList = useStore(platformSettingsList)
@@ -12,6 +13,7 @@ export default () => {
         Settings
       </header>
       <main class="flex-1 overflow-auto">
+        {/* <GeneralSettings /> */}
         <For each={$platformSettingsList()}>
           {item => <PlatformSettings config={item} />}
         </For>

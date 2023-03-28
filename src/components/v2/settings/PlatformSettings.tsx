@@ -5,6 +5,7 @@ import type { SettingsUI } from '@/types/provider'
 interface Props {
   config: {
     id: string
+    icon?: string
     name: string
     settings?: SettingsUI[]
   }
@@ -27,8 +28,11 @@ export default ({ config }: Props) => {
         'border border-b-base border-l-transparent border-r-transparent border-t-transparent': !editing(),
       }}
     >
-      <h3 class="mb-2 fi gap-2">
-        <div class="flex-1 text-sm truncate">{config.name}</div>
+      <h3 class="fi gap-2">
+        <div class="flex-1 fi gap-1.5 overflow-hidden">
+          {config.icon && <div class={config.icon} />}
+          <div class="flex-1 text-sm truncate">{config.name}</div>
+        </div>
         {!editing() && (
           <div onClick={() => setEditing(true)} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
             <div class="i-carbon-edit" />
@@ -45,11 +49,13 @@ export default ({ config }: Props) => {
           </>
         )}
       </h3>
-      <For each={config.settings}>
-        {item => (
-          <SettingsUIComponent settings={item} editing={editing} />
-        )}
-      </For>
+      <div class="mt-2 flex flex-col">
+        <For each={config.settings}>
+          {item => (
+            <SettingsUIComponent settings={item} editing={editing} />
+          )}
+        </For>
+      </div>
     </div>
   )
 }
