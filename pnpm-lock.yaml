@@ -8,15 +8,14 @@ specifiers:
   '@astrojs/vercel': ^3.1.3
   '@evan-yang/eslint-config': ^1.0.1
   '@iconify-json/carbon': ^1.1.16
+  '@iconify-json/simple-icons': ^1.1.47
   '@nanostores/solid': ^0.3.2
-  '@types/alpinejs': ^3.0.0
   '@types/markdown-it': ^12.2.3
   '@typescript-eslint/parser': ^5.54.1
   '@unocss/preset-attributify': ^0.50.1
   '@unocss/preset-icons': ^0.50.4
   '@unocss/preset-typography': ^0.50.3
   '@unocss/reset': ^0.50.1
-  alpinejs: ^3.0.0
   astro: ^2.0.15
   eslint: ^8.36.0
   eslint-plugin-astro: ^0.24.0
@@ -43,9 +42,7 @@ dependencies:
   '@astrojs/solid-js': 2.1.0_erm5hwiw5jwypj5jthk632jqdq
   '@astrojs/vercel': 3.2.1_astro@2.1.3+react@18.2.0
   '@nanostores/solid': 0.3.2_mjx2sbwkkjho6i5tlo3iadoqvq
-  '@types/alpinejs': 3.7.1
   '@unocss/reset': 0.50.6
-  alpinejs: 3.12.0
   astro: 2.1.3
   eslint: 8.36.0
   eventsource-parser: 0.1.0
@@ -64,6 +61,7 @@ dependencies:
 devDependencies:
   '@evan-yang/eslint-config': 1.0.4_j4766f7ecgqbon3u7zlxn5zszu
   '@iconify-json/carbon': 1.1.16
+  '@iconify-json/simple-icons': 1.1.47
   '@types/markdown-it': 12.2.3
   '@typescript-eslint/parser': 5.55.0_j4766f7ecgqbon3u7zlxn5zszu
   '@unocss/preset-attributify': 0.50.6
@@ -1707,6 +1705,12 @@ packages:
 
   /@iconify-json/carbon/1.1.16:
     resolution: {integrity: sha512-AD8bcnRSGA0WfcGEass2FbA0sagrUzrpFx5WchuDy3uf7yKBWumdypdQK121DH321fQDl5+zZQ26T6gC9knwUQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/simple-icons/1.1.47:
+    resolution: {integrity: sha512-nmyvFWvZtftWBFaFgiz3mwVf2lXCnJL2tbXNz3HKKEUiX5aHwuXLmu4jdJ5L3kLmQB2YmAprYBJc5fQnYy4Z/g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

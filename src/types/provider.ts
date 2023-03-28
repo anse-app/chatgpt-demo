@@ -2,6 +2,8 @@ import type { ConversationMessage, ConversationType } from './conversation'
 
 export interface Provider {
   id: string
+  /** Icon of provider. Only support `@unocss/preset-icons` class name for now */
+  icon?: string
   /** Name of provider */
   name: string
   /** Global settings of the provider */
