@@ -173,8 +173,10 @@ export default () => {
     if (e.isComposing || e.shiftKey)
       return
 
-    if (e.key === 'Enter')
+    if (e.keyCode === 13) {
+      e.preventDefault()
       handleButtonClick()
+    }
   }
 
   return (
