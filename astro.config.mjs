@@ -63,7 +63,7 @@ export default defineConfig({
           periodicSyncForUpdates: 20,
         },
         devOptions: {
-          enabled: true,
+          enabled: false,
         },
       }),
     ],
