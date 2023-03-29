@@ -2,6 +2,7 @@ FROM node:alpine
 WORKDIR /usr/src
 RUN npm install -g pnpm
 COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --update-lockfile
 RUN pnpm install
 COPY . .
 RUN pnpm run build
