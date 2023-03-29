@@ -21,6 +21,7 @@ specifiers:
   eslint-plugin-astro: ^0.24.0
   eventsource-parser: ^0.1.0
   highlight.js: ^11.7.0
+  idb: ^7.1.1
   js-sha256: ^0.9.0
   katex: ^0.6.0
   markdown-it: ^13.0.1
@@ -47,6 +48,7 @@ dependencies:
   eslint: 8.36.0
   eventsource-parser: 0.1.0
   highlight.js: 11.7.0
+  idb: 7.1.1
   js-sha256: 0.9.0
   katex: 0.6.0
   markdown-it: 13.0.1
@@ -4734,7 +4736,6 @@ packages:
 
   /idb/7.1.1:
     resolution: {integrity: sha512-gchesWBzyvGHRO9W8tzUWFDycow5gwjvFKfyV9FF32Y7F50yZMp7mP+T2mJIWFx49zicqyC4uefHM17o6xKIVQ==}
-    dev: true
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
