@@ -27,7 +27,7 @@ async function checkCurrentAuth() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      pass: password,
+      localPass: password,
     }),
   })
   const responseJson = await response.json()
