@@ -27,9 +27,6 @@ export default defineConfig({
     solidJs(),
   ],
   output: 'server',
-  ssr: {
-    noExternal: ['crypto'],
-  },
   adapter: envAdapter(),
   vite: {
     plugins: [

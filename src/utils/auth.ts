@@ -1,4 +1,4 @@
-import * as crypto from 'crypto'
+import * as CryptoJS from 'crypto-js'
 import { sha256 } from 'js-sha256'
 
 interface AuthPayload {
@@ -39,10 +39,12 @@ export function encryptPassword(password: string): string {
 
   // 将secret_key作为加密的salt
   const salt = import.meta.env.SECRET_KEY
-  const hash = crypto.createHmac('sha256', salt)
-    .update(password)
-    .digest('hex')
-  return hash
+  // const hash = bcrypt.createHmac('sha256', salt)
+  //   .update(password)
+  //   .digest('hex')
+  // const hash = bcrypt.hash(password, salt)
+  const hash = CryptoJS.SHA256(password + salt)
+  return hash.toString(CryptoJS.enc.Hex)
 }
 
 // export function comparePasswords(password: string, hash: string): boolean {

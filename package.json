@@ -20,6 +20,7 @@
     "@astrojs/vercel": "^3.1.3",
     "@unocss/reset": "^0.50.1",
     "astro": "^2.0.15",
+    "crypto-js": "^4.1.1",
     "eslint": "^8.36.0",
     "eventsource-parser": "^0.1.0",
     "highlight.js": "^11.7.0",
@@ -33,6 +34,7 @@
     "undici": "^5.20.0"
   },
   "devDependencies": {
+    "@evan-yang/eslint-config": "^1.0.1",
     "@iconify-json/carbon": "^1.1.16",
     "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/parser": "^5.54.1",
@@ -42,7 +44,6 @@
     "eslint-plugin-astro": "^0.24.0",
     "punycode": "^2.3.0",
     "unocss": "^0.50.1",
-    "@evan-yang/eslint-config": "^1.0.1",
     "vite-plugin-pwa": "^0.14.1"
   }
 }
