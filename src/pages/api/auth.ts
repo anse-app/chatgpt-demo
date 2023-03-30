@@ -13,8 +13,8 @@ export const post: APIRoute = async(context) => {
   const localPass = body.localPass
 
 
-  console.log(inputPass)
-  console.log(localPass)
+  // console.log(inputPass)
+  // console.log(localPass)
 
   const realPasswordHash = await encryptPassword(realPassword.toString())
 
@@ -25,7 +25,7 @@ export const post: APIRoute = async(context) => {
   if (localPass)
     passHash = localPass
 
-    console.log(passHash)
+    // console.log(passHash)
   return new Response(JSON.stringify({
     code: (!realPassword || passHash === realPasswordHash) ? 0 : -1,
     password: passHash,
