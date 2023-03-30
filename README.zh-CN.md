@@ -77,7 +77,7 @@
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
 
 ### 部署在 Docker
-环境变量参考下方文档, [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
+部署之前请确认 `.env` 文件正常配置，环境变量参考下方文档, [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
 
 **一键运行**
 ```bash
