@@ -2,11 +2,11 @@ version: '3'
 
 services:
   app:
-    image: ddiu8081/chatgpt-demo
+    image: ddiu8081/chatgpt-demo:latest
     ports:
       - 3000:3000
     environment:
-      OPENAI_API_KEY:
+      OPENAI_API_KEY: 
       HTTPS_PROXY: 
       OPENAI_API_BASE_URL: 
       HEAD_SCRIPTS: 
