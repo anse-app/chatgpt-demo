@@ -7,5 +7,11 @@ services:
     image: chatgpt-demo
     ports:
       - 3000:3000
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      OPENAI_API_KEY: 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
+      HTTPS_PROXY: xxx
+      OPENAI_API_BASE_URL: xxx
+      HEAD_SCRIPTS: xxx
+      SECRET_KEY: xxx
+      SITE_PASSWORD: xxx
+      OPENAI_API_MODEL: xxx
