@@ -1,10 +1,12 @@
 version: '3'
 
 services:
-  app:
+  chatgpt-demo:
     image: ddiu8081/chatgpt-demo:latest
+    container_name: chatgpt-demo
+    restart: always
     ports:
-      - 3000:3000
+        - "3000:3000"
     environment:
       OPENAI_API_KEY: 
       HTTPS_PROXY: 

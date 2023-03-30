@@ -87,7 +87,7 @@ Environment variables refer to the documentation below. [Docker Hub address](htt
 
 **Direct run**
 ```bash
-docker run -e OPENAI_API_KEY=sk-xxx -p 3000:3000 ddiu8081/chatgpt-demo
+docker run --name=chatgpt-demo --volume=/path/.env:/usr/src/.env:rw -p 3000:3000 --restart=always -d ddiu8081/chatgpt-demo:latest
 ```
 
 **Docker compose**
@@ -95,12 +95,14 @@ docker run -e OPENAI_API_KEY=sk-xxx -p 3000:3000 ddiu8081/chatgpt-demo
 version: '3'
 
 services:
-  app:
-    image: ddiu8081/chatgpt-demo
+  chatgpt-demo:
+    image: ddiu8081/chatgpt-demo:latest
+    container_name: chatgpt-demo
+    restart: always
     ports:
-      - 3000:3000
+        - "3000:3000"
     environment:
-      OPENAI_API_KEY:
+      OPENAI_API_KEY: 
       HTTPS_PROXY: 
       OPENAI_API_BASE_URL: 
       HEAD_SCRIPTS: 
