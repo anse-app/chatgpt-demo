@@ -20,3 +20,10 @@ import '@/message.css'
   </div>
   <ModalsLayer client:load />
 </Layout>
+
+<script>
+import { createStores, rebuildStores } from '@/stores/storage/db'
+
+createStores()
+rebuildStores()
+</script>
