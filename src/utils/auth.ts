@@ -1,6 +1,6 @@
 // import * as crypto from 'crypto'
 import { sha256 } from 'js-sha256'
-import * as CryptoJS from 'crypto-js'
+// import * as CryptoJS from 'crypto-js'
 
 interface AuthPayload {
   t: number
@@ -34,7 +34,7 @@ export const verifySignature = async(payload: AuthPayload, sign: string) => {
   return payloadSign === sign
 }
 
-export function encryptPassword(password: string): string {
+export async function encryptPassword(password: string) {
   if (!password)
     throw new Error('Password cannot be empty.')
 
@@ -44,8 +44,9 @@ export function encryptPassword(password: string): string {
   //   .update(password)
   //   .digest('hex')
   // return hash
-  const hash = CryptoJS.SHA256(password + salt)
-  return hash.toString(CryptoJS.enc.Hex)
+  // const hash = CryptoJS.SHA256(password + salt)
+  // return hash.toString(CryptoJS.enc.Hex)
+  return await digestMessage(password)
 }
 
 // export function comparePasswords(password: string, hash: string): boolean {

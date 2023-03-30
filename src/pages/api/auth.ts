@@ -12,15 +12,20 @@ export const post: APIRoute = async(context) => {
   let inputPass = body.inputPass
   const localPass = body.localPass
 
-  const realPasswordHash = encryptPassword(realPassword.toString())
+
+  console.log(inputPass)
+  console.log(localPass)
+
+  const realPasswordHash = await encryptPassword(realPassword.toString())
 
   if (inputPass)
-    inputPass = encryptPassword(inputPass)
+    inputPass = await encryptPassword(inputPass)
   passHash = inputPass
 
   if (localPass)
     passHash = localPass
 
+    console.log(passHash)
   return new Response(JSON.stringify({
     code: (!realPassword || passHash === realPasswordHash) ? 0 : -1,
     password: passHash,
