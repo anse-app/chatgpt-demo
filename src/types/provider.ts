@@ -1,4 +1,5 @@
-import type { ConversationMessage, ConversationType } from './conversation'
+import type { ConversationType } from './conversation'
+import type { Message } from '@/types/message'
 
 export interface Provider {
   id: string
@@ -14,7 +15,7 @@ export interface Provider {
   /** Handle a prompt in single conversation type */
   handleSinglePrompt?: (prompt: string) => Promise<PromptResponse>
   /** Handle a prompt in continuous conversation type */
-  handleContinuousPrompt?: (messages: ConversationMessage[]) => Promise<PromptResponse>
+  handleContinuousPrompt?: (messages: Message[]) => Promise<PromptResponse>
   /** Handle a prompt in image conversation type */
   handleImagePrompt?: (prompt: string) => Promise<PromptResponse>
 }

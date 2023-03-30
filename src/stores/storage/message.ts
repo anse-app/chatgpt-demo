@@ -1,37 +1,37 @@
 import { del, entries, get, set, update } from 'idb-keyval'
-import { conversations } from './db'
-import type { Conversation } from '@/types/conversation'
+import { messages } from './db'
+import type { Message } from '@/types/message'
 
-const setItem = async(key: string, item: Conversation) => {
-  const store = conversations.get()
+const setItem = async(key: string, item: Message[]) => {
+  const store = messages.get()
   if (store)
     await set(key, item, store)
 }
 
 const getItem = async(key: string) => {
-  const store = conversations.get()
+  const store = messages.get()
   if (store)
-    return get<Conversation>(key, store)
+    return get<Message[]>(key, store)
   return null
 }
 
-const updateItem = async(key: string, item: Conversation) => {
-  const store = conversations.get()
+const updateItem = async(key: string, item: Message[]) => {
+  const store = messages.get()
   if (store)
     await update(key, () => item, store)
 }
 
 const deleteItem = async(key: string) => {
-  const store = conversations.get()
+  const store = messages.get()
   if (store)
     await del(key, store)
 }
 
 const exportData = async() => {
-  const store = conversations.get()
+  const store = messages.get()
   if (store) {
     const entriesData = await entries(store)
-    return Object.fromEntries(entriesData) as Record<string, Conversation>
+    return Object.fromEntries(entriesData) as Record<string, Message[]>
   }
   return null
 }

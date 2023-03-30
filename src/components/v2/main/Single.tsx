@@ -1,12 +1,11 @@
 import type { Accessor } from 'solid-js'
-import type { ConversationInstance } from '@/types/conversation'
+import type { Message } from '@/types/message'
 
 interface Props {
-  conversation: Accessor<ConversationInstance>
+  messages: Accessor<Message[]>
 }
 
-export default ({ conversation }: Props) => {
-  const messages = () => conversation().messages
+export default ({ messages }: Props) => {
   const messageInput = () => messages().length > 0 ? messages()[0].content : ''
   const messageOutput = () => messages().length > 1 ? messages()[1].content : ''
   return (

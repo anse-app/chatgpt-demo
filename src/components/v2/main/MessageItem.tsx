@@ -1,9 +1,9 @@
 import MarkdownIt from 'markdown-it'
-import type { ConversationMessage } from '@/types/conversation'
+import type { Message } from '@/types/message'
 import type { Accessor } from 'solid-js'
 
 interface Props {
-  role: ConversationMessage['role']
+  role: Message['role']
   message: Accessor<string> | string
 }
 

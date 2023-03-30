@@ -1,10 +1,10 @@
 import { useStore } from '@nanostores/solid'
 import { currentConversationId, currentEditingConversationId, deleteConversationById } from '@/stores/conversation'
 import { showConversationEditModal } from '@/stores/ui'
-import type { ConversationInstance } from '@/types/conversation'
+import type { Conversation } from '@/types/conversation'
 
 interface Props {
-  instance: Omit<ConversationInstance, 'messages'> & {
+  instance: Omit<Conversation, 'messages'> & {
     current?: boolean
   }
 }

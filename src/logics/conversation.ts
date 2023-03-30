@@ -1,43 +1,44 @@
 import { getProviderById } from '@/stores/provider'
-import { addMessageOnConversation, clearMessagesOnConversation, updateConversationById } from '@/stores/conversation'
+import { clearMessagesByConversationId, getMessagesByConversationId, pushMessagesByConversationId } from '@/stores/messages'
 import type { PromptResponse, Provider } from '@/types/provider'
-import type { ConversationInstance, ConversationMessage, ConversationType } from '@/types/conversation'
+import type { Conversation, ConversationType } from '@/types/conversation'
+import type { Message } from '@/types/message'
 
-export const handlePrompt = async(conversation: ConversationInstance, prompt: string) => {
+export const handlePrompt = async(conversation: Conversation, prompt: string) => {
   const provider = getProviderById(conversation?.providerId)
   if (!provider) return
 
   if (conversation.conversationType !== 'continuous')
-    clearMessagesOnConversation(conversation.id)
-  if (!conversation.messages.length && !conversation.name) {
-    updateConversationById(conversation.id, {
-      name: prompt,
-    })
-  }
+    clearMessagesByConversationId(conversation.id)
+  // if (!conversation.messages.length && !conversation.name) {
+  //   updateConversationById(conversation.id, {
+  //     name: prompt,
+  //   })
+  // }
 
-  addMessageOnConversation(conversation.id, {
+  pushMessagesByConversationId(conversation.id, [{
     role: 'user',
     content: prompt,
-  })
+  }])
 
   const providerResponse: PromptResponse = await callProviderHandler({
     conversationType: conversation.conversationType,
     provider,
     prompt,
-    historyMessages: conversation.messages,
+    historyMessages: getMessagesByConversationId(conversation.id),
   })
 
-  addMessageOnConversation(conversation.id, {
+  pushMessagesByConversationId(conversation.id, [{
     role: 'assistant',
     content: providerResponse || '',
-  })
+  }])
 }
 
 interface CallProviderPayload {
   conversationType: ConversationType
   provider: Provider
   prompt: string
-  historyMessages: ConversationMessage[]
+  historyMessages: Message[]
 }
 
 const callProviderHandler = async(payload: CallProviderPayload) => {
