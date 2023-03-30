@@ -13,11 +13,19 @@ export interface Provider {
   conversationSettings?: SettingsUI[]
   supportConversationType: ConversationType[]
   /** Handle a prompt in single conversation type */
-  handleSinglePrompt?: (prompt: string) => Promise<PromptResponse>
+  handleSinglePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
   /** Handle a prompt in continuous conversation type */
-  handleContinuousPrompt?: (messages: Message[]) => Promise<PromptResponse>
+  handleContinuousPrompt?: (messages: Message[], payload: HandlerPayload) => Promise<PromptResponse>
   /** Handle a prompt in image conversation type */
-  handleImagePrompt?: (prompt: string) => Promise<PromptResponse>
+  handleImagePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
+}
+
+export interface HandlerPayload {
+  conversationId: string
+  platformSettings: Record<string, string | number | boolean>
+  conversationSettings: Record<string, string | number | boolean>
+  systemRole: string
+  mockMessages: Message[]
 }
 
 // TODO: Support stream response
