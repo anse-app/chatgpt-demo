@@ -80,15 +80,9 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 
 ### Deploy with Docker
-Before deploying the app, please make sure `.env` is configured normally.
 
 ```bash
-# build
-docker-compose build .
-# run
-docker-compose up -d
-# stop
-docker-compose down
+docker run -e OPENAI_API_KEY=sk-xxx -p 3000:3000 ddiu8081/chatgpt-demo
 ```
 
 ### Deploy on more servers
