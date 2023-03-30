@@ -2,10 +2,14 @@ version: '3'
 
 services:
   app:
-    build: .
-    container_name: chatgpt-demo
-    image: chatgpt-demo
+    image: ddiu8081/chatgpt-demo
     ports:
       - 3000:3000
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      OPENAI_API_KEY:
+      HTTPS_PROXY: 
+      OPENAI_API_BASE_URL: 
+      HEAD_SCRIPTS: 
+      SECRET_KEY: 
+      SITE_PASSWORD: 
+      OPENAI_API_MODEL: 

@@ -1,9 +1,11 @@
 import { encryptPassword } from '@/utils/auth'
 import type { APIRoute } from 'astro'
 
+
 // env 配置的密码
 const realPassword = import.meta.env.SITE_PASSWORD
 let passHash
+
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
