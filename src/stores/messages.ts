@@ -22,7 +22,12 @@ export const pushMessageByConversationId = action(
     const oldMessages = map.get()[id] || []
     const newMessages = [...oldMessages, payload]
     map.setKey(id, newMessages)
-    db.updateItem(id, newMessages)
+    if (typeof payload.content === 'string') {
+      db.updateItem(id, newMessages)
+    } else {
+      // TODO: handle ReadableStream
+      console.log(typeof payload.content)
+    }
   },
 )
 

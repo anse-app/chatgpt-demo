@@ -1,4 +1,5 @@
 import { fetchChatCompletion } from './api'
+import { parseStream } from './parser'
 import type { Provider } from '@/types/provider'
 
 // const res = {
@@ -20,19 +21,24 @@ export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, 
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.6,
-      // stream: true,
+      stream: true,
     },
   })
+  console.log(response)
   if (!response.ok) {
     const responseJson = await response.json()
     const errMessage = responseJson.error?.message || 'Unknown error'
     throw new Error(errMessage)
   }
+  const isStream = response.headers.get('content-type')?.includes('text/event-stream')
+  if (isStream) {
+    return parseStream(response)
+  } else {
+    const resJson = await response.json()
+    const resText = resJson.choices[0].message.content
 
-  const resJson = await response.json()
-  const resText = resJson.choices[0].message.content
-
-  return resText
+    return resText
+  }
 }
 
 export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload) => {

@@ -30,8 +30,7 @@ export interface HandlerPayload {
   mockMessages: Message[]
 }
 
-// TODO: Support stream response
-export type PromptResponse = string | null | undefined
+export type PromptResponse = string | ReadableStream | null | undefined
 
 interface SettingsUIBase {
   key: string
