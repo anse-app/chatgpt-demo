@@ -41,6 +41,7 @@
     "@evan-yang/eslint-config": "^1.0.1",
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/simple-icons": "^1.1.47",
+    "@iconify-json/line-md": "^1.1.14",
     "@types/markdown-it": "^12.2.3",
     "@typescript-eslint/parser": "^5.54.1",
     "@unocss/preset-attributify": "^0.50.1",

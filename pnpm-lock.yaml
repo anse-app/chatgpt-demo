@@ -8,6 +8,7 @@ specifiers:
   '@astrojs/vercel': ^3.1.3
   '@evan-yang/eslint-config': ^1.0.1
   '@iconify-json/carbon': ^1.1.16
+  '@iconify-json/line-md': ^1.1.14
   '@iconify-json/simple-icons': ^1.1.47
   '@nanostores/solid': ^0.3.2
   '@types/markdown-it': ^12.2.3
@@ -63,6 +64,7 @@ dependencies:
 devDependencies:
   '@evan-yang/eslint-config': 1.0.4_j4766f7ecgqbon3u7zlxn5zszu
   '@iconify-json/carbon': 1.1.16
+  '@iconify-json/line-md': 1.1.23
   '@iconify-json/simple-icons': 1.1.47
   '@types/markdown-it': 12.2.3
   '@typescript-eslint/parser': 5.55.0_j4766f7ecgqbon3u7zlxn5zszu
@@ -1707,6 +1709,12 @@ packages:
 
   /@iconify-json/carbon/1.1.16:
     resolution: {integrity: sha512-AD8bcnRSGA0WfcGEass2FbA0sagrUzrpFx5WchuDy3uf7yKBWumdypdQK121DH321fQDl5+zZQ26T6gC9knwUQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/line-md/1.1.23:
+    resolution: {integrity: sha512-gaA4OPpHa4SuHXtCDH2LUqMN/zUL4uVvTPFnHc+Ki3mGOZg1q2yZ0+vrwnWK0iMKf7tlffprZmQ5lIZZc/Irrg==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

@@ -53,7 +53,6 @@ export default defineConfig({
     'fc': 'flex justify-center',
     'fi': 'flex items-center',
     'fcc': 'fc items-center',
-
     'fb': 'flex justify-between',
     'fie': 'fi justify-end',
     'col-fcc': 'flex-col fcc',
@@ -78,5 +77,9 @@ export default defineConfig({
     'gpt-toggle-wrapper': 'inline-flex rounded border border-gray-100 bg-gray-100 p-1 cursor-pointer',
     'gpt-toggle-item': 'inline-block rounded font-semibold px-2 py-1 text-xs text-gray-500 focus:relative',
     'gpt-toggle-active': 'bg-emerald-500 text-white',
+
+    'icon-base': 'md:(w-6 h-6) w-5 h-5',
+    'icon--off': 'group-hover:hidden inline-block',
+    'icon--on': 'hidden group-hover:inline-block',
   }],
 })
