@@ -6,7 +6,6 @@ export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 
 export const rebuildSettingsStore = async() => {
   const data = await db.exportData() || {}
-  console.log('data', data)
   providerSettingsMap.set(data)
 }
 
