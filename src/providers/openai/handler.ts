@@ -1,6 +1,5 @@
+import { fetchChatCompletion } from './api'
 import type { Provider } from '@/types/provider'
-
-// const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
 
 // const res = {
 //   id: 'chatcmpl-6xxS3BQdz1ALgkGvqVQDKedReeNLY',
@@ -14,22 +13,16 @@ import type { Provider } from '@/types/provider'
 // }
 
 export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, payload) => {
-  console.log('payload', payload)
-  const initOptions = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${payload.globalSettings.apiKey}`,
-    },
-    method: 'POST',
-    body: JSON.stringify({
+  const response = await fetchChatCompletion({
+    apiKey: payload.globalSettings.apiKey as string,
+    baseUrl: (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, ''),
+    body: {
       model: 'gpt-3.5-turbo',
       messages: [{ role: 'user', content: prompt }],
       temperature: 0.6,
       // stream: true,
-    }),
-  }
-  const baseUrl = (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, '')
-  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions)
+    },
+  })
   if (!response.ok) {
     const responseJson = await response.json()
     const errMessage = responseJson.error?.message || 'Unknown error'
@@ -43,22 +36,16 @@ export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, 
 }
 
 export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload) => {
-  console.log('payload', payload)
-  const initOptions = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${payload.globalSettings.apiKey}`,
-    },
-    method: 'POST',
-    body: JSON.stringify({
+  const response = await fetchChatCompletion({
+    apiKey: payload.globalSettings.apiKey as string,
+    baseUrl: (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, ''),
+    body: {
       model: 'gpt-3.5-turbo',
       messages,
       temperature: 0.6,
       // stream: true,
-    }),
-  }
-  const baseUrl = (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, '')
-  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions)
+    },
+  })
   if (!response.ok) {
     const responseJson = await response.json()
     const errMessage = responseJson.error?.message || 'Unknown error'
