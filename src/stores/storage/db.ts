@@ -2,6 +2,7 @@ import { atom } from 'nanostores'
 import { createStore } from 'idb-keyval'
 import { rebuildConversationStore } from '../conversation'
 import { rebuildMessagesStore } from '../messages'
+import { rebuildSettingsStore } from '../settings'
 import type { UseStore } from 'idb-keyval'
 
 export const conversations = atom<UseStore | null>(null)
@@ -17,4 +18,5 @@ export const createStores = () => {
 export const rebuildStores = async() => {
   rebuildConversationStore()
   rebuildMessagesStore()
+  rebuildSettingsStore()
 }

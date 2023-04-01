@@ -1,28 +1,34 @@
 import { For, createSignal } from 'solid-js'
-import { getSettingsByProviderId, setSettingsByProviderId } from '@/stores/providerSettings'
 import SettingsUIComponent from './SettingsUIComponent'
-import type { SettingsUI } from '@/types/provider'
+import type { Accessor } from 'solid-js'
+import type { SettingsPayload, SettingsUI } from '@/types/provider'
 
 interface Props {
   config: {
     id: string
     icon?: string
     name: string
-    settings?: SettingsUI[]
+    settingsUI?: SettingsUI[]
   }
+  settingsValue: Accessor<SettingsPayload>
+  setSettings: (v: SettingsPayload) => void
 }
 
-export default ({ config }: Props) => {
+export default ({ config, settingsValue, setSettings }: Props) => {
   const [editing, setEditing] = createSignal(false)
-  const [formData, setFormData] = createSignal<Record<string, string>>(getSettingsByProviderId(config.id))
+  const [editFormData, setEditFormData] = createSignal<SettingsPayload>({})
+  const formData = () => ({
+    ...settingsValue(),
+    ...editFormData(),
+  })
 
   const handleClick = () => {
     console.log(formData())
-    setSettingsByProviderId(config.id, formData())
+    setSettings(formData())
     setEditing(false)
   }
 
-  if (!config.settings) return null
+  if (!config.settingsUI) return null
   return (
     <div
       class="px-4 py-3 border transition-colors"
@@ -53,13 +59,13 @@ export default ({ config }: Props) => {
         )}
       </h3>
       <div class="mt-2 flex flex-col">
-        <For each={config.settings}>
+        <For each={config.settingsUI}>
           {item => (
             <SettingsUIComponent
               settings={item}
               editing={editing}
               value={() => formData()[item.key] || ''}
-              setValue={v => setFormData({ ...formData(), [item.key]: v })}
+              setValue={v => setEditFormData({ ...formData(), [item.key]: v })}
             />
           )}
         </For>

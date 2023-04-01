@@ -20,10 +20,12 @@ export interface Provider {
   handleImagePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
 }
 
+export type SettingsPayload = Record<string, string | number | boolean>
+
 export interface HandlerPayload {
   conversationId: string
-  globalSettings: Record<string, string | number | boolean>
-  conversationSettings: Record<string, string | number | boolean>
+  globalSettings: SettingsPayload
+  conversationSettings: SettingsPayload
   systemRole: string
   mockMessages: Message[]
 }

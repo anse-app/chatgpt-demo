@@ -1,6 +1,6 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessagesByConversationId } from '@/stores/messages'
-import { getSettingsByProviderId } from '@/stores/providerSettings'
+import { getSettingsByProviderId } from '@/stores/settings'
 import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
 import type { Message } from '@/types/message'

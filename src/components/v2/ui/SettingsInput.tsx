@@ -1,3 +1,4 @@
+import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUIInput } from '@/types/provider'
 import type { Accessor, Setter } from 'solid-js'
 
@@ -24,8 +25,11 @@ export default ({ settings, editing, value, setValue }: Props) => {
             onChange={e => setValue(e.currentTarget.value)}
           />
         )}
-        {!editing() && (
+        {!editing() && value() && (
           <div>{value()}</div>
+        )}
+        {!editing() && !value() && (
+          <SettingsNotDefined />
         )}
       </div>
     </div>

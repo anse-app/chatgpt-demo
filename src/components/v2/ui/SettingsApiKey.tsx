@@ -1,3 +1,4 @@
+import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUIInput } from '@/types/provider'
 import type { Accessor, Setter } from 'solid-js'
 
@@ -24,11 +25,14 @@ export default ({ settings, editing, value, setValue }: Props) => {
             onChange={e => setValue(e.currentTarget.value)}
           />
         )}
-        {!editing() && (
+        {!editing() && value() && (
           <div class="fi justify-between gap-2">
-            <ApiKeyMaskText key={value()} />
+            <ApiKeyMaskText key={value} />
             <Usage />
           </div>
+        )}
+        {!editing() && !value() && (
+          <SettingsNotDefined />
         )}
       </div>
     </div>
@@ -44,15 +48,15 @@ const Usage = () => {
 }
 
 const ApiKeyMaskText = (props: {
-  key: string
+  key: Accessor<string>
 }) => {
   if (!props.key)
     return <div>unknown</div>
   return (
     <div class="fi">
-      <div>{props.key.slice(0, 3)}</div>
+      <div>{props.key().slice(0, 3)}</div>
       <div>****</div>
-      <div>{props.key.slice(-4)}</div>
+      <div>{props.key().slice(-4)}</div>
     </div>
   )
 }
