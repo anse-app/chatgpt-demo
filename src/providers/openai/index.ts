@@ -9,10 +9,9 @@ const providerOpenAI = () => {
     id: 'provider-openai',
     icon: 'i-simple-icons-openai', // @unocss-include
     name: 'OpenAI',
-    platformSettings: [
+    globalSettings: [
       {
         name: 'API Key',
-        description: 'Your OpenAI API Key',
         type: 'api-key',
       },
       {

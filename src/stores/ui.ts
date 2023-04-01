@@ -12,6 +12,6 @@ export const platformSettingsList = computed(providerList, (list) => {
     id: provider.id,
     icon: provider.icon,
     name: provider.name,
-    settings: provider.platformSettings,
+    settings: provider.globalSettings,
   }))
 })

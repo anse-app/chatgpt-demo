@@ -13,6 +13,8 @@ interface Props {
 
 export default ({ config }: Props) => {
   const [editing, setEditing] = createSignal(false)
+  const [testValue, setTestValue] = createSignal('1111')
+  const [formData, setFormData] = createSignal<Record<string, string>>({})
 
   const handleClick = () => {
     console.log('click')
@@ -49,10 +51,16 @@ export default ({ config }: Props) => {
           </>
         )}
       </h3>
+      <div text-xs mt-4>{JSON.stringify(formData())}</div>
       <div class="mt-2 flex flex-col">
         <For each={config.settings}>
           {item => (
-            <SettingsUIComponent settings={item} editing={editing} />
+            <SettingsUIComponent
+              settings={item}
+              editing={editing}
+              value={testValue}
+              setValue={setTestValue}
+            />
           )}
         </For>
       </div>

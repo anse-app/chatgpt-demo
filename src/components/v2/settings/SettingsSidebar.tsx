@@ -2,7 +2,7 @@ import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { platformSettingsList } from '@/stores/ui'
 import ThemeToogle from '../ui/ThemeToogle'
-import PlatformSettings from './PlatformSettings'
+import ProviderGlobalSettings from './ProviderGlobalSettings'
 import GeneralSettings from './GeneralSettings'
 
 export default () => {
@@ -16,7 +16,7 @@ export default () => {
       <main class="flex-1 overflow-auto">
         {/* <GeneralSettings /> */}
         <For each={$platformSettingsList()}>
-          {item => <PlatformSettings config={item} />}
+          {item => <ProviderGlobalSettings config={item} />}
         </For>
       </main>
       <footer class="p-4 fb items-center">

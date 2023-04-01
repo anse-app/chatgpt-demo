@@ -8,7 +8,7 @@ export interface Provider {
   /** Name of provider */
   name: string
   /** Global settings of the provider */
-  platformSettings?: SettingsUI[]
+  globalSettings?: SettingsUI[]
   /** Settings for each conversation */
   conversationSettings?: SettingsUI[]
   supportConversationType: ConversationType[]
@@ -22,7 +22,7 @@ export interface Provider {
 
 export interface HandlerPayload {
   conversationId: string
-  platformSettings: Record<string, string | number | boolean>
+  globalSettings: Record<string, string | number | boolean>
   conversationSettings: Record<string, string | number | boolean>
   systemRole: string
   mockMessages: Message[]
