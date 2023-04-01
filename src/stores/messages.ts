@@ -15,12 +15,12 @@ export const getMessagesByConversationId = (id: string) => {
   return conversationMessagesMap.get()[id] || []
 }
 
-export const pushMessagesByConversationId = action(
+export const pushMessageByConversationId = action(
   conversationMessagesMap,
-  'pushMessagesByConversationId',
-  (map, id: string, payload: Message[]) => {
+  'pushMessageByConversationId',
+  (map, id: string, payload: Message) => {
     const oldMessages = map.get()[id] || []
-    const newMessages = [...oldMessages, ...payload]
+    const newMessages = [...oldMessages, payload]
     map.setKey(id, newMessages)
     db.updateItem(id, newMessages)
   },

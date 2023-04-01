@@ -1,5 +1,5 @@
 import { getProviderById } from '@/stores/provider'
-import { clearMessagesByConversationId, getMessagesByConversationId, pushMessagesByConversationId } from '@/stores/messages'
+import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
 import { getSettingsByProviderId } from '@/stores/settings'
 import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
@@ -17,10 +17,10 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   //   })
   // }
 
-  pushMessagesByConversationId(conversation.id, [{
+  pushMessageByConversationId(conversation.id, {
     role: 'user',
     content: prompt,
-  }])
+  })
 
   const providerResponse: PromptResponse = await callProviderHandler({
     conversation,
@@ -29,10 +29,10 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     historyMessages: getMessagesByConversationId(conversation.id),
   })
 
-  pushMessagesByConversationId(conversation.id, [{
+  pushMessageByConversationId(conversation.id, {
     role: 'assistant',
     content: providerResponse || '',
-  }])
+  })
 }
 
 interface CallProviderPayload {
