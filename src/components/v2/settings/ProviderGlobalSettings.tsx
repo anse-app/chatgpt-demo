@@ -1,4 +1,5 @@
 import { For, createSignal } from 'solid-js'
+import { getSettingsByProviderId, setSettingsByProviderId } from '@/stores/providerSettings'
 import SettingsUIComponent from './SettingsUIComponent'
 import type { SettingsUI } from '@/types/provider'
 
@@ -13,11 +14,11 @@ interface Props {
 
 export default ({ config }: Props) => {
   const [editing, setEditing] = createSignal(false)
-  const [testValue, setTestValue] = createSignal('1111')
-  const [formData, setFormData] = createSignal<Record<string, string>>({})
+  const [formData, setFormData] = createSignal<Record<string, string>>(getSettingsByProviderId(config.id))
 
   const handleClick = () => {
-    console.log('click')
+    console.log(formData())
+    setSettingsByProviderId(config.id, formData())
     setEditing(false)
   }
 
@@ -51,15 +52,14 @@ export default ({ config }: Props) => {
           </>
         )}
       </h3>
-      <div text-xs mt-4>{JSON.stringify(formData())}</div>
       <div class="mt-2 flex flex-col">
         <For each={config.settings}>
           {item => (
             <SettingsUIComponent
               settings={item}
               editing={editing}
-              value={testValue}
-              setValue={setTestValue}
+              value={() => formData()[item.key] || ''}
+              setValue={v => setFormData({ ...formData(), [item.key]: v })}
             />
           )}
         </For>

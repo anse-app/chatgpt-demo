@@ -17,7 +17,12 @@ export default ({ settings, editing, value, setValue }: Props) => {
     <div class="my-2">
       <Switch>
         <Match when={settings.type === 'api-key'}>
-          <SettingsApiKey settings={settings} editing={editing} />
+          <SettingsApiKey
+            settings={settings}
+            editing={editing}
+            value={value}
+            setValue={setValue}
+          />
         </Match>
         <Match when={settings.type === 'input'}>
           <SettingsInput

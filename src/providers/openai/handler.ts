@@ -1,6 +1,6 @@
 import type { Provider } from '@/types/provider'
 
-const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
+// const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com').trim().replace(/\/$/, '')
 
 // const res = {
 //   id: 'chatcmpl-6xxS3BQdz1ALgkGvqVQDKedReeNLY',
@@ -13,11 +13,12 @@ const baseUrl = (import.meta.env.OPENAI_API_BASE_URL || 'https://api.openai.com'
 //   ],
 // }
 
-export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt) => {
+export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, payload) => {
+  console.log('payload', payload)
   const initOptions = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI_API_KEY}`,
+      'Authorization': `Bearer ${payload.globalSettings.apiKey}`,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -27,6 +28,7 @@ export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt) 
       // stream: true,
     }),
   }
+  const baseUrl = (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, '')
   const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions)
   if (!response.ok) {
     const responseJson = await response.json()
@@ -40,11 +42,12 @@ export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt) 
   return resText
 }
 
-export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages) => {
+export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload) => {
+  console.log('payload', payload)
   const initOptions = {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${import.meta.env.PUBLIC_OPENAI_API_KEY}`,
+      'Authorization': `Bearer ${payload.globalSettings.apiKey}`,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -54,6 +57,7 @@ export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(
       // stream: true,
     }),
   }
+  const baseUrl = (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, '')
   const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions)
   if (!response.ok) {
     const responseJson = await response.json()

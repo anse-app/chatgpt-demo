@@ -1,7 +1,8 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessagesByConversationId } from '@/stores/messages'
-import type { PromptResponse, Provider } from '@/types/provider'
-import type { Conversation, ConversationType } from '@/types/conversation'
+import { getSettingsByProviderId } from '@/stores/providerSettings'
+import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
+import type { Conversation } from '@/types/conversation'
 import type { Message } from '@/types/message'
 
 export const handlePrompt = async(conversation: Conversation, prompt: string) => {
@@ -22,7 +23,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   }])
 
   const providerResponse: PromptResponse = await callProviderHandler({
-    conversationType: conversation.conversationType,
+    conversation,
     provider,
     prompt,
     historyMessages: getMessagesByConversationId(conversation.id),
@@ -35,20 +36,27 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
 }
 
 interface CallProviderPayload {
-  conversationType: ConversationType
+  conversation: Conversation
   provider: Provider
   prompt: string
   historyMessages: Message[]
 }
 
 const callProviderHandler = async(payload: CallProviderPayload) => {
-  const { conversationType, provider, prompt, historyMessages } = payload
+  const { conversation, provider, prompt, historyMessages } = payload
   let response: PromptResponse
+  const handlerPayload: HandlerPayload = {
+    conversationId: conversation.id,
+    globalSettings: getSettingsByProviderId(provider.id),
+    conversationSettings: {},
+    systemRole: '',
+    mockMessages: [],
+  }
   try {
-    if (conversationType === 'single')
-      response = await provider.handleSinglePrompt?.(prompt)
-    else if (conversationType === 'continuous')
-      response = await provider.handleContinuousPrompt?.(historyMessages)
+    if (conversation.conversationType === 'single')
+      response = await provider.handleSinglePrompt?.(prompt, handlerPayload)
+    else if (conversation.conversationType === 'continuous')
+      response = await provider.handleContinuousPrompt?.(historyMessages, handlerPayload)
 
     console.log(response)
     return response

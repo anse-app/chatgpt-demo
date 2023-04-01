@@ -32,6 +32,7 @@ export interface HandlerPayload {
 export type PromptResponse = string | null | undefined
 
 interface SettingsUIBase {
+  key: string
   name: string
   description?: string
 }

@@ -11,10 +11,12 @@ const providerOpenAI = () => {
     name: 'OpenAI',
     globalSettings: [
       {
+        key: 'apiKey',
         name: 'API Key',
         type: 'api-key',
       },
       {
+        key: 'baseUrl',
         name: 'Base URL',
         description: 'Custom base url for OpenAI API.',
         type: 'input',

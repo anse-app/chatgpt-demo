@@ -1,12 +1,14 @@
 import type { SettingsUI, SettingsUIInput } from '@/types/provider'
-import type { Accessor } from 'solid-js'
+import type { Accessor, Setter } from 'solid-js'
 
 interface Props {
   settings: SettingsUI
   editing: Accessor<boolean>
+  value: Accessor<string>
+  setValue: Setter<string>
 }
 
-export default ({ settings, editing }: Props) => {
+export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
   const inputSettings = settings as SettingsUIInput
   return (
@@ -17,13 +19,14 @@ export default ({ settings, editing }: Props) => {
         {editing() && (
           <input
             type="password"
-            value="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+            value={value()}
             class="w-full mt-1 bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
+            onChange={e => setValue(e.currentTarget.value)}
           />
         )}
         {!editing() && (
           <div class="fi justify-between gap-2">
-            <ApiKeyMaskText key="sk-xxxxxx35Ko" />
+            <ApiKeyMaskText key={value()} />
             <Usage />
           </div>
         )}
