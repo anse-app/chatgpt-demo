@@ -1,5 +1,6 @@
 import { action, atom, computed, map } from 'nanostores'
 import { providerMetaList } from './provider'
+import { clearMessagesByConversationId } from './messages'
 import { conversationMapData } from './tests/conversation.mock'
 import { db } from './storage/conversation'
 import type { Conversation } from '@/types/conversation'
@@ -43,4 +44,5 @@ export const updateConversationById = action(conversationMap, 'updateConversatio
 export const deleteConversationById = action(conversationMap, 'deleteConversationById', (map, id: string) => {
   map.set(Object.fromEntries(Object.entries(map.get()).filter(([key]) => key !== id)))
   db.deleteItem(id)
+  clearMessagesByConversationId(id)
 })
