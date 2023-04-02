@@ -13,3 +13,7 @@
   padding: 1rem;
   border-radius: 0.5rem;
 }
+
+.gen-textarea {
+  border-radius: 5px;
+}
