@@ -1,1 +1,15 @@
+.to-yellow-400 {
+  background-image: url(/user.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
 
+.to-green-300 {
+  background-image: url(/cg-logo.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
