@@ -229,10 +229,10 @@ export default () => {
             rows="1"
             class="gen-textarea"
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
+          <button class="resp-btn" onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
+          <button class="resp-btn" title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
             <IconClear />
           </button>
         </div>
