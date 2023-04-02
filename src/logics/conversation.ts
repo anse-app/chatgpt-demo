@@ -18,6 +18,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   // }
 
   pushMessageByConversationId(conversation.id, {
+    id: `${conversation.id}:user:${Date.now()}`,
     role: 'user',
     content: prompt,
   })
@@ -30,8 +31,10 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   })
 
   pushMessageByConversationId(conversation.id, {
+    id: `${conversation.id}:assistant:${Date.now()}`,
     role: 'assistant',
-    content: providerResponse || '',
+    content: typeof providerResponse === 'string' ? providerResponse : '',
+    stream: providerResponse instanceof ReadableStream ? providerResponse : undefined,
   })
 }
 
@@ -53,12 +56,16 @@ const callProviderHandler = async(payload: CallProviderPayload) => {
     mockMessages: [],
   }
   try {
-    if (conversation.conversationType === 'single')
+    if (conversation.conversationType === 'single') {
       response = await provider.handleSinglePrompt?.(prompt, handlerPayload)
-    else if (conversation.conversationType === 'continuous')
-      response = await provider.handleContinuousPrompt?.(historyMessages, handlerPayload)
+    } else if (conversation.conversationType === 'continuous') {
+      const messages = historyMessages.map(message => ({
+        role: message.role,
+        content: message.content,
+      }))
+      response = await provider.handleContinuousPrompt?.(messages, handlerPayload)
+    }
 
-    console.log(response)
     return response
   } catch (e) {
     console.error(e)

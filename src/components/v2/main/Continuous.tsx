@@ -1,21 +1,22 @@
 import { For } from 'solid-js'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
-import type { Message } from '@/types/message'
+import type { MessageInstance } from '@/types/message'
 
 interface Props {
-  messages: Accessor<Message[]>
+  conversationId: string
+  messages: Accessor<MessageInstance[]>
 }
 
-export default ({ messages }: Props) => {
+export default ({ conversationId, messages }: Props) => {
   return (
     <div class="flex flex-col h-full overflow-y-scroll">
       <For each={messages()}>
         {message => (
           <div class="border-b border-lighter">
             <MessageItem
-              role={message.role}
-              message={message.content}
+              conversationId={conversationId}
+              message={message}
             />
           </div>
         )}

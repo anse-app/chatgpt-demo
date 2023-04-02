@@ -1,8 +1,8 @@
 import { del, entries, get, set, update } from 'idb-keyval'
 import { messages } from './db'
-import type { Message } from '@/types/message'
+import type { MessageInstance } from '@/types/message'
 
-const setItem = async(key: string, item: Message[]) => {
+const setItem = async(key: string, item: MessageInstance[]) => {
   const store = messages.get()
   if (store)
     await set(key, item, store)
@@ -11,11 +11,11 @@ const setItem = async(key: string, item: Message[]) => {
 const getItem = async(key: string) => {
   const store = messages.get()
   if (store)
-    return get<Message[]>(key, store)
+    return get<MessageInstance[]>(key, store)
   return null
 }
 
-const updateItem = async(key: string, item: Message[]) => {
+const updateItem = async(key: string, item: MessageInstance[]) => {
   const store = messages.get()
   if (store)
     await update(key, () => item, store)
@@ -31,7 +31,7 @@ const exportData = async() => {
   const store = messages.get()
   if (store) {
     const entriesData = await entries(store)
-    return Object.fromEntries(entriesData) as Record<string, Message[]>
+    return Object.fromEntries(entriesData) as Record<string, MessageInstance[]>
   }
   return null
 }

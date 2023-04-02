@@ -1,53 +1,35 @@
-import { createSignal } from 'solid-js'
-import { convertReadableStreamToAccessor } from '@/logics/stream'
+import StreamableText from '../StreamableText'
 import type { Accessor } from 'solid-js'
-import type { Message } from '@/types/message'
+import type { MessageInstance } from '@/types/message'
 
 interface Props {
-  messages: Accessor<Message[]>
+  conversationId: string
+  messages: Accessor<MessageInstance[]>
 }
 
-export default ({ messages }: Props) => {
-  const [inputText, setInputText] = createSignal('')
-  const [outputText, setOutputText] = createSignal('')
-  const messageInput = () => {
-    if (!messages().length) {
-      return ''
-    } else {
-      const content = messages()[0].content
-      if (typeof content === 'string') {
-        return content
-      } else {
-        convertReadableStreamToAccessor(content, inputText, setInputText)
-        return inputText()
-      }
-    }
-  }
-  // const messageOutput = () => messages().length > 1 ? messages()[1].content : ''
-  const messageOutput = () => {
-    if (messages().length <= 1) {
-      return ''
-    } else {
-      const content = messages()[1].content
-      if (typeof content === 'string') {
-        return content
-      } else {
-        convertReadableStreamToAccessor(content, outputText, setOutputText)
-        return inputText()
-      }
-    }
-  }
+export default ({ conversationId, messages }: Props) => {
+  const messageInput = () => messages().length > 0 ? messages()[0] : null
+  const messageOutput = () => messages().length > 1 ? messages()[1] : null
   return (
     <div class="flex flex-col h-full">
       <div class="flex-[1] border-b border-base p-6 break-all overflow-y-scroll">
-        <div class="max-w-base">
-          {messageInput()}
-        </div>
+        <StreamableText
+          class="mx-auto"
+          text={messageInput()?.content || ''}
+        />
       </div>
       <div class="flex-[2] p-6 break-all overflow-y-scroll">
-        <div class="max-w-base">
-          {messageOutput()}
-        </div>
+        <StreamableText
+          class="mx-auto"
+          text={messageOutput()?.content || ''}
+          streamInfo={messageOutput()?.stream
+            ? () => ({
+                conversationId,
+                messageId: messageOutput()?.id || '',
+                stream: messageOutput()?.stream || null,
+              })
+            : undefined}
+        />
       </div>
     </div>
   )

@@ -19,10 +19,16 @@ export default () => {
   return (
     <Switch>
       <Match when={currentConversation()?.conversationType === 'single'}>
-        <Single messages={currentConversationMessages} />
+        <Single
+          conversationId={$currentConversationId()}
+          messages={currentConversationMessages}
+        />
       </Match>
       <Match when={currentConversation()?.conversationType === 'continuous'}>
-        <Continuous messages={currentConversationMessages} />
+        <Continuous
+          conversationId={$currentConversationId()}
+          messages={currentConversationMessages}
+        />
       </Match>
     </Switch>
   )

@@ -4,8 +4,11 @@ import type { ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 export const parseStream = (rawResponse: Response) => {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
+  const rb = rawResponse.body as ReadableStream
 
-  const stream = new ReadableStream({
+  const reader = rb.getReader()
+
+  return new ReadableStream({
     async start(controller) {
       const streamParser = (event: ParsedEvent | ReconnectInterval) => {
         if (event.type === 'event') {
@@ -15,18 +18,8 @@ export const parseStream = (rawResponse: Response) => {
             return
           }
           try {
-            // response = {
-            //   id: 'chatcmpl-6pULPSegWhFgi0XQ1DtgA3zTa1WR6',
-            //   object: 'chat.completion.chunk',
-            //   created: 1677729391,
-            //   model: 'gpt-3.5-turbo-0301',
-            //   choices: [
-            //     { delta: { content: '你' }, index: 0, finish_reason: null }
-            //   ],
-            // }
             const json = JSON.parse(data)
             const text = json.choices[0].delta?.content || ''
-            console.log('text', text)
             const queue = encoder.encode(text)
             controller.enqueue(queue)
           } catch (e) {
@@ -34,12 +27,17 @@ export const parseStream = (rawResponse: Response) => {
           }
         }
       }
-
-      const parser = createParser(streamParser)
-      for await (const chunk of rawResponse.body as any)
-        parser.feed(decoder.decode(chunk))
+      let done = false
+      while (!done) {
+        const { done: isDone, value } = await reader.read()
+        if (isDone) {
+          done = true
+          controller.close()
+          return
+        }
+        const parser = createParser(streamParser)
+        parser.feed(decoder.decode(value))
+      }
     },
   })
-
-  return stream
 }

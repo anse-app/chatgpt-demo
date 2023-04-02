@@ -18,6 +18,6 @@ export const setSettingsByProviderId = action(
   'setSettingsByProviderId',
   (map, id: string, payload: SettingsPayload) => {
     map.setKey(id, payload)
-    db.updateItem(id, payload)
+    db.setItem(id, payload)
   },
 )
