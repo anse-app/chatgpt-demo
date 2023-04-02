@@ -6,6 +6,7 @@ import MessageItem from './MessageItem'
 import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
 import type { ChatMessage, ErrorMessage } from '@/types'
+import './styles.css'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
