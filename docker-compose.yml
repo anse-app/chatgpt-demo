@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  app:
-    build: .
+  chatgpt-demo:
+    image: ddiu8081/chatgpt-demo:latest
     container_name: chatgpt-demo
-    image: chatgpt-demo
+    restart: always
     ports:
-      - 3000:3000
+        - "3000:3000"
     volumes:
       - .env:/usr/src/.env
