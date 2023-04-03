@@ -2,7 +2,7 @@ import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { platformSettingsUIList } from '@/stores/ui'
 import { providerSettingsMap, setSettingsByProviderId } from '@/stores/settings'
-import ThemeToogle from '../ui/ThemeToogle'
+import ThemeToggle from '../ui/ThemeToggle'
 import ProviderGlobalSettings from './ProviderGlobalSettings'
 import GeneralSettings from './GeneralSettings'
 
@@ -27,14 +27,14 @@ export default () => {
           )}
         </For>
       </main>
-      <footer class="p-4 fb items-center">
-        <ThemeToogle />
-        <div text-xs op-40>
-          <a href="#" target="_blank" rel="noreferrer" class="op-70 hover:op-100">
+      <footer class="h-14 fi justify-between px-3">
+        <ThemeToggle />
+        <div text-xs op-40 px-2>
+          <a href="#" target="_blank" rel="noreferrer" class="hv-foreground">
             FAQ
           </a>
           <span class="px-1"> · </span>
-          <a href="https://github.com/ddiu8081/chatgpt-demo" target="_blank" rel="noreferrer" class="op-70 hover:op-100">
+          <a href="https://github.com/ddiu8081/chatgpt-demo" target="_blank" rel="noreferrer" class="hv-foreground">
             Github
           </a>
         </div>

@@ -52,7 +52,7 @@ export default defineConfig({
     'border-darker': 'border-neutral-300 dark:border-neutral-600',
     'placeholder-base': 'placeholder:op-50 dark:placeholder:op-30',
     'hv-base': 'transition-colors cursor-pointer hover:bg-darker',
-    'hv-foreground': 'transition-opacity op-70 hover:op-100',
+    'hv-foreground': 'transition-opacity cursor-pointer op-70 hover:op-100',
     'border-b-base': 'border-b-light-900 dark:border-b-dark-100',
     'input-base': 'placeholder:op-50 dark:placeholder:op-30 focus:(bg-darker-100 ring-0 outline-none)',
     'max-w-base': 'max-w-3xl mx-auto',

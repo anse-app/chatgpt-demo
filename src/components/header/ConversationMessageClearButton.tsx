@@ -9,7 +9,8 @@ export default () => {
     <>
       { $currentConversationId() && (
         <div
-          class="i-carbon-clean fc px-2 rounded-md cursor-pointer text-xl op-70 md:hidden"
+          i-carbon-clean
+          class="fc px-2 rounded-md cursor-pointer text-xl hv-foreground"
           onClick={() => clearMessagesByConversationId($currentConversationId())}
         />
       )}
