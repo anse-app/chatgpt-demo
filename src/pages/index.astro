@@ -5,7 +5,7 @@ import ConversationSidebar from '@/components/conversations/ConversationSidebar'
 import Settings from '@/components/settings/SettingsSidebar'
 import ModalsLayer from '@/components/ModalsLayer'
 import Sidebar from '@/components/ui/Sidebar'
-import '@/message.css'
+import BuildStores from '@/components/client-only/BuildStores'
 ---
 
 <Layout title="ChatGPT Api Demo">
@@ -19,11 +19,5 @@ import '@/message.css'
     </Sidebar>
   </div>
   <ModalsLayer client:load />
+  <BuildStores client:only />
 </Layout>
-
-<script>
-import { createStores, rebuildStores } from '@/stores/storage/db'
-
-await createStores()
-await rebuildStores()
-</script>
