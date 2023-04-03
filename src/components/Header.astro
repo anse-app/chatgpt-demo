@@ -1,16 +1,36 @@
 ---
-import Logo from './Logo.astro'
-import Themetoggle from './Themetoggle.astro'
+import Button from './ui/Button.astro'
 ---
-
-<header>
-  <div class="fb items-center">
-    <Logo />
-    <Themetoggle />
-  </div>
-  <div class="fi mt-2">
-    <span class="gpt-title">ChatGPT</span>
-    <span class="gpt-subtitle">Demo</span>
-  </div>
-  <p mt-1 op-60>Based on OpenAI API (gpt-3.5-turbo).</p>
+<header class="absolute top-0 left-0 right-0 flex items-center bg-base border-b border-base h-12 px-4">
+  <Button
+    id="sidebar-toggle-btn"
+    class="text-xl md:hidden"
+    type="ghost"
+    icon="i-carbon-add-comment"
+  />
+  <div id="sidebar-toggle-btn" class=""></div>
+  <div class="flex-1 text-center font-extrabold">ChatGPT Demo V2</div>
+  <Button
+    id="settings-toggle-btn"
+    class="text-xl lg:hidden"
+    type="ghost"
+    icon="i-carbon-settings"
+  />
 </header>
+
+<script>
+  import {
+    showConversationSidebar,
+    showSettingsSidebar,
+  } from '@/stores/ui'
+
+  const sidebarToggleBtn = document.getElementById('sidebar-toggle-btn')
+  const settingsToggleBtn = document.getElementById('settings-toggle-btn')
+
+  sidebarToggleBtn!.addEventListener('click', () => {
+    showConversationSidebar.set(true)
+  })
+  settingsToggleBtn!.addEventListener('click', () => {
+    showSettingsSidebar.set(true)
+  })
+</script>
