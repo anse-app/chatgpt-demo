@@ -18,6 +18,7 @@ export default ({ instance }: Props) => {
   const handleDelete = (e: MouseEvent, conversationId: string) => {
     e.stopPropagation()
     deleteConversationById(conversationId)
+    currentConversationId.set('')
   }
   const handleEdit = (e: MouseEvent, conversationId: string) => {
     e.stopPropagation()
