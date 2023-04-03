@@ -31,6 +31,12 @@ export default defineConfig({
         'h5, h6': {
           margin: '1em 0 0.5em',
         },
+        ':where(.prose>:first-child):not(:where([class~=not-prose] *))': {
+          'margin-top': 0,
+        },
+        ':where(.prose>:last-child):not(:where([class~=not-prose] *))': {
+          'margin-bottom': 0,
+        },
       },
     }),
   ],

@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <div class="h-full flex flex-col">
-      <header class="h-12 fi border-b border-base px-4 text-xs uppercase">
+      <header class="h-14 fi border-b border-base px-4 text-xs uppercase">
         Settings
       </header>
       <main class="flex-1 overflow-auto">

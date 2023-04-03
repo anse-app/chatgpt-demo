@@ -1,13 +1,13 @@
 ---
-import Header from './Header.astro'
+import Header from './header/Header'
 import Send from './Send'
 
 import Conversation from './main/Conversation'
 ---
 
 <main class="relative flex-1 flex flex-col overflow-hidden">
-  <Header />
-  <main class="flex-1 mt-12 mb-14 flex flex-col overflow-hidden">
+  <Header client:load />
+  <main class="flex-1 mt-14 mb-14 flex flex-col overflow-hidden">
     <!-- <ConversationConfiguration /> -->
     <div class="flex-1 overflow-hidden">
       <Conversation client:load />
