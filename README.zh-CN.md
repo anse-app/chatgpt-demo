@@ -95,7 +95,7 @@ services:
     container_name: chatgpt-demo
     restart: always
     ports:
-        - "3000:3000"
+      - '3000:3000'
     volumes:
       - .env:/usr/src/.env
 ```
@@ -122,7 +122,7 @@ docker-compose down
 | `OPENAI_API_BASE_URL` | 请求 OpenAI API 的自定义 Base URL. | `https://api.openai.com` |
 | `HEAD_SCRIPTS` | 在页面的 `</head>` 之前注入分析或其他脚本 | `null` |
 | `SECRET_KEY` | 项目的秘密字符串。用于生成 API 调用的签名 | `null` |
-| `SITE_PASSWORD` | 为网站设置密码。如果未设置，则该网站将是公开的 | `null` |
+| `SITE_PASSWORD` | 为网站设置密码，支持使用英文逗号创建多个密码。如果未设置，则该网站将是公开的 | `null` |
 | `OPENAI_API_MODEL` | 使用的 OpenAI 模型. [模型列表](https://platform.openai.com/docs/api-reference/models/list) | `gpt-3.5-turbo` |
 
 ## 常见问题

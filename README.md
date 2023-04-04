@@ -102,7 +102,7 @@ services:
     container_name: chatgpt-demo
     restart: always
     ports:
-        - "3000:3000"
+      - '3000:3000'
     volumes:
       - .env:/usr/src/.env
 ```
@@ -129,7 +129,7 @@ You can control the website through environment variables.
 | `OPENAI_API_BASE_URL` | Custom base url for OpenAI API. | `https://api.openai.com` |
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | `null` |
 | `SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | `null` |
-| `SITE_PASSWORD` | Set password for site. If not set, site will be public | `null` |
+| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | `null` |
 | `OPENAI_API_MODEL` | ID of the model to use. [List models](https://platform.openai.com/docs/api-reference/models/list) | `gpt-3.5-turbo` |
 
 

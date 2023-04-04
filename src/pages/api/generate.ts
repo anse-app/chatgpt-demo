@@ -8,7 +8,8 @@ import type { APIRoute } from 'astro'
 const apiKey = import.meta.env.OPENAI_API_KEY
 const httpsProxy = import.meta.env.HTTPS_PROXY
 const baseUrl = ((import.meta.env.OPENAI_API_BASE_URL) || 'https://api.openai.com').trim().replace(/\/$/, '')
-const sitePassword = import.meta.env.SITE_PASSWORD
+const sitePassword = import.meta.env.SITE_PASSWORD || ''
+const passList = sitePassword.split(',') || []
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
@@ -20,7 +21,7 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 400 })
   }
-  if (sitePassword && sitePassword !== pass) {
+  if (sitePassword && (sitePassword !== pass || !passList.includes(pass))) {
     return new Response(JSON.stringify({
       error: {
         message: 'Invalid password.',
