@@ -2,8 +2,9 @@ import { Match, Switch } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { conversationMessagesMap } from '@/stores/messages'
-import Single from './Single'
 import Continuous from './Continuous'
+import Single from './Single'
+import Image from './Image'
 
 export default () => {
   const $conversationMap = useStore(conversationMap)
@@ -18,14 +19,20 @@ export default () => {
 
   return (
     <Switch>
+      <Match when={currentConversation()?.conversationType === 'continuous'}>
+        <Continuous
+          conversationId={$currentConversationId()}
+          messages={currentConversationMessages}
+        />
+      </Match>
       <Match when={currentConversation()?.conversationType === 'single'}>
         <Single
           conversationId={$currentConversationId()}
           messages={currentConversationMessages}
         />
       </Match>
-      <Match when={currentConversation()?.conversationType === 'continuous'}>
-        <Continuous
+      <Match when={currentConversation()?.conversationType === 'image'}>
+        <Image
           conversationId={$currentConversationId()}
           messages={currentConversationMessages}
         />

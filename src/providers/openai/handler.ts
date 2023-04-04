@@ -1,4 +1,4 @@
-import { fetchChatCompletion } from './api'
+import { fetchChatCompletion, fetchImageGeneration } from './api'
 import { parseStream } from './parser'
 import type { Message } from '@/types/message'
 import type { HandlerPayload, Provider } from '@/types/provider'
@@ -9,6 +9,26 @@ export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, 
 
 export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload) => {
   return handleChatCompletion(messages, payload)
+}
+
+export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, payload) => {
+  const response = await fetchImageGeneration({
+    apiKey: payload.globalSettings.apiKey as string,
+    baseUrl: (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, ''),
+    body: {
+      prompt,
+      n: 1,
+      size: '512x512',
+      response_format: 'url', // TODO: support 'b64_json'
+    },
+  })
+  if (!response.ok) {
+    const responseJson = await response.json()
+    const errMessage = responseJson.error?.message || 'Unknown error'
+    throw new Error(errMessage)
+  }
+  const resJson = await response.json()
+  return resJson.data[0].url
 }
 
 const handleChatCompletion = async(messages: Message[], payload: HandlerPayload) => {

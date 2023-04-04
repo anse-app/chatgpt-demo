@@ -1,5 +1,6 @@
 import {
   handleContinuousPrompt,
+  handleImagePrompt,
   handleSinglePrompt,
 } from './handler'
 import type { Provider } from '@/types/provider'
@@ -23,9 +24,10 @@ const providerOpenAI = () => {
       },
     ],
     conversationSettings: [],
-    supportConversationType: ['continuous', 'single'],
+    supportConversationType: ['continuous', 'single', 'image'],
     handleSinglePrompt,
     handleContinuousPrompt,
+    handleImagePrompt,
   }
   return provider
 }

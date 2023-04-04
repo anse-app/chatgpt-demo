@@ -64,6 +64,8 @@ const callProviderHandler = async(payload: CallProviderPayload) => {
         content: message.content,
       }))
       response = await provider.handleContinuousPrompt?.(messages, handlerPayload)
+    } else if (conversation.conversationType === 'image') {
+      response = await provider.handleImagePrompt?.(prompt, handlerPayload)
     }
 
     return response
