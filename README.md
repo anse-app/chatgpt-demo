@@ -49,9 +49,9 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 
 > #### 🔒 Need website password?
-> 
+>
 > Deploy with the [`SITE_PASSWORD`](#environment-variables)
-> 
+>
 > <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&env=SITE_PASSWORD&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys" alt="Deploy with Vercel" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel" height=24 style="vertical-align: middle; margin-right: 4px;"></a>
 
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
@@ -87,9 +87,9 @@ Environment variables refer to the documentation below. [Docker Hub address](htt
 
 **Direct run**
 ```bash
-docker run --name=chatgpt-demo --volume=/path/.env:/usr/src/.env:rw -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
+docker run --name=chatgpt-demo -e OPENAI_API_KEY=YOUR_OPEN_API_KEY -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
 ```
-`/path/.env` represents the path to the local environment variable.
+`-e` define environment variables in the container.
 
 
 **Docker compose**
@@ -103,8 +103,8 @@ services:
     restart: always
     ports:
       - '3000:3000'
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      - OPENAI_API_KEY=YOUR_OPEN_API_KEY
 ```
 
 ```bash
