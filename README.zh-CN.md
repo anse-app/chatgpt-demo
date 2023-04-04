@@ -81,9 +81,9 @@
 
 **一键运行**
 ```bash
-docker run --name=chatgpt-demo --volume=/path/.env:/usr/src/.env:rw -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
+docker run --name=chatgpt-demo -e OPENAI_API_KEY=YOUR_OPEN_API_KEY -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
 ```
-`/path/.env` 代表环境变量的路径。
+`-e` 在容器中定义环境变量。
 
 **使用 Docker compose**
 ```yml
@@ -96,8 +96,8 @@ services:
     restart: always
     ports:
       - '3000:3000'
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      - OPENAI_API_KEY=YOUR_OPEN_API_KEY
 ```
 
 ```bash

@@ -1,6 +1,7 @@
+import process from 'process'
 import type { APIRoute } from 'astro'
 
-const realPassword = import.meta.env.SITE_PASSWORD || ''
+const realPassword = import.meta.env.SITE_PASSWORD || process.env.SITE_PASSWORD || ''
 const passList = realPassword.split(',') || []
 
 export const post: APIRoute = async(context) => {

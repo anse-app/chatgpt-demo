@@ -1,14 +1,15 @@
 // #vercel-disable-blocks
+import * as process from 'process'
 import { ProxyAgent, fetch } from 'undici'
 // #vercel-end
 import { generatePayload, parseOpenAIStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
 import type { APIRoute } from 'astro'
 
-const apiKey = import.meta.env.OPENAI_API_KEY
-const httpsProxy = import.meta.env.HTTPS_PROXY
-const baseUrl = ((import.meta.env.OPENAI_API_BASE_URL) || 'https://api.openai.com').trim().replace(/\/$/, '')
-const sitePassword = import.meta.env.SITE_PASSWORD || ''
+const apiKey = import.meta.env.OPENAI_API_KEY || process.env.OPENAI_API_KEY
+const httpsProxy = import.meta.env.HTTPS_PROXY || process.env.HTTPS_PROXY
+const baseUrl = ((import.meta.env.OPENAI_API_BASE_URL || process.env.OPENAI_API_BASE_URL) || 'https://api.openai.com').trim().replace(/\/$/, '')
+const sitePassword = import.meta.env.SITE_PASSWORD || process.env.SITE_PASSWORD || ''
 const passList = sitePassword.split(',') || []
 
 export const post: APIRoute = async(context) => {

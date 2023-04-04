@@ -7,5 +7,6 @@ services:
     restart: always
     ports:
         - "3000:3000"
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
+      - SITE_PASSWORD=YOUR_SITE_PASSWORD
