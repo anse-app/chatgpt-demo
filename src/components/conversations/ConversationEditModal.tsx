@@ -36,6 +36,7 @@ const iconList = [
 export default () => {
   let inputRef: HTMLInputElement
   const $currentEditingConversation = useStore(currentEditingConversation)
+  const $providerMetaList = useStore(providerMetaList)
   const [currentEditingId, setCurrentEditingId] = createSignal('')
   const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
   const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
@@ -91,13 +92,13 @@ export default () => {
           placeholder="Untitled"
           class="w-full bg-transparent border border-base px-4 py-3 input-base focus:border-darker"
         />
-        {/* <select name="provider" onChange={e => setSelectProviderId(e.target.value)}>
+        <select name="provider" onChange={e => setSelectProviderId(e.currentTarget.value)}>
           <For each={$providerMetaList()}>
             {item => (
               <option value={item.id}>{item.name}</option>
             )}
           </For>
-        </select> */}
+        </select>
         <div>
           <For each={typeSelectList.filter(item => selectProvider()?.supportConversationType.includes(item.value))}>
             {item => (
