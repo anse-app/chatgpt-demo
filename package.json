@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.2.1",
-    "@astrojs/netlify": "2.2.0",
+    "@astrojs/netlify": "2.0.0",
     "@astrojs/node": "^5.1.1",
     "@astrojs/solid-js": "^2.1.0",
     "@astrojs/vercel": "^3.2.2",
@@ -37,7 +37,7 @@
     "micromark": "^3.1.0",
     "micromark-extension-gfm": "^2.0.1",
     "nanostores": "^0.7.4",
-    "solid-js": "1.7.2",
+    "solid-js": "1.6.12",
     "solidjs-use": "^1.2.0"
   },
   "devDependencies": {
