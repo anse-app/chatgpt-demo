@@ -67,8 +67,5 @@ export default defineConfig({
         },
       }),
     ],
-    ssr: {
-      noExternal: ['@kobalte/core'],
-    },
   },
 })

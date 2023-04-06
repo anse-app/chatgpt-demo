@@ -1,6 +1,6 @@
 import { For, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { Select } from '@kobalte/core'
+import { Select } from '@/components/ui/base/Select'
 import {
   addConversation,
   currentEditingConversation,
@@ -8,9 +8,7 @@ import {
 } from '@/stores/conversation'
 import { showConversationEditModal } from '@/stores/ui'
 import { providerMetaList } from '@/stores/provider'
-import type { Accessor, Setter } from 'solid-js'
 import type { ConversationType } from '@/types/conversation'
-import type { Provider } from '@/types/provider'
 
 const typeSelectList = [
   {
@@ -95,15 +93,8 @@ export default () => {
           placeholder="Untitled"
           class="w-full bg-transparent border border-base px-4 py-3 input-base focus:border-darker"
         />
-        {/* <select name="provider" onChange={e => setSelectProviderId(e.currentTarget.value)}>
-          <For each={$providerMetaList()}>
-            {item => (
-              <option value={item.id}>{item.name}</option>
-            )}
-          </For>
-        </select> */}
-        <ProviderSelect
-          list={$providerMetaList()}
+        <Select
+          options={$providerMetaList().map(item => ({ value: item.id, label: item.name }))}
           value={selectProviderId}
           setValue={setSelectProviderId}
         />
@@ -141,43 +132,5 @@ export default () => {
       </main>
       <div class="fcc p-4 border border-base mt-8 hv-base" onClick={handleAdd}>OK</div>
     </div>
-  )
-}
-
-interface ProviderSelectProps {
-  list: Pick<Provider, 'id' | 'name' | 'supportConversationType'>[]
-  value: Accessor<string>
-  setValue: Setter<string>
-}
-
-const ProviderSelect = (props: ProviderSelectProps) => {
-  return (
-    <Select.Root
-      options={props.list}
-      placeholder="Select a provider..."
-      value={props.value()}
-      onValueChange={props.setValue}
-      valueComponent={v => v.item?.rawValue.id}
-      itemComponent={v => (
-        <Select.Item item={v.item} class="fi justify-between w-full px-4 py-2 bg-base border border-base">
-          <Select.ItemLabel>{v.item.rawValue.name}</Select.ItemLabel>
-          <Select.ItemIndicator class="select__item-indicator">
-            <div i-carbon-checkmark />
-          </Select.ItemIndicator>
-        </Select.Item>
-      )}
-    >
-      <Select.Trigger aria-label="Provider" class="fi justify-between w-full px-4 py-2 border border-base hv-base">
-        <Select.Value />
-        <Select.Icon>
-          <div i-carbon-caret-down />
-        </Select.Icon>
-      </Select.Trigger>
-      <Select.Portal>
-        <Select.Content class="select__content">
-          <Select.Listbox class="select__listbox" />
-        </Select.Content>
-      </Select.Portal>
-    </Select.Root>
   )
 }
