@@ -1,4 +1,4 @@
-import { Index, Show, createSignal, onCleanup, onMount } from 'solid-js'
+import { Index, Show, createEffect, createSignal, onCleanup, onMount } from 'solid-js'
 import { useThrottleFn } from 'solidjs-use'
 import { generateSignature } from '@/utils/auth'
 import IconClear from './icons/Clear'
@@ -16,14 +16,28 @@ export default () => {
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
+  const [isStick, setStick] = createSignal(false)
+
+  createEffect(() => (isStick() && smoothToBottom()))
 
   onMount(() => {
+    let lastPostion = window.scrollY
+
+    window.addEventListener('scroll', () => {
+      const nowPostion = window.scrollY
+      nowPostion < lastPostion && setStick(false)
+      lastPostion = nowPostion
+    })
+
     try {
       if (localStorage.getItem('messageList'))
         setMessageList(JSON.parse(localStorage.getItem('messageList')))
 
       if (localStorage.getItem('systemRoleSettings'))
         setCurrentSystemRoleSettings(localStorage.getItem('systemRoleSettings'))
+
+      if (localStorage.getItem('stickToBottom') === 'stick')
+        setStick(true)
     } catch (err) {
       console.error(err)
     }
@@ -37,6 +51,7 @@ export default () => {
   const handleBeforeUnload = () => {
     localStorage.setItem('messageList', JSON.stringify(messageList()))
     localStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
+    isStick() ? localStorage.setItem('stickToBottom', 'stick') : localStorage.removeItem('stickToBottom')
   }
 
   const handleButtonClick = async() => {
@@ -56,11 +71,16 @@ export default () => {
       },
     ])
     requestWithLatestMessage()
+    instantToBottom()
   }
 
   const smoothToBottom = useThrottleFn(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
   }, 300, false, true)
+
+  const instantToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' })
+  }
 
   const requestWithLatestMessage = async() => {
     setLoading(true)
@@ -115,7 +135,7 @@ export default () => {
           if (char)
             setCurrentAssistantMessage(currentAssistantMessage() + char)
 
-          smoothToBottom()
+          isStick() && instantToBottom()
         }
         done = readerDone
       }
@@ -126,6 +146,7 @@ export default () => {
       return
     }
     archiveCurrentMessage()
+    isStick() && instantToBottom()
   }
 
   const archiveCurrentMessage = () => {
@@ -237,6 +258,13 @@ export default () => {
           </button>
         </div>
       </Show>
+      <div class="fixed bottom-5 left-5 rounded-md hover:bg-slate/10 w-fit h-fit transition-colors active:scale-90" class:stick-btn-on={isStick()}>
+        <div>
+          <button class="p-2.5 text-base" title="stick to bottom" type="button" onClick={() => setStick(!isStick())}>
+            <div i-ph-arrow-line-down-bold />
+          </button>
+        </div>
+      </div>
     </div>
   )
 }
