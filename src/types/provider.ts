@@ -38,6 +38,11 @@ interface SettingsUIBase {
   description?: string
 }
 
+interface SelectOptionType {
+  value: any
+  label: string
+}
+
 export interface SettingsApiKey extends SettingsUIBase {
   type: 'api-key'
 }
@@ -48,7 +53,15 @@ export interface SettingsUIInput extends SettingsUIBase {
 
 export interface SettingsUISelect extends SettingsUIBase {
   type: 'select'
-  options: string[]
+  options: SelectOptionType[]
 }
 
-export type SettingsUI = SettingsApiKey | SettingsUIInput | SettingsUISelect
+export interface SettingsUISlider extends SettingsUIBase {
+  type: 'slider'
+  min: number
+  max: number
+  value: number
+  step: number
+}
+
+export type SettingsUI = SettingsApiKey | SettingsUIInput | SettingsUISelect | SettingsUISlider

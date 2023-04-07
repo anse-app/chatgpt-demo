@@ -19,6 +19,7 @@ export const Select = (inputProps: Props) => {
   }, inputProps)
   const [state, send] = useMachine(select.machine({
     id: createUniqueId(),
+    loop: true,
     onChange: (details) => {
       details && props.setValue(details.value)
     },
@@ -39,7 +40,7 @@ export const Select = (inputProps: Props) => {
           <div i-carbon-caret-down />
         </button>
       </div>
-      <div class="w-$reference-width" {...api().positionerProps}>
+      <div class="w-$reference-width z-100 shadow-md" {...api().positionerProps}>
         <ul {...api().contentProps}>
           {props.options.map(({ label, value }) => (
             <li

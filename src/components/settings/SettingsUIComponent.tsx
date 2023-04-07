@@ -1,6 +1,8 @@
 import { Match, Switch } from 'solid-js'
 import SettingsApiKey from '../ui/SettingsApiKey'
 import SettingsInput from '../ui/SettingsInput'
+import SettingsSlider from '../ui/SettingsSlider'
+import SettingsSelect from '../ui/SettingsSelect'
 import type { Accessor, Setter } from 'solid-js'
 import type { SettingsUI } from '@/types/provider'
 
@@ -29,6 +31,22 @@ export default ({ settings, editing, value, setValue }: Props) => {
             settings={settings}
             editing={editing}
             value={value}
+            setValue={setValue}
+          />
+        </Match>
+        <Match when={settings.type === 'select'}>
+          <SettingsSelect
+            settings={settings}
+            editing={editing}
+            value={value}
+            setValue={setValue}
+          />
+        </Match>
+        <Match when={settings.type === 'slider'}>
+          <SettingsSlider
+            settings={settings}
+            editing={editing}
+            value={value as Accessor<any>}
             setValue={setValue}
           />
         </Match>
