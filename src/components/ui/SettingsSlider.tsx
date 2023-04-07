@@ -14,8 +14,6 @@ export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
   const sliderSettings = settings as SettingsUISlider
 
-  if (!value())
-    setValue(sliderSettings.value)
   return (
     <div>
       <div class="mt-1 text-sm">

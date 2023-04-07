@@ -11,6 +11,7 @@ interface Props {
   value: Accessor<string>
   setValue: Setter<string>
   placeholder?: string
+  readonly?: boolean
 }
 
 export const Select = (inputProps: Props) => {
@@ -19,7 +20,7 @@ export const Select = (inputProps: Props) => {
   }, inputProps)
   const [state, send] = useMachine(select.machine({
     id: createUniqueId(),
-    loop: true,
+    readOnly: props.readonly,
     onChange: (details) => {
       details && props.setValue(details.value)
     },

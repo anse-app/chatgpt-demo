@@ -23,6 +23,12 @@ export const Slider = (selectProps: Props) => {
     label: 'Slider Label',
     disabled: false,
   }, selectProps)
+
+  const formatSldierValue = (value: number) => {
+    if (!value) return 0
+    return Number.isInteger(value) ? value : parseFloat(value.toFixed(2))
+  }
+
   const [state, send] = useMachine(slider.machine({
     id: createUniqueId(),
     value: props.value(),
@@ -31,7 +37,7 @@ export const Slider = (selectProps: Props) => {
     step: props.step,
     disabled: props.disabled,
     onChange: (details) => {
-      details && props.setValue(details.value)
+      details && props.setValue(formatSldierValue(details.value))
     },
   }))
   const api = createMemo(() => slider.connect(state, send, normalizeProps))
@@ -39,7 +45,7 @@ export const Slider = (selectProps: Props) => {
     <div {...api().rootProps}>
       <div class="text-xs op-50 fb items-center">
         <label {...api().labelProps}>{ props.label }</label>
-        <output {...api().outputProps}>{api().value}</output>
+        <output {...api().outputProps}>{formatSldierValue(api().value)}</output>
       </div>
       {props.desc && !props.disabled && (
         <div class="mt-1 text-xs op-30">{props.desc}</div>

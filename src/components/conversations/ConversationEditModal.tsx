@@ -1,6 +1,6 @@
 import { For, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { Select } from '@/components/ui/base/Select'
+// import { Select } from '@/components/ui/base/Select'
 import {
   addConversation,
   currentEditingConversation,
@@ -93,11 +93,11 @@ export default () => {
           placeholder="Untitled"
           class="w-full bg-transparent border border-base px-4 py-3 input-base focus:border-darker"
         />
-        <Select
+        {/* <Select
           options={$providerMetaList().map(item => ({ value: item.id, label: item.name }))}
           value={selectProviderId}
           setValue={setSelectProviderId}
-        />
+        /> */}
         <div>
           <For each={typeSelectList.filter(item => selectProvider()?.supportConversationType.includes(item.value))}>
             {item => (

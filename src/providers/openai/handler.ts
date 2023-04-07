@@ -14,7 +14,7 @@ export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(
 export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, payload) => {
   const response = await fetchImageGeneration({
     apiKey: payload.globalSettings.apiKey as string,
-    baseUrl: (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, ''),
+    baseUrl: (payload.globalSettings.baseUrl as string).trim().replace(/\/$/, ''),
     body: {
       prompt,
       n: 1,
@@ -34,11 +34,13 @@ export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, pa
 const handleChatCompletion = async(messages: Message[], payload: HandlerPayload) => {
   const response = await fetchChatCompletion({
     apiKey: payload.globalSettings.apiKey as string,
-    baseUrl: (payload.globalSettings.baseUrl as string || 'https://api.openai.com').trim().replace(/\/$/, ''),
+    baseUrl: (payload.globalSettings.baseUrl as string).trim().replace(/\/$/, ''),
     body: {
       model: 'gpt-3.5-turbo',
       messages,
-      temperature: 0.6,
+      temperature: payload.globalSettings.temperature as number,
+      max_tokens: payload.globalSettings.maxTokens as number,
+      top_p: payload.globalSettings.topP as number,
       stream: true,
     },
   })

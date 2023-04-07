@@ -36,6 +36,7 @@ interface SettingsUIBase {
   key: string
   name: string
   description?: string
+  default?: string | number | boolean
 }
 
 interface SelectOptionType {
@@ -60,7 +61,6 @@ export interface SettingsUISlider extends SettingsUIBase {
   type: 'slider'
   min: number
   max: number
-  value: number
   step: number
 }
 

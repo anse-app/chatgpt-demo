@@ -16,7 +16,7 @@ export const createStores = () => {
 }
 
 export const rebuildStores = async() => {
-  rebuildConversationStore()
-  rebuildMessagesStore()
-  rebuildSettingsStore()
+  await rebuildConversationStore()
+  await rebuildMessagesStore()
+  await rebuildSettingsStore()
 }

@@ -27,6 +27,20 @@ export default ({ config, settingsValue, setSettings }: Props) => {
     setEditing(false)
   }
 
+  // onMount(() => {
+  //   if (DB_DONE.get()) {
+  //     console.log(formData(), settingsValue())
+  //     config.settingsUI?.forEach((item) => {
+  //       if (item.default && settingsValue()[item.key] === undefined) {
+  //         setEditFormData(
+  //           { ...formData(), [item.key]: item.default },
+  //         )
+  //       }
+  //     })
+  //     setSettings(formData())
+  //   }
+  // })
+
   if (!config.settingsUI) return null
   return (
     <div
@@ -59,14 +73,16 @@ export default ({ config, settingsValue, setSettings }: Props) => {
       </h3>
       <div class="mt-2 flex flex-col">
         <For each={config.settingsUI}>
-          {item => (
-            <SettingsUIComponent
-              settings={item}
-              editing={editing}
-              value={() => formData()[item.key] || ''}
-              setValue={v => setEditFormData({ ...formData(), [item.key]: v })}
-            />
-          )}
+          {(item) => {
+            return (
+              <SettingsUIComponent
+                settings={item}
+                editing={editing}
+                value={() => formData()[item.key] || ''}
+                setValue={v => setEditFormData({ ...formData(), [item.key]: v })}
+              />
+            )
+          }}
         </For>
       </div>
     </div>

@@ -14,8 +14,6 @@ export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
   const selectSettings = settings as SettingsUISelect
 
-  console.log(value, selectSettings)
-
   return (
     <div>
       <div class="text-xs op-50">{selectSettings.name}</div>
@@ -24,17 +22,9 @@ export default ({ settings, editing, value, setValue }: Props) => {
         {editing() && (
           <Select value={value} setValue={setValue} options={selectSettings.options} />
         )}
-        {/* {!editing() && value() && (
-          <Slider
-            label={settings.name}
-            setValue={setValue}
-            max={sliderSettings.max}
-            value={value}
-            min={sliderSettings.min}
-            step={sliderSettings.step}
-            disabled
-          />
-        )} */}
+        {!editing() && value() && (
+          <Select value={value} setValue={setValue} options={selectSettings.options} readonly />
+        )}
         {!editing() && !value() && (
         <SettingsNotDefined />
         )}
