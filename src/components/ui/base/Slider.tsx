@@ -24,7 +24,7 @@ export const Slider = (selectProps: Props) => {
     disabled: false,
   }, selectProps)
 
-  const formatSldierValue = (value: number) => {
+  const formatSliderValue = (value: number) => {
     if (!value) return 0
     return Number.isInteger(value) ? value : parseFloat(value.toFixed(2))
   }
@@ -37,7 +37,7 @@ export const Slider = (selectProps: Props) => {
     step: props.step,
     disabled: props.disabled,
     onChange: (details) => {
-      details && props.setValue(formatSldierValue(details.value))
+      details && details.value && props.setValue(formatSliderValue(details.value))
     },
   }))
   const api = createMemo(() => slider.connect(state, send, normalizeProps))
@@ -45,7 +45,7 @@ export const Slider = (selectProps: Props) => {
     <div {...api().rootProps}>
       <div class="text-xs op-50 fb items-center">
         <label {...api().labelProps}>{ props.label }</label>
-        <output {...api().outputProps}>{formatSldierValue(api().value)}</output>
+        <output {...api().outputProps}>{formatSliderValue(api().value)}</output>
       </div>
       {props.desc && !props.disabled && (
         <div class="mt-1 text-xs op-30">{props.desc}</div>

@@ -34,7 +34,7 @@ const providerOpenAI = () => {
       //   ],
       // },
       {
-        key: 'max-tokens',
+        key: 'maxTokens',
         name: 'Max Tokens',
         description: 'The maximum number of tokens to generate in the completion.',
         type: 'slider',

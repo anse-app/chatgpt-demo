@@ -22,7 +22,13 @@ export default ({ config, settingsValue, setSettings }: Props) => {
     ...editFormData(),
   })
 
+  const handleDismiss = () => {
+    setEditFormData({})
+    setEditing(false)
+  }
+
   const handleClick = () => {
+    console.log('handleClick', editFormData())
     setSettings(formData())
     setEditing(false)
   }
@@ -62,7 +68,7 @@ export default ({ config, settingsValue, setSettings }: Props) => {
         )}
         {editing() && (
           <>
-            <div onClick={() => setEditing(false)} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
+            <div onClick={handleDismiss} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
               <div class="i-carbon-close" />
             </div>
             <div onClick={handleClick} class="p-1 inline-flex items-center rounded-md hv-base hv-foreground">
@@ -79,7 +85,10 @@ export default ({ config, settingsValue, setSettings }: Props) => {
                 settings={item}
                 editing={editing}
                 value={() => formData()[item.key] || ''}
-                setValue={v => setEditFormData({ ...formData(), [item.key]: v })}
+                setValue={(v) => {
+                  console.log('setValue', v)
+                  setEditFormData({ ...formData(), [item.key]: v })
+                }}
               />
             )
           }}

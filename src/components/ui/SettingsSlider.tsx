@@ -1,13 +1,13 @@
 import { Slider } from '../ui/base/Slider'
 import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUISlider } from '@/types/provider'
-import type { Accessor, Setter } from 'solid-js'
+import type { Accessor } from 'solid-js'
 
 interface Props {
   settings: SettingsUI
   editing: Accessor<boolean>
   value: Accessor<number>
-  setValue: Setter<number>
+  setValue: (v: number) => void
 }
 
 export default ({ settings, editing, value, setValue }: Props) => {

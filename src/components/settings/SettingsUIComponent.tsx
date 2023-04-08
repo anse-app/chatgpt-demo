@@ -3,14 +3,14 @@ import SettingsApiKey from '../ui/SettingsApiKey'
 import SettingsInput from '../ui/SettingsInput'
 import SettingsSlider from '../ui/SettingsSlider'
 // import SettingsSelect from '../ui/SettingsSelect'
-import type { Accessor, Setter } from 'solid-js'
+import type { Accessor } from 'solid-js'
 import type { SettingsUI } from '@/types/provider'
 
 interface Props {
   settings: SettingsUI
   editing: Accessor<boolean>
-  value: Accessor<string>
-  setValue: Setter<string>
+  value: Accessor<string | number | boolean>
+  setValue: (v: string | number | boolean) => void
 }
 
 export default ({ settings, editing, value, setValue }: Props) => {
@@ -22,7 +22,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
           <SettingsApiKey
             settings={settings}
             editing={editing}
-            value={value}
+            value={value as Accessor<string>}
             setValue={setValue}
           />
         </Match>
@@ -30,7 +30,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
           <SettingsInput
             settings={settings}
             editing={editing}
-            value={value}
+            value={value as Accessor<string>}
             setValue={setValue}
           />
         </Match>
@@ -47,7 +47,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
           <SettingsSlider
             settings={settings}
             editing={editing}
-            value={value as Accessor<any>}
+            value={value as Accessor<number>}
             setValue={setValue}
           />
         </Match>

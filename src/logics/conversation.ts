@@ -55,6 +55,7 @@ const callProviderHandler = async(payload: CallProviderPayload) => {
     systemRole: '',
     mockMessages: [],
   }
+  console.log('callProviderHandler', handlerPayload)
   try {
     if (conversation.conversationType === 'single') {
       response = await provider.handleSinglePrompt?.(prompt, handlerPayload)

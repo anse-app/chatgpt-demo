@@ -1,13 +1,13 @@
 import { Select } from '../ui/base/Select'
 import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUISelect } from '@/types/provider'
-import type { Accessor, Setter } from 'solid-js'
+import type { Accessor } from 'solid-js'
 
 interface Props {
   settings: SettingsUI
   editing: Accessor<boolean>
   value: Accessor<string>
-  setValue: Setter<string>
+  setValue: (v: string) => void
 }
 
 export default ({ settings, editing, value, setValue }: Props) => {
