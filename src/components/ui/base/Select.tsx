@@ -42,11 +42,11 @@ export const Select = (inputProps: Props) => {
           <div i-carbon-caret-down />
         </button>
       </div>
-      <div class="w-$reference-width z-100 shadow-md" {...api().positionerProps}>
+      <div class="w-$reference-width -mt-2 z-100 shadow-md" {...api().positionerProps}>
         <ul {...api().contentProps}>
           {props.options.map(({ label, value }) => (
             <li
-              class="fi justify-between w-full px-4 py-2 bg-base border border-base"
+              class="fi justify-between w-full px-4 py-2 bg-base border border-base hv-base"
               {...api().getOptionProps({ label, value })}
             >
               <span>{label}</span>

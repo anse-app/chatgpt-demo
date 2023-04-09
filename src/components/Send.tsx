@@ -32,7 +32,7 @@ export default () => {
   )
 
   const EditState = () => (
-    <div class="h-full bg-darker-100 px-6">
+    <div class="h-full bg-darker px-6">
       <div class="max-w-base h-full relative">
         <textarea
           ref={inputRef!}
@@ -40,7 +40,7 @@ export default () => {
           autocomplete="off"
           onBlur={() => { setFocusState(false) }}
           onInput={() => { inputPrompt.set(inputRef.value) }}
-          class="absolute inset-0 py-4 resize-none scroll-pa-4 bg-darker-100 input-base"
+          class="absolute inset-0 py-4 resize-none scroll-pa-4 bg-darker input-base"
         />
         <div
           onClick={handleSend}

@@ -43,8 +43,7 @@ export default defineConfig({
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
     'bg-base': 'bg-light-100 dark:bg-dark-400',
-    'bg-darker-100': 'bg-light-400 dark:bg-dark-300',
-    'bg-darker': 'bg-dark/4 dark:bg-white/4',
+    'bg-darker': 'bg-light-400 dark:bg-dark-300',
     'fg-base': 'text-dark dark:text-light',
     // 'bg-accent': 'bg-emerald/50',
     'border-base': 'border-light-800 dark:border-dark-100',
@@ -54,7 +53,7 @@ export default defineConfig({
     'hv-base': 'transition-colors cursor-pointer hover:bg-darker',
     'hv-foreground': 'transition-opacity cursor-pointer op-70 hover:op-100',
     'border-b-base': 'border-b-light-900 dark:border-b-dark-100',
-    'input-base': 'placeholder:op-50 dark:placeholder:op-30 focus:(bg-darker-100 ring-0 outline-none)',
+    'input-base': 'placeholder:op-50 dark:placeholder:op-30 focus:(bg-darker ring-0 outline-none)',
     'max-w-base': 'max-w-3xl mx-auto',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',
