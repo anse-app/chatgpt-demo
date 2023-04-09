@@ -12,14 +12,14 @@ import type { ConversationType } from '@/types/conversation'
 
 const typeSelectList = [
   {
-    value: 'single' as const,
-    label: 'Single Conversation',
-    icon: 'i-carbon-connect',
-  },
-  {
     value: 'continuous' as const,
     label: 'Continuous Conversation',
     icon: 'i-carbon-edt-loop',
+  },
+  {
+    value: 'single' as const,
+    label: 'Single Conversation',
+    icon: 'i-carbon-connect',
   },
   {
     value: 'image' as const,
@@ -39,10 +39,15 @@ export default () => {
   const $currentEditingConversation = useStore(currentEditingConversation)
   const $providerMetaList = useStore(providerMetaList)
   const [currentEditingId, setCurrentEditingId] = createSignal('')
-  const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('single')
+  const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('continuous')
   const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
   const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0]?.id)
   const selectProvider = () => providerMetaList.get().find(item => item.id === selectProviderId()) || null
+
+  const handleProviderChange = (id: string) => {
+    setSelectProviderId(id)
+    setSelectConversationType(selectProvider()?.supportConversationType[0] || 'continuous')
+  }
 
   const handleAdd = () => {
     const currentId = currentEditingId()
@@ -86,23 +91,24 @@ export default () => {
       <header class="mb-4">
         <h1 class="font-bold">Edit Conversation</h1>
       </header>
-      <main class="flex flex-col gap-4">
+      <main class="flex flex-col gap-3">
         <input
           ref={inputRef!}
           type="text"
           placeholder="Untitled"
-          class="w-full bg-transparent border border-base px-4 py-3 input-base focus:border-darker"
+          class="w-full bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
         />
         <Select
           options={$providerMetaList().map(item => ({ value: item.id, label: item.name }))}
           value={selectProviderId}
-          setValue={setSelectProviderId}
+          setValue={handleProviderChange}
+          readonly={!!$currentEditingConversation()}
         />
         <div>
           <For each={typeSelectList.filter(item => selectProvider()?.supportConversationType.includes(item.value))}>
             {item => (
               <div
-                class="flex items-center gap-3 p-4 border border-base"
+                class="flex items-center gap-2 p-2 border border-base"
                 classList={{
                   'border-emerald-500 text-emerald': selectConversationType() === item.value,
                   'op-50': !!$currentEditingConversation(),
@@ -110,7 +116,7 @@ export default () => {
                 }}
                 onClick={() => { !$currentEditingConversation() && setSelectConversationType(item.value) }}
               >
-                <div class={`text-xl ${item.icon}`} />
+                <div class={item.icon} />
                 <div>{item.label}</div>
               </div>
             )}
@@ -120,17 +126,17 @@ export default () => {
           <For each={iconList}>
             {item => (
               <div
-                class="fcc w-12 h-12 border border-base hv-base"
+                class="fcc w-10 h-10 border border-base hv-base"
                 classList={{ 'border-emerald-500 text-emerald': selectIcon() === item }}
                 onClick={() => { setSelectIcon(item) }}
               >
-                <div class={`text-xl ${item}`} />
+                <div class={item} />
               </div>
             )}
           </For>
         </div>
       </main>
-      <div class="fcc p-4 border border-base mt-8 hv-base" onClick={handleAdd}>OK</div>
+      <div class="fcc px-2 py-2 bg-darker border border-base mt-4 hv-base hover:border-darker" onClick={handleAdd}>Save</div>
     </div>
   )
 }

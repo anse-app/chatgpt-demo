@@ -35,7 +35,7 @@ export const Select = (inputProps: Props) => {
     <div class="z-10">
       <div>
         <button
-          class="fi justify-between w-full px-4 py-2 bg-base border border-base hv-base"
+          class="fi justify-between w-full px-2 py-1 border border-base hv-base"
           {...api().triggerProps}
         >
           <span>{api().selectedOption?.label ?? props.placeholder}</span>
@@ -46,7 +46,7 @@ export const Select = (inputProps: Props) => {
         <ul {...api().contentProps}>
           {props.options.map(({ label, value }) => (
             <li
-              class="fi justify-between w-full px-4 py-2 bg-base border border-base hv-base"
+              class="fi justify-between w-full px-2 py-1 bg-base border border-base hv-base"
               {...api().getOptionProps({ label, value })}
             >
               <span>{label}</span>
