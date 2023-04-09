@@ -40,11 +40,10 @@ export default ({ settings, editing, value, setValue }: Props) => {
           />
         )}
         {!editing() && !value() && (
-        <>
-          <div class="text-xs op-50">{sliderSettings.name}</div>
-          <SettingsNotDefined />
-        </>
-
+          <>
+            <div class="text-xs op-50">{sliderSettings.name}</div>
+            <SettingsNotDefined />
+          </>
         )}
       </div>
     </div>

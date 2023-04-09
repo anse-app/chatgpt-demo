@@ -26,7 +26,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
           <Select value={value} setValue={setValue} options={selectSettings.options} readonly />
         )}
         {!editing() && !value() && (
-        <SettingsNotDefined />
+          <SettingsNotDefined />
         )}
       </div>
     </div>

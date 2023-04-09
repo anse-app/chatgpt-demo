@@ -36,7 +36,7 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
     apiKey: payload.globalSettings.apiKey as string,
     baseUrl: (payload.globalSettings.baseUrl as string).trim().replace(/\/$/, ''),
     body: {
-      model: 'gpt-3.5-turbo',
+      model: payload.globalSettings.model as string,
       messages,
       temperature: payload.globalSettings.temperature as number,
       max_tokens: payload.globalSettings.maxTokens as number,

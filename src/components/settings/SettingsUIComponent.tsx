@@ -2,7 +2,7 @@ import { Match, Switch } from 'solid-js'
 import SettingsApiKey from '../ui/SettingsApiKey'
 import SettingsInput from '../ui/SettingsInput'
 import SettingsSlider from '../ui/SettingsSlider'
-// import SettingsSelect from '../ui/SettingsSelect'
+import SettingsSelect from '../ui/SettingsSelect'
 import type { Accessor } from 'solid-js'
 import type { SettingsUI } from '@/types/provider'
 
@@ -34,15 +34,14 @@ export default ({ settings, editing, value, setValue }: Props) => {
             setValue={setValue}
           />
         </Match>
-        {/* TODO: Bug-右侧select组件change事件会报错 */}
-        {/* <Match when={settings.type === 'select'}>
+        <Match when={settings.type === 'select'}>
           <SettingsSelect
             settings={settings}
             editing={editing}
-            value={value}
+            value={value as Accessor<string>}
             setValue={setValue}
           />
-        </Match> */}
+        </Match>
         <Match when={settings.type === 'slider'}>
           <SettingsSlider
             settings={settings}

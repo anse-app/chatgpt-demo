@@ -23,16 +23,17 @@ const providerOpenAI = () => {
         type: 'input',
         default: 'https://api.openai.com',
       },
-      // {
-      //   key: 'model',
-      //   name: 'OpenAI model',
-      //   description: 'Custom gpt model for OpenAI API.',
-      //   type: 'select',
-      //   options: [
-      //     { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo' },
-      //     { value: 'gpt-4', label: 'gpt-4' },
-      //   ],
-      // },
+      {
+        key: 'model',
+        name: 'OpenAI model',
+        description: 'Custom gpt model for OpenAI API.',
+        type: 'select',
+        options: [
+          { value: 'gpt-3.5-turbo', label: 'gpt-3.5-turbo' },
+          { value: 'gpt-4', label: 'gpt-4' },
+        ],
+        default: 'gpt-3.5-turbo',
+      },
       {
         key: 'maxTokens',
         name: 'Max Tokens',
