@@ -38,6 +38,7 @@ specifiers:
   nanostores: ^0.7.4
   punycode: ^2.3.0
   solid-js: 1.6.12
+  solid-transition-group: ^0.2.2
   solidjs-use: ^1.2.0
   unocss: ^0.50.6
   vite-plugin-pwa: ^0.14.7
@@ -70,6 +71,7 @@ dependencies:
   micromark-extension-gfm: 2.0.1
   nanostores: 0.7.4
   solid-js: 1.6.12
+  solid-transition-group: 0.2.2_solid-js@1.6.12
   solidjs-use: 1.2.0
 
 devDependencies:
@@ -1977,6 +1979,31 @@ packages:
       picomatch: 2.3.1
       rollup: 3.20.2
     dev: true
+
+  /@solid-primitives/refs/1.0.2_solid-js@1.6.12:
+    resolution: {integrity: sha512-qnqQRdYbsENlVx86QCfftRKGZ/9zUJMGK9U85xDRymocEyeUXxdxgq0FeyGhvgg4A25spJVwHmuZUGY0aMBBLA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/utils': 6.0.0_solid-js@1.6.12
+      solid-js: 1.6.12
+    dev: false
+
+  /@solid-primitives/transition-group/1.0.1_solid-js@1.6.12:
+    resolution: {integrity: sha512-StVQs7BVGQa1uo6dD19wqOgfGMxu3gL/bvPHUV/NBJaiNX5R5e7dPb6lz6zR1RdTho3M+3Mv8jUHKd/aKuhL4w==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.6.12
+    dev: false
+
+  /@solid-primitives/utils/6.0.0_solid-js@1.6.12:
+    resolution: {integrity: sha512-SSu12+vvU6J8SVWW9eGV+dqiMsc0WG1Oy8YYY9AWzRzssmzNXg/uexaW+0eqTuj8JcRAaGplMDjhraB01HOidA==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      solid-js: 1.6.12
+    dev: false
 
   /@solidjs-use/shared/1.2.0:
     resolution: {integrity: sha512-HkGJl6c3XDlusLFJw+4JKUCiW6PZ1xw+brMZdyGMfDbr+RQZXrLfu61WbGhVpY5BPy/+P93gS4+WKpBhOqkz6Q==}
@@ -7022,6 +7049,16 @@ packages:
     resolution: {integrity: sha512-JFqRobfG3q5r1l4RYVOAukk6+FWtHpXGIjgh/GEsHKweN/kK+iHOtzUALE6+P5t/jIcSNeGiVitX8gmJg+cYvQ==}
     dependencies:
       csstype: 3.1.2
+    dev: false
+
+  /solid-transition-group/0.2.2_solid-js@1.6.12:
+    resolution: {integrity: sha512-6nB90UM2PB6VsIo/UCkmZmlIJb9mnmP7QPGrePqQJWtpUiRs5PbhkB8fvdyv9g/RPHWYpdJhQgxL6n++WmTt5A==}
+    peerDependencies:
+      solid-js: ^1.6.12
+    dependencies:
+      '@solid-primitives/refs': 1.0.2_solid-js@1.6.12
+      '@solid-primitives/transition-group': 1.0.1_solid-js@1.6.12
+      solid-js: 1.6.12
     dev: false
 
   /solidjs-use/1.2.0:
