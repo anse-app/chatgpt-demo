@@ -54,6 +54,7 @@ export default (props: Props) => {
     <div
       class={`prose prose-neutral dark:prose-invert max-w-3xl ${props.class ?? ''}`}
       innerHTML={htmlString()}
+      class={`prose prose-neutral dark:prose-invert max-w-3xl -my-4 ${props.class ?? ''}`}
     />
   )
 }

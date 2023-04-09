@@ -18,24 +18,20 @@ export default defineConfig({
     presetTypography({
       cssExtend: {
         'h1': {
-          'font-size': '1.6em',
+          'font-size': '1.25em',
+          'margin': '1rem 0',
         },
         'h2': {
-          'font-size': '1.4em',
-          'margin': '1.4em 0 0.5em',
+          'font-size': '1.16em',
+          'margin': '1rem 0',
         },
         'h3': {
-          'font-size': '1.25em',
-          'margin': '1.2em 0 0.5em',
+          'font-size': '1.1em',
+          'margin': '1rem 0',
         },
-        'h5, h6': {
-          margin: '1em 0 0.5em',
-        },
-        ':where(.prose>:first-child):not(:where([class~=not-prose] *))': {
-          'margin-top': 0,
-        },
-        ':where(.prose>:last-child):not(:where([class~=not-prose] *))': {
-          'margin-bottom': 0,
+        'h4, h5, h6': {
+          'font-size': '1em',
+          'margin': '1rem 0',
         },
       },
     }),
