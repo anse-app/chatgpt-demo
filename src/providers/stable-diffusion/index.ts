@@ -16,7 +16,8 @@ const providerOpenAI = () => {
       },
       {
         key: 'version',
-        name: 'Version hash of the model',
+        name: 'Model Version',
+        description: 'Version hash for Stable Diffusion.',
         type: 'input',
       },
     ],
