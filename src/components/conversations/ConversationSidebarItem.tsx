@@ -32,11 +32,11 @@ export default ({ instance }: Props) => {
     <div
       class={[
         'group fi h-16 px-4 gap-3 border-b border-l-4 border-b-base hv-base',
-        instance.id === $currentConversationId() ? 'border-l-emerald-500' : 'border-l-transparent',
+        instance.id === $currentConversationId() ? 'border-l-emerald-600' : 'border-l-transparent',
       ].join(' ')}
       onClick={handleClick}
     >
-      <div class="fcc w-8 h-8 rounded-full bg-emerald/10 text-emerald text-xl shrink-0">
+      <div class="fcc w-8 h-8 rounded-full text-xl shrink-0">
         <div class={instance.icon || 'i-carbon-chat'} />
       </div>
       <div class="flex-1 truncate">{ instance.name || 'Untitled' }</div>

@@ -45,7 +45,6 @@ export default defineConfig({
     'bg-base': 'bg-light-100 dark:bg-dark-400',
     'bg-darker': 'bg-light-400 dark:bg-dark-300',
     'fg-base': 'text-dark dark:text-light',
-    // 'bg-accent': 'bg-emerald/50',
     'border-base': 'border-light-800 dark:border-dark-100',
     'border-lighter': 'border-light-600 dark:border-dark-300',
     'border-darker': 'border-neutral-300 dark:border-neutral-600',

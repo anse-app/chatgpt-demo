@@ -110,7 +110,7 @@ export default () => {
               <div
                 class="flex items-center gap-2 p-2 border border-base"
                 classList={{
-                  'border-emerald-500 text-emerald': selectConversationType() === item.value,
+                  'border-emerald-600! text-emerald-600': selectConversationType() === item.value,
                   'op-50': !!$currentEditingConversation(),
                   'hv-base': !$currentEditingConversation(),
                 }}
@@ -127,7 +127,7 @@ export default () => {
             {item => (
               <div
                 class="fcc w-10 h-10 border border-base hv-base"
-                classList={{ 'border-emerald-500 text-emerald': selectIcon() === item }}
+                classList={{ 'border-emerald-600! text-emerald-600': selectIcon() === item }}
                 onClick={() => { setSelectIcon(item) }}
               >
                 <div class={item} />
