@@ -1,4 +1,4 @@
-import { For, createSignal } from 'solid-js'
+import { For, createSignal, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { Select } from '@/components/ui/base/Select'
 import {
@@ -29,9 +29,18 @@ const typeSelectList = [
 ]
 const iconList = [
   'i-carbon-chat',
+  'i-carbon-chat-bot',
   'i-carbon-basketball',
   'i-carbon-game-console',
   'i-carbon-palm-tree',
+  'i-carbon-asleep',
+  'i-carbon-cafe',
+  'i-carbon-calculation',
+  'i-carbon-color-palette',
+  'i-carbon-fish',
+  'i-carbon-idea',
+  'i-carbon-music',
+  'i-carbon-parameter',
 ]
 
 export default () => {
@@ -49,6 +58,22 @@ export default () => {
     setSelectConversationType(selectProvider()?.supportConversationType[0] || 'continuous')
   }
 
+  onMount(() => {
+    const current = currentEditingConversation.get()
+    if (current?.id) {
+      setCurrentEditingId(current.id)
+      const { name, icon, conversationType } = current
+      inputRef.value = name
+      setSelectConversationType(conversationType)
+      setSelectIcon(icon || 'i-carbon-chat')
+    } else {
+      setCurrentEditingId('')
+      inputRef.value = ''
+      setSelectConversationType('single')
+      setSelectIcon('i-carbon-chat')
+    }
+  })
+
   const handleAdd = () => {
     const currentId = currentEditingId()
     const payload = {
@@ -65,26 +90,6 @@ export default () => {
     showConversationEditModal.set(false)
     inputRef.value = ''
   }
-
-  showConversationEditModal.listen((showModal) => {
-    if (showModal) {
-      const current = currentEditingConversation.get()
-      if (current?.id) {
-        setCurrentEditingId(current.id)
-        const { name, icon, conversationType } = current
-        inputRef.value = name
-        setSelectConversationType(conversationType)
-        setSelectIcon(icon || 'i-carbon-chat')
-      } else {
-        setCurrentEditingId('')
-        inputRef.value = ''
-        setSelectConversationType('single')
-        setSelectIcon('i-carbon-chat')
-      }
-    } else {
-      setCurrentEditingId('')
-    }
-  })
 
   return (
     <div class="p-6">
@@ -122,7 +127,7 @@ export default () => {
             )}
           </For>
         </div>
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap">
           <For each={iconList}>
             {item => (
               <div
