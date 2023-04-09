@@ -1,6 +1,6 @@
 import { useStore } from '@nanostores/solid'
 import { currentConversationId, currentEditingConversationId, deleteConversationById } from '@/stores/conversation'
-import { showConversationEditModal } from '@/stores/ui'
+import { showConversationEditModal, showConversationSidebar } from '@/stores/ui'
 import type { Conversation } from '@/types/conversation'
 
 interface Props {
@@ -13,6 +13,8 @@ export default ({ instance }: Props) => {
   const $currentConversationId = useStore(currentConversationId)
 
   const handleClick = () => {
+    if (instance.id === currentConversationId.get())
+      showConversationSidebar.set(false)
     currentConversationId.set(instance.id)
   }
   const handleDelete = (e: MouseEvent, conversationId: string) => {

@@ -15,7 +15,7 @@ interface Props {
 export default (props: Props) => {
   const [state, send] = useMachine(dialog.machine({
     id: createUniqueId(),
-    initialFocusEl: null,
+    closeOnOutsideClick: false,
   }))
   const api = createMemo(() => dialog.connect(state, send, normalizeProps))
 
@@ -38,11 +38,11 @@ export default (props: Props) => {
       <Show when={api().isOpen}>
         <div class="fixed inset-0 z-20">
           <Portal>
-            <div class="fixed inset-0 bg-base opacity-50" {...api().backdropProps} />
+            <div {...api().backdropProps} class="fixed inset-0 bg-base opacity-50" />
           </Portal>
           <div {...api().containerProps}>
             <div {...api().contentProps} class={`bg-base absolute transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>
-              <button class="absolute top-4 right-4" {...api().closeTriggerProps}>
+              <button {...api().closeTriggerProps} class="absolute top-4 right-4">
                 <div i-carbon-close class="text-xl" />
               </button>
               { props.children }

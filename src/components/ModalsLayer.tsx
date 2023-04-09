@@ -17,7 +17,7 @@ export default () => {
         </div>
       </Modal>
       <Modal bindValue={showSettingsSidebar} direction="right">
-        <div class="w-[70vw] max-w-[300px] h-full">
+        <div class="w-screen sm:w-[70vw] sm:max-w-[300px] h-full">
           <SettingsSidebar />
         </div>
       </Modal>
