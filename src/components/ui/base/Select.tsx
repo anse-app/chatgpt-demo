@@ -20,6 +20,7 @@ export const Select = (inputProps: Props) => {
   }, inputProps)
   const [state, send] = useMachine(select.machine({
     id: createUniqueId(),
+    selectedOption: props.options.find(o => o.value === props.value()),
     readOnly: props.readonly,
     onChange: (details) => {
       details && props.setValue(details.value)
@@ -28,7 +29,7 @@ export const Select = (inputProps: Props) => {
 
   const api = createMemo(() => select.connect(state, send, normalizeProps))
 
-  api().setSelectedOption(props.options[0])
+  // api().setSelectedOption(props.options[0])
 
   return (
     <div class="z-10">
