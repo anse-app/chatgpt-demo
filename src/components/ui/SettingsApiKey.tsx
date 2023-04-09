@@ -1,5 +1,5 @@
 import SettingsNotDefined from './SettingsNotDefined'
-import type { SettingsUI, SettingsUIInput } from '@/types/provider'
+import type { SettingsUI } from '@/types/provider'
 import type { Accessor } from 'solid-js'
 
 interface Props {
@@ -11,41 +11,33 @@ interface Props {
 
 export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
-  const inputSettings = settings as SettingsUIInput
   return (
     <div>
-      <div class="text-xs op-50">{inputSettings.name}</div>
-      {editing() && inputSettings.description && <div class="mt-1 text-xs op-30">{inputSettings.description}</div>}
-      <div class="mt-1 text-sm">
-        {editing() && (
-          <input
-            type="password"
-            value={value()}
-            class="w-full mt-1 bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
-            onChange={e => setValue(e.currentTarget.value)}
-          />
-        )}
-        {!editing() && value() && (
-          <div class="fi justify-between gap-2">
-            <ApiKeyMaskText key={value} />
-            <Usage />
-          </div>
-        )}
-        {!editing() && !value() && (
-          <SettingsNotDefined />
-        )}
-      </div>
+      {editing() && (
+        <input
+          type="password"
+          value={value()}
+          class="w-full mt-1 bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
+          onChange={e => setValue(e.currentTarget.value)}
+        />
+      )}
+      {!editing() && value() && (
+        <ApiKeyMaskText key={value} />
+      )}
+      {!editing() && !value() && (
+        <SettingsNotDefined />
+      )}
     </div>
   )
 }
 
-const Usage = () => {
-  return (
-    <div class="relative h-1 w-[60px] bg-darker rounded-full overflow-hidden">
-      <div class="absolute top-0 bottom-0 left-0 w-[70%] bg-emerald-600 bg-op-60 rounded-full" />
-    </div>
-  )
-}
+// const Usage = () => {
+//   return (
+//     <div class="relative h-1 w-[60px] bg-darker rounded-full overflow-hidden">
+//       <div class="absolute top-0 bottom-0 left-0 w-[70%] bg-emerald-600 bg-op-60 rounded-full" />
+//     </div>
+//   )
+// }
 
 const ApiKeyMaskText = (props: {
   key: Accessor<string>

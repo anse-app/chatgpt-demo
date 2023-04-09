@@ -9,9 +9,7 @@ interface Props {
   min: number
   max: number
   step: number
-  label?: string
   disabled?: boolean
-  desc?: string
   setValue: (v: number) => void
 }
 
@@ -20,7 +18,6 @@ export const Slider = (selectProps: Props) => {
     min: 0,
     max: 10,
     step: 1,
-    label: 'Slider Label',
     disabled: false,
   }, selectProps)
 
@@ -44,12 +41,9 @@ export const Slider = (selectProps: Props) => {
   return (
     <div {...api().rootProps}>
       <div class="text-xs op-50 fb items-center">
-        <label {...api().labelProps}>{ props.label }</label>
+        <div />
         <output {...api().outputProps}>{formatSliderValue(api().value)}</output>
       </div>
-      {props.desc && !props.disabled && (
-        <div class="mt-1 text-xs op-30">{props.desc}</div>
-      )}
       <div class="mt-2" {...api().controlProps}>
         <div {...api().trackProps}>
           <div {...api().rangeProps} />

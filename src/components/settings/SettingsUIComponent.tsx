@@ -17,40 +17,44 @@ export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
   return (
     <div class="my-2">
-      <Switch>
-        <Match when={settings.type === 'api-key'}>
-          <SettingsApiKey
-            settings={settings}
-            editing={editing}
-            value={value as Accessor<string>}
-            setValue={setValue}
-          />
-        </Match>
-        <Match when={settings.type === 'input'}>
-          <SettingsInput
-            settings={settings}
-            editing={editing}
-            value={value as Accessor<string>}
-            setValue={setValue}
-          />
-        </Match>
-        <Match when={settings.type === 'select'}>
-          <SettingsSelect
-            settings={settings}
-            editing={editing}
-            value={value as Accessor<string>}
-            setValue={setValue}
-          />
-        </Match>
-        <Match when={settings.type === 'slider'}>
-          <SettingsSlider
-            settings={settings}
-            editing={editing}
-            value={value as Accessor<number>}
-            setValue={setValue}
-          />
-        </Match>
-      </Switch>
+      <div class="text-xs op-50">{settings.name}</div>
+      {editing() && settings.description && <div class="mt-1 text-xs op-30">{settings.description}</div>}
+      <div class="mt-1 text-sm">
+        <Switch>
+          <Match when={settings.type === 'api-key'}>
+            <SettingsApiKey
+              settings={settings}
+              editing={editing}
+              value={value as Accessor<string>}
+              setValue={setValue}
+            />
+          </Match>
+          <Match when={settings.type === 'input'}>
+            <SettingsInput
+              settings={settings}
+              editing={editing}
+              value={value as Accessor<string>}
+              setValue={setValue}
+            />
+          </Match>
+          <Match when={settings.type === 'select'}>
+            <SettingsSelect
+              settings={settings}
+              editing={editing}
+              value={value as Accessor<string>}
+              setValue={setValue}
+            />
+          </Match>
+          <Match when={settings.type === 'slider'}>
+            <SettingsSlider
+              settings={settings}
+              editing={editing}
+              value={value as Accessor<number>}
+              setValue={setValue}
+            />
+          </Match>
+        </Switch>
+      </div>
     </div>
   )
 }

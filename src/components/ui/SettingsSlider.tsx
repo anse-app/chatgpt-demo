@@ -16,36 +16,21 @@ export default ({ settings, editing, value, setValue }: Props) => {
 
   return (
     <div>
-      <div class="mt-1 text-sm">
-        {editing() && (
-          <Slider
-            label={settings.name}
-            desc={settings.description}
-            setValue={setValue}
-            max={sliderSettings.max}
-            value={value}
-            min={sliderSettings.min}
-            step={sliderSettings.step}
-          />
-        )}
-        {!editing() && value() && (
-          <Slider
-            label={settings.name}
-            setValue={setValue}
-            max={sliderSettings.max}
-            value={value}
-            min={sliderSettings.min}
-            step={sliderSettings.step}
-            disabled
-          />
-        )}
-        {!editing() && !value() && (
-          <>
-            <div class="text-xs op-50">{sliderSettings.name}</div>
-            <SettingsNotDefined />
-          </>
-        )}
-      </div>
+      {editing() && (
+        <Slider
+          setValue={setValue}
+          max={sliderSettings.max}
+          value={value}
+          min={sliderSettings.min}
+          step={sliderSettings.step}
+        />
+      )}
+      {!editing() && value() && (
+        <div>{value()}</div>
+      )}
+      {!editing() && !value() && (
+        <SettingsNotDefined />
+      )}
     </div>
   )
 }
