@@ -6,14 +6,14 @@
 }
 
 .slide-top-enter, .slide-top-exit-to {
-  @apply -translate-y-20 opacity-0;
+  @apply -translate-y-20 opacity-0 sm:translate-y-2;
 }
 .slide-top-enter-to {
   @apply translate-y-0;
 }
 
 .slide-bottom-enter, .slide-bottom-exit-to {
-  @apply translate-y-20 opacity-0;
+  @apply translate-y-20 opacity-0 sm:translate-y-2;
 }
 .slide-bottom-enter-to {
   @apply translate-y-0;

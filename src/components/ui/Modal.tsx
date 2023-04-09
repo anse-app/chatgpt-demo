@@ -20,10 +20,10 @@ export default (props: Props) => {
   const api = createMemo(() => dialog.connect(state, send, normalizeProps))
 
   const containerBaseClass = {
-    top: 'top-0 left-0 right-0 border-b',
-    bottom: 'bottom-0 left-0 right-0 border-t',
-    left: 'top-0 left-0 bottom-0 border-r',
-    right: 'top-0 right-0 bottom-0 border-l',
+    top: 'absolute top-0 left-0 right-0 border-b sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
+    bottom: 'absolute bottom-0 left-0 right-0 border-t sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
+    left: 'absolute top-0 left-0 bottom-0 border-r',
+    right: 'absolute top-0 right-0 bottom-0 border-l',
   }[props.direction]
 
   props.bindValue.subscribe((show) => {
@@ -36,12 +36,12 @@ export default (props: Props) => {
   return (
     <Transition name={`slide-${props.direction}`}>
       <Show when={api().isOpen}>
-        <div class="fixed inset-0 z-20">
+        <div class="fixed inset-0 z-20 fcc">
           <Portal>
             <div {...api().backdropProps} class="fixed inset-0 bg-base opacity-50" />
           </Portal>
           <div {...api().containerProps}>
-            <div {...api().contentProps} class={`bg-base absolute transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>
+            <div {...api().contentProps} class={`bg-base transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>
               <button {...api().closeTriggerProps} class="absolute top-4 right-4">
                 <div i-carbon-close class="text-xl" />
               </button>
