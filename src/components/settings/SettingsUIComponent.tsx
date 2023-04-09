@@ -39,7 +39,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
           <SettingsSelect
             settings={settings}
             editing={editing}
-            value={value}
+            value={value as Accessor<string>}
             setValue={setValue}
           />
         </Match> */}

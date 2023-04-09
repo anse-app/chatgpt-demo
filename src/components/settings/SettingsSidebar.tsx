@@ -4,7 +4,7 @@ import { platformSettingsUIList } from '@/stores/ui'
 import { providerSettingsMap, setSettingsByProviderId } from '@/stores/settings'
 import ThemeToggle from '../ui/ThemeToggle'
 import ProviderGlobalSettings from './ProviderGlobalSettings'
-import GeneralSettings from './GeneralSettings'
+// import GeneralSettings from './GeneralSettings'
 
 export default () => {
   const $platformSettingsUIList = useStore(platformSettingsUIList)

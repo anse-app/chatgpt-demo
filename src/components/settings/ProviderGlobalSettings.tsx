@@ -33,20 +33,6 @@ export default ({ config, settingsValue, setSettings }: Props) => {
     setEditing(false)
   }
 
-  // onMount(() => {
-  //   if (DB_DONE.get()) {
-  //     console.log(formData(), settingsValue())
-  //     config.settingsUI?.forEach((item) => {
-  //       if (item.default && settingsValue()[item.key] === undefined) {
-  //         setEditFormData(
-  //           { ...formData(), [item.key]: item.default },
-  //         )
-  //       }
-  //     })
-  //     setSettings(formData())
-  //   }
-  // })
-
   if (!config.settingsUI) return null
   return (
     <div
@@ -86,7 +72,6 @@ export default ({ config, settingsValue, setSettings }: Props) => {
                 editing={editing}
                 value={() => formData()[item.key] || ''}
                 setValue={(v) => {
-                  console.log('setValue', v)
                   setEditFormData({ ...formData(), [item.key]: v })
                 }}
               />
