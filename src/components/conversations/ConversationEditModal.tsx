@@ -69,7 +69,7 @@ export default () => {
     } else {
       setCurrentEditingId('')
       inputRef.value = ''
-      setSelectConversationType('single')
+      setSelectConversationType('continuous')
       setSelectIcon('i-carbon-chat')
     }
   })
