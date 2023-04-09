@@ -7,8 +7,8 @@ export const conversationMessagesMap = map<Record<string, MessageInstance[]>>({}
 
 export const rebuildMessagesStore = async() => {
   const data = await db.exportData() || {}
-  // conversationMessagesMap.set(data)
-  conversationMessagesMap.set(conversationMessagesMapData)
+  conversationMessagesMap.set(data)
+  // conversationMessagesMap.set(conversationMessagesMapData)
 }
 
 export const getMessagesByConversationId = (id: string) => {

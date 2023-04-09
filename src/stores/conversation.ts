@@ -14,8 +14,8 @@ export const currentEditingConversation = computed(currentEditingConversationId,
 
 export const rebuildConversationStore = async() => {
   const data = await db.exportData() || {}
-  // conversationMap.set(data)
-  conversationMap.set(conversationMapData)
+  conversationMap.set(data)
+  // conversationMap.set(conversationMapData)
 }
 
 export const addConversation = action(conversationMap, 'addConversation', (map, instance?: Partial<Conversation>) => {
