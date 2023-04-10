@@ -58,6 +58,8 @@ export default () => {
   )
 
   const handleSend = () => {
+    if (!inputRef.value)
+      return
     if (!currentConversation())
       addConversation()
     handlePrompt(currentConversation(), inputRef.value)
@@ -67,7 +69,7 @@ export default () => {
   }
 
   return (
-    <div class={`absolute bottom-0 left-0 right-0 bg-base border-t border-base transition-height ${classTest()}`}>
+    <div class={`bg-base border-t border-base transition-height ${classTest()}`}>
       <Show when={!isEditing()}>
         <EmptyState />
       </Show>
