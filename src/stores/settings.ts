@@ -6,14 +6,21 @@ import type { SettingsPayload } from '@/types/provider'
 export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 
 export const rebuildSettingsStore = async() => {
-  let data = await db.exportData()
-  if (!data || !Object.keys(data).length)
-    data = defaultSettingsStore()
+  const exportData = await db.exportData()
+  const defaultData = defaultSettingsStore()
+  const providers = providerMetaList.get()
+  const data: Record<string, SettingsPayload> = {}
+  providers.forEach((provider) => {
+    data[provider.id] = {
+      ...defaultData[provider.id] || {},
+      ...exportData?.[provider.id] || {},
+    }
+  })
   providerSettingsMap.set(data)
 }
 
 export const getSettingsByProviderId = (id: string) => {
-  return providerSettingsMap.get()[id] || defaultSettingsByProviderId(id)
+  return providerSettingsMap.get()[id] || {}
 }
 
 export const setSettingsByProviderId = action(
