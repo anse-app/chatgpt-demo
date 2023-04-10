@@ -22,8 +22,8 @@ export default (props: Props) => {
   const containerBaseClass = {
     top: 'absolute top-0 left-0 right-0 border-b sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
     bottom: 'absolute bottom-0 left-0 right-0 border-t sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
-    left: 'absolute top-0 left-0 bottom-0 border-r',
-    right: 'absolute top-0 right-0 bottom-0 border-l',
+    left: 'absolute top-0 left-0 bottom-0 border-r pb-[env(safe-area-inset-bottom)]',
+    right: 'absolute top-0 right-0 bottom-0 border-l pb-[env(safe-area-inset-bottom)]',
   }[props.direction]
 
   props.bindValue.subscribe((show) => {
