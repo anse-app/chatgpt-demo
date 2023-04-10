@@ -1,5 +1,6 @@
 import { Show, createSignal } from 'solid-js'
 import { useStore } from '@nanostores/solid'
+import { createShortcut } from '@solid-primitives/keyboard'
 import { inputPrompt } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
@@ -14,6 +15,10 @@ export default () => {
   const currentConversation = () => {
     return $conversationMap()[$currentConversationId()]
   }
+
+  createShortcut(['Meta', 'Enter'], () => {
+    focusState() && handleSend()
+  })
 
   const classTest = () => {
     if (isEditing())
