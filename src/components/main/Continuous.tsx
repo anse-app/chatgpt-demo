@@ -10,7 +10,7 @@ interface Props {
 
 export default ({ conversationId, messages }: Props) => {
   return (
-    <div class="flex flex-col h-full overflow-y-scroll">
+    <div class="scroll-list flex flex-col h-full overflow-y-scroll">
       <For each={messages()}>
         {message => (
           <div class="border-b border-lighter">
