@@ -6,6 +6,8 @@
 
 **🍿 在线预览**: https://chatgpt.ddiu.me
 
+**🏖️ V2 版本(Beta)**: https://v2.chatgpt.ddiu.me
+
 > ⚠️ 注意: 我们的API密钥限制已用尽。所以演示站点现在不可用。
 
 ![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
@@ -98,6 +100,12 @@ services:
       - '3000:3000'
     environment:
       - OPENAI_API_KEY=YOUR_OPEN_API_KEY
+      # - HTTPS_PROXY=YOUR_HTTPS_PROXY
+      # - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
+      # - HEAD_SCRIPTS=YOUR_HEAD_SCRIPTS
+      # - SECRET_KEY=YOUR_SECRET_KEY
+      # - SITE_PASSWORD=YOUR_SITE_PASSWORD
+      # - OPENAI_API_MODEL=YOUR_OPENAI_API_MODEL
 ```
 
 ```bash
