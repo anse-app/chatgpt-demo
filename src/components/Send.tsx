@@ -39,7 +39,7 @@ export default () => {
   )
 
   const EditState = () => (
-    <div class="h-full bg-darker">
+    <div class="h-full">
       <div class="h-full relative">
         <textarea
           ref={inputRef!}
@@ -47,11 +47,11 @@ export default () => {
           autocomplete="off"
           onBlur={() => { setFocusState(false) }}
           onInput={() => { inputPrompt.set(inputRef.value) }}
-          class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 bg-darker input-base"
+          class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 input-base"
         />
         <div
           onClick={handleSend}
-          class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-darker border border-base p-2 rounded-md hv-base hover:border-darker"
+          class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base"
         >
           <div class="i-carbon-send op-50 text-xl cursor-pointer" />
         </div>
@@ -71,7 +71,7 @@ export default () => {
   }
 
   return (
-    <div class={`bg-base border-t border-base transition-all ${stateClass()}`}>
+    <div class={`bg-base-100 border-t border-base transition-height ${stateClass()}`}>
       <Show when={!isEditing()}>
         <EmptyState />
       </Show>

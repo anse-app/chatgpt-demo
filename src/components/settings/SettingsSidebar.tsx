@@ -11,7 +11,7 @@ export default () => {
   const $providerSettingsMap = useStore(providerSettingsMap)
 
   return (
-    <div class="h-full flex flex-col">
+    <div class="h-full flex flex-col bg-sidebar">
       <header class="h-14 fi border-b border-base px-4 text-xs uppercase">
         Settings
       </header>

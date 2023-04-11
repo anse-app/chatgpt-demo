@@ -8,7 +8,7 @@ export default () => {
   const $conversationMap = useStore(conversationMap)
 
   return (
-    <div class="h-full flex flex-col">
+    <div class="h-full flex flex-col bg-sidebar">
       <div class="h-14 fi border-b border-base px-4 text-xs uppercase pl-6">
         Conversations
       </div>

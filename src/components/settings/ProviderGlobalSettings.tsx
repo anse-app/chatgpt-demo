@@ -38,7 +38,7 @@ export default ({ config, settingsValue, setSettings }: Props) => {
     <div
       class="px-4 py-3 border transition-colors"
       classList={{
-        'border border-amber/40 bg-amber/2': editing(),
+        'border border-amber/50 bg-amber/2': editing(),
         'border border-b-base border-l-transparent border-r-transparent border-t-transparent': !editing(),
       }}
     >
