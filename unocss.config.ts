@@ -54,6 +54,8 @@ export default defineConfig({
     'border-b-base': 'border-b-light-900 dark:border-b-dark-100',
     'input-base': 'bg-transparent placeholder:op-50 dark:placeholder:op-30 focus:(ring-0 outline-none)',
     'max-w-base': 'max-w-3xl mx-auto',
+    'text-error': 'text-red-700 dark:text-red-400/80',
+    'border-error': 'border border-red-700 dark:border-red-400/80',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',
     'fcc': 'fc items-center',

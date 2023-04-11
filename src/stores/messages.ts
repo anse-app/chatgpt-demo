@@ -40,10 +40,12 @@ export const pushMessageByConversationId = action(
   'pushMessageByConversationId',
   (map, id: string, payload: MessageInstance) => {
     const oldMessages = map.get()[id] || []
+    if (oldMessages[oldMessages.length - 1]?.id === payload.id) return
     map.setKey(id, [...oldMessages, payload])
     db.setItem(id, [...oldMessages, {
-      ...payload,
-      stream: undefined,
+      id: payload.id,
+      role: payload.role,
+      content: payload.content,
     }])
   },
 )

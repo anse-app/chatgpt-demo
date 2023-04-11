@@ -1,7 +1,7 @@
-import { Show, createSignal, onMount } from 'solid-js'
+import { Match, Switch, createSignal, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createShortcut } from '@solid-primitives/keyboard'
-import { inputPrompt } from '@/stores/ui'
+import { currentErrorMessage, inputPrompt } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
 
@@ -10,6 +10,8 @@ export default () => {
   const $conversationMap = useStore(conversationMap)
   const $currentConversationId = useStore(currentConversationId)
   const $inputPrompt = useStore(inputPrompt)
+  const $currentErrorMessage = useStore(currentErrorMessage)
+
   const [focusState, setFocusState] = createSignal(false)
   const isEditing = () => $inputPrompt() || focusState()
   const currentConversation = () => {
@@ -22,19 +24,13 @@ export default () => {
     })
   })
 
-  const stateClass = () => {
-    if (isEditing())
-      return 'h-40'
-    else
-      return 'h-14'
-  }
-
   const EmptyState = () => (
-    <div onClick={() => { setFocusState(true) && inputRef.focus() }} class="h-full px-6 hv-base">
-      <div class="max-w-base flex flex-row items-center gap-2 h-full border border-transparent">
-        <div class="flex-1 op-30">Enter Something...</div>
-        <div class="i-carbon-send op-50 text-xl" />
-      </div>
+    <div
+      class="max-w-base h-full flex flex-row items-center gap-2"
+      onClick={() => { setFocusState(true) && inputRef.focus() }}
+    >
+      <div class="flex-1 op-30">Enter Something...</div>
+      <div class="i-carbon-send op-50 text-xl" />
     </div>
   )
 
@@ -59,6 +55,24 @@ export default () => {
     </div>
   )
 
+  const ErrorState = () => (
+    <div class="max-w-base h-full flex items-end flex-col sm:(flex-row items-center) justify-between gap-8 py-4 text-error text-sm">
+      <div>
+        <div class="fi gap-0.5 mb-1">
+          <span i-carbon-warning />
+          <span class="font-semibold">{$currentErrorMessage()?.code}</span>
+        </div>
+        <div>{$currentErrorMessage()?.message}</div>
+      </div>
+      <div
+        class="border border-error px-2 py-1 rounded-md hv-base hover:bg-white"
+        onClick={() => { currentErrorMessage.set(null) }}
+      >
+        Dismiss
+      </div>
+    </div>
+  )
+
   const handleSend = () => {
     if (!inputRef.value)
       return
@@ -70,14 +84,35 @@ export default () => {
     setFocusState(false)
   }
 
+  const stateType = () => {
+    if ($currentErrorMessage())
+      return 'error'
+    else if (isEditing())
+      return 'editing'
+    else
+      return 'normal'
+  }
+
+  const stateClass = () => {
+    if (stateType() === 'normal')
+      return 'h-14 bg-base-100 hv-base'
+    else if (stateType() === 'error')
+      return 'bg-red/8'
+    else if (stateType() === 'editing')
+      return 'h-40 bg-base-100'
+    return ''
+  }
+
   return (
-    <div class={`bg-base-100 border-t border-base transition-height ${stateClass()}`}>
-      <Show when={!isEditing()}>
-        <EmptyState />
-      </Show>
-      <Show when={isEditing()}>
-        <EditState />
-      </Show>
+    <div class={`px-6 border-t border-base transition-all ${stateClass()}`}>
+      <Switch fallback={<EmptyState />}>
+        <Match when={$currentErrorMessage()}>
+          <ErrorState />
+        </Match>
+        <Match when={isEditing()}>
+          <EditState />
+        </Match>
+      </Switch>
     </div>
   )
 }

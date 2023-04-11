@@ -1,9 +1,10 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
 import { getSettingsByProviderId } from '@/stores/settings'
+import { currentErrorMessage } from '@/stores/ui'
 import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
-import type { Message } from '@/types/message'
+import type { ErrorMessage, Message } from '@/types/message'
 
 export const handlePrompt = async(conversation: Conversation, prompt: string) => {
   const provider = getProviderById(conversation?.providerId)
@@ -30,12 +31,14 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     historyMessages: getMessagesByConversationId(conversation.id),
   })
 
-  pushMessageByConversationId(conversation.id, {
-    id: `${conversation.id}:assistant:${Date.now()}`,
-    role: 'assistant',
-    content: typeof providerResponse === 'string' ? providerResponse : '',
-    stream: providerResponse instanceof ReadableStream ? providerResponse : undefined,
-  })
+  if (providerResponse) {
+    pushMessageByConversationId(conversation.id, {
+      id: `${conversation.id}:assistant:${Date.now()}`,
+      role: 'assistant',
+      content: typeof providerResponse === 'string' ? providerResponse : '',
+      stream: providerResponse instanceof ReadableStream ? providerResponse : undefined,
+    })
+  }
 }
 
 interface CallProviderPayload {
@@ -71,7 +74,13 @@ const callProviderHandler = async(payload: CallProviderPayload) => {
 
     return response
   } catch (e) {
+    const error = e as Error
+    const cause = error?.cause as ErrorMessage
     console.error(e)
+    currentErrorMessage.set({
+      code: cause?.code || 'provider_error',
+      message: cause?.message || error.message || 'Unknown error',
+    })
     return null
   }
 }

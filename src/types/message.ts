@@ -8,3 +8,8 @@ export interface MessageInstance extends Message {
   id: string
   stream?: ReadableStream
 }
+
+export interface ErrorMessage {
+  code: string
+  message: string
+}

@@ -47,7 +47,7 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
   if (!response.ok) {
     const responseJson = await response.json()
     const errMessage = responseJson.error?.message || 'Unknown error'
-    throw new Error(errMessage)
+    throw new Error(errMessage, { cause: responseJson.error })
   }
   const isStream = response.headers.get('content-type')?.includes('text/event-stream')
   if (isStream) {
