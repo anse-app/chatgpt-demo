@@ -22,7 +22,7 @@ export default () => {
     })
   })
 
-  const classTest = () => {
+  const stateClass = () => {
     if (isEditing())
       return 'h-40'
     else
@@ -31,7 +31,7 @@ export default () => {
 
   const EmptyState = () => (
     <div onClick={() => { setFocusState(true) && inputRef.focus() }} class="h-full px-6 hv-base">
-      <div class="max-w-base flex flex-row items-center gap-2 h-full">
+      <div class="max-w-base flex flex-row items-center gap-2 h-full border border-transparent">
         <div class="flex-1 op-30">Enter Something...</div>
         <div class="i-carbon-send op-50 text-xl" />
       </div>
@@ -39,19 +39,19 @@ export default () => {
   )
 
   const EditState = () => (
-    <div class="h-full bg-darker px-6">
-      <div class="max-w-base h-full relative">
+    <div class="h-full bg-darker">
+      <div class="h-full relative">
         <textarea
           ref={inputRef!}
           placeholder="Enter something..."
           autocomplete="off"
           onBlur={() => { setFocusState(false) }}
           onInput={() => { inputPrompt.set(inputRef.value) }}
-          class="absolute inset-0 py-4 resize-none scroll-pa-4 bg-darker input-base"
+          class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 bg-darker input-base"
         />
         <div
           onClick={handleSend}
-          class="absolute -right-2 bottom-3 inline-flex p-2 items-center gap-1 rounded-md hv-base"
+          class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-darker border border-base p-2 rounded-md hv-base hover:border-darker"
         >
           <div class="i-carbon-send op-50 text-xl cursor-pointer" />
         </div>
@@ -71,7 +71,7 @@ export default () => {
   }
 
   return (
-    <div class={`bg-base border-t border-base transition-height ${classTest()}`}>
+    <div class={`bg-base border-t border-base transition-all ${stateClass()}`}>
       <Show when={!isEditing()}>
         <EmptyState />
       </Show>
