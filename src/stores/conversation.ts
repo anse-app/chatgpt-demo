@@ -26,6 +26,7 @@ export const addConversation = action(conversationMap, 'addConversation', (map, 
     conversationType: instance?.conversationType || providerMetaList.get()[0]?.supportConversationType?.[0],
     name: instance?.name || '',
     icon: instance?.icon || 'i-carbon-chat',
+    lastUseTime: Date.now(),
   }
   map.setKey(instanceId, conversation)
   db.setItem(instanceId, conversation)
@@ -44,5 +45,5 @@ export const updateConversationById = action(conversationMap, 'updateConversatio
 export const deleteConversationById = action(conversationMap, 'deleteConversationById', (map, id: string) => {
   map.set(Object.fromEntries(Object.entries(map.get()).filter(([key]) => key !== id)))
   db.deleteItem(id)
-  clearMessagesByConversationId(id)
+  clearMessagesByConversationId(id, true)
 })

@@ -1,6 +1,7 @@
 import { action, map } from 'nanostores'
 import { conversationMessagesMapData } from './tests/message.mock'
 import { db } from './storage/message'
+import { updateConversationById } from './conversation'
 import type { MessageInstance } from '@/types/message'
 
 export const conversationMessagesMap = map<Record<string, MessageInstance[]>>({})
@@ -47,14 +48,20 @@ export const pushMessageByConversationId = action(
       role: payload.role,
       content: payload.content,
     }])
+    updateConversationById(id, {
+      lastUseTime: Date.now(),
+    })
   },
 )
 
 export const clearMessagesByConversationId = action(
   conversationMessagesMap,
   'clearMessagesByConversationId',
-  (map, id: string) => {
+  (map, id: string, deleteChat?: boolean) => {
     map.setKey(id, [])
     db.deleteItem(id)
+    !deleteChat && updateConversationById(id, {
+      lastUseTime: Date.now(),
+    })
   },
 )

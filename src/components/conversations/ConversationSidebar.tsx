@@ -6,6 +6,7 @@ import ConversationSidebarAdd from './ConversationSidebarAdd'
 
 export default () => {
   const $conversationMap = useStore(conversationMap)
+  const conversationMapSortList = () => Object.values($conversationMap()).sort((a, b) => b.lastUseTime - a.lastUseTime)
 
   return (
     <div class="h-full flex flex-col bg-sidebar">
@@ -13,7 +14,7 @@ export default () => {
         Conversations
       </div>
       <div class="flex-1 overflow-auto">
-        <For each={Object.values($conversationMap())}>
+        <For each={conversationMapSortList()}>
           {instance => (
             <ConversationSidebarItem instance={instance} />
           )}

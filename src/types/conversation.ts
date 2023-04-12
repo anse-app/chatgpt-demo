@@ -6,4 +6,5 @@ export interface Conversation {
   conversationType: ConversationType
   name: string
   icon: string
+  lastUseTime: number
 }
