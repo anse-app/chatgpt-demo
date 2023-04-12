@@ -15,6 +15,8 @@ interface Props {
 export default (props: Props) => {
   const [state, send] = useMachine(dialog.machine({
     id: createUniqueId(),
+    // TODO: set it to true will cause the modal closes exceptionally
+    // https://github.com/chakra-ui/zag/issues/596
     closeOnOutsideClick: false,
   }))
   const api = createMemo(() => dialog.connect(state, send, normalizeProps))
