@@ -3,7 +3,7 @@
 * -----------------------------------------------------------------------------*/
 
 [data-scope='slider'][data-part='root'] {
-  @apply max-w-300px w-full flex flex-col
+  @apply w-full flex flex-col
 }
 [data-scope='slider'][data-part='root'][data-orientation='vertical'] {
   @apply h-60
@@ -76,4 +76,15 @@
 
 [data-scope='slider'][data-part='marker'] {
   color: lightgray;
+}
+
+/* -----------------------------------------------------------------------------
+* Select
+* -----------------------------------------------------------------------------*/
+
+[data-scope='select'][data-part='content'] {
+  @apply border border-darker;
+}
+[data-scope='select'][data-part='trigger'][data-expanded] {
+  @apply border border-darker;
 }

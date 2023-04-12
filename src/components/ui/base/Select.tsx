@@ -5,6 +5,7 @@ import type { Accessor } from 'solid-js'
 
 interface Props {
   options: {
+    icon?: string
     label: string
     value: string
   }[]
@@ -29,27 +30,31 @@ export const Select = (inputProps: Props) => {
 
   const api = createMemo(() => select.connect(state, send, normalizeProps))
 
-  // api().setSelectedOption(props.options[0])
-
   return (
     <div class="z-10">
       <div>
         <button
-          class="fi justify-between w-full px-2 py-1 border border-base hv-base"
+          class={`fi justify-between w-full px-2 py-1 border border-base ${props.readonly ? '' : 'hv-base'}`}
           {...api().triggerProps}
         >
-          <span>{api().selectedOption?.label ?? props.placeholder}</span>
-          <div i-carbon-caret-down />
+          <div class="fi gap-2">
+            {api().selectedOption?.icon && <div class={api().selectedOption?.icon} />}
+            <div>{api().selectedOption?.label ?? props.placeholder}</div>
+          </div>
+          {!props.readonly && <div i-carbon-caret-down />}
         </button>
       </div>
       <div class="w-$reference-width -mt-2 z-100 shadow-md" {...api().positionerProps}>
         <ul class="bg-base" {...api().contentProps}>
-          {props.options.map(({ label, value }) => (
+          {props.options.map(({ label, value, icon }) => (
             <li
-              class="fi justify-between w-full px-2 py-1 border border-base hv-base"
+              class="fi justify-between w-full px-2 py-1 border-b border-b-base hv-base"
               {...api().getOptionProps({ label, value })}
             >
-              <span>{label}</span>
+              <div class="fi gap-2">
+                {icon && <div class={icon} />}
+                <div>{label}</div>
+              </div>
               {value === api().selectedOption?.value && (
                 <div i-carbon-checkmark />
               )}

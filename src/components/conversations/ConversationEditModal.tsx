@@ -104,7 +104,7 @@ export default () => {
           class="w-full bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
         />
         <Select
-          options={$providerMetaList().map(item => ({ value: item.id, label: item.name }))}
+          options={$providerMetaList().map(item => ({ value: item.id, label: item.name, icon: item.icon }))}
           value={selectProviderId}
           setValue={handleProviderChange}
           readonly={!!$currentEditingConversation()}

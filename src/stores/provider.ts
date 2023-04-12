@@ -13,6 +13,7 @@ export const providerMetaList = computed(providerList, (list) => {
   return list.map(provider => ({
     id: provider.id,
     name: provider.name,
+    icon: provider.icon,
     supportConversationType: provider.supportConversationType,
   }))
 })
