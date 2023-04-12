@@ -40,7 +40,8 @@ export default defineConfig({
   shortcuts: [{
     'bg-base': 'bg-light-100 dark:bg-dark-400',
     'bg-base-100': 'bg-light-200 dark:bg-[#262626]',
-    'bg-base-200': 'bg-light-300 dark:bg-dark-500',
+    'bg-base-200': 'bg-light-300 dark:bg-dark-300',
+    'bg-blur': 'bg-light-200/85 dark:bg-[#262626]/85 backdrop-blur-xl backdrop-saturate-150',
     'bg-sidebar': 'bg-light-400 dark:bg-dark-500',
     'bg-modal': 'bg-base dark:bg-base-100',
     'bg-darker': 'bg-black/4 dark:bg-white/4',

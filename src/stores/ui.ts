@@ -17,3 +17,14 @@ export const platformSettingsUIList = computed(providerList, (list) => {
     settingsUI: provider.globalSettings,
   }))
 })
+
+export const scrollController = () => {
+  const elementList = () => Array.from(document.getElementsByClassName('scroll-list'))
+  const firstElement = () => elementList()[0]
+  return {
+    scrollToTop: () => elementList().forEach(element => element.scrollTo({ top: 0, behavior: 'smooth' })),
+    scrollToBottom: () => elementList().forEach(element => element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })),
+    instantToBottom: () => elementList().forEach(element => element.scrollTo({ top: element.scrollHeight })),
+    isBottom: () => firstElement().scrollTop + firstElement().clientHeight >= firstElement().scrollHeight - 100,
+  }
+}

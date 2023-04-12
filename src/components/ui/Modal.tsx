@@ -40,7 +40,7 @@ export default (props: Props) => {
       <Show when={api().isOpen}>
         <div class="fixed inset-0 z-20 fcc">
           <Portal>
-            <div {...api().backdropProps} class="fixed inset-0 bg-base-200 opacity-60" />
+            <div {...api().backdropProps} class="fixed inset-0 bg-base opacity-60" />
           </Portal>
           <div {...api().containerProps}>
             <div {...api().contentProps} class={`bg-base-100 transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>

@@ -1,15 +1,10 @@
-import { showConversationSidebar, showSettingsSidebar } from '@/stores/ui'
+import { scrollController, showConversationSidebar, showSettingsSidebar } from '@/stores/ui'
 import ConversationHeaderInfo from './ConversationHeaderInfo'
 import ConversationMessageClearButton from './ConversationMessageClearButton'
 
 export default () => {
-  const handleDoubleClick = () => {
-    const element = document.getElementsByClassName('scroll-list')[0]
-    element?.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
   return (
-    <header onDblClick={handleDoubleClick} class="absolute top-0 left-0 right-0 fi justify-between bg-base-100 border-b border-base h-14 px-6">
+    <header onDblClick={scrollController().scrollToTop} class="absolute top-0 left-0 right-0 fi justify-between bg-base-100 border-b border-base h-14 px-6">
       <div class="fi gap-4 overflow-hidden">
         <div
           i-carbon-menu
