@@ -20,8 +20,8 @@ export default (props: Props) => {
   const api = createMemo(() => dialog.connect(state, send, normalizeProps))
 
   const containerBaseClass = {
-    top: 'absolute top-0 left-0 right-0 border-b sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
-    bottom: 'absolute bottom-0 left-0 right-0 border-t sm:(relative w-[400px] max-h-[60vh] mb-12 border)',
+    top: 'absolute top-0 left-0 right-0 border-b rounded-b-xl sm:(relative w-[400px] max-h-[60vh] border rounded-lg)',
+    bottom: 'absolute bottom-0 left-0 right-0 border-t rounded-t-xl pb-[env(safe-area-inset-bottom)] sm:(relative w-[400px] max-h-[60vh] pb-0 border rounded-lg)',
     left: 'absolute top-0 left-0 bottom-0 border-r pb-[env(safe-area-inset-bottom)]',
     right: 'absolute top-0 right-0 bottom-0 border-l pb-[env(safe-area-inset-bottom)]',
   }[props.direction]
@@ -41,7 +41,7 @@ export default (props: Props) => {
             <div {...api().backdropProps} class="fixed inset-0 bg-base-200 opacity-60" />
           </Portal>
           <div {...api().containerProps}>
-            <div {...api().contentProps} class={`bg-base-100 transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base rounded-lg ${containerBaseClass}`}>
+            <div {...api().contentProps} class={`bg-base-100 transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>
               <button {...api().closeTriggerProps} class="absolute top-4 right-4">
                 <div i-carbon-close class="text-xl" />
               </button>
