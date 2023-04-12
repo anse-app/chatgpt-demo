@@ -6,7 +6,7 @@ interface Props {
   message: MessageInstance
 }
 
-export default ({ conversationId, message }: Props) => {
+export default (props: Props) => {
   const roleClass = {
     system: 'bg-gradient-to-b from-gray-300 via-gray-200 to-gray-300',
     user: 'bg-gradient-to-b from-gray-300 via-gray-200 to-gray-300',
@@ -17,18 +17,18 @@ export default ({ conversationId, message }: Props) => {
     <div
       class="p-6 break-all"
       classList={{
-        'op-70 bg-darker': message.role === 'user',
+        'op-70 bg-darker': props.message.role === 'user',
       }}
     >
       <div class="max-w-base flex gap-4 overflow-hidden">
-        <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[message.role]}`} />
+        <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[props.message.role]}`} />
         <StreamableText
-          text={message.content}
-          streamInfo={message.stream
+          text={props.message.content}
+          streamInfo={props.message.stream
             ? () => ({
-                conversationId,
-                messageId: message.id || '',
-                stream: message.stream || null,
+                conversationId: props.conversationId,
+                messageId: props.message.id || '',
+                stream: props.message.stream || null,
               })
             : undefined}
         />
