@@ -1,3 +1,4 @@
+import { instantScrollToBottomThrottle } from '@/stores/ui'
 import StreamableText from '../StreamableText'
 import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
@@ -8,8 +9,14 @@ interface Props {
 }
 
 export default ({ conversationId, messages }: Props) => {
+  let scrollRef: HTMLDivElement
   const messageInput = () => messages().length > 0 ? messages()[0] : null
   const messageOutput = () => messages().length > 1 ? messages()[1] : null
+
+  const handleStreamableTextUpdate = () => {
+    instantScrollToBottomThrottle(scrollRef)
+  }
+
   return (
     <div class="flex flex-col h-full">
       <div class="flex-[1] border-b border-base p-6 break-all overflow-y-scroll">
@@ -18,7 +25,7 @@ export default ({ conversationId, messages }: Props) => {
           text={messageInput()?.content || ''}
         />
       </div>
-      <div class="flex-[2] p-6 break-all overflow-y-scroll">
+      <div class="scroll-list flex-[2] p-6 break-all overflow-y-scroll" ref={scrollRef!}>
         <StreamableText
           class="mx-auto"
           text={messageOutput()?.content || ''}
@@ -27,6 +34,7 @@ export default ({ conversationId, messages }: Props) => {
                 conversationId,
                 messageId: messageOutput()?.id || '',
                 stream: messageOutput()?.stream || null,
+                handleStreaming: handleStreamableTextUpdate,
               })
             : undefined}
         />

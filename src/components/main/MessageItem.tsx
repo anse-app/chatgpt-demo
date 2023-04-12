@@ -4,6 +4,7 @@ import type { MessageInstance } from '@/types/message'
 interface Props {
   conversationId: string
   message: MessageInstance
+  handleStreaming?: () => void
 }
 
 export default (props: Props) => {
@@ -29,6 +30,7 @@ export default (props: Props) => {
                 conversationId: props.conversationId,
                 messageId: props.message.id || '',
                 stream: props.message.stream || null,
+                handleStreaming: props.handleStreaming,
               })
             : undefined}
         />

@@ -1,4 +1,4 @@
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createSignal, on } from 'solid-js'
 import { convertReadableStreamToAccessor } from '@/logics/stream'
 import { updateMessage } from '@/stores/messages'
 import Markdown from './Markdown'
@@ -10,11 +10,17 @@ interface Props {
     conversationId: string
     messageId: string
     stream: ReadableStream | null
+    handleStreaming?: () => void
   }
 }
 
 export default (props: Props) => {
   const [localText, setLocalText] = createSignal('')
+
+  createEffect(on(localText, () => {
+    if (props.streamInfo && props.streamInfo()?.handleStreaming)
+      props.streamInfo().handleStreaming!()
+  }, { defer: true }))
 
   createEffect(async() => {
     const text = props.text

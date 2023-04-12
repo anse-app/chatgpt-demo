@@ -1,7 +1,7 @@
 import { Match, Switch, createSignal, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createShortcut } from '@solid-primitives/keyboard'
-import { currentErrorMessage, isSendBoxFocus } from '@/stores/ui'
+import { currentErrorMessage, isSendBoxFocus, scrollController } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
 
@@ -83,6 +83,7 @@ export default () => {
     setInputPrompt('')
     inputRef.value = ''
     isSendBoxFocus.set(false)
+    scrollController().scrollToBottom()
   }
 
   const stateType = () => {

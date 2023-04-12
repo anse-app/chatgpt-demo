@@ -1,4 +1,5 @@
 import { atom, computed } from 'nanostores'
+import { leading, throttle } from '@solid-primitives/scheduled'
 import { providerList } from './provider'
 import type { ErrorMessage } from '@/types/message'
 
@@ -21,11 +22,11 @@ export const platformSettingsUIList = computed(providerList, (list) => {
 
 export const scrollController = () => {
   const elementList = () => Array.from(document.getElementsByClassName('scroll-list'))
-  const firstElement = () => elementList()[0]
   return {
     scrollToTop: () => elementList().forEach(element => element.scrollTo({ top: 0, behavior: 'smooth' })),
     scrollToBottom: () => elementList().forEach(element => element.scrollTo({ top: element.scrollHeight, behavior: 'smooth' })),
     instantToBottom: () => elementList().forEach(element => element.scrollTo({ top: element.scrollHeight })),
-    isBottom: () => firstElement().scrollTop + firstElement().clientHeight >= firstElement().scrollHeight - 100,
   }
 }
+
+export const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => element.scrollTo({ top: element.scrollHeight }), 250)
