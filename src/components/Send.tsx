@@ -38,22 +38,20 @@ export default () => {
   )
 
   const EditState = () => (
-    <div class="h-full">
-      <div class="h-full relative">
-        <textarea
-          ref={inputRef!}
-          placeholder="Enter something..."
-          autocomplete="off"
-          onBlur={() => { isSendBoxFocus.set(false) }}
-          onInput={() => { setInputPrompt(inputRef.value) }}
-          class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 input-base"
-        />
-        <div
-          onClick={handleSend}
-          class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base"
-        >
-          <div class="i-carbon-send op-50 text-xl cursor-pointer" />
-        </div>
+    <div class="h-full relative">
+      <textarea
+        ref={inputRef!}
+        placeholder="Enter something..."
+        autocomplete="off"
+        onBlur={() => { isSendBoxFocus.set(false) }}
+        onInput={() => { setInputPrompt(inputRef.value) }}
+        class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 input-base"
+      />
+      <div
+        onClick={handleSend}
+        class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base"
+      >
+        <div class="i-carbon-send op-50 text-xl cursor-pointer" />
       </div>
     </div>
   )
@@ -98,16 +96,16 @@ export default () => {
 
   const stateClass = () => {
     if (stateType() === 'normal')
-      return 'h-14 bg-base-100 hv-base'
+      return 'px-6 h-14 bg-base-100 hv-base'
     else if (stateType() === 'error')
-      return 'bg-red/8'
+      return 'px-6 bg-red/8'
     else if (stateType() === 'editing')
       return 'h-40 bg-base-100'
     return ''
   }
 
   return (
-    <div class={`px-6 border-t border-base transition-all ${stateClass()}`}>
+    <div class={`border-t border-base transition transition-property-[background-color,height] ${stateClass()}`}>
       <Switch fallback={<EmptyState />}>
         <Match when={$currentErrorMessage()}>
           <ErrorState />
