@@ -1,5 +1,7 @@
 import { For, Show, createEffect, createSignal } from 'solid-js'
+import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
+import { isSendBoxFocus } from '@/stores/ui'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
@@ -10,6 +12,7 @@ interface Props {
 }
 
 export default ({ conversationId, messages }: Props) => {
+  const $isSendBoxFocus = useStore(isSendBoxFocus)
   const [isScrollBottom, setIsScrollBottom] = createSignal(false)
   let scrollRef: HTMLDivElement
   const scroll = createScrollPosition(() => scrollRef)
@@ -31,12 +34,12 @@ export default ({ conversationId, messages }: Props) => {
           )}
         </For>
       </div>
-      <Show when={!isScrollBottom()}>
+      <Show when={!isScrollBottom() && !$isSendBoxFocus()}>
         <div
           class="absolute bottom-0 left-0 right-0 border-t border-base bg-blur hv-base hover:bg-base-200"
           onClick={() => scrollRef!.scrollTo({ top: scrollRef.scrollHeight, behavior: 'smooth' })}
         >
-          <div class="fcc h-8 max-w-base text-xs op-20 gap-1">
+          <div class="fcc h-8 max-w-base text-xs op-30 gap-1">
             <div>Scroll to bottom</div>
             <div i-carbon-arrow-down />
           </div>

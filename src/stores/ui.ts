@@ -7,6 +7,7 @@ export const showSettingsSidebar = atom(false)
 export const showConversationEditModal = atom(false)
 
 export const inputPrompt = atom('')
+export const isSendBoxFocus = atom(false)
 export const currentErrorMessage = atom<ErrorMessage | null>(null)
 
 export const platformSettingsUIList = computed(providerList, (list) => {
