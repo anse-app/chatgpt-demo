@@ -1,7 +1,8 @@
-import { For, Show, createEffect, createSignal, on, onMount } from 'solid-js'
+import { For, Show, createEffect, createSignal, on } from 'solid-js'
 import { useStore } from '@nanostores/solid'
 import { createScrollPosition } from '@solid-primitives/scroll'
-import { instantScrollToBottomThrottle, isSendBoxFocus } from '@/stores/ui'
+import { leading, throttle } from '@solid-primitives/scheduled'
+import { isSendBoxFocus } from '@/stores/ui'
 import MessageItem from './MessageItem'
 import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
@@ -25,6 +26,8 @@ export default (props: Props) => {
       instantScrollToBottomThrottle(scrollRef)
     }, 0)
   }))
+
+  const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => element.scrollTo({ top: element.scrollHeight }), 250)
 
   const handleStreamableTextUpdate = () => {
     isScrollBottom() && instantScrollToBottomThrottle(scrollRef)

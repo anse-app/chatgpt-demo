@@ -1,4 +1,4 @@
-import { instantScrollToBottomThrottle } from '@/stores/ui'
+import { leading, throttle } from '@solid-primitives/scheduled'
 import StreamableText from '../StreamableText'
 import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
@@ -12,6 +12,8 @@ export default ({ conversationId, messages }: Props) => {
   let scrollRef: HTMLDivElement
   const messageInput = () => messages().length > 0 ? messages()[0] : null
   const messageOutput = () => messages().length > 1 ? messages()[1] : null
+
+  const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => element.scrollTo({ top: element.scrollHeight }), 250)
 
   const handleStreamableTextUpdate = () => {
     instantScrollToBottomThrottle(scrollRef)

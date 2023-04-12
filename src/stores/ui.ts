@@ -1,5 +1,4 @@
 import { atom, computed } from 'nanostores'
-import { leading, throttle } from '@solid-primitives/scheduled'
 import { providerList } from './provider'
 import type { ErrorMessage } from '@/types/message'
 
@@ -28,5 +27,3 @@ export const scrollController = () => {
     instantToBottom: () => elementList().forEach(element => element.scrollTo({ top: element.scrollHeight })),
   }
 }
-
-export const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => element.scrollTo({ top: element.scrollHeight }), 250)
