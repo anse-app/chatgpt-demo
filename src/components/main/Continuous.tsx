@@ -27,10 +27,12 @@ export default (props: Props) => {
     }, 0)
   }))
 
-  const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => element.scrollTo({ top: element.scrollHeight }), 250)
+  const instantScrollToBottomThrottle = leading(throttle, (element: HTMLDivElement) => {
+    isScrollBottom() && element.scrollTo({ top: element.scrollHeight })
+  }, 250)
 
   const handleStreamableTextUpdate = () => {
-    isScrollBottom() && instantScrollToBottomThrottle(scrollRef)
+    instantScrollToBottomThrottle(scrollRef)
   }
 
   return (
