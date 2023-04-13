@@ -49,7 +49,7 @@ export default () => {
       />
       <div
         onClick={handleSend}
-        class="absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base"
+        class={`absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base ${inputPrompt() && 'bg-teal-400 dark:bg-teal-700 b-none hover:bg-teal-500 dark:hover:bg-teal-800'}`}
       >
         <div class="i-carbon-send op-50 text-xl cursor-pointer" />
       </div>
