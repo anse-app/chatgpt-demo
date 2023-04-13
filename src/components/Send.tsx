@@ -19,7 +19,7 @@ export default () => {
   }
 
   onMount(() => {
-    createShortcut(['Meta', 'Enter'], () => {
+    createShortcut(['Control', 'Enter'], () => {
       $isSendBoxFocus() && handleSend()
     })
   })
