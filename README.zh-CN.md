@@ -6,6 +6,8 @@
 
 **🍿 在线预览**: https://chatgpt.ddiu.me
 
+**🏖️ V2 版本(Beta)**: https://v2.chatgpt.ddiu.me
+
 > ⚠️ 注意: 我们的API密钥限制已用尽。所以演示站点现在不可用。
 
 ![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
@@ -47,10 +49,10 @@
 
 
 
-> ###### 🔒 需要站点密码？	
+> ###### 🔒 需要站点密码？
 >
 > 携带[`SITE_PASSWORD`](#environment-variables)进行部署
-> 
+>
 > <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&env=SITE_PASSWORD&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys" alt="Deploy with Vercel" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel" height=24 style="vertical-align: middle; margin-right: 4px;"></a>
 
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
@@ -81,9 +83,9 @@
 
 **一键运行**
 ```bash
-docker run --name=chatgpt-demo --volume=/path/.env:/usr/src/.env:rw -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
+docker run --name=chatgpt-demo -e OPENAI_API_KEY=YOUR_OPEN_API_KEY -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
 ```
-`/path/.env` 代表环境变量的路径。
+`-e` 在容器中定义环境变量。
 
 **使用 Docker compose**
 ```yml
@@ -96,8 +98,14 @@ services:
     restart: always
     ports:
       - '3000:3000'
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      - OPENAI_API_KEY=YOUR_OPEN_API_KEY
+      # - HTTPS_PROXY=YOUR_HTTPS_PROXY
+      # - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
+      # - HEAD_SCRIPTS=YOUR_HEAD_SCRIPTS
+      # - SECRET_KEY=YOUR_SECRET_KEY
+      # - SITE_PASSWORD=YOUR_SITE_PASSWORD
+      # - OPENAI_API_MODEL=YOUR_OPENAI_API_MODEL
 ```
 
 ```bash

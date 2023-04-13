@@ -6,11 +6,11 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 **🍿 Live preview**: https://chatgpt.ddiu.me
 
+**🏖️ V2 Version(Beta)**: https://v2.chatgpt.ddiu.me
+
 > ⚠️ Notice: Our API Key limit has been exhausted. So the demo site is not available now.
 
 ![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
-
-
 
 ## Running Locally
 
@@ -49,9 +49,9 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 
 > #### 🔒 Need website password?
-> 
+>
 > Deploy with the [`SITE_PASSWORD`](#environment-variables)
-> 
+>
 > <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&env=SITE_PASSWORD&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys" alt="Deploy with Vercel" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel" height=24 style="vertical-align: middle; margin-right: 4px;"></a>
 
 ![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
@@ -81,15 +81,13 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 ### Deploy with Docker
 
-Before deploying the app, please make sure `.env` is configured normally.
-
 Environment variables refer to the documentation below. [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
 
 **Direct run**
 ```bash
-docker run --name=chatgpt-demo --volume=/path/.env:/usr/src/.env:rw -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
+docker run --name=chatgpt-demo -e OPENAI_API_KEY=YOUR_OPEN_API_KEY -p 3000:3000 -d ddiu8081/chatgpt-demo:latest
 ```
-`/path/.env` represents the path to the local environment variable.
+`-e` define environment variables in the container.
 
 
 **Docker compose**
@@ -103,8 +101,14 @@ services:
     restart: always
     ports:
       - '3000:3000'
-    volumes:
-      - .env:/usr/src/.env
+    environment:
+      - OPENAI_API_KEY=YOUR_OPEN_API_KEY
+      # - HTTPS_PROXY=YOUR_HTTPS_PROXY
+      # - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
+      # - HEAD_SCRIPTS=YOUR_HEAD_SCRIPTS
+      # - SECRET_KEY=YOUR_SECRET_KEY
+      # - SITE_PASSWORD=YOUR_SITE_PASSWORD
+      # - OPENAI_API_MODEL=YOUR_OPENAI_API_MODEL
 ```
 
 ```bash
@@ -156,7 +160,7 @@ This project exists thanks to all those who contributed.
 
 Thank you to all our supporters!🙏
 
-[![img](https://contrib.rocks/image?repo=ddiu8081/chatgpt-demo)](https://github.com/ddiu8081/chatgpt-demo/graphs/contributors)
+[![img](https://contributors.nn.ci/api?repo=ddiu8081/chatgpt-demo)](https://github.com/ddiu8081/chatgpt-demo/graphs/contributors)
 
 ## License
 
