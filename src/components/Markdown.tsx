@@ -1,9 +1,11 @@
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
 import remarkGfm from 'remark-gfm'
+import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
-import rehypeSanitize from 'rehype-sanitize'
+import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
+import 'katex/dist/katex.min.css'
 
 interface Props {
   class?: string
@@ -14,8 +16,9 @@ const parseMarkdown = (raw: string) => {
   const file = unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkMath)
     .use(remarkRehype)
-    .use(rehypeSanitize)
+    .use(rehypeKatex)
     .use(rehypeStringify)
     .processSync(raw)
   // const str = processor.runSync(processor.parse(raw))
