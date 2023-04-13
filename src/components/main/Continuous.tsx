@@ -50,10 +50,10 @@ export default (props: Props) => {
       </div>
       <Show when={!isScrollBottom() && !$isSendBoxFocus()}>
         <div
-          class="absolute bottom-0 left-0 right-0 border-t border-base bg-blur hv-base hover:bg-base-200"
+          class="absolute bottom-0 left-0 right-0 border-t border-base bg-blur hv-base"
           onClick={() => scrollRef!.scrollTo({ top: scrollRef.scrollHeight, behavior: 'smooth' })}
         >
-          <div class="fcc h-8 max-w-base text-xs op-30 gap-1">
+          <div class="fcc h-8 max-w-base text-xs op-50 gap-1">
             <div>Scroll to bottom</div>
             <div i-carbon-arrow-down />
           </div>
