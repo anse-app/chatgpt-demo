@@ -5,7 +5,7 @@ import ConversationMessageClearButton from './ConversationMessageClearButton'
 export default () => {
   return (
     <header onDblClick={scrollController().scrollToTop} class="absolute top-0 left-0 right-0 fi justify-between bg-base-100 border-b border-base h-14 px-4">
-      <div class="fi gap-2 overflow-hidden">
+      <div class="fi overflow-hidden">
         <div
           class="fcc p-2 rounded-md text-xl hv-foreground md:hidden"
           onClick={() => showConversationSidebar.set(true)}

@@ -12,7 +12,7 @@ export default () => {
     <div class="max-w-40vw overflow-hidden text-sm">
       {!currentConversation() && null}
       {currentConversation() && (
-        <div class="truncate">
+        <div class="px-2 truncate">
           {currentConversation() ? (currentConversation().name || 'Untitled') : ''}
         </div>
       )}
