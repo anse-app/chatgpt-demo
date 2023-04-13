@@ -10,6 +10,7 @@ interface Props {
   bindValue: WritableAtom<boolean>
   direction: 'top' | 'bottom' | 'left' | 'right'
   children: JSXElement
+  closeBtnClass?: string
 }
 
 export default (props: Props) => {
@@ -44,7 +45,7 @@ export default (props: Props) => {
           </Portal>
           <div {...api().containerProps}>
             <div {...api().contentProps} class={`bg-base-100 transition-transform ease-out max-w-screen max-h-screen overflow-auto border-base ${containerBaseClass}`}>
-              <button {...api().closeTriggerProps} class="absolute top-4 right-4">
+              <button {...api().closeTriggerProps} class={`absolute p-1 rounded-md top-4 right-4 hv-base hv-foreground ${props.closeBtnClass || ''}`}>
                 <div i-carbon-close class="text-xl" />
               </button>
               { props.children }

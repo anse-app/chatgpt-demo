@@ -21,7 +21,7 @@ export default () => {
           <SettingsSidebar />
         </div>
       </Modal>
-      <Modal bindValue={showConversationEditModal} direction="bottom">
+      <Modal bindValue={showConversationEditModal} direction="bottom" closeBtnClass="top-6 right-6">
         <div class="max-h-[70vh] w-full">
           <ConversationEditModal />
         </div>
