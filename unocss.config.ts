@@ -39,9 +39,9 @@ export default defineConfig({
   transformers: [transformerVariantGroup(), transformerDirectives()],
   shortcuts: [{
     'bg-base': 'bg-light-100 dark:bg-[#1c1c1c]',
-    'bg-base-100': 'bg-light-200 dark:bg-[#242424]',
-    'bg-blur': 'bg-light-200/85 dark:bg-[#242424]/85 backdrop-blur-xl backdrop-saturate-150',
-    'bg-sidebar': 'bg-light-400 dark:bg-[#161616]',
+    'bg-base-100': 'bg-light-200 dark:bg-[#222222]',
+    'bg-blur': 'bg-light-200/85 dark:bg-[#222222]/85 backdrop-blur-xl backdrop-saturate-150',
+    'bg-sidebar': 'bg-light-400 dark:bg-[#191919]',
     'bg-modal': 'bg-base dark:bg-base-100',
     'bg-darker': 'bg-black/4 dark:bg-white/4',
     'fg-base': 'text-dark dark:text-[#dadada]',
