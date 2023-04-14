@@ -4,6 +4,7 @@ import { createShortcut } from '@solid-primitives/keyboard'
 import { currentErrorMessage, isSendBoxFocus, scrollController } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
+import { Tooltip } from './ui/base/Tooltip'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
@@ -47,12 +48,17 @@ export default () => {
         onInput={() => { setInputPrompt(inputRef.value) }}
         class="absolute inset-0 py-4 px-[calc(max(1.5rem,(100%-48rem)/2))] resize-none scroll-pa-4 input-base"
       />
-      <div
-        onClick={handleSend}
-        class={`absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base ${inputPrompt() && 'bg-teal-600 dark:bg-teal-700 b-none hover:bg-teal-700 dark:hover:bg-teal-800 text-white'}`}
+      <Tooltip
+        tip={() => <span><kbd>Ctrl</kbd> + <kbd>&#9166;</kbd></span>}
       >
-        <div class="i-carbon-send op-80 dark:op-70 text-xl cursor-pointer" />
-      </div>
+        <div
+          onClick={handleSend}
+          class={`absolute right-[calc(max(1.5rem,(100%-48rem)/2)-0.5rem)] bottom-3 bg-base-100 border border-base p-2 rounded-md hv-base ${inputPrompt() && 'bg-teal-600 dark:bg-teal-700 b-none hover:bg-teal-700 dark:hover:bg-teal-800 text-white'}`}
+        >
+          <div class="i-carbon-send op-80 dark:op-70 text-xl cursor-pointer" />
+        </div>
+      </Tooltip>
+
     </div>
   )
 

@@ -83,8 +83,8 @@
 * -----------------------------------------------------------------------------*/
 
 [data-scope='select'][data-part='content'] {
-  @apply border border-darker;
+  @apply border border-darker
 }
 [data-scope='select'][data-part='trigger'][data-expanded] {
-  @apply border border-darker;
+  @apply border border-darker
 }

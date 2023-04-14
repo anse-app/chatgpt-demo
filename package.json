@@ -29,6 +29,7 @@
     "@zag-js/solid": "^0.3.1",
     "@zag-js/toast": "^0.2.13",
     "@zag-js/toggle": "^0.2.15",
+    "@zag-js/tooltip": "^0.2.12",
     "astro": "^2.2.0",
     "eslint": "^8.37.0",
     "eventsource-parser": "^0.1.0",

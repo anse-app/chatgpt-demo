@@ -46,6 +46,9 @@ dependencies:
   '@zag-js/toggle':
     specifier: ^0.2.15
     version: 0.2.15
+  '@zag-js/tooltip':
+    specifier: ^0.2.12
+    version: 0.2.13
   astro:
     specifier: ^2.2.0
     version: 2.2.0
@@ -1724,7 +1727,7 @@ packages:
       eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.27.5)(eslint@8.37.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@8.37.0)
       eslint-plugin-html: 6.2.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
       eslint-plugin-jsonc: 2.7.0(eslint@8.37.0)
       eslint-plugin-jsx-a11y: 6.7.1(eslint@8.37.0)
       eslint-plugin-markdown: 2.2.1(eslint@8.37.0)
@@ -1745,6 +1748,12 @@ packages:
 
   /@floating-ui/core@1.2.5:
     resolution: {integrity: sha512-qrcbyfnRVziRlB6IYwjCopYhO7Vud750JlJyuljruIXcPxr22y8zdckcJGsuOdnQ639uVD1tTXddrcH3t3QYIQ==}
+    dev: false
+
+  /@floating-ui/dom@1.2.1:
+    resolution: {integrity: sha512-Rt45SmRiV8eU+xXSB9t0uMYiQ/ZWGE/jumse2o3i5RGlyvcbqOF4q+1qBnzLE2kZ5JGhq0iMkcGXUKbFe7MpTA==}
+    dependencies:
+      '@floating-ui/core': 1.2.5
     dev: false
 
   /@floating-ui/dom@1.2.5:
@@ -2596,6 +2605,13 @@ packages:
     resolution: {integrity: sha512-48e5YT2hb4pyPoTTs97CVcHjq+VGF6yfcpmJ8KY4cSKoB0WWSrb8NLNwv8uMceyqhy4QVE7dEWayR47FRPY02g==}
     dev: false
 
+  /@zag-js/core@0.2.10:
+    resolution: {integrity: sha512-Hc8a8KF+5VpSlLkeKFqFTRvlBtBOL+yjUEy0/pD5jTOPOwKyEHz+Yt/nCaGW5L3rzNkALpiAfrKHkXdhYKNOVg==}
+    dependencies:
+      '@zag-js/store': 0.2.8
+      klona: 2.0.6
+    dev: false
+
   /@zag-js/core@0.2.12:
     resolution: {integrity: sha512-XAcB9BorwetDljwLQeFHrTeBpw7jQUSKNj1zfy+TU/ZmQ9JVaKSDLO0JdKAy05lJIT7jKpjOkGB3g5tt+mT79w==}
     dependencies:
@@ -2637,6 +2653,10 @@ packages:
     resolution: {integrity: sha512-s2q18k3z3ABAkySc6xK1NLPVIdgZGTLSZxok7yzpCYoywEeCnFvP6K63Q4ONElk74XgO7Eq8KMzIj702LDS+Mg==}
     dev: false
 
+  /@zag-js/element-rect@0.2.2:
+    resolution: {integrity: sha512-6sh+3wRfq5MlMTxQ30CS3B6cvrHY5cEhOHHsXAJC1y9WVLTtA5Z1GhdCQxqd5lVt6yEc8uaoOQppM/VpWn6m3Q==}
+    dev: false
+
   /@zag-js/element-rect@0.3.0:
     resolution: {integrity: sha512-P3bdcfE5Bk3Bm7qhs8lPDykgWNYJeMgyqa+3Z93QPCH9cXsg76O0OrhkK3kWruHzT/f+sVXDDZ1yEUxxgLCRFg==}
     dev: false
@@ -2666,6 +2686,15 @@ packages:
 
   /@zag-js/numeric-range@0.1.1:
     resolution: {integrity: sha512-TVOUG6aXfzUaSrigFeTdN/pGlKBInMRTYhYfPWGg3UOACkRVSyiUc8I3W1j4a66JHE5urzB35jQCU8Y4EcGuIw==}
+    dev: false
+
+  /@zag-js/popper@0.2.5:
+    resolution: {integrity: sha512-FhMjiu7mdwbFAEovGBhL5w/LLhZXREnjAODszNTkcAahZnwsd4xAPTQnSEYkG80oe58pdBsD0IPu4fn3sbcr1A==}
+    dependencies:
+      '@floating-ui/dom': 1.2.1
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/element-rect': 0.2.2
+      '@zag-js/utils': 0.3.3
     dev: false
 
   /@zag-js/popper@0.2.7:
@@ -2761,10 +2790,27 @@ packages:
       '@zag-js/utils': 0.3.4
     dev: false
 
+  /@zag-js/tooltip@0.2.13:
+    resolution: {integrity: sha512-S6TxqbWYiNeAbz8w5/Sv/iLZmtUt5hI2VFLE0bksAQH+zDnzuOd43UJmEleba2YPbgy3lM5TCbPVHSeBPzOMcw==}
+    dependencies:
+      '@zag-js/anatomy': 0.1.4
+      '@zag-js/core': 0.2.10
+      '@zag-js/dom-event': 0.0.1
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/popper': 0.2.5
+      '@zag-js/types': 0.3.4
+      '@zag-js/utils': 0.3.3
+      '@zag-js/visually-hidden': 0.0.1
+    dev: false
+
   /@zag-js/types@0.3.4:
     resolution: {integrity: sha512-KkZOMNqFZA0TaVF70O6WIRJPWTcDyRQjhXLDkLVfo99gwJdsC1bMZWfjrCiR8g1CfzvCyGNSWzdArIgzTJVEMA==}
     dependencies:
       csstype: 3.1.1
+    dev: false
+
+  /@zag-js/utils@0.3.3:
+    resolution: {integrity: sha512-INNuBcu1+Y5Nxo/PGW51qqkVwBzUCjzO0WjUJDBoqNo8hRs5KsWLcGKdrCayRPaDjNvQetXsUH54LGImUjUHTQ==}
     dev: false
 
   /@zag-js/utils@0.3.4:
@@ -4066,7 +4112,7 @@ packages:
       eslint-plugin-promise: ^6.0.0
     dependencies:
       eslint: 8.37.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
       eslint-plugin-n: 15.7.0(eslint@8.37.0)
       eslint-plugin-promise: 6.1.1(eslint@8.37.0)
     dev: true
@@ -4090,7 +4136,7 @@ packages:
     dependencies:
       debug: 4.3.4
       eslint: 8.37.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
       glob: 7.2.3
       is-glob: 4.0.3
       resolve: 1.22.2
@@ -4099,7 +4145,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils@2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0):
+  /eslint-module-utils@2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint@8.37.0):
     resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -4124,7 +4170,6 @@ packages:
       debug: 3.2.7
       eslint: 8.37.0
       eslint-import-resolver-node: 0.3.7
-      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.27.5)(eslint@8.37.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4174,7 +4219,7 @@ packages:
       htmlparser2: 7.2.0
     dev: true
 
-  /eslint-plugin-import@2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0):
+  /eslint-plugin-import@2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0):
     resolution: {integrity: sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -4192,7 +4237,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.37.0
       eslint-import-resolver-node: 0.3.7
-      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
+      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint@8.37.0)
       has: 1.0.3
       is-core-module: 2.11.0
       is-glob: 4.0.3

@@ -39,9 +39,10 @@ interface SettingsUIBase {
   default?: string | number | boolean
 }
 
-interface SelectOptionType {
+export interface SelectOptionType {
   value: any
   label: string
+  icon?: string
 }
 
 export interface SettingsApiKey extends SettingsUIBase {

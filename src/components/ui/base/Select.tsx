@@ -1,14 +1,11 @@
 import * as select from '@zag-js/select'
 import { normalizeProps, useMachine } from '@zag-js/solid'
 import { createMemo, createUniqueId, mergeProps } from 'solid-js'
+import type { SelectOptionType } from '@/types/provider'
 import type { Accessor } from 'solid-js'
 
 interface Props {
-  options: {
-    icon?: string
-    label: string
-    value: string
-  }[]
+  options: SelectOptionType[]
   value: Accessor<string>
   setValue: (v: string) => void
   placeholder?: string
@@ -38,7 +35,7 @@ export const Select = (inputProps: Props) => {
           {...api().triggerProps}
         >
           <div class="fi gap-2">
-            {api().selectedOption?.icon && <div class={api().selectedOption?.icon} />}
+            {(api().selectedOption as SelectOptionType)?.icon && <div class={(api().selectedOption as SelectOptionType)?.icon} />}
             <div>{api().selectedOption?.label ?? props.placeholder}</div>
           </div>
           {!props.readonly && <div i-carbon-caret-down />}
