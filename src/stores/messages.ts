@@ -19,14 +19,13 @@ export const getMessagesByConversationId = (id: string) => {
 export const updateMessage = action(
   conversationMessagesMap,
   'updateMessage',
-  (map, conversationId: string, id: string, payload: Partial<Omit<MessageInstance, 'stream'>>) => {
+  (map, conversationId: string, id: string, payload: Partial<MessageInstance>) => {
     const oldMessages = map.get()[conversationId] || []
     const newMessages = oldMessages.map((message) => {
       if (message.id === id) {
         return {
           ...message,
           ...payload,
-          stream: undefined,
         }
       }
       return message
@@ -43,11 +42,7 @@ export const pushMessageByConversationId = action(
     const oldMessages = map.get()[id] || []
     if (oldMessages[oldMessages.length - 1]?.id === payload.id) return
     map.setKey(id, [...oldMessages, payload])
-    db.setItem(id, [...oldMessages, {
-      id: payload.id,
-      role: payload.role,
-      content: payload.content,
-    }])
+    db.setItem(id, [...oldMessages, payload])
     updateConversationById(id, {
       lastUseTime: Date.now(),
     })

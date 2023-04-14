@@ -1,16 +1,21 @@
 export interface Message {
   role: 'system' | 'user' | 'assistant'
   content: string
-  dateTime?: number
 }
 
 /** Used in app */
 export interface MessageInstance extends Message {
   id: string
-  stream?: ReadableStream
+  stream?: boolean
+  dateTime?: number
 }
 
 export interface ErrorMessage {
   code: string
   message: string
+}
+
+export interface StreamInstance {
+  messageId: string
+  stream: ReadableStream
 }

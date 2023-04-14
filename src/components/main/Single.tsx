@@ -35,7 +35,6 @@ export default ({ conversationId, messages }: Props) => {
             ? () => ({
                 conversationId,
                 messageId: messageOutput()?.id || '',
-                stream: messageOutput()?.stream || null,
                 handleStreaming: handleStreamableTextUpdate,
               })
             : undefined}

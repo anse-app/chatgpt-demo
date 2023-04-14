@@ -55,7 +55,6 @@ export default (props: Props) => {
               ? () => ({
                   conversationId: props.conversationId,
                   messageId: props.message.id || '',
-                  stream: props.message.stream || null,
                   handleStreaming: props.handleStreaming,
                 })
               : undefined}

@@ -1,6 +1,7 @@
 import { createEffect, createSignal, on } from 'solid-js'
 import { convertReadableStreamToAccessor } from '@/logics/stream'
 import { updateMessage } from '@/stores/messages'
+import { deleteStreamById, getStreamByConversationId } from '@/stores/streams'
 import Markdown from './Markdown'
 
 interface Props {
@@ -9,7 +10,6 @@ interface Props {
   streamInfo?: () => {
     conversationId: string
     messageId: string
-    stream: ReadableStream | null
     handleStreaming?: () => void
   }
 }
@@ -28,13 +28,16 @@ export default (props: Props) => {
       setLocalText(text)
     } else if (props.streamInfo) {
       const streamInfo = props.streamInfo()
-      if (streamInfo.messageId && streamInfo.stream) {
-        const finalText = await convertReadableStreamToAccessor(streamInfo.stream, setLocalText)
+      const streamInstance = getStreamByConversationId(streamInfo.conversationId)
+      if (streamInfo.messageId && streamInstance?.messageId === streamInfo.messageId) {
+        const finalText = await convertReadableStreamToAccessor(streamInstance.stream, setLocalText)
         setLocalText(finalText)
         updateMessage(streamInfo.conversationId, streamInfo.messageId, {
           content: finalText,
+          stream: false,
         })
       }
+      deleteStreamById(streamInfo.conversationId)
     } else {
       setLocalText('')
     }

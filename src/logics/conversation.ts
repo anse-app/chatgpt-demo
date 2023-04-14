@@ -1,6 +1,7 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
 import { getSettingsByProviderId } from '@/stores/settings'
+import { setStreamByConversationId } from '@/stores/streams'
 import { currentErrorMessage } from '@/stores/ui'
 import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
@@ -33,11 +34,18 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   })
 
   if (providerResponse) {
+    const messageId = `${conversation.id}:assistant:${Date.now()}`
+    if (providerResponse instanceof ReadableStream) {
+      setStreamByConversationId(conversation.id, {
+        messageId,
+        stream: providerResponse,
+      })
+    }
     pushMessageByConversationId(conversation.id, {
-      id: `${conversation.id}:assistant:${Date.now()}`,
+      id: messageId,
       role: 'assistant',
       content: typeof providerResponse === 'string' ? providerResponse : '',
-      stream: providerResponse instanceof ReadableStream ? providerResponse : undefined,
+      stream: providerResponse instanceof ReadableStream,
       dateTime: new Date().getTime(),
     })
   }
