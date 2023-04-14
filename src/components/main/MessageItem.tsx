@@ -1,4 +1,3 @@
-import { useDateFormat, useTimeAgo } from 'solidjs-use'
 import StreamableText from '../StreamableText'
 import type { MessageInstance } from '@/types/message'
 
@@ -25,7 +24,6 @@ export default (props: Props) => {
       <div class="max-w-base flex gap-4 overflow-hidden">
         <div class={`shrink-0 w-7 h-7 rounded-md op-80 ${roleClass[props.message.role]}`} />
         <div class="flex flex-col space-y-1">
-          <span class="text-xs text-info">{useTimeAgo(useDateFormat(props.message.dateTime, 'YYYY-MM-DD HH:mm:ss'))}</span>
           <StreamableText
             text={props.message.content}
             streamInfo={props.message.stream

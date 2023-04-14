@@ -6,7 +6,6 @@ import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
 import 'katex/dist/katex.min.css'
-import './prose.css'
 
 interface Props {
   class?: string
