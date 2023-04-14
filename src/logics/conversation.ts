@@ -22,6 +22,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     id: `${conversation.id}:user:${Date.now()}`,
     role: 'user',
     content: prompt,
+    dateTime: new Date().getTime(),
   })
 
   const providerResponse: PromptResponse = await callProviderHandler({
@@ -37,6 +38,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
       role: 'assistant',
       content: typeof providerResponse === 'string' ? providerResponse : '',
       stream: providerResponse instanceof ReadableStream ? providerResponse : undefined,
+      dateTime: new Date().getTime(),
     })
   }
 }

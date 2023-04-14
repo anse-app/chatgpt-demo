@@ -1,0 +1,3 @@
+.prose :where(p,ul,ol,pre):not(:where(.not-prose,.not-prose *)) {
+  @apply my-2
+}

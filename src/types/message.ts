@@ -1,6 +1,7 @@
 export interface Message {
   role: 'system' | 'user' | 'assistant'
   content: string
+  dateTime?: number
 }
 
 /** Used in app */
