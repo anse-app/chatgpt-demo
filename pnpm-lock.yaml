@@ -31,6 +31,9 @@ dependencies:
   '@zag-js/dialog':
     specifier: ^0.2.15
     version: 0.2.15
+  '@zag-js/menu':
+    specifier: ^0.5.0
+    version: 0.5.0
   '@zag-js/select':
     specifier: ^0.2.1
     version: 0.2.1
@@ -2619,6 +2622,13 @@ packages:
       klona: 2.0.6
     dev: false
 
+  /@zag-js/core@0.5.0:
+    resolution: {integrity: sha512-hFQeMsQP274r/0L3n8BV+Esm06kKkxvBVORJ7tfdIqb7gPuGCuh1X88E3VmP/OrxjZA3Ped8MpENqXlEOpUaHw==}
+    dependencies:
+      '@zag-js/store': 0.2.8
+      klona: 2.0.6
+    dev: false
+
   /@zag-js/dialog@0.2.15:
     resolution: {integrity: sha512-BqlLJkNbiMNZJG91fXzJZMe0gnjsmfzBZ6+asiIlEel1TMYQqFkimPK3YtGmTEeqM8S0vkcF3eIF4NLOsFtDFA==}
     dependencies:
@@ -2642,11 +2652,27 @@ packages:
       '@zag-js/utils': 0.3.4
     dev: false
 
+  /@zag-js/dismissable@0.5.0:
+    resolution: {integrity: sha512-Iz/UNLaClWush0q8zpotqI/QMZw7hhxxRy2o5W34ItDi+aRXhfRf4My0Na4n0wRAdep9kMa02tAzGkp7vGq/9Q==}
+    dependencies:
+      '@zag-js/dom-event': 0.5.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/interact-outside': 0.5.0
+      '@zag-js/utils': 0.3.4
+    dev: false
+
   /@zag-js/dom-event@0.0.1:
     resolution: {integrity: sha512-oRDWn/31JUwTc9nIUG/Ingug6FNBkhXUnd2dh3vEcqfk+NVHPZ9Lgx5tauiEDyiRKeWr9PS5GJpBQVNc2YDo3Q==}
     dependencies:
       '@zag-js/text-selection': 0.0.1
       '@zag-js/types': 0.3.4
+    dev: false
+
+  /@zag-js/dom-event@0.5.0:
+    resolution: {integrity: sha512-O1qBxYemJkEvsLBzVpbch76W+CYHnosoV4mFEtTVqtrgjtGAp/z4ql5Fviudh8ORg07uIQyykXH3lDvk4V7Tmg==}
+    dependencies:
+      '@zag-js/text-selection': 0.0.1
+      '@zag-js/types': 0.5.0
     dev: false
 
   /@zag-js/dom-query@0.1.4:
@@ -2680,6 +2706,29 @@ packages:
       '@zag-js/utils': 0.3.4
     dev: false
 
+  /@zag-js/interact-outside@0.5.0:
+    resolution: {integrity: sha512-S77WBF7jzvMNZZB0qIhBkqax+l2znUCcfjTKRL1tDYOQONlQqA9zTB2EoQgGfADXmu3rWBLLAmznRPCfToJy/w==}
+    dependencies:
+      '@zag-js/dom-event': 0.5.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/tabbable': 0.1.1
+      '@zag-js/utils': 0.3.4
+    dev: false
+
+  /@zag-js/menu@0.5.0:
+    resolution: {integrity: sha512-HWdIjY3B1wOarWS86rkgcjOgMemzlNg4B1VIanjMsivxLoB4QbwFu8u03vu91wbFU/5WeZYFx0FEYQmAgxrl3A==}
+    dependencies:
+      '@zag-js/anatomy': 0.1.4
+      '@zag-js/core': 0.5.0
+      '@zag-js/dismissable': 0.5.0
+      '@zag-js/dom-event': 0.5.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/popper': 0.2.7
+      '@zag-js/rect-utils': 0.2.3
+      '@zag-js/types': 0.5.0
+      '@zag-js/utils': 0.3.4
+    dev: false
+
   /@zag-js/mutation-observer@0.0.1:
     resolution: {integrity: sha512-HasPzt6LyVWsu1jwx3lFNKuV3nlaJQ918rU1wUnhqMD8ZVSKvNBxCoz0NswiKZWTR/6eNwFwvHrewJiWKXivrw==}
     dev: false
@@ -2704,6 +2753,10 @@ packages:
       '@zag-js/dom-query': 0.1.4
       '@zag-js/element-rect': 0.3.0
       '@zag-js/utils': 0.3.4
+    dev: false
+
+  /@zag-js/rect-utils@0.2.3:
+    resolution: {integrity: sha512-kqzHvJjvY9GjVwj+LsiVMu5c+oxL5uHs85X2Nwy1nXQ+XjED8qvrxFnoldhTQm+s/1fCbyzbsTdHbVMZQ3kBnw==}
     dev: false
 
   /@zag-js/remove-scroll@0.2.4:
@@ -2805,6 +2858,12 @@ packages:
 
   /@zag-js/types@0.3.4:
     resolution: {integrity: sha512-KkZOMNqFZA0TaVF70O6WIRJPWTcDyRQjhXLDkLVfo99gwJdsC1bMZWfjrCiR8g1CfzvCyGNSWzdArIgzTJVEMA==}
+    dependencies:
+      csstype: 3.1.1
+    dev: false
+
+  /@zag-js/types@0.5.0:
+    resolution: {integrity: sha512-in0N3xWjg9U4reI+u9yFEa9iP35b1GpEA0PDDJFuJTyramRcAdMRJAqKmhVlzAW8HmgQM84fs5Prr1jQXsxpWA==}
     dependencies:
       csstype: 3.1.1
     dev: false

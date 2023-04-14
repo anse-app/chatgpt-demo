@@ -57,6 +57,7 @@ export default defineConfig({
     'text-error': 'text-red-700 dark:text-red-400/80',
     'border-error': 'border border-red-700 dark:border-red-400/80',
     'text-info': 'text-gray-400 dark:text-gray-200',
+    'menu-icon': 'cursor-pointer text-xl fg-base hover-text-emerald-600',
     'fc': 'flex justify-center',
     'fi': 'flex items-center',
     'fcc': 'fc items-center',

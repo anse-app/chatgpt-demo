@@ -1,6 +1,6 @@
 import { For, createSignal, onMount } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { Select } from '@/components/ui/base/Select'
+import { Select } from '@/components/ui/base'
 import {
   addConversation,
   currentEditingConversation,

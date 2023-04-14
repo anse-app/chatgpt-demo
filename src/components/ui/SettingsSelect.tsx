@@ -1,4 +1,4 @@
-import { Select } from '../ui/base/Select'
+import { Select } from '../ui/base'
 import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUISelect } from '@/types/provider'
 import type { Accessor } from 'solid-js'

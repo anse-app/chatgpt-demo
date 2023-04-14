@@ -39,12 +39,13 @@ export default (props: Props) => {
     <>
       <div class="scroll-list relative flex flex-col h-full overflow-y-scroll" ref={scrollRef!}>
         <For each={props.messages()}>
-          {message => (
+          {(message, index) => (
             <div class="border-b border-lighter">
               <MessageItem
                 conversationId={props.conversationId}
                 message={message}
                 handleStreaming={handleStreamableTextUpdate}
+                index={index()}
               />
             </div>
           )}

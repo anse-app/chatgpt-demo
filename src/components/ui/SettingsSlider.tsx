@@ -1,4 +1,4 @@
-import { Slider } from '../ui/base/Slider'
+import { Slider } from '../ui/base'
 import SettingsNotDefined from './SettingsNotDefined'
 import type { SettingsUI, SettingsUISlider } from '@/types/provider'
 import type { Accessor } from 'solid-js'

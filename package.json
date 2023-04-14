@@ -24,6 +24,7 @@
     "@solid-primitives/scroll": "^2.0.14",
     "@unocss/reset": "^0.50.6",
     "@zag-js/dialog": "^0.2.15",
+    "@zag-js/menu": "^0.5.0",
     "@zag-js/select": "^0.2.1",
     "@zag-js/slider": "^0.2.14",
     "@zag-js/solid": "^0.3.1",

@@ -4,7 +4,7 @@ import { createShortcut } from '@solid-primitives/keyboard'
 import { currentErrorMessage, isSendBoxFocus, scrollController } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
 import { handlePrompt } from '@/logics/conversation'
-import { Tooltip } from './ui/base/Tooltip'
+import { Tooltip } from './ui/base'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
