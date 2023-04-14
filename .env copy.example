@@ -1,9 +1,9 @@
 # Your API Key for OpenAI
-OPENAI_API_KEY=
+OPENAI_API_KEY=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
 # Provide proxy for OpenAI API. e.g. http://127.0.0.1:7890
-HTTPS_PROXY=
+HTTPS_PROXY=http://127.0.0.1:51351
 # Custom base url for OpenAI API. default: https://api.openai.com
-OPENAI_API_BASE_URL=
+OPENAI_API_BASE_URL=https://api.openai.com
 # Inject analytics or other scripts before </head> of the page
 HEAD_SCRIPTS=
 # Secret string for the project. Use for generating signatures for API calls
