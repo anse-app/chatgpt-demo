@@ -32,3 +32,24 @@
 .slide-right-enter-to {
   @apply translate-x-0;
 }
+
+.progress-bg {
+  background-image: linear-gradient(90deg, #ffffff00 0%, #ffffff08 35%, #ffffff08 65%, #ffffff00 100%);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* height: 1px; */
+  width: 60%;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: progress-bar-loop;
+}
+
+@keyframes progress-bar-loop {
+  from {
+    left: -60%;
+  }
+  to {
+    left: 110%;
+  }
+}

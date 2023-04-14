@@ -3,6 +3,7 @@ import { useStore } from '@nanostores/solid'
 import { createShortcut } from '@solid-primitives/keyboard'
 import { currentErrorMessage, isSendBoxFocus, scrollController } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
+import { streamsMap } from '@/stores/streams'
 import { handlePrompt } from '@/logics/conversation'
 
 export default () => {
@@ -11,12 +12,14 @@ export default () => {
   const $currentConversationId = useStore(currentConversationId)
   const $isSendBoxFocus = useStore(isSendBoxFocus)
   const $currentErrorMessage = useStore(currentErrorMessage)
+  const $streamsMap = useStore(streamsMap)
 
   const [inputPrompt, setInputPrompt] = createSignal('')
   const isEditing = () => inputPrompt() || $isSendBoxFocus()
   const currentConversation = () => {
     return $conversationMap()[$currentConversationId()]
   }
+  const isStreaming = () => !!$streamsMap()[$currentConversationId()]
 
   onMount(() => {
     createShortcut(['Control', 'Enter'], () => {
@@ -26,7 +29,7 @@ export default () => {
 
   const EmptyState = () => (
     <div
-      class="max-w-base h-full flex flex-row items-center gap-2"
+      class="max-w-base h-full fi flex-row gap-2"
       onClick={() => {
         isSendBoxFocus.set(true)
         inputRef.focus()
@@ -74,6 +77,19 @@ export default () => {
     </div>
   )
 
+  const LoadingState = () => (
+    <div class="max-w-base h-full fi flex-row gap-2">
+      <div class="progress-bg" />
+      <div class="flex-1 op-50">Thinking...</div>
+      {/* <div
+        class="border border-darker px-2 py-1 rounded-md text-sm op-40 hv-base hover:bg-white"
+        onClick={() => {  }}
+      >
+        Abort
+      </div> */}
+    </div>
+  )
+
   const handleSend = () => {
     if (!inputRef.value)
       return
@@ -89,6 +105,8 @@ export default () => {
   const stateType = () => {
     if ($currentErrorMessage())
       return 'error'
+    else if (isStreaming())
+      return 'loading'
     else if (isEditing())
       return 'editing'
     else
@@ -100,18 +118,23 @@ export default () => {
       return 'px-6 h-14 bg-base-100 hv-base'
     else if (stateType() === 'error')
       return 'px-6 bg-red/8'
+    else if (stateType() === 'loading')
+      return 'px-6 h-14 bg-base-100'
     else if (stateType() === 'editing')
       return 'h-40 bg-base-100'
     return ''
   }
 
   return (
-    <div class={`border-t border-base transition transition-property-[background-color,height] ${stateClass()}`}>
+    <div class={`relative border-t border-base transition transition-property-[background-color,height] transition-240 ${stateClass()}`}>
       <Switch fallback={<EmptyState />}>
-        <Match when={$currentErrorMessage()}>
+        <Match when={stateType() === 'error'}>
           <ErrorState />
         </Match>
-        <Match when={isEditing()}>
+        <Match when={stateType() === 'loading'}>
+          <LoadingState />
+        </Match>
+        <Match when={stateType() === 'editing'}>
           <EditState />
         </Match>
       </Switch>
