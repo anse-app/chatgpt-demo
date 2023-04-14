@@ -63,8 +63,8 @@ export default () => {
   )
 
   const ErrorState = () => (
-    <div class="max-w-base h-full flex items-end flex-col sm:(flex-row items-center) justify-between gap-8 py-4 text-error text-sm">
-      <div>
+    <div class="max-w-base h-full flex items-end flex-col justify-between gap-8 sm:(flex-row items-center) py-4 text-error text-sm">
+      <div class="flex-1 w-full">
         <div class="fi gap-0.5 mb-1">
           <span i-carbon-warning />
           <span class="font-semibold">{$currentErrorMessage()?.code}</span>
