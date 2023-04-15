@@ -1,3 +1,8 @@
+[![](https://cloud-upyun.ddiu.site/picture/2023/04/15/xAe0dY.png)](https://v2.chatgpt.ddiu.me)
+
+> We are working on V2 Version! Preview & more info on https://github.com/ddiu8081/chatgpt-demo/discussions/247.
+
+
 # ChatGPT-API Demo
 
 English | [简体中文](./README.zh-CN.md)
