@@ -8,7 +8,12 @@ export const post: APIRoute = async({ request }) => {
 
   try {
     const providerResponse = await callProviderHandler(body)
-    return new Response(providerResponse)
+    const isStream = providerResponse instanceof ReadableStream
+    return new Response(providerResponse, {
+      headers: {
+        'Content-Type': isStream ? 'text/html; charset=utf-8' : 'text/plain; charset=utf-8',
+      },
+    })
   } catch (e) {
     const error = e as Error
     const cause = error?.cause as ErrorMessage
