@@ -9,8 +9,8 @@ import type { ErrorMessage } from '@/types/message'
 
 export const handlePrompt = async(conversation: Conversation, prompt: string) => {
   const generalSettings = getGeneralSettings()
-  const providerId = conversation?.providerId
-  if (!providerId) return
+  const provider = getProviderById(conversation?.providerId)
+  if (!provider) return
 
   if (conversation.conversationType !== 'continuous')
     clearMessagesByConversationId(conversation.id)
@@ -40,8 +40,10 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
       prompt,
       historyMessages: getMessagesByConversationId(conversation.id),
     }
-    const method = generalSettings.requestWithBackend ? 'backend' : 'frontend'
-    providerResponse = await getProviderResponse(method, providerPayload)
+    let method = generalSettings.requestWithBackend ? 'backend' : 'frontend'
+    if (provider.supportCallMethod === 'frontend' || provider.supportCallMethod === 'backend')
+      method = provider.supportCallMethod
+    providerResponse = await getProviderResponse(method as 'frontend' | 'backend', providerPayload)
   } catch (e) {
     const error = e as Error
     const cause = error?.cause as ErrorMessage

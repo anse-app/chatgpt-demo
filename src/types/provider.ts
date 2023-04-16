@@ -11,7 +11,10 @@ export interface Provider {
   globalSettings?: SettingsUI[]
   /** Settings for each conversation */
   conversationSettings?: SettingsUI[]
+  /** The types of conversations supported by the Provider. */
   supportConversationType: ConversationType[]
+  /** Whether the Provider can accept frontend or backend calls, or both. */
+  supportCallMethod?: 'both' | 'frontend' | 'backend'
   /** Handle a prompt in single conversation type */
   handleSinglePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
   /** Handle a prompt in continuous conversation type */
