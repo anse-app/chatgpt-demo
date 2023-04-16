@@ -34,7 +34,7 @@
 }
 
 .progress-bg {
-  background-image: linear-gradient(90deg, #ffffff00 0%, #ffffff08 35%, #ffffff08 65%, #ffffff00 100%);
+  background-image: linear-gradient(90deg, #ffffff00 0%, var(--c-shadow) 35%, var(--c-shadow) 65%, #ffffff00 100%);
   position: absolute;
   top: 0;
   bottom: 0;
