@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/solid'
 import { createShortcut } from '@solid-primitives/keyboard'
 import { currentErrorMessage, isSendBoxFocus, scrollController } from '@/stores/ui'
 import { addConversation, conversationMap, currentConversationId } from '@/stores/conversation'
-import { streamsMap } from '@/stores/streams'
+import { loadingStateMap, streamsMap } from '@/stores/streams'
 import { handlePrompt } from '@/logics/conversation'
 
 export default () => {
@@ -13,6 +13,7 @@ export default () => {
   const $isSendBoxFocus = useStore(isSendBoxFocus)
   const $currentErrorMessage = useStore(currentErrorMessage)
   const $streamsMap = useStore(streamsMap)
+  const $loadingStateMap = useStore(loadingStateMap)
 
   const [inputPrompt, setInputPrompt] = createSignal('')
   const isEditing = () => inputPrompt() || $isSendBoxFocus()
@@ -20,12 +21,24 @@ export default () => {
     return $conversationMap()[$currentConversationId()]
   }
   const isStreaming = () => !!$streamsMap()[$currentConversationId()]
+  const isLoading = () => !!$loadingStateMap()[$currentConversationId()]
 
   onMount(() => {
     createShortcut(['Control', 'Enter'], () => {
       $isSendBoxFocus() && handleSend()
     })
   })
+
+  const stateType = () => {
+    if ($currentErrorMessage())
+      return 'error'
+    else if (isLoading() || isStreaming())
+      return 'loading'
+    else if (isEditing())
+      return 'editing'
+    else
+      return 'normal'
+  }
 
   const EmptyState = () => (
     <div
@@ -100,17 +113,6 @@ export default () => {
     inputRef.value = ''
     isSendBoxFocus.set(false)
     scrollController().scrollToBottom()
-  }
-
-  const stateType = () => {
-    if ($currentErrorMessage())
-      return 'error'
-    else if (isStreaming())
-      return 'loading'
-    else if (isEditing())
-      return 'editing'
-    else
-      return 'normal'
   }
 
   const stateClass = () => {

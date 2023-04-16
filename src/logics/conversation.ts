@@ -1,7 +1,7 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
 import { getGeneralSettings, getSettingsByProviderId } from '@/stores/settings'
-import { setStreamByConversationId } from '@/stores/streams'
+import { setLoadingStateByConversationId, setStreamByConversationId } from '@/stores/streams'
 import { currentErrorMessage } from '@/stores/ui'
 import type { CallProviderPayload, HandlerPayload, PromptResponse } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
@@ -27,6 +27,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     dateTime: new Date().getTime(),
   })
 
+  setLoadingStateByConversationId(conversation.id, true)
   let providerResponse: PromptResponse
   try {
     const providerPayload: CallProviderPayload = {
@@ -67,6 +68,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
       dateTime: new Date().getTime(),
     })
   }
+  setLoadingStateByConversationId(conversation.id, false)
 }
 
 const getProviderResponse = async(caller: 'frontend' | 'backend', payload: CallProviderPayload) => {
