@@ -24,7 +24,7 @@ export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, pa
   })
   if (!response.ok) {
     const responseJson = await response.json()
-    const errMessage = responseJson.error?.message || 'Unknown error'
+    const errMessage = responseJson.error?.message || response.statusText || 'Unknown error'
     throw new Error(errMessage)
   }
   const resJson = await response.json()
@@ -46,7 +46,8 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
   })
   if (!response.ok) {
     const responseJson = await response.json()
-    const errMessage = responseJson.error?.message || 'Unknown error'
+    console.log('responseJson', responseJson)
+    const errMessage = responseJson.error?.message || response.statusText || 'Unknown error'
     throw new Error(errMessage, { cause: responseJson.error })
   }
   const isStream = response.headers.get('content-type')?.includes('text/event-stream')

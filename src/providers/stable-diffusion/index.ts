@@ -19,6 +19,7 @@ const providerOpenAI = () => {
         name: 'Model Version',
         description: 'Version hash for Stable Diffusion.',
         type: 'input',
+        default: 'db21e45d3f7023abc2a46ee38a23973f6dce16bb082a930b0c49861f96d1e5bf',
       },
     ],
     conversationSettings: [],

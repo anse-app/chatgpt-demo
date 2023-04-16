@@ -22,6 +22,18 @@ export interface Provider {
 
 export type SettingsPayload = Record<string, string | number | boolean>
 
+/* Payload for `callProviderHandler` */
+export interface CallProviderPayload {
+  conversationMeta: {
+    id: string
+    conversationType: string
+  }
+  globalSettings: SettingsPayload
+  providerId: string
+  prompt: string
+  historyMessages: Message[]
+}
+
 export interface HandlerPayload {
   conversationId: string
   globalSettings: SettingsPayload

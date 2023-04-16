@@ -3,13 +3,13 @@ import { clearMessagesByConversationId, getMessagesByConversationId, pushMessage
 import { getSettingsByProviderId } from '@/stores/settings'
 import { setStreamByConversationId } from '@/stores/streams'
 import { currentErrorMessage } from '@/stores/ui'
-import type { HandlerPayload, PromptResponse, Provider } from '@/types/provider'
+import type { CallProviderPayload, HandlerPayload, PromptResponse, Provider } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
-import type { ErrorMessage, Message } from '@/types/message'
+import type { ErrorMessage } from '@/types/message'
 
 export const handlePrompt = async(conversation: Conversation, prompt: string) => {
-  const provider = getProviderById(conversation?.providerId)
-  if (!provider) return
+  const providerId = conversation?.providerId
+  if (!providerId) return
 
   if (conversation.conversationType !== 'continuous')
     clearMessagesByConversationId(conversation.id)
@@ -26,12 +26,28 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     dateTime: new Date().getTime(),
   })
 
-  const providerResponse: PromptResponse = await callProviderHandler({
-    conversation,
-    provider,
-    prompt,
-    historyMessages: getMessagesByConversationId(conversation.id),
-  })
+  let providerResponse: PromptResponse
+  try {
+    const providerPayload: CallProviderPayload = {
+      conversationMeta: {
+        id: conversation.id,
+        conversationType: conversation.conversationType,
+      },
+      globalSettings: getSettingsByProviderId(conversation.providerId),
+      providerId: conversation.providerId,
+      prompt,
+      historyMessages: getMessagesByConversationId(conversation.id),
+    }
+    providerResponse = await getProviderResponse('frontend', providerPayload)
+  } catch (e) {
+    const error = e as Error
+    const cause = error?.cause as ErrorMessage
+    console.error(e)
+    currentErrorMessage.set({
+      code: cause?.code || 'provider_error',
+      message: cause?.message || error.message || 'Unknown error',
+    })
+  }
 
   if (providerResponse) {
     const messageId = `${conversation.id}:assistant:${Date.now()}`
@@ -51,46 +67,54 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   }
 }
 
-interface CallProviderPayload {
-  conversation: Conversation
-  provider: Provider
-  prompt: string
-  historyMessages: Message[]
+const getProviderResponse = async(caller: 'frontend' | 'backend', payload: CallProviderPayload): PromptResponse => {
+  if (caller === 'frontend') {
+    return callProviderHandler(payload)
+  } else {
+    const backendResponse = await fetch('/api/handle', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    })
+    if (!backendResponse.ok) {
+      const error = await backendResponse.json()
+      throw new Error('Request failed', {
+        cause: error?.error,
+      })
+    }
+    if (backendResponse.headers.get('content-type')?.includes('text/plain'))
+      return backendResponse.text()
+    else
+      return backendResponse.body
+  }
 }
 
-const callProviderHandler = async(payload: CallProviderPayload) => {
-  const { conversation, provider, prompt, historyMessages } = payload
+// Called by both client and server
+export const callProviderHandler = async(payload: CallProviderPayload) => {
+  console.log('callProviderHandler', payload)
+
+  const { conversationMeta, providerId, prompt, historyMessages } = payload
+  const provider = getProviderById(providerId)
+  if (!provider) return
+
   let response: PromptResponse
   const handlerPayload: HandlerPayload = {
-    conversationId: conversation.id,
-    globalSettings: getSettingsByProviderId(provider.id),
+    conversationId: conversationMeta.id,
+    globalSettings: payload.globalSettings,
     conversationSettings: {},
     systemRole: '',
     mockMessages: [],
   }
-  console.log('callProviderHandler', handlerPayload)
-  try {
-    if (conversation.conversationType === 'single') {
-      response = await provider.handleSinglePrompt?.(prompt, handlerPayload)
-    } else if (conversation.conversationType === 'continuous') {
-      const messages = historyMessages.map(message => ({
-        role: message.role,
-        content: message.content,
-      }))
-      response = await provider.handleContinuousPrompt?.(messages, handlerPayload)
-    } else if (conversation.conversationType === 'image') {
-      response = await provider.handleImagePrompt?.(prompt, handlerPayload)
-    }
-
-    return response
-  } catch (e) {
-    const error = e as Error
-    const cause = error?.cause as ErrorMessage
-    console.error(e)
-    currentErrorMessage.set({
-      code: cause?.code || 'provider_error',
-      message: cause?.message || error.message || 'Unknown error',
-    })
-    return null
+  if (conversationMeta.conversationType === 'single') {
+    response = await provider.handleSinglePrompt?.(prompt, handlerPayload)
+  } else if (conversationMeta.conversationType === 'continuous') {
+    const messages = historyMessages.map(message => ({
+      role: message.role,
+      content: message.content,
+    }))
+    response = await provider.handleContinuousPrompt?.(messages, handlerPayload)
+  } else if (conversationMeta.conversationType === 'image') {
+    response = await provider.handleImagePrompt?.(prompt, handlerPayload)
   }
+
+  return response
 }
