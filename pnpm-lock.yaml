@@ -43,6 +43,9 @@ dependencies:
   '@zag-js/solid':
     specifier: ^0.3.1
     version: 0.3.1(solid-js@1.6.12)
+  '@zag-js/switch':
+    specifier: ^0.5.0
+    version: 0.5.0
   '@zag-js/toast':
     specifier: ^0.2.13
     version: 0.2.16
@@ -1730,7 +1733,7 @@ packages:
       eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.27.5)(eslint@8.37.0)
       eslint-plugin-eslint-comments: 3.2.0(eslint@8.37.0)
       eslint-plugin-html: 6.2.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
       eslint-plugin-jsonc: 2.7.0(eslint@8.37.0)
       eslint-plugin-jsx-a11y: 6.7.1(eslint@8.37.0)
       eslint-plugin-markdown: 2.2.1(eslint@8.37.0)
@@ -2812,6 +2815,18 @@ packages:
     resolution: {integrity: sha512-QgBnbYjb5jvcTt0+JCoPJ9YKM9vP1/RR78mkT6fWCIM0N8hnZu4MzQPVKxiopxZ8XIrDbUjFWlJLzL83uiYv2g==}
     dependencies:
       proxy-compare: 2.5.0
+    dev: false
+
+  /@zag-js/switch@0.5.0:
+    resolution: {integrity: sha512-IdJ9zAuKDc9LByz0eb0pyfbkbw7p9Kbi8BDkyeIOY0+UgIa7RLB+LJ9K5lWqFazbllI4chADq7XxaoSx5pEs9A==}
+    dependencies:
+      '@zag-js/anatomy': 0.1.4
+      '@zag-js/core': 0.5.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/form-utils': 0.2.5
+      '@zag-js/types': 0.5.0
+      '@zag-js/utils': 0.3.4
+      '@zag-js/visually-hidden': 0.0.1
     dev: false
 
   /@zag-js/tabbable@0.1.1:
@@ -4171,7 +4186,7 @@ packages:
       eslint-plugin-promise: ^6.0.0
     dependencies:
       eslint: 8.37.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
       eslint-plugin-n: 15.7.0(eslint@8.37.0)
       eslint-plugin-promise: 6.1.1(eslint@8.37.0)
     dev: true
@@ -4195,7 +4210,7 @@ packages:
     dependencies:
       debug: 4.3.4
       eslint: 8.37.0
-      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
       glob: 7.2.3
       is-glob: 4.0.3
       resolve: 1.22.2
@@ -4204,7 +4219,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils@2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint@8.37.0):
+  /eslint-module-utils@2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0):
     resolution: {integrity: sha512-j4GT+rqzCoRKHwURX7pddtIPGySnX9Si/cgMI5ztrcqOPtk5dDEeZ34CQVPphnqkJytlc97Vuk05Um2mJ3gEQA==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -4229,6 +4244,7 @@ packages:
       debug: 3.2.7
       eslint: 8.37.0
       eslint-import-resolver-node: 0.3.7
+      eslint-import-resolver-typescript: 2.7.1(eslint-plugin-import@2.27.5)(eslint@8.37.0)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4278,7 +4294,7 @@ packages:
       htmlparser2: 7.2.0
     dev: true
 
-  /eslint-plugin-import@2.27.5(@typescript-eslint/parser@5.57.1)(eslint@8.37.0):
+  /eslint-plugin-import@2.27.5(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0):
     resolution: {integrity: sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -4296,7 +4312,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.37.0
       eslint-import-resolver-node: 0.3.7
-      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint@8.37.0)
+      eslint-module-utils: 2.7.4(@typescript-eslint/parser@5.57.1)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@2.7.1)(eslint@8.37.0)
       has: 1.0.3
       is-core-module: 2.11.0
       is-glob: 4.0.3

@@ -77,4 +77,8 @@ export interface SettingsUISlider extends SettingsUIBase {
   step: number
 }
 
-export type SettingsUI = SettingsApiKey | SettingsUIInput | SettingsUISelect | SettingsUISlider
+export interface SettingsUIToggle extends SettingsUIBase {
+  type: 'toggle'
+}
+
+export type SettingsUI = SettingsApiKey | SettingsUIInput | SettingsUISelect | SettingsUISlider | SettingsUIToggle

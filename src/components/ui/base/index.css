@@ -88,3 +88,28 @@
 [data-scope='select'][data-part='trigger'][data-expanded] {
   @apply border border-darker
 }
+
+/* -----------------------------------------------------------------------------
+* Switch
+* -----------------------------------------------------------------------------*/
+
+[data-scope='switch'][data-part='root'] {
+  @apply relative mt-1 inline-block cursor-pointer
+}
+[data-scope='switch'][data-part='control'] {
+  @apply relative w-10 h-6 rounded-full shadow-inner bg-gray-400 transition-colors
+}
+[data-scope='switch'][data-part='control'][data-checked] {
+  @apply bg-emerald-600
+}
+[data-scope='switch'][data-part='control'][data-focus] {
+  /* box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6); */
+  /* @apply shadow-lg shadow-cyan-500/50; */
+  @apply ring-1 ring-black/50 dark:ring-white/50
+}
+[data-scope='switch'][data-part='thumb'] {
+  @apply absolute inset-y-0 left-0 w-4 h-4 m-1 rounded-full bg-light dark:bg-dark transition-transform
+}
+[data-scope='switch'][data-part='thumb'][data-checked] {
+  @apply translate-x-full
+}
