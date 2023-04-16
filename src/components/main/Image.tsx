@@ -23,9 +23,10 @@ export default (props: Props) => {
       <div class="flex-1 fcc overflow-y-auto px-6">
         <Show when={messageOutput()?.content}>
           <img
-            class="w-full max-w-[400px] my-6"
+            class="w-full max-w-[400px] aspect-1"
             src={messageOutput()?.content}
             alt={messageInput()?.content || ''}
+            onError={e => e.currentTarget.classList.add('hidden')}
           />
         </Show>
       </div>
