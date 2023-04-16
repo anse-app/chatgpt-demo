@@ -15,7 +15,7 @@ export default (props: Props) => {
   return (
     <div>
       {props.editing() && (
-        <Toggle value={props.value()} setValue={props.setValue} />
+        <Toggle value={props.value} setValue={props.setValue} />
       )}
       {!props.editing() && (
         <div>{props.value() ? 'Yes' : 'No'}</div>
