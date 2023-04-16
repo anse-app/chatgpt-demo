@@ -48,7 +48,7 @@ export default (props: Props) => {
             </For>
           </div>
         </div> */}
-        <div class="flex-1 overflow-hidden">
+        <div class="flex-1 min-w-0">
           <StreamableText
             text={props.message.content}
             streamInfo={props.message.stream
