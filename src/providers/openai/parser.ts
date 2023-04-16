@@ -6,8 +6,6 @@ export const parseStream = (rawResponse: Response) => {
   const decoder = new TextDecoder()
   const rb = rawResponse.body as ReadableStream
 
-  const reader = rb.getReader()
-
   return new ReadableStream({
     async start(controller) {
       const streamParser = (event: ParsedEvent | ReconnectInterval) => {
@@ -27,6 +25,8 @@ export const parseStream = (rawResponse: Response) => {
           }
         }
       }
+      const reader = rb.getReader()
+      const parser = createParser(streamParser)
       let done = false
       while (!done) {
         const { done: isDone, value } = await reader.read()
@@ -35,7 +35,6 @@ export const parseStream = (rawResponse: Response) => {
           controller.close()
           return
         }
-        const parser = createParser(streamParser)
         parser.feed(decoder.decode(value))
       }
     },
