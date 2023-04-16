@@ -15,7 +15,6 @@ export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, pa
   })
   if (!response.ok) {
     const responseJson = await response.json()
-    console.log('responseJson', responseJson)
     const errMessage = responseJson.detail || response.statusText || 'Unknown error'
     throw new Error(errMessage, {
       cause: {
@@ -44,14 +43,18 @@ const waitImageWithPrediction = async(prediction: Prediction, token: string) => 
   let currentPrediction = prediction
   while (currentPrediction.status !== 'succeeded' && currentPrediction.status !== 'failed') {
     await sleep(1000)
-    const response = await fetchImageGeneration({ token })
-    prediction = await response.json()
+    const response = await fetchImageGeneration({
+      predictionId: currentPrediction.id,
+      token,
+    })
     if (!response.ok) {
       const responseJson = await response.json()
       const errMessage = responseJson.error?.message || 'Unknown error'
       throw new Error(errMessage)
     }
+    prediction = await response.json()
     currentPrediction = prediction
+    // console.log('currentPrediction', prediction)
   }
   if (!currentPrediction.output || currentPrediction.output.length === 0)
     throw new Error('No output')

@@ -24,6 +24,7 @@ const providerOpenAI = () => {
     ],
     conversationSettings: [],
     supportConversationType: ['image'],
+    supportCallMethod: 'backend',
     handleImagePrompt,
   }
   return provider
