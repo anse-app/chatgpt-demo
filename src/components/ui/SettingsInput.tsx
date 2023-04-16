@@ -22,7 +22,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
         />
       )}
       {!editing() && value() && (
-        <div>{value()}</div>
+        <div class="truncate">{value()}</div>
       )}
       {!editing() && !value() && (
         <SettingsNotDefined />
