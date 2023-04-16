@@ -126,7 +126,7 @@ export default () => {
   }
 
   return (
-    <div class={`relative border-t border-base transition transition-property-[background-color,height] transition-240 ${stateClass()}`}>
+    <div class={`relative shrink-0 border-t border-base transition transition-property-[background-color,height] transition-240 ${stateClass()}`}>
       <Switch fallback={<EmptyState />}>
         <Match when={stateType() === 'error'}>
           <ErrorState />
