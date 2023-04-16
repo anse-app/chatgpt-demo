@@ -4,25 +4,26 @@ import type { Accessor } from 'solid-js'
 import type { MessageInstance } from '@/types/message'
 
 interface Props {
-  conversationId: string
+  // conversationId: string
   messages: Accessor<MessageInstance[]>
+  // fetching: boolean
 }
 
-export default ({ conversationId, messages }: Props) => {
-  const messageInput = () => messages().length > 0 ? messages()[0] : null
-  const messageOutput = () => messages().length > 1 ? messages()[1] : null
+export default (props: Props) => {
+  const messageInput = () => props.messages().length > 0 ? props.messages()[0] : null
+  const messageOutput = () => props.messages().length > 1 ? props.messages()[1] : null
   return (
     <div class="flex flex-col h-full">
-      <div class="h-16 fi px-6 border-b border-base truncate overflow-y-scroll">
+      <div class="min-h-16 max-h-40 fi px-6 py-4 border-b border-base break-all overflow-y-scroll">
         <StreamableText
-          class="mx-auto w-full"
+          class="w-full"
           text={messageInput()?.content || ''}
         />
       </div>
-      <div class="flex-1 fcc overflow-y-scroll p-6">
+      <div class="flex-1 fcc overflow-y-auto px-6">
         <Show when={messageOutput()?.content}>
           <img
-            class="max-w-[400px]"
+            class="w-full max-w-[400px] my-6"
             src={messageOutput()?.content}
             alt={messageInput()?.content || ''}
           />
