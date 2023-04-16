@@ -1,13 +1,14 @@
 import { getProviderById } from '@/stores/provider'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
-import { getSettingsByProviderId } from '@/stores/settings'
+import { getGeneralSettings, getSettingsByProviderId } from '@/stores/settings'
 import { setStreamByConversationId } from '@/stores/streams'
 import { currentErrorMessage } from '@/stores/ui'
-import type { CallProviderPayload, HandlerPayload, PromptResponse, Provider } from '@/types/provider'
+import type { CallProviderPayload, HandlerPayload, PromptResponse } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
 import type { ErrorMessage } from '@/types/message'
 
 export const handlePrompt = async(conversation: Conversation, prompt: string) => {
+  const generalSettings = getGeneralSettings()
   const providerId = conversation?.providerId
   if (!providerId) return
 
@@ -38,7 +39,8 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
       prompt,
       historyMessages: getMessagesByConversationId(conversation.id),
     }
-    providerResponse = await getProviderResponse('frontend', providerPayload)
+    const method = generalSettings.requestWithBackend ? 'backend' : 'frontend'
+    providerResponse = await getProviderResponse(method, providerPayload)
   } catch (e) {
     const error = e as Error
     const cause = error?.cause as ErrorMessage
@@ -67,7 +69,7 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   }
 }
 
-const getProviderResponse = async(caller: 'frontend' | 'backend', payload: CallProviderPayload): PromptResponse => {
+const getProviderResponse = async(caller: 'frontend' | 'backend', payload: CallProviderPayload) => {
   if (caller === 'frontend') {
     return callProviderHandler(payload)
   } else {

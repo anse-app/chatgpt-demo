@@ -3,7 +3,6 @@ import type { Provider } from '@/types/provider'
 
 // TODO: handle CORS error
 export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, payload) => {
-  console.log('payload', payload)
   const response = await fetchImageGeneration({
     token: payload.globalSettings.token as string,
     method: 'POST',
@@ -16,8 +15,14 @@ export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, pa
   })
   if (!response.ok) {
     const responseJson = await response.json()
-    const errMessage = responseJson.error?.message || 'Unknown error'
-    throw new Error(errMessage)
+    console.log('responseJson', responseJson)
+    const errMessage = responseJson.detail || response.statusText || 'Unknown error'
+    throw new Error(errMessage, {
+      cause: {
+        code: response.status,
+        message: errMessage,
+      },
+    })
   }
   const resJson = await response.json()
 

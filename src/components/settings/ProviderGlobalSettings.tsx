@@ -28,7 +28,7 @@ export default ({ config, settingsValue, setSettings }: Props) => {
   }
 
   const handleClick = () => {
-    console.log('handleClick', editFormData())
+    console.log('providerGlobalSetting set', editFormData())
     setSettings(formData())
     setEditing(false)
   }

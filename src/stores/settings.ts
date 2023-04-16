@@ -2,6 +2,7 @@ import { action, map } from 'nanostores'
 import { db } from './storage/settings'
 import { getProviderById, providerMetaList } from './provider'
 import type { SettingsPayload } from '@/types/provider'
+import type { GeneralSettings } from '@/types/app'
 
 export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 
@@ -15,6 +16,7 @@ export const rebuildSettingsStore = async() => {
       ...exportData?.[provider.id] || {},
     }
   })
+  data.general = exportData?.general || {}
   providerSettingsMap.set(data)
 }
 
@@ -32,6 +34,23 @@ export const setSettingsByProviderId = action(
     }
     map.setKey(id, mergedSettings)
     db.setItem(id, mergedSettings)
+  },
+)
+
+export const getGeneralSettings = () => {
+  return (providerSettingsMap.get().general || {}) as unknown as GeneralSettings
+}
+
+export const updateGeneralSettings = action(
+  providerSettingsMap,
+  'setSettingsByProviderId',
+  (map, payload: Partial<GeneralSettings>) => {
+    const mergedSettings = {
+      ...map.get().general || {},
+      ...payload,
+    }
+    map.setKey('general', mergedSettings)
+    db.setItem('general', mergedSettings)
   },
 )
 

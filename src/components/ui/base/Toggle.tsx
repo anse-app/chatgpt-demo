@@ -10,17 +10,21 @@ interface Props {
 
 export const Toggle = (inputProps: Props) => {
   const props = mergeProps({}, inputProps)
-  console.log('Checkbox', props.value)
   const [state, send] = useMachine(zagSwitch.machine({
     id: createUniqueId(),
     readOnly: props.readOnly,
-    checked: props.value,
+    value: props.value,
     onChange({ checked }) {
       props.setValue(!checked)
     },
   }))
 
   const api = createMemo(() => zagSwitch.connect(state, send, normalizeProps))
+
+  // TODO: remove this hack. It's here because the state machine is not ready
+  setTimeout(() => {
+    api().setChecked(props.value)
+  }, 100)
 
   return (
     <label {...api().rootProps}>
