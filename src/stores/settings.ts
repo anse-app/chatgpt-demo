@@ -8,9 +8,8 @@ export const providerSettingsMap = map<Record<string, SettingsPayload>>({})
 export const rebuildSettingsStore = async() => {
   const exportData = await db.exportData()
   const defaultData = defaultSettingsStore()
-  const providers = providerMetaList.get()
   const data: Record<string, SettingsPayload> = {}
-  providers.forEach((provider) => {
+  providerMetaList.forEach((provider) => {
     data[provider.id] = {
       ...defaultData[provider.id] || {},
       ...exportData?.[provider.id] || {},
@@ -37,9 +36,8 @@ export const setSettingsByProviderId = action(
 )
 
 export const defaultSettingsStore = () => {
-  const providers = providerMetaList.get()
   const defaultSettings: Record<string, SettingsPayload> = {}
-  providers.forEach((provider) => {
+  providerMetaList.forEach((provider) => {
     defaultSettings[provider.id] = defaultSettingsByProviderId(provider.id)
   })
   return defaultSettings

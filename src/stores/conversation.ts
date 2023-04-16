@@ -22,8 +22,8 @@ export const addConversation = action(conversationMap, 'addConversation', (map, 
   const instanceId = instance?.id || `id_${Date.now()}`
   const conversation: Conversation = {
     id: instanceId,
-    providerId: instance?.providerId || providerMetaList.get()[0]?.id,
-    conversationType: instance?.conversationType || providerMetaList.get()[0]?.supportConversationType?.[0],
+    providerId: instance?.providerId || providerMetaList[0]?.id,
+    conversationType: instance?.conversationType || providerMetaList[0]?.supportConversationType?.[0],
     name: instance?.name || '',
     icon: instance?.icon || 'i-carbon-chat',
     lastUseTime: Date.now(),

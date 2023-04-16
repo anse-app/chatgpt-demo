@@ -1,13 +1,12 @@
 import { For } from 'solid-js'
 import { useStore } from '@nanostores/solid'
-import { platformSettingsUIList } from '@/stores/ui'
+import { platformSettingsUIList } from '@/stores/provider'
 import { providerSettingsMap, setSettingsByProviderId } from '@/stores/settings'
 import ThemeToggle from '../ui/ThemeToggle'
 import ProviderGlobalSettings from './ProviderGlobalSettings'
 // import GeneralSettings from './GeneralSettings'
 
 export default () => {
-  const $platformSettingsUIList = useStore(platformSettingsUIList)
   const $providerSettingsMap = useStore(providerSettingsMap)
 
   return (
@@ -17,7 +16,7 @@ export default () => {
       </header>
       <main class="flex-1 overflow-auto">
         {/* <GeneralSettings /> */}
-        <For each={$platformSettingsUIList()}>
+        <For each={platformSettingsUIList}>
           {item => (
             <ProviderGlobalSettings
               config={item}

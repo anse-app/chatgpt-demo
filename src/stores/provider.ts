@@ -1,23 +1,25 @@
-import { action, atom, computed } from 'nanostores'
 import providerOpenAI from '@/providers/openai'
 import providerStableDiffusion from '@/providers/stable-diffusion'
 
-import type { Provider } from '@/types/provider'
-
-export const providerList = atom<Provider[]>([
+export const providerList = [
   providerOpenAI(),
   providerStableDiffusion(),
-])
+]
 
-export const providerMetaList = computed(providerList, (list) => {
-  return list.map(provider => ({
-    id: provider.id,
-    name: provider.name,
-    icon: provider.icon,
-    supportConversationType: provider.supportConversationType,
-  }))
-})
+export const providerMetaList = providerList.map(provider => ({
+  id: provider.id,
+  name: provider.name,
+  icon: provider.icon,
+  supportConversationType: provider.supportConversationType,
+}))
 
-export const getProviderById = action(providerList, 'getProviderById', (list, id: string) => {
-  return list.get().find(provider => provider.id === id)
-})
+export const platformSettingsUIList = providerList.map(provider => ({
+  id: provider.id,
+  icon: provider.icon,
+  name: provider.name,
+  settingsUI: provider.globalSettings,
+}))
+
+export const getProviderById = (id: string) => {
+  return providerList.find(provider => provider.id === id)
+}

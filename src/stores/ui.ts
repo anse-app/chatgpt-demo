@@ -1,5 +1,4 @@
-import { atom, computed } from 'nanostores'
-import { providerList } from './provider'
+import { atom } from 'nanostores'
 import type { ErrorMessage } from '@/types/message'
 
 export const showConversationSidebar = atom(false)
@@ -9,15 +8,6 @@ export const showConversationEditModal = atom(false)
 export const inputPrompt = atom('')
 export const isSendBoxFocus = atom(false)
 export const currentErrorMessage = atom<ErrorMessage | null>(null)
-
-export const platformSettingsUIList = computed(providerList, (list) => {
-  return list.map(provider => ({
-    id: provider.id,
-    icon: provider.icon,
-    name: provider.name,
-    settingsUI: provider.globalSettings,
-  }))
-})
 
 export const scrollController = () => {
   const elementList = () => Array.from(document.getElementsByClassName('scroll-list'))

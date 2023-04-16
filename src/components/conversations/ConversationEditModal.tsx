@@ -46,12 +46,11 @@ const iconList = [
 export default () => {
   let inputRef: HTMLInputElement
   const $currentEditingConversation = useStore(currentEditingConversation)
-  const $providerMetaList = useStore(providerMetaList)
   const [currentEditingId, setCurrentEditingId] = createSignal('')
   const [selectConversationType, setSelectConversationType] = createSignal<ConversationType>('continuous')
   const [selectIcon, setSelectIcon] = createSignal('i-carbon-chat')
-  const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList.get()[0]?.id)
-  const selectProvider = () => providerMetaList.get().find(item => item.id === selectProviderId()) || null
+  const [selectProviderId, setSelectProviderId] = createSignal(providerMetaList[0]?.id)
+  const selectProvider = () => providerMetaList.find(item => item.id === selectProviderId()) || null
 
   const handleProviderChange = (id: string) => {
     setSelectProviderId(id)
@@ -104,7 +103,7 @@ export default () => {
           class="w-full bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
         />
         <Select
-          options={$providerMetaList().map(item => ({ value: item.id, label: item.name, icon: item.icon }))}
+          options={providerMetaList.map(item => ({ value: item.id, label: item.name, icon: item.icon }))}
           value={selectProviderId}
           setValue={handleProviderChange}
           readonly={!!$currentEditingConversation()}
