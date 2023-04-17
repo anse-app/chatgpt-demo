@@ -5,6 +5,7 @@ import remarkMath from 'remark-math'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
+import rehypePrism from '@mapbox/rehype-prism'
 import 'katex/dist/katex.min.css'
 
 interface Props {
@@ -18,11 +19,10 @@ const parseMarkdown = (raw: string) => {
     .use(remarkGfm)
     .use(remarkMath)
     .use(remarkRehype)
+    .use(rehypePrism)
     .use(rehypeKatex)
     .use(rehypeStringify)
     .processSync(raw)
-  // const str = processor.runSync(processor.parse(raw))
-  // console.log(String(file))
   return String(file)
 }
 
