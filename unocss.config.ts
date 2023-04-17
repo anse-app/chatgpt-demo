@@ -33,6 +33,11 @@ export default defineConfig({
           'font-size': '1em',
           'margin': '1rem 0',
         },
+        'code': {
+          'font-weight': 400,
+          'padding': '0 0.2em',
+          'color': 'var(--prism-keyword)',
+        },
       },
     }),
   ],
