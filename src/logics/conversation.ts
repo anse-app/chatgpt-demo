@@ -1,4 +1,5 @@
 import { getProviderById } from '@/stores/provider'
+import { updateConversationById } from '@/stores/conversation'
 import { clearMessagesByConversationId, getMessagesByConversationId, pushMessageByConversationId } from '@/stores/messages'
 import { getGeneralSettings, getSettingsByProviderId } from '@/stores/settings'
 import { setLoadingStateByConversationId, setStreamByConversationId } from '@/stores/streams'
@@ -12,13 +13,17 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   const provider = getProviderById(conversation?.providerId)
   if (!provider) return
 
+  const historyMessages = getMessagesByConversationId(conversation.id)
+
   if (conversation.conversationType !== 'continuous')
     clearMessagesByConversationId(conversation.id)
-  // if (!conversation.messages.length && !conversation.name) {
-  //   updateConversationById(conversation.id, {
-  //     name: prompt,
-  //   })
-  // }
+  if (!historyMessages.length && !conversation.name) {
+    updateConversationById(conversation.id, {
+      // TODO: Generate name by provider's AI
+      // and move it after the first response got
+      name: prompt,
+    })
+  }
 
   pushMessageByConversationId(conversation.id, {
     id: `${conversation.id}:user:${Date.now()}`,
