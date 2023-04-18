@@ -11,11 +11,11 @@ interface Props {
 
 export default ({ instance }: Props) => {
   const $currentConversationId = useStore(currentConversationId)
+  const isTouchDevice = 'ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0
 
   const handleClick = () => {
-    if (instance.id === currentConversationId.get())
-      showConversationSidebar.set(false)
     currentConversationId.set(instance.id)
+    showConversationSidebar.set(false)
   }
   const handleDelete = (e: MouseEvent, conversationId: string) => {
     e.stopPropagation()
@@ -40,7 +40,7 @@ export default ({ instance }: Props) => {
         <div class={instance.icon || 'i-carbon-chat'} />
       </div>
       <div class="flex-1 truncate">{ instance.name || 'Untitled' }</div>
-      <div class="hidden group-hover:block">
+      <div class={isTouchDevice ? '' : 'hidden group-hover:block'}>
         <div
           class="inline-flex p-2 items-center gap-1 rounded-md hv-base"
           onClick={e => handleEdit(e, instance.id)}
