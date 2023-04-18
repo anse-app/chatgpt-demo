@@ -20,7 +20,9 @@ export interface Provider {
   /** Handle a prompt in continuous conversation type */
   handleContinuousPrompt?: (messages: Message[], payload: HandlerPayload) => Promise<PromptResponse>
   /** Handle a prompt in image conversation type */
-  handleImagePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
+  handleImagePrompt?: (prompt: string, payload: HandlerPayload) => Promise<string>
+  /** Handle a temporary, rapidly prompt, used for interface display like conversation title's generation */
+  handleRapidPrompt?: (prompt: string, globalSettings: SettingsPayload) => Promise<string>
 }
 
 export type SettingsPayload = Record<string, string | number | boolean>

@@ -4,6 +4,7 @@ import { clearMessagesByConversationId, getMessagesByConversationId, pushMessage
 import { getGeneralSettings, getSettingsByProviderId } from '@/stores/settings'
 import { setLoadingStateByConversationId, setStreamByConversationId } from '@/stores/streams'
 import { currentErrorMessage } from '@/stores/ui'
+import { generateRapidProviderPayload, promptHelper } from './helper'
 import type { CallProviderPayload, HandlerPayload, PromptResponse } from '@/types/provider'
 import type { Conversation } from '@/types/conversation'
 import type { ErrorMessage } from '@/types/message'
@@ -12,18 +13,12 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
   const generalSettings = getGeneralSettings()
   const provider = getProviderById(conversation?.providerId)
   if (!provider) return
-
-  const historyMessages = getMessagesByConversationId(conversation.id)
+  let callMethod = generalSettings.requestWithBackend ? 'backend' : 'frontend' as 'frontend' | 'backend'
+  if (provider.supportCallMethod === 'frontend' || provider.supportCallMethod === 'backend')
+    callMethod = provider.supportCallMethod
 
   if (conversation.conversationType !== 'continuous')
     clearMessagesByConversationId(conversation.id)
-  if (!historyMessages.length && !conversation.name) {
-    updateConversationById(conversation.id, {
-      // TODO: Generate name by provider's AI
-      // and move it after the first response got
-      name: prompt,
-    })
-  }
 
   pushMessageByConversationId(conversation.id, {
     id: `${conversation.id}:user:${Date.now()}`,
@@ -34,21 +29,18 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
 
   setLoadingStateByConversationId(conversation.id, true)
   let providerResponse: PromptResponse
+  const providerPayload: CallProviderPayload = {
+    conversationMeta: {
+      id: conversation.id,
+      conversationType: conversation.conversationType,
+    },
+    globalSettings: getSettingsByProviderId(conversation.providerId),
+    providerId: conversation.providerId,
+    prompt,
+    historyMessages: getMessagesByConversationId(conversation.id),
+  }
   try {
-    const providerPayload: CallProviderPayload = {
-      conversationMeta: {
-        id: conversation.id,
-        conversationType: conversation.conversationType,
-      },
-      globalSettings: getSettingsByProviderId(conversation.providerId),
-      providerId: conversation.providerId,
-      prompt,
-      historyMessages: getMessagesByConversationId(conversation.id),
-    }
-    let method = generalSettings.requestWithBackend ? 'backend' : 'frontend'
-    if (provider.supportCallMethod === 'frontend' || provider.supportCallMethod === 'backend')
-      method = provider.supportCallMethod
-    providerResponse = await getProviderResponse(method as 'frontend' | 'backend', providerPayload)
+    providerResponse = await getProviderResponse(callMethod, providerPayload)
   } catch (e) {
     const error = e as Error
     const cause = error?.cause as ErrorMessage
@@ -76,6 +68,15 @@ export const handlePrompt = async(conversation: Conversation, prompt: string) =>
     })
   }
   setLoadingStateByConversationId(conversation.id, false)
+
+  // Update conversation title
+  if (providerResponse && conversation.conversationType === 'continuous' && !conversation.name) {
+    const rapidPayload = generateRapidProviderPayload(promptHelper.summarizeText(prompt), conversation.providerId)
+    const generatedTitle = await getProviderResponse(callMethod, rapidPayload).catch(() => {}) as string || prompt
+    updateConversationById(conversation.id, {
+      name: generatedTitle,
+    })
+  }
 }
 
 const getProviderResponse = async(caller: 'frontend' | 'backend', payload: CallProviderPayload) => {
@@ -125,6 +126,8 @@ export const callProviderHandler = async(payload: CallProviderPayload) => {
     response = await provider.handleContinuousPrompt?.(messages, handlerPayload)
   } else if (conversationMeta.conversationType === 'image') {
     response = await provider.handleImagePrompt?.(prompt, handlerPayload)
+  } else if (conversationMeta.conversationType === 'rapid') {
+    response = await provider.handleRapidPrompt?.(prompt, handlerPayload.globalSettings)
   }
 
   return response

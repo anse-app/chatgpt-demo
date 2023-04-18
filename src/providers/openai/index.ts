@@ -1,6 +1,7 @@
 import {
   handleContinuousPrompt,
   handleImagePrompt,
+  handleRapidPrompt,
   handleSinglePrompt,
 } from './handler'
 import type { Provider } from '@/types/provider'
@@ -70,6 +71,7 @@ const providerOpenAI = () => {
     handleSinglePrompt,
     handleContinuousPrompt,
     handleImagePrompt,
+    handleRapidPrompt,
   }
   return provider
 }

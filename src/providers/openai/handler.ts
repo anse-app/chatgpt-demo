@@ -31,6 +31,27 @@ export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, pa
   return resJson.data[0].url
 }
 
+export const handleRapidPrompt: Provider['handleRapidPrompt'] = async(prompt, globalSettings) => {
+  const rapidPromptPayload = {
+    conversationId: 'temp',
+    globalSettings: {
+      ...globalSettings,
+      model: 'gpt-3.5-turbo',
+      temperature: 0.4,
+      maxTokens: 2048,
+      top_p: 1,
+      stream: false,
+    },
+    conversationSettings: {},
+    systemRole: '',
+    mockMessages: [],
+  } as HandlerPayload
+  const result = await handleChatCompletion([{ role: 'user', content: prompt }], rapidPromptPayload)
+  if (typeof result === 'string')
+    return result
+  return ''
+}
+
 const handleChatCompletion = async(messages: Message[], payload: HandlerPayload) => {
   const response = await fetchChatCompletion({
     apiKey: payload.globalSettings.apiKey as string,
@@ -41,7 +62,7 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
       temperature: payload.globalSettings.temperature as number,
       max_tokens: payload.globalSettings.maxTokens as number,
       top_p: payload.globalSettings.topP as number,
-      stream: true,
+      stream: payload.globalSettings.stream as boolean ?? true,
     },
   })
   if (!response.ok) {
@@ -55,6 +76,6 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
     return parseStream(response)
   } else {
     const resJson = await response.json()
-    return resJson.choices[0].message.content
+    return resJson.choices[0].message.content as string
   }
 }
