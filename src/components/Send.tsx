@@ -95,7 +95,6 @@ export default () => {
 
   const LoadingState = () => (
     <div class="max-w-base h-full fi flex-row gap-2">
-      <div class="progress-bg" />
       <div class="flex-1 op-50">Thinking...</div>
       {/* <div
         class="border border-darker px-2 py-1 rounded-md text-sm op-40 hv-base hover:bg-white"
@@ -118,31 +117,45 @@ export default () => {
     scrollController().scrollToBottom()
   }
 
-  const stateClass = () => {
+  const stateRootClass = () => {
     if (stateType() === 'normal')
-      return 'px-6 h-14 bg-base-100 hv-base'
+      return 'bg-base-100 hv-base'
     else if (stateType() === 'error')
-      return 'px-6 bg-red/8'
+      return 'bg-red/8'
     else if (stateType() === 'loading')
-      return 'px-6 h-14 bg-base-100'
+      return 'loading-anim bg-base-100'
     else if (stateType() === 'editing')
-      return 'h-40 bg-base-100'
+      return 'bg-base-100'
+    return ''
+  }
+
+  const stateHeightClass = () => {
+    if (stateType() === 'normal')
+      return 'px-6 h-14'
+    else if (stateType() === 'error')
+      return 'px-6'
+    else if (stateType() === 'loading')
+      return 'px-6 h-14'
+    else if (stateType() === 'editing')
+      return 'h-40'
     return ''
   }
 
   return (
-    <div class={`relative shrink-0 border-t border-base transition transition-property-[background-color,height] transition-240 ${stateClass()}`}>
-      <Switch fallback={<EmptyState />}>
-        <Match when={stateType() === 'error'}>
-          <ErrorState />
-        </Match>
-        <Match when={stateType() === 'loading'}>
-          <LoadingState />
-        </Match>
-        <Match when={stateType() === 'editing'}>
-          <EditState />
-        </Match>
-      </Switch>
+    <div class={`relative shrink-0 border-t border-base pb-[env(safe-area-inset-bottom)] transition transition-colors duration-300 ${stateRootClass()}`}>
+      <div class={`relative transition transition-height duration-240 ${stateHeightClass()}`}>
+        <Switch fallback={<EmptyState />}>
+          <Match when={stateType() === 'error'}>
+            <ErrorState />
+          </Match>
+          <Match when={stateType() === 'loading'}>
+            <LoadingState />
+          </Match>
+          <Match when={stateType() === 'editing'}>
+            <EditState />
+          </Match>
+        </Switch>
+      </div>
     </div>
   )
 }

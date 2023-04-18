@@ -33,7 +33,8 @@
   @apply translate-x-0;
 }
 
-.progress-bg {
+.loading-anim::before {
+  content: ' ';
   background-image: linear-gradient(90deg, #ffffff00 0%, var(--c-shadow) 35%, var(--c-shadow) 65%, #ffffff00 100%);
   position: absolute;
   top: 0;
