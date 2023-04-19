@@ -8,7 +8,7 @@ export default () => {
 
   return (
     <div class="fcc h-full">
-      <div class="flex flex-col gap-4 w-full max-w-md mx-18">
+      <div class="flex flex-col gap-4 w-full max-w-md mx-12 sm:mx-18">
         <div class="px-6 py-4 bg-base-100 border border-base rounded-lg">
           <h2 class="text-xs op-30 uppercase my-2">Recents</h2>
           <div class="flex flex-col items-start">
