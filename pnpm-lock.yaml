@@ -38,8 +38,8 @@ dependencies:
     specifier: ^0.5.0
     version: 0.5.0
   '@zag-js/select':
-    specifier: ^0.2.1
-    version: 0.2.1
+    specifier: ^0.6.0
+    version: 0.6.0
   '@zag-js/slider':
     specifier: ^0.2.14
     version: 0.2.17
@@ -2703,6 +2703,15 @@ packages:
       '@zag-js/utils': 0.3.4
     dev: false
 
+  /@zag-js/dismissable@0.6.0:
+    resolution: {integrity: sha512-D6drGv+ZzGguyPFefd4nLCFQGgGy/zQkDaXnHqkBffnooqqWnJizmgxgynajfCQrVK3VfZ473D8V8SD66/jBdQ==}
+    dependencies:
+      '@zag-js/dom-event': 0.6.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/interact-outside': 0.6.0
+      '@zag-js/utils': 0.3.4
+    dev: false
+
   /@zag-js/dom-event@0.0.1:
     resolution: {integrity: sha512-oRDWn/31JUwTc9nIUG/Ingug6FNBkhXUnd2dh3vEcqfk+NVHPZ9Lgx5tauiEDyiRKeWr9PS5GJpBQVNc2YDo3Q==}
     dependencies:
@@ -2712,6 +2721,13 @@ packages:
 
   /@zag-js/dom-event@0.5.0:
     resolution: {integrity: sha512-O1qBxYemJkEvsLBzVpbch76W+CYHnosoV4mFEtTVqtrgjtGAp/z4ql5Fviudh8ORg07uIQyykXH3lDvk4V7Tmg==}
+    dependencies:
+      '@zag-js/text-selection': 0.0.1
+      '@zag-js/types': 0.5.0
+    dev: false
+
+  /@zag-js/dom-event@0.6.0:
+    resolution: {integrity: sha512-C/3v8tGOYcslmNcBB0Jyxuwthr/Pyw9WGYDMFUOQ0GqX3q019M2DdndqH9Iof35OfJ4ZLDOX9VyTNfPEGZAwVA==}
     dependencies:
       '@zag-js/text-selection': 0.0.1
       '@zag-js/types': 0.5.0
@@ -2752,6 +2768,15 @@ packages:
     resolution: {integrity: sha512-S77WBF7jzvMNZZB0qIhBkqax+l2znUCcfjTKRL1tDYOQONlQqA9zTB2EoQgGfADXmu3rWBLLAmznRPCfToJy/w==}
     dependencies:
       '@zag-js/dom-event': 0.5.0
+      '@zag-js/dom-query': 0.1.4
+      '@zag-js/tabbable': 0.1.1
+      '@zag-js/utils': 0.3.4
+    dev: false
+
+  /@zag-js/interact-outside@0.6.0:
+    resolution: {integrity: sha512-jIMhKit3iwCj50muUQsFMSLB6vouvnwgFFuTVuhNIUmqstmH0cvhmaywXcIQyrrEbM6nL2BjF+Csy3BaUgtzZA==}
+    dependencies:
+      '@zag-js/dom-event': 0.6.0
       '@zag-js/dom-query': 0.1.4
       '@zag-js/tabbable': 0.1.1
       '@zag-js/utils': 0.3.4
@@ -2807,19 +2832,19 @@ packages:
       '@zag-js/dom-query': 0.1.4
     dev: false
 
-  /@zag-js/select@0.2.1:
-    resolution: {integrity: sha512-JmxCbkFdyfScrywJnuVm6XFHMEfXuP7Pcn2mI3UpUu7lYEkckDw+K3KHHbB6cNEmeHNiAFGAK5jul27/XxUetg==}
+  /@zag-js/select@0.6.0:
+    resolution: {integrity: sha512-oyH1zW18uHXyhCEsUma199r1jwqplPU4AVHw0R22NdIjDtMC4Av595vXolSyCNsOuBFPD08794sq6efnrfpyHg==}
     dependencies:
       '@zag-js/anatomy': 0.1.4
-      '@zag-js/core': 0.2.12
-      '@zag-js/dismissable': 0.2.6
-      '@zag-js/dom-event': 0.0.1
+      '@zag-js/core': 0.5.0
+      '@zag-js/dismissable': 0.6.0
+      '@zag-js/dom-event': 0.6.0
       '@zag-js/dom-query': 0.1.4
       '@zag-js/form-utils': 0.2.5
       '@zag-js/mutation-observer': 0.0.1
       '@zag-js/popper': 0.2.7
       '@zag-js/tabbable': 0.1.1
-      '@zag-js/types': 0.3.4
+      '@zag-js/types': 0.5.0
       '@zag-js/utils': 0.3.4
       '@zag-js/visually-hidden': 0.0.1
     dev: false

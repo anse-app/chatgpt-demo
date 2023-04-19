@@ -63,11 +63,13 @@ export default () => {
       setCurrentEditingId(current.id)
       const { name, icon, conversationType } = current
       inputRef.value = name
+      setSelectProviderId(current.providerId)
       setSelectConversationType(conversationType)
       setSelectIcon(icon || 'i-carbon-chat')
     } else {
       setCurrentEditingId('')
       inputRef.value = ''
+      setSelectProviderId(providerMetaList[0]?.id)
       setSelectConversationType('continuous')
       setSelectIcon('i-carbon-chat')
     }

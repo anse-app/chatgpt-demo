@@ -1,6 +1,6 @@
+import { createEffect, createMemo, createUniqueId, mergeProps, on } from 'solid-js'
 import * as select from '@zag-js/select'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createUniqueId, mergeProps } from 'solid-js'
 import type { SelectOptionType } from '@/types/provider'
 import type { Accessor } from 'solid-js'
 
@@ -26,6 +26,11 @@ export const Select = (inputProps: Props) => {
   }))
 
   const api = createMemo(() => select.connect(state, send, normalizeProps))
+
+  createEffect(on(props.value, () => {
+    const option = props.options.find(o => o.value === props.value())
+    option && api().setSelectedOption(option)
+  }))
 
   return (
     <div class="z-10">

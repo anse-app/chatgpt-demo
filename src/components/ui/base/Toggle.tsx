@@ -1,6 +1,6 @@
+import { createEffect, createMemo, createUniqueId, mergeProps, on } from 'solid-js'
 import * as zagSwitch from '@zag-js/switch'
 import { normalizeProps, useMachine } from '@zag-js/solid'
-import { createMemo, createUniqueId, mergeProps } from 'solid-js'
 import type { Accessor } from 'solid-js'
 
 interface Props {
@@ -27,10 +27,9 @@ export const Toggle = (inputProps: Props) => {
 
   const api = createMemo(() => zagSwitch.connect(state, send, normalizeProps))
 
-  // TODO: remove this hack. It's here because the state machine is not ready
-  setTimeout(() => {
+  createEffect(on(props.value, () => {
     api().setChecked(props.value())
-  }, 200)
+  }))
 
   return (
     <label {...api().rootProps}>
