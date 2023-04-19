@@ -3,6 +3,7 @@ import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { conversationMessagesMap } from '@/stores/messages'
 import { loadingStateMap, streamsMap } from '@/stores/streams'
+import ConversationEmpty from './ConversationEmpty'
 import Continuous from './Continuous'
 import Single from './Single'
 import Image from './Image'
@@ -24,7 +25,11 @@ export default () => {
   const isLoading = () => !!$loadingStateMap()[$currentConversationId()]
 
   return (
-    <Switch>
+    <Switch
+      fallback={(
+        <ConversationEmpty />
+      )}
+    >
       <Match when={currentConversation()?.conversationType === 'continuous'}>
         <Continuous
           conversationId={$currentConversationId()}

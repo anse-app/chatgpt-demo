@@ -11,6 +11,9 @@ export const currentEditingConversationId = atom<string | null>('')
 export const currentEditingConversation = computed(currentEditingConversationId, (id) => {
   return id ? conversationMap.get()[id] as Conversation : null
 })
+export const conversationMapSortList = computed(conversationMap, (map) => {
+  return Object.values(map).sort((a, b) => b.lastUseTime - a.lastUseTime)
+})
 
 export const rebuildConversationStore = async() => {
   const data = await db.exportData() || {}
