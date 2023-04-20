@@ -59,7 +59,7 @@
 
 ### 部署在 Netlify
 
-[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ddiu8081/chatgpt-demo#OPENAI_API_KEY=&HTTPS_PROXY=&OPENAI_API_BASE_URL=&HEAD_SCRIPTS=&SECRET_KEY=&OPENAI_API_MODEL=&SITE_PASSWORD=)
+[![Deploy with Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/ddiu8081/chatgpt-demo#OPENAI_API_KEY=&HTTPS_PROXY=&OPENAI_API_BASE_URL=&HEAD_SCRIPTS=&PUBLIC_SECRET_KEY=&OPENAI_API_MODEL=&SITE_PASSWORD=)
 
 **分步部署教程：**
 
@@ -103,7 +103,7 @@ services:
       # - HTTPS_PROXY=YOUR_HTTPS_PROXY
       # - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
       # - HEAD_SCRIPTS=YOUR_HEAD_SCRIPTS
-      # - SECRET_KEY=YOUR_SECRET_KEY
+      # - PUBLIC_SECRET_KEY=YOUR_SECRET_KEY
       # - SITE_PASSWORD=YOUR_SITE_PASSWORD
       # - OPENAI_API_MODEL=YOUR_OPENAI_API_MODEL
 ```
@@ -129,7 +129,7 @@ docker-compose down
 | `HTTPS_PROXY` | 为 OpenAI API 提供代理. e.g. `http://127.0.0.1:7890` | `null` |
 | `OPENAI_API_BASE_URL` | 请求 OpenAI API 的自定义 Base URL. | `https://api.openai.com` |
 | `HEAD_SCRIPTS` | 在页面的 `</head>` 之前注入分析或其他脚本 | `null` |
-| `SECRET_KEY` | 项目的秘密字符串。用于生成 API 调用的签名 | `null` |
+| `PUBLIC_SECRET_KEY` | 项目的秘密字符串。用于生成 API 调用的签名 | `null` |
 | `SITE_PASSWORD` | 为网站设置密码，支持使用英文逗号创建多个密码。如果未设置，则该网站将是公开的 | `null` |
 | `OPENAI_API_MODEL` | 使用的 OpenAI 模型. [模型列表](https://platform.openai.com/docs/api-reference/models/list) | `gpt-3.5-turbo` |
 
