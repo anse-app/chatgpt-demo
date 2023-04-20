@@ -25,11 +25,12 @@ export default () => {
             </Show>
           </div>
         </div>
-        <div class="flex flex-col p-6 bg-base-100 hv-base border border-base rounded-lg">
-          <div class="fi gap-2 h-8 op-70" onClick={() => showConversationEditModal.set(true)}>
-            <div class="i-carbon-add" />
-            <div class="flex-1 text-sm truncate">New Conversation</div>
-          </div>
+        <div
+          class="fcc gap-2 p-6 bg-base-100 hv-base border border-base rounded-lg"
+          onClick={() => showConversationEditModal.set(true)}
+        >
+          <div class="i-carbon-add" />
+          <div class="flex-1 text-sm truncate">New Conversation</div>
         </div>
       </div>
     </div>
