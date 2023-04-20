@@ -19,10 +19,10 @@ export default () => {
         Settings
       </header>
       <main class="flex-1 overflow-auto">
-        <AppGeneralSettings
+        {/* <AppGeneralSettings
           settingsValue={() => generalSettings()}
           updateSettings={updateGeneralSettings}
-        />
+        /> */}
         <For each={platformSettingsUIList}>
           {item => (
             <ProviderGlobalSettings

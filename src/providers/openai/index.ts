@@ -12,18 +12,18 @@ const providerOpenAI = () => {
     icon: 'i-simple-icons-openai', // @unocss-include
     name: 'OpenAI',
     globalSettings: [
-      {
-        key: 'apiKey',
-        name: 'API Key',
-        type: 'api-key',
-      },
-      {
-        key: 'baseUrl',
-        name: 'Base URL',
-        description: 'Custom base url for OpenAI API.',
-        type: 'input',
-        default: 'https://api.openai.com',
-      },
+      // {
+      //   key: 'apiKey',
+      //   name: 'API Key',
+      //   type: 'api-key',
+      // },
+      // {
+      //   key: 'baseUrl',
+      //   name: 'Base URL',
+      //   description: 'Custom base url for OpenAI API.',
+      //   type: 'input',
+      //   default: 'https://api.openai.com',
+      // },
       {
         key: 'model',
         name: 'OpenAI model',
