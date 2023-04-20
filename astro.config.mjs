@@ -27,6 +27,9 @@ export default defineConfig({
   ],
   output: 'server',
   adapter: envAdapter(),
+  server: {
+    host: '0.0.0.0',
+  },
   vite: {
     plugins: [
       process.env.OUTPUT === 'vercel' && disableBlocks(),

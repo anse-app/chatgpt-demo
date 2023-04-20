@@ -1,6 +1,7 @@
+import { createSignal } from 'solid-js'
 import SettingsNotDefined from './SettingsNotDefined'
-import type { SettingsUI } from '@/types/provider'
 import type { Accessor } from 'solid-js'
+import type { SettingsUI } from '@/types/provider'
 
 interface Props {
   settings: SettingsUI
@@ -11,15 +12,21 @@ interface Props {
 
 export default ({ settings, editing, value, setValue }: Props) => {
   if (!settings.name || !settings.type) return null
+  const [isOpen, setIsOpen] = createSignal(false)
   return (
     <div>
       {editing() && (
-        <input
-          type="password"
-          value={value()}
-          class="w-full mt-1 bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
-          onChange={e => setValue(e.currentTarget.value)}
-        />
+        <div class="fcc relative border border-base focus-within:border-darker">
+          <input
+            type={isOpen() ? 'text' : 'password'}
+            value={value()}
+            class="w-full mt-1 bg-transparent pl-2 py-1 pr-8 input-base focus:border-darker"
+            onChange={e => setValue(e.currentTarget.value)}
+          />
+          <div class="absolute top-0 right-0 bottom-0 fcc p-1 w-8 box-border bg-transparent cursor-pointer" onClick={() => { setIsOpen(!isOpen()) }}>
+            <div class={`${isOpen() ? 'i-carbon-view' : 'i-carbon-view-off'} text-sm`} />
+          </div>
+        </div>
       )}
       {!editing() && value() && (
         <ApiKeyMaskText key={value} />
