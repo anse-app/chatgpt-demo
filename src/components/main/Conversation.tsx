@@ -3,7 +3,7 @@ import { useStore } from '@nanostores/solid'
 import { conversationMap, currentConversationId } from '@/stores/conversation'
 import { conversationMessagesMap } from '@/stores/messages'
 import { loadingStateMap, streamsMap } from '@/stores/streams'
-import ConversationEmpty from './ConversationEmpty'
+import Welcome from './Welcome'
 import Continuous from './Continuous'
 import Single from './Single'
 import Image from './Image'
@@ -27,7 +27,7 @@ export default () => {
   return (
     <Switch
       fallback={(
-        <ConversationEmpty />
+        <Welcome />
       )}
     >
       <Match when={currentConversation()?.conversationType === 'continuous'}>
