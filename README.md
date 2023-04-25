@@ -12,7 +12,7 @@
 - **💬 Session Record Saving** - We use `IndexDB` to store local data, it will not be uploaded to the server, security issues are guaranteed.
 - **🎉 Multiple Session Modes** - Provides different conversations modes，support `Single Conversation`, `Continuous Conversation`, `OpenAI Image Generation`、`Stable Diffusion` and more.
 - **💎 Improved UI Experience** - We have refactored the website UI for the previous version, optimized a lot of details, and also adapted to `mobile end` and `dark mode`.
-- **🌈 One-Click Deployment** Support one-click deployment, abandoned use environment variables, you can refer to our documentation to deploy the website to [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), `Docker`, `Node` and other platforms.
+- **🌈 One-Click Deployment** - Support one-click deployment, abandoned use environment variables, you can refer to our documentation to deploy the website to [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), `Docker`, `Node` and other platforms.
 ## Running Locally
 
 ### Pre environment
@@ -67,7 +67,7 @@
 
 ### Deploy with Docker
 
-Environment variables refer to the documentation below. [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo-v2).
+[Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo-v2).
 
 **Direct run**
 ```bash
