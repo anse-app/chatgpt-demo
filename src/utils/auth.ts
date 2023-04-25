@@ -17,7 +17,7 @@ async function digestMessage(message: string) {
 
 export const generateSignature = async(payload: AuthPayload) => {
   const { t: timestamp, m: lastMessage } = payload
-  const secretKey = import.meta.env.PUBLIC_SECRET_KEY as string
+  const secretKey = import.meta.env.PUBLIC_SECRET_KEY as string || ''
   const signText = `${timestamp}:${lastMessage}:${secretKey}`
   // eslint-disable-next-line no-return-await
   return await digestMessage(signText)
