@@ -67,7 +67,7 @@
 
 ### Deploy with Docker
 
-Environment variables refer to the documentation below. [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
+Environment variables refer to the documentation below. [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo-v2).
 
 **Direct run**
 ```bash
