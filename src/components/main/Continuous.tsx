@@ -45,7 +45,7 @@ export default (props: Props) => {
                 conversationId={props.conversationId}
                 message={message}
                 handleStreaming={handleStreamableTextUpdate}
-                index={index()}
+                // index={index()}
               />
             </div>
           )}

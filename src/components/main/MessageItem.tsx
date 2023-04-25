@@ -1,13 +1,13 @@
 // import { For } from 'solid-js/web'
 import StreamableText from '../StreamableText'
 // import { DropDownMenu, Tooltip } from '../ui/base'
-import type { MenuItem } from '../ui/base'
+// import type { MenuItem } from '../ui/base'
 import type { MessageInstance } from '@/types/message'
 
 interface Props {
   conversationId: string
   message: MessageInstance
-  index: number
+  // index: number
   handleStreaming?: () => void
 }
 
