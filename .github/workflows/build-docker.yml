@@ -31,5 +31,5 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-demo-v2:${{ github.ref_name//\//- }}
-            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-demo-v2:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-demo-new:${{ github.ref_name }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/chatgpt-demo-new:latest
