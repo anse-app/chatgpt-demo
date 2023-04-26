@@ -95,4 +95,46 @@ export default defineConfig({
     'icon--off': 'group-hover:hidden inline-block',
     'icon--on': 'hidden group-hover:inline-block',
   }],
+  preflights: [{
+    layer: 'base',
+    getCSS: () => `
+      :root {
+      --c-scroll: #d9d9d9;
+      --c-scroll-hover: #bbbbbb;
+      --c-shadow: #00000008;
+      }
+
+      html.dark {
+        --c-scroll: #333333;
+        --c-scroll-hover: #555555;
+        --c-shadow: #ffffff08;
+      }
+
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--c-scroll);
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--c-scroll-hover);
+      }
+
+      ::selection {
+        background: rgba(0, 0, 0, 0.12);
+      }
+
+      .dark ::selection {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      button,select,input,option {
+        outline: none;
+        -webkit-appearance: none
+      }
+    `,
+  }],
 })

@@ -17,7 +17,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
         <input
           type="text"
           value={value()}
-          class="w-full mt-1 bg-transparent border border-base px-2 py-1 input-base focus:border-darker"
+          class="w-full mt-1 bg-transparent border border-base px-2 py-1  focus:border-darker transition-colors-200"
           onChange={e => setValue(e.currentTarget.value)}
         />
       )}

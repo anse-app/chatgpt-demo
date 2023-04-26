@@ -18,7 +18,7 @@ export default ({ settings, editing, value, setValue }: Props) => {
   return (
     <div>
       {editing() && (
-        <div class="fcc relative border border-base focus-within:border-darker">
+        <div class="fcc relative border border-base focus-within:border-darker transition-colors-200">
           <input
             type={isOpen() ? 'text' : 'password'}
             value={value()}
