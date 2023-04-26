@@ -16,11 +16,11 @@ export interface Provider {
   /** Whether the Provider can accept frontend or backend calls, or both. */
   supportCallMethod?: 'both' | 'frontend' | 'backend'
   /** Handle a prompt in single conversation type */
-  handleSinglePrompt?: (prompt: string, payload: HandlerPayload) => Promise<PromptResponse>
+  handleSinglePrompt?: (prompt: string, payload: HandlerPayload, signal?: AbortSignal) => Promise<PromptResponse>
   /** Handle a prompt in continuous conversation type */
-  handleContinuousPrompt?: (messages: Message[], payload: HandlerPayload) => Promise<PromptResponse>
+  handleContinuousPrompt?: (messages: Message[], payload: HandlerPayload, signal?: AbortSignal) => Promise<PromptResponse>
   /** Handle a prompt in image conversation type */
-  handleImagePrompt?: (prompt: string, payload: HandlerPayload) => Promise<string>
+  handleImagePrompt?: (prompt: string, payload: HandlerPayload, signal?: AbortSignal) => Promise<string>
   /** Handle a temporary, rapidly prompt, used for interface display like conversation title's generation */
   handleRapidPrompt?: (prompt: string, globalSettings: SettingsPayload) => Promise<string>
 }

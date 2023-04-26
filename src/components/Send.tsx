@@ -14,6 +14,7 @@ export default () => {
   const $currentErrorMessage = useStore(currentErrorMessage)
   const $streamsMap = useStore(streamsMap)
   const $loadingStateMap = useStore(loadingStateMap)
+  const [controller, setController] = createSignal<AbortController>()
 
   const [inputPrompt, setInputPrompt] = createSignal('')
   const isEditing = () => inputPrompt() || $isSendBoxFocus()
@@ -93,15 +94,26 @@ export default () => {
     </div>
   )
 
+  const clearPrompt = () => {
+    setInputPrompt('')
+    inputRef.value = ''
+    isSendBoxFocus.set(false)
+  }
+
+  const handleAbortFetch = () => {
+    controller()!.abort()
+    clearPrompt()
+  }
+
   const LoadingState = () => (
     <div class="max-w-base h-full fi flex-row gap-2">
       <div class="flex-1 op-50">Thinking...</div>
-      {/* <div
+      <div
         class="border border-darker px-2 py-1 rounded-md text-sm op-40 hv-base hover:bg-white"
-        onClick={() => {  }}
+        onClick={() => { handleAbortFetch() }}
       >
         Abort
-      </div> */}
+      </div>
     </div>
   )
 
@@ -110,10 +122,11 @@ export default () => {
       return
     if (!currentConversation())
       addConversation()
-    handlePrompt(currentConversation(), inputRef.value)
-    setInputPrompt('')
-    inputRef.value = ''
-    isSendBoxFocus.set(false)
+
+    const controller = new AbortController()
+    setController(controller)
+    handlePrompt(currentConversation(), inputRef.value, controller.signal)
+    clearPrompt()
     scrollController().scrollToBottom()
   }
 

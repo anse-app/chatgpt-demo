@@ -56,6 +56,7 @@
     "@evan-yang/eslint-config": "^1.0.9",
     "@iconify-json/carbon": "^1.1.16",
     "@iconify-json/simple-icons": "^1.1.48",
+    "@types/mapbox__rehype-prism": "^0.8.0",
     "@typescript-eslint/parser": "^5.57.1",
     "@unocss/preset-attributify": "^0.50.6",
     "@unocss/preset-icons": "^0.50.6",

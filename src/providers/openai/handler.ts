@@ -3,12 +3,12 @@ import { parseStream } from './parser'
 import type { Message } from '@/types/message'
 import type { HandlerPayload, Provider } from '@/types/provider'
 
-export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, payload) => {
-  return handleChatCompletion([{ role: 'user', content: prompt }], payload)
+export const handleSinglePrompt: Provider['handleSinglePrompt'] = async(prompt, payload, signal?: AbortSignal) => {
+  return handleChatCompletion([{ role: 'user', content: prompt }], payload, signal)
 }
 
-export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload) => {
-  return handleChatCompletion(messages, payload)
+export const handleContinuousPrompt: Provider['handleContinuousPrompt'] = async(messages, payload, signal?: AbortSignal) => {
+  return handleChatCompletion(messages, payload, signal)
 }
 
 export const handleImagePrompt: Provider['handleImagePrompt'] = async(prompt, payload) => {
@@ -52,7 +52,7 @@ export const handleRapidPrompt: Provider['handleRapidPrompt'] = async(prompt, gl
   return ''
 }
 
-const handleChatCompletion = async(messages: Message[], payload: HandlerPayload) => {
+const handleChatCompletion = async(messages: Message[], payload: HandlerPayload, signal?: AbortSignal) => {
   const response = await fetchChatCompletion({
     apiKey: payload.globalSettings.apiKey as string,
     baseUrl: (payload.globalSettings.baseUrl as string).trim().replace(/\/$/, ''),
@@ -64,6 +64,7 @@ const handleChatCompletion = async(messages: Message[], payload: HandlerPayload)
       top_p: payload.globalSettings.topP as number,
       stream: payload.globalSettings.stream as boolean ?? true,
     },
+    signal,
   })
   if (!response.ok) {
     const responseJson = await response.json()
