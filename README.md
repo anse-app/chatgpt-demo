@@ -10,9 +10,9 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 ![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
 
-## Introducing `Ance`
+## Introducing `Anse`
 
-Looking for multi-chat, image-generation, and more powerful features? Take a look at our newly launched [Ance](https://github.com/anse-app/anse).
+Looking for multi-chat, image-generation, and more powerful features? Take a look at our newly launched [Anse](https://github.com/anse-app/anse).
 
 More info on https://github.com/ddiu8081/chatgpt-demo/discussions/247.
 
