@@ -133,6 +133,12 @@ docker-compose down
 | `SITE_PASSWORD` | 为网站设置密码，支持使用英文逗号创建多个密码。如果未设置，则该网站将是公开的 | `null` |
 | `OPENAI_API_MODEL` | 使用的 OpenAI 模型. [模型列表](https://platform.openai.com/docs/api-reference/models/list) | `gpt-3.5-turbo` |
 
+## 开启同步更新
+
+Fork 项目后，您需要在 Fork 项目的操作页面上手动启用工作流和上游同步操作。启用后，每天都会执行自动更新:
+
+![](https://cdn.staticaly.com/gh/yzh990918/static@master/20230518/image.2hhnrsrd2t1c.webp)
+
 ## 常见问题
 
 Q: TypeError: fetch failed (can't connect to OpenAI Api)
