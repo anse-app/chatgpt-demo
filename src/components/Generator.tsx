@@ -158,7 +158,7 @@ export default () => {
       setCurrentAssistantMessage('')
       setLoading(false)
       setController(null)
-      // Determines whether to focus the cursor based on the user agent
+      // Disable auto-focus on touch devices
       if (!('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0))
         inputRef.focus()
     }
