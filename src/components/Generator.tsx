@@ -158,8 +158,16 @@ export default () => {
       setCurrentAssistantMessage('')
       setLoading(false)
       setController(null)
-      inputRef.focus()
+      // Determines whether to focus the cursor based on the user agent
+      if (!isMobileDevice())
+        inputRef.focus()
     }
+  }
+
+  const isMobileDevice = () => {
+    const currentUserAgent = navigator.userAgent
+    const userAgents = ['Android', 'Windows Phone', 'iPhone', 'iPad', 'iPod']
+    return !!userAgents.filter(ua => currentUserAgent.includes(ua)).length
   }
 
   const clear = () => {
@@ -182,7 +190,6 @@ export default () => {
       const lastMessage = messageList()[messageList().length - 1]
       if (lastMessage.role === 'assistant')
         setMessageList(messageList().slice(0, -1))
-
       requestWithLatestMessage()
     }
   }
