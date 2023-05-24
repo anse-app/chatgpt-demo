@@ -159,15 +159,9 @@ export default () => {
       setLoading(false)
       setController(null)
       // Determines whether to focus the cursor based on the user agent
-      if (!isMobileDevice())
+      if (!('ontouchstart' in document.documentElement || navigator.maxTouchPoints > 0))
         inputRef.focus()
     }
-  }
-
-  const isMobileDevice = () => {
-    const currentUserAgent = navigator.userAgent
-    const userAgents = ['Android', 'Windows Phone', 'iPhone', 'iPad', 'iPod']
-    return !!userAgents.filter(ua => currentUserAgent.includes(ua)).length
   }
 
   const clear = () => {
