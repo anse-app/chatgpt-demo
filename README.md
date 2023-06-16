@@ -126,17 +126,19 @@ docker-compose down
 
 ### Deploy with Sealos
 
- 1.Register a Sealos account for free
-[sealos cloud](https://cloud.sealos.io)
+ 1.Register a Sealos account for free [sealos cloud](https://cloud.sealos.io)
 
 2.Click  `App Launchpad` button
-![App Launchpad](./public/sealos/install-on-sealos-1.jpg)
+
+![App Launchpad](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230609/install-on-sealos-1.34i8gi80j268.webp)
 
 3.Click `Create Application` button
-![Create Application](./public/sealos/install-on-sealos-2.jpg)
+
+![Create Application](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230609/install-on-sealos-2.4t8q5px18eps.webp)
 
 4.Just fill in according to the following figure, and click on it after filling out `Deploy Application` button
-![Create Application](./public/sealos/install-on-sealos-3.jpg)
+
+![Create Application](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230609/install-on-sealos-3.5x5exqk0o8lc.webp)
 
 ```shell
 App Name: chatgpt-demo
@@ -149,10 +151,12 @@ Environment: OPENAI_API_KEY=YOUR_OPEN_API_KEY
 ```
 
 5.Obtain the access link and click directly to access it. If you need to bind your own domain name, you can also fill in your own domain name in `Custom domain` and follow the prompts to configure the domain name CNAME
-![Create Application](./public/sealos/install-on-sealos-4.jpg)
+
+![Create Application](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230609/install-on-sealos-4.4esqkqu70z9c.webp)
 
 6.Wait for one to two minutes and open this link
-![Open Link](./public/sealos/install-on-sealos-5.jpg)
+
+![Open Link](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230609/install-on-sealos-5.5cgfpee3zeyo.webp)
 
 ### Deploy on more servers
 
