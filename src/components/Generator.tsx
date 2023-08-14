@@ -17,6 +17,8 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
+  const [temperature, setTemperature] = createSignal(0.6);
+  const temperatureSetting = (value: number) => { setTemperature(value) }
 
   createEffect(() => (isStick() && smoothToBottom()))
 
@@ -105,6 +107,7 @@ export default () => {
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
           }),
+          temperature: temperature(),
         }),
         signal: controller.signal,
       })
@@ -206,6 +209,7 @@ export default () => {
         setSystemRoleEditing={setSystemRoleEditing}
         currentSystemRoleSettings={currentSystemRoleSettings}
         setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
+        temperatureSetting={temperatureSetting}
       />
       <Index each={messageList()}>
         {(message, index) => (
