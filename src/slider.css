@@ -21,10 +21,10 @@
   @apply w-[var(--slider-thumb-size)];
 }
 [data-scope='slider'][data-part='control']:hover [data-part='range'] {
-  @apply bg-gray-400 dark:bg-gray-800
+  @apply bg-gray-400 dark:bg-gray-600
 }
 [data-scope='slider'][data-part='control']:hover [data-part='thumb'] {
-  @apply bg-gray-300 dark:bg-gray-600
+  @apply bg-gray-300 dark:bg-gray-400
 }
 
 
