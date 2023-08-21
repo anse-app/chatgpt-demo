@@ -1,0 +1,82 @@
+/* -----------------------------------------------------------------------------
+* Slider
+* -----------------------------------------------------------------------------*/
+
+[data-scope='slider'][data-part='root'] {
+  @apply w-full flex flex-col
+}
+[data-scope='slider'][data-part='root'][data-orientation='vertical'] {
+  @apply h-60
+}
+
+[data-scope='slider'][data-part='control'] {
+  --slider-thumb-size: 14px;
+  --slider-track-height: 4px;
+  @apply relative fcc cursor-pointer
+}
+[data-scope='slider'][data-part='control'][data-orientation='horizontal'] {
+  @apply h-[var(--slider-thumb-size)];
+}
+[data-scope='slider'][data-part='control'][data-orientation='vertical'] {
+  @apply w-[var(--slider-thumb-size)];
+}
+[data-scope='slider'][data-part='control']:hover [data-part='range'] {
+  @apply bg-gray-400 dark:bg-gray-600
+}
+[data-scope='slider'][data-part='control']:hover [data-part='thumb'] {
+  @apply bg-gray-300 dark:bg-gray-400
+}
+
+
+[data-scope='slider'][data-part='thumb'] {
+  all: unset;
+  @apply bg-gray-200 dark:bg-gray-500 w-[var(--slider-thumb-size)] h-[var(--slider-thumb-size)] rounded-full b-#c5c5d2 b-2
+}
+[data-scope='slider'][data-part='thumb'][data-disabled] {
+  @apply w-0
+}
+
+[data-scope='slider'] .control-area {
+  @apply flex mt-12px
+}
+
+.slider [data-orientation='horizontal'] .control-area {
+  flex-direction: column;
+  width: 100%;
+}
+
+.slider [data-orientation='vertical'] .control-area {
+  flex-direction: row;
+  height: 100%;
+}
+
+[data-scope='slider'][data-part='track'] {
+  @apply rounded-full bg-gray-200 dark:bg-neutral-700
+}
+[data-scope='slider'][data-part='track'][data-orientation='horizontal'] {
+  @apply h-[var(--slider-track-height)] w-full;
+}
+[data-scope='slider'][data-part='track'][data-orientation='vertical'] {
+  @apply h-full w-[var(--slider-track-height)];
+}
+
+[data-scope='slider'][data-part='range'] {
+  @apply bg-neutral-300 dark:bg-gray-700
+}
+[data-scope='slider'][data-part='range'][data-disabled] {
+   @apply bg-neutral-300 dark:bg-gray-600
+}
+[data-scope='slider'][data-part='range'][data-orientation='horizontal'] {
+  @apply h-full;
+}
+[data-scope='slider'][data-part='range'][data-orientation='vertical'] {
+   @apply w-full;
+}
+
+[data-scope='slider'][data-part='output'] {
+  margin-inline-start: 12px;
+}
+
+[data-scope='slider'][data-part='marker'] {
+  color: lightgray;
+}

@@ -1,6 +1,7 @@
-import { Show } from 'solid-js'
+import { Show, createSignal, createEffect } from 'solid-js'
 import IconEnv from './icons/Env'
 import IconX from './icons/X'
+import SettingsSlider from './SettingsSlider'
 import type { Accessor, Setter } from 'solid-js'
 
 interface Props {
@@ -9,15 +10,21 @@ interface Props {
   setSystemRoleEditing: Setter<boolean>
   currentSystemRoleSettings: Accessor<string>
   setCurrentSystemRoleSettings: Setter<string>
+  temperatureSetting: (value: number) => void
 }
 
 export default (props: Props) => {
   let systemInputRef: HTMLTextAreaElement
+  const [temperature, setTemperature] = createSignal(0.6)
 
   const handleButtonClick = () => {
     props.setCurrentSystemRoleSettings(systemInputRef.value)
     props.setSystemRoleEditing(false)
   }
+
+  createEffect(() => {
+    props.temperatureSetting(temperature())
+  })
 
   return (
     <div class="my-4">
@@ -59,9 +66,25 @@ export default (props: Props) => {
               gen-textarea
             />
           </div>
-          <button onClick={handleButtonClick} gen-slate-btn>
-            Set
-          </button>
+          <div class="w-full fi fb">
+            <button onClick={handleButtonClick} gen-slate-btn>
+              Set
+            </button>
+            <div class="w-full ml-2">
+              <SettingsSlider
+                settings={{
+                  name: 'Temperature',
+                  type: 'slider',
+                  min: 0,
+                  max: 2,
+                  step: 0.01,
+                }}
+                editing={() => true}
+                value={temperature}
+                setValue={setTemperature}
+              />
+            </div>
+          </div>
         </div>
       </Show>
     </div>
