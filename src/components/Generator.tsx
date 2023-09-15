@@ -19,7 +19,7 @@ export default () => {
   const [isStick, setStick] = createSignal(false)
   const [temperature, setTemperature] = createSignal(0.6);
   const temperatureSetting = (value: number) => { setTemperature(value) }
-  const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '10')
+  const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '9')
 
   createEffect(() => (isStick() && smoothToBottom()))
 
