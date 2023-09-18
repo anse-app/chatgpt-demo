@@ -7,7 +7,7 @@ export const model = import.meta.env.OPENAI_API_MODEL || 'gpt-3.5-turbo'
 export const generatePayload = (
   apiKey: string,
   messages: ChatMessage[],
-  temperature: number
+  temperature: number,
 ): RequestInit & { dispatcher?: any } => ({
   headers: {
     'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const generatePayload = (
   body: JSON.stringify({
     model,
     messages,
-    temperature: temperature,
+    temperature,
     stream: true,
   }),
 })

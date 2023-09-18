@@ -1,4 +1,4 @@
-import { Show, createSignal, createEffect } from 'solid-js'
+import { Show, createEffect, createSignal } from 'solid-js'
 import IconEnv from './icons/Env'
 import IconX from './icons/X'
 import SettingsSlider from './SettingsSlider'
