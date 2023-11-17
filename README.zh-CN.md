@@ -10,7 +10,7 @@
 
 > ⚠️ 注意：我们的 API 密钥限制已用尽。所以演示站点现在不可用。
 
-![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
+![chat-logo](https://cdn.jsdelivr.net/gh/yzh990918/static@master/chat-logo.webp)
 
 ## 本地运行
 
@@ -55,7 +55,7 @@
 >
 > <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&env=SITE_PASSWORD&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys" alt="Deploy with Vercel" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel" height=24 style="vertical-align: middle; margin-right: 4px;"></a>
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
 
 ### 部署在 Netlify
 
@@ -65,18 +65,18 @@
 
 1. [Fork](https://github.com/ddiu8081/chatgpt-demo/fork) 此项目，前往 [https://app.netlify.com/start](https://app.netlify.com/start) 新建站点，选择你 `fork` 完成的项目，将其与 `GitHub` 帐户连接。
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.3nlt4hgzb16o.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.3nlt4hgzb16o.webp)
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
 
 
 2. 选择要部署的分支，选择 `main` 分支，在项目设置中配置环境变量，环境变量配置参考下文。
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.6dvtfmoijb7k.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.6dvtfmoijb7k.webp)
 
 3. 选择默认的构建命令和输出目录，单击 `Deploy Site` 按钮开始部署站点。
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
 
 ### 部署在 Docker
 部署之前请确认 `.env` 文件正常配置，环境变量参考下方文档，[Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
@@ -171,7 +171,7 @@ Environment: OPENAI_API_KEY=YOUR_OPEN_API_KEY
 
 Fork 项目后，您需要在 Fork 项目的操作页面上手动启用工作流和上游同步操作。启用后，每天都会执行自动更新：
 
-![](https://cdn.staticaly.com/gh/yzh990918/static@master/20230518/image.2hhnrsrd2t1c.webp)
+![](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230518/image.2hhnrsrd2t1c.webp)
 
 ## 常见问题
 

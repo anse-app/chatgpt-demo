@@ -8,7 +8,7 @@ A demo repo based on [OpenAI GPT-3.5 Turbo API.](https://platform.openai.com/doc
 
 > ⚠️ Notice: Our API Key limit has been exhausted. So the demo site is not available now.
 
-![chat-logo](https://cdn.staticaly.com/gh/yzh990918/static@master/chat-logo.webp)
+![chat-logo](https://cdn.jsdelivr.net/gh/yzh990918/static@master/chat-logo.webp)
 
 ## Introducing `Anse`
 
@@ -60,7 +60,7 @@ More info on https://github.com/ddiu8081/chatgpt-demo/discussions/247.
 >
 > <a href="https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fddiu8081%2Fchatgpt-demo&env=OPENAI_API_KEY&env=SITE_PASSWORD&envDescription=OpenAI%20API%20Key&envLink=https%3A%2F%2Fplatform.openai.com%2Faccount%2Fapi-keys" alt="Deploy with Vercel" target="_blank"><img src="https://vercel.com/button" alt="Deploy with Vercel" height=24 style="vertical-align: middle; margin-right: 4px;"></a>
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.4wzfb79qt7k0.webp)
 
 
 ### Deploy With Netlify
@@ -71,18 +71,18 @@ More info on https://github.com/ddiu8081/chatgpt-demo/discussions/247.
 
 1. [Fork](https://github.com/ddiu8081/chatgpt-demo/fork) this project, Go to [https://app.netlify.com/start](https://app.netlify.com/start) new Site, select the project you `forked` done, and connect it with your `GitHub` account.
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.3nlt4hgzb16o.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.3nlt4hgzb16o.webp)
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.5fhfouap270g.webp)
 
 
 2. Select the branch you want to deploy, then configure environment variables in the project settings.
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230311/image.gfs9lx8c854.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230311/image.gfs9lx8c854.webp)
 
 3. Select the default build command and output directory, Click the `Deploy Site` button to start deploying the site.
 
-![image](https://cdn.staticaly.com/gh/yzh990918/static@master/20230311/image.4jky9e1wbojk.webp)
+![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230311/image.4jky9e1wbojk.webp)
 
 
 ### Deploy with Docker
@@ -180,7 +180,7 @@ You can control the website through environment variables.
 
 After forking the project, you need to manually enable Workflows and Upstream Sync Action on the Actions page of the forked project. Once enabled, automatic updates will be scheduled every day:
 
-![](https://cdn.staticaly.com/gh/yzh990918/static@master/20230518/image.2hhnrsrd2t1c.webp)
+![](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230518/image.2hhnrsrd2t1c.webp)
 
 
 ## Frequently Asked Questions
