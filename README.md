@@ -85,6 +85,12 @@ More info on https://github.com/ddiu8081/chatgpt-demo/discussions/247.
 ![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230311/image.4jky9e1wbojk.webp)
 
 
+### Deploy With ZopDay
+
+[![Deploy to ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=ddiu8081/chatgpt-demo:latest&port=3000&name=chatgpt-demo&utm_source=github&utm_medium=one_click&utm_content=chatgpt-demo)
+
+Runs the official Docker image (`ddiu8081/chatgpt-demo`) on port `3000`. Set `OPENAI_API_KEY` and any other [environment variables](#environment-variables) on the deploy screen.
+
 ### Deploy with Docker
 
 Environment variables refer to the documentation below. [Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
