@@ -78,6 +78,12 @@
 
 ![image](https://cdn.jsdelivr.net/gh/yzh990918/static@master/20230310/image.e0n7c0zaen4.webp)
 
+### 部署在 ZopDay
+
+[![Deploy to ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=ddiu8081/chatgpt-demo:latest&port=3000&name=chatgpt-demo&utm_source=github&utm_medium=one_click&utm_content=chatgpt-demo)
+
+运行官方 Docker 镜像（`ddiu8081/chatgpt-demo`），端口 `3000`。在部署页面设置 `OPENAI_API_KEY` 以及其他[环境变量](#环境变量)。
+
 ### 部署在 Docker
 部署之前请确认 `.env` 文件正常配置，环境变量参考下方文档，[Docker Hub address](https://hub.docker.com/r/ddiu8081/chatgpt-demo).
 
